@@ -128,3 +128,4 @@ rebel.xml
 .gradle
 /build/
 .gradletasknamecache
+kmerz/.settings/org.eclipse.wst.common.component
