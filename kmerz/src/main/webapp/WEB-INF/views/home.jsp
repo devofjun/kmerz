@@ -7,6 +7,7 @@
 <body>
 <h1>
 	Hello GIT! good
+	Hello World!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
