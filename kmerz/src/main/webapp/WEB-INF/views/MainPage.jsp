@@ -45,14 +45,18 @@
 			</div>
 			<div class="postList">
 			POST LIST
+			<div class="post">
+			GIMOTI
+			</div>
+			
+			<div class="post">
+			SHIT
+			</div>
 			</div>
 			<div class="rSidebar">
 			RIGHT SIDE BAR
 			</div>
 		</div>
-	</section>
-	<section class="about">
-		
 	</section>
 </body>
 </html>
