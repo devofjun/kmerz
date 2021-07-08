@@ -1,4 +1,8 @@
+@@ -1,131 +0,0 @@
 #root-context.xml
+
+# Server file
+Servers/
 
 # Compiled class file
 *.class
