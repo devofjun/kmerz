@@ -129,3 +129,4 @@ rebel.xml
 /build/
 .gradletasknamecache
 kmerz/.settings/org.eclipse.wst.common.component
+kmerz/src/main/resources/rebel-remote.xml

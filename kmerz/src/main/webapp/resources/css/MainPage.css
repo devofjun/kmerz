@@ -65,7 +65,7 @@ header
 	top:0;
 	left:0;
 	width:100%;
-	padding: 40px 100px;
+	padding: 20px 100px;
 	z-index: 1000;
 	display: flex;
 	justify-content: space-around;
@@ -134,6 +134,7 @@ header ul li a
 }
 .postSection
 {
+	background:#d9e0e6;
 	height:auto;	
 }
 .sticky
@@ -169,8 +170,12 @@ header ul li a
 }
 .post
 {
-	margin: 15 15px;
+	margin: 15px;
 	background-color: #001789;
 	border-radius: 7px 7px 7px 7px;
 	height: 300px;
+}
+video
+{
+	max-width: 340px;
 }
