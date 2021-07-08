@@ -59,49 +59,7 @@ section
 {
 	background: #222222;
 }
-header
-{
-	background-color: #000;
-	position: fixed;
-	top:0;
-	left:0;
-	width:100%;
-	padding: 10px 80px;
-	z-index: 1000;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-header .logo
-{
-	background-color: #000;
-	color: #fff;
-	font-size: 24px;
-	text-transform: uppercase;
-	text-decoration: none;
-	font-weight: 700;
-	letter-spacing: 2px;
-}
-header ul
-{
-	background-color:#000;
-	position: relative;
-	display: flex;
-}
-header ul li
-{
-	position: relative;
-	list-style: none;
-}
-header ul li a
-{
-	position: relative;
-	display: inline-block;
-	margin: 0 15px;
-	color: #fff;
-	text-decoration: none;
 
-}
 .stickyHeader
 {
 	position: relative;
@@ -147,13 +105,7 @@ header ul li a
 	height:300vh;	
 	display: flex;
 }
-.lSidebar
-{
-	font-size:40px;
-	text-align: center;
-	background-color: #00ffff;
-	width: 25%;
-}
+
 .postList
 {
 	font-size:40px;
@@ -161,13 +113,7 @@ header ul li a
 	background-color: #ff00ff;
 	width: 50%;
 }
-.rSidebar
-{
-	font-size:40px;
-	text-align: center;
-	background-color: #ffff00;
-	width: 25%;
-}
+
 .post
 {
 	margin: 15px;
