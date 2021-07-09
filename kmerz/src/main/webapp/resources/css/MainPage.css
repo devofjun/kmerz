@@ -10,7 +10,7 @@
 }
 section
 {
-	padding:100px;
+	
 }
 .banner
 {
@@ -97,8 +97,8 @@ section
 }
 .sticky
 {
-   position: sticky;
-  top: 115px;
+  position: sticky;
+  top:60px;
 }
 .posts
 {
