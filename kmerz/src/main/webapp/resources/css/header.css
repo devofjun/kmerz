@@ -16,7 +16,6 @@ header
 }
 header .logo
 {
-	background-color: #000;
 	color: #fff;
 	font-size: 24px;
 	text-transform: uppercase;
@@ -26,7 +25,6 @@ header .logo
 }
 header ul
 {
-	background-color:#000;
 	position: relative;
 	display: flex;
 }

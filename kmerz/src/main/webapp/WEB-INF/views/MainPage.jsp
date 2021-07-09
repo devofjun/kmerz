@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
 <link rel="stylesheet" href="/resources/css/MainPage.css">
+<link rel="stylesheet" href="/resources/css/lSidebar.css">
+<link rel="stylesheet" href="/resources/css/rSidebar.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
