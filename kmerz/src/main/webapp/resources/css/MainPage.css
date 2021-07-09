@@ -12,3 +12,114 @@ section
 {
 	padding:100px;
 }
+.banner
+{
+	position:relative;
+	min-height: 100vh;
+	background:url(/resources/images/background.jpg);
+	background-size:cover;
+	background-position:right;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.banner h2
+{
+	font-size:3em;
+	color:#fff;
+	font-weight:500;
+	line-height: 1.5em;
+}
+.banner h2 span
+{
+	font-size:1.5em;
+	font-weight: 500;
+}
+.banner h3
+{
+	font-size:1.5em;
+	color:#fff;
+	font-weight:500;
+}
+.btn
+{
+	position: relative;
+	background: #2196f3;
+	display: inline-block;
+	color:#fff;
+	margin-top: 20px;
+	padding: 10px 30px;
+	font-size: 18px;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 2px;
+	font-weight: 500;
+}
+.btn:hover
+{
+	background: #222222;
+}
+.stickyHeader
+{
+	position: relative;
+	list-style: none;
+}
+.stickyHeader ul li
+{
+	background-color: #000;
+	position: relative;
+	list-style: none;
+}
+.stickyHeader ul
+{
+	background-color:#000;
+	position: relative;
+	display: flex;
+}
+.stickyHeader ul li
+{
+	position: relative;
+	list-style: none;
+}
+.stickyHeader ul li a
+{
+	position: relative;
+	display: inline-block;
+	margin: 0 15px;
+	color: #fff;
+	text-decoration: none;
+
+}
+.postSection
+{
+	background:#d9e0e6;
+	height:auto;	
+}
+.sticky
+{
+  position: sticky;
+  top: 80px;
+}
+.posts
+{
+	height:300vh;	
+	display: flex;
+}
+.postList
+{
+	font-size:40px;
+	text-align: center;
+	background-color: #ff00ff;
+	width: 50%;
+}
+.post
+{
+	margin: 15px;
+	background-color: #001789;
+	border-radius: 7px 7px 7px 7px;
+	height: 300px;
+}
+video
+{
+	max-width: 340px;
+}
