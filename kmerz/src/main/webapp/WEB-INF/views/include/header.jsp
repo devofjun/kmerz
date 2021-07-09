@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="/resources/css/MainPage.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <script src="/resources/script/bannerVideo.js"></script>
 <title>Insert title here</title>
 </head>
