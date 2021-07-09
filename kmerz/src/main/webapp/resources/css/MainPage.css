@@ -61,11 +61,16 @@ section
 }
 header
 {
+	background-color: #000;
 	position: fixed;
 	top:0;
 	left:0;
 	width:100%;
+<<<<<<< HEAD
 	padding: 20px 100px;
+=======
+	padding: 10px 80px;
+>>>>>>> main
 	z-index: 1000;
 	display: flex;
 	justify-content: space-around;
@@ -139,7 +144,7 @@ header ul li a
 .sticky
 {
   position: sticky;
-  top: 80px;
+  top: 115px;
 }
 .posts
 {
