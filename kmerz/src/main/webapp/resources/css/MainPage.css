@@ -70,10 +70,10 @@ header
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	background-color: #2d2d2d;
 }
 header .logo
 {
-	background-color: #000;
 	color: #fff;
 	font-size: 24px;
 	text-transform: uppercase;
@@ -83,7 +83,6 @@ header .logo
 }
 header ul
 {
-	background-color:#000;
 	position: relative;
 	display: flex;
 }
