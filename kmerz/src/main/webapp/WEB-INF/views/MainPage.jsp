@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver4">
 <link rel="stylesheet" href="/resources/css/lSidebar.css">
 <link rel="stylesheet" href="/resources/css/rSidebar.css">
 <link rel="stylesheet" href="/resources/css/header.css">
@@ -83,7 +83,7 @@
 					</button>
 				</div>
 			</div>
-			
+
 			<div class="discount_block discount_block_inline hero_discount"
 				data-price-final="1625000">
 				<div class="discount_pct">-75%</div>
@@ -110,22 +110,20 @@
 		</div>
 	</section>
 	<section class="postSection">
-		<div class="sticky">
-			<div class="stickyHeader">
-				<div class="toggle"></div>
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Product</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="#">Community</a></li>
-				</ul>
-			</div>
-		</div>
 		<div class="posts">
 			<div class="lSidebar">LEFT SIDE BAR</div>
 			<div class="postList">
-				POST LIST
+				<div class="sticky">
+					<div class="stickyHeader">
+						<div class="toggle"></div>
+						<ul>
+							<li><a href="#">HOT</a></li>
+							<li><a href="#">NEW</a></li>
+							<li><a href="#">TOP</a></li>
+							<li><input type="text"></li>
+						</ul>
+					</div>
+				</div>
 				<div class="post">SHIT</div>
 
 				<div class="post">SHIT</div>

@@ -8,10 +8,6 @@
 	box-sizing:border-box;
 	font-family:"Poppins",sans-serif;
 }
-section
-{
-	
-}
 .banner
 {
 	position:relative;
@@ -61,18 +57,12 @@ section
 }
 .stickyHeader
 {
-	position: relative;
-	list-style: none;
-}
-.stickyHeader ul li
-{
-	background-color: #000;
+	background-color:#9f9f9f;
 	position: relative;
 	list-style: none;
 }
 .stickyHeader ul
 {
-	background-color:#000;
 	position: relative;
 	display: flex;
 }
@@ -83,6 +73,7 @@ section
 }
 .stickyHeader ul li a
 {
+	font-size:20px;
 	position: relative;
 	display: inline-block;
 	margin: 0 15px;
@@ -98,7 +89,7 @@ section
 .sticky
 {
   position: sticky;
-  top:60px;
+  top:55px;
 }
 .posts
 {
