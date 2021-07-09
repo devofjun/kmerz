@@ -97,8 +97,8 @@ section
 }
 .sticky
 {
-  position: sticky;
-  top: 100px;
+   position: sticky;
+  top: 115px;
 }
 .posts
 {
