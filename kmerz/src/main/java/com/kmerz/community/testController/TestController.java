@@ -8,6 +8,6 @@ public class TestController {
 	
 	@RequestMapping(value="/c")
 	public String headerTest() {
-		return "community/createCommunity";
+		return "community/createCommunityForm";
 	}
 }
