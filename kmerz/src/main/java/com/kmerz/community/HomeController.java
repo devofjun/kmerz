@@ -38,4 +38,13 @@ public class HomeController {
 
 	}
 	
+	@RequestMapping(value="/loginForm")
+	public String loginForm() {
+		return "loginForm";
+	}
+	
+	@RequestMapping(value="/joinForm")
+	public String joinForm() {
+		return "joinForm";
+	}
 }

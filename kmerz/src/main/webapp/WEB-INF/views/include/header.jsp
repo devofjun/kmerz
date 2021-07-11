@@ -15,7 +15,7 @@
 		<a href="#" class="logo">LOGO</a>
 		<div class="toggle"></div>
 		<ul>
-			<li><a href="#">Sign in</a></li>
-			<li><a href="#">Sign up</a></li>
+			<li><a href="/loginForm">Sign in</a></li>
+			<li><a href="/joinForm">Sign up</a></li>
 		</ul>
 	</header>
