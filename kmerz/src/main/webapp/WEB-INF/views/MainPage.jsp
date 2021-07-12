@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver4">
-<link rel="stylesheet" href="/resources/css/lSidebar.css">
-<link rel="stylesheet" href="/resources/css/rSidebar.css">
-<link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver9">
+<link rel="stylesheet" href="/resources/css/lSidebar.css?v2">
+<link rel="stylesheet" href="/resources/css/rSidebar.css?v2">
+<link rel="stylesheet" href="/resources/css/header.css?">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
@@ -96,22 +96,10 @@
 				<div></div>
 			</div>
 		</div>
-		<div class="textBox">
-			<h2>
-				TextBox<br> <span>ANG</span> test
-			</h2>
-			<h3>REOGAMER DEVasdfas</h3>
-			<a href="#" class="btn">BUTTON</a>
-			<video controls autoplay="autoplay" loop muted class="hero_video">
-				<source
-					src="https://cdn.akamai.steamstatic.com/steam/apps/256840255/movie480_vp9.webm?t=1624501755"
-					type="video/webm">
-			</video>
-		</div>
 	</section>
 	<section class="postSection">
 		<div class="posts">
-			<div class="lSidebar">LEFT SIDE BAR</div>
+			<%@ include file="./include/lSidebar.jsp"%>
 			<div class="postList">
 				<div class="sticky">
 					<div class="stickyHeader">
@@ -124,11 +112,27 @@
 						</ul>
 					</div>
 				</div>
-				<div class="post">SHIT</div>
-
-				<div class="post">SHIT</div>
+				<div class="searchBar border">
+					<input class="border" type="text" placeholder="New Post...">
+				</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT</div>
+				<div class="post border">SHIT9</div>
+				<div class="post border">SHIT9</div>
+				<div class="post border">SHIT9</div>
+				<div class="post border">SHIT9</div>
+				<div class="post border">SHIT9</div>
+				<div class="post border">SHIT9</div>
 			</div>
-			<div class="rSidebar">RIGHT SIDE BAR</div>
+			<%@ include file="./include/rSidebar.jsp"%>
 		</div>
 	</section>
 </body>
