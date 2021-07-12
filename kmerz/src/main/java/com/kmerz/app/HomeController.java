@@ -1,4 +1,4 @@
-package com.kmerz.community;
+package com.kmerz.app;
 
 import java.text.DateFormat;
 import java.util.Date;

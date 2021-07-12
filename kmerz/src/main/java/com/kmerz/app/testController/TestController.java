@@ -1,4 +1,4 @@
-package com.kmerz.community.testController;
+package com.kmerz.app.testController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

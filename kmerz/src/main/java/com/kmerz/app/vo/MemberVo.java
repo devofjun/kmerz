@@ -1,4 +1,4 @@
-package com.kmerz.community.vo;
+package com.kmerz.app.vo;
 
 import java.sql.Timestamp;
 

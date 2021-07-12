@@ -1,4 +1,4 @@
-package com.kmerz.community.vo;
+package com.kmerz.app.vo;
 
 public class CategoryVo {
 	private int category_id;

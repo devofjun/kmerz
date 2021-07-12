@@ -1,4 +1,4 @@
-package com.kmerz.community.vo;
+package com.kmerz.app.vo;
 
 public class CommunityVo {
 	private int community_id;

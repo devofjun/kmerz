@@ -11,6 +11,6 @@
 <!-- 		<typeAlias type="com.kh.sample01.MemberVo" alias="MemberVo"/> -->
 		
 		<!-- 패키지 단위 -->
-		<package name="com.kmerz.community.vo"/>
+		<package name="com.kmerz.app.vo"/>
 	</typeAliases>
 </configuration>
