@@ -5,6 +5,20 @@
 {
 	font-size:40px;
 	text-align: center;
-	background-color: #ffff00;
-	width: 25%;
+	width: 15%;
+}
+.userinfo
+{
+	margin:5%;	
+	width: 90%;
+	height:200px;
+}
+.hotList
+{
+	list-style: none;
+	margin:5%;
+}
+.hotList ul
+{
+	list-style: none;	
 }
