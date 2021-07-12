@@ -14,10 +14,11 @@ public class CommunityDaoImpl implements CommunityDao {
 	SqlSession sqlsession;
 	
 	@Override
-	public String test() {
+	public int test() {
 		System.out.println("다오");
-		sqlsession.selectOne(NAMESPACE+"commtest");
-		return "success";
+		int result = sqlsession.selectOne(NAMESPACE+"commtest");
+		System.out.println(result);
+		return result;
 	}
 
 }

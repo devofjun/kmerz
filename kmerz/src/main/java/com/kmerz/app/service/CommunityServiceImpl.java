@@ -13,7 +13,7 @@ public class CommunityServiceImpl implements CommunityService {
 	CommunityDao commDao;
 	
 	@Override
-	public String test() {
+	public int test() {
 		System.out.println("서비스");		
 		return commDao.test();
 	}
