@@ -139,3 +139,12 @@ video
 {
 	max-width: 340px;
 }
+.leftbar
+{
+	background-color: green;
+	position:relative;
+}
+.postTitle
+{
+	background-color:yellow;
+}

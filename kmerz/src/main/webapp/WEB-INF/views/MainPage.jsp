@@ -12,6 +12,8 @@
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 	<header>
@@ -115,7 +117,21 @@
 				<div class="searchBar border">
 					<input class="border" type="text" placeholder="New Post...">
 				</div>
-				<div class="post border">SHIT</div>
+				<div class="post border">
+					<div class="leftbar">
+						<ion-icon name="caret-down-outline"></ion-icon>
+						<ion-icon name="caret-up-outline"></ion-icon>
+					</div>
+					<div class="postTitle">
+						SHIT
+					</div>
+					<div class="postContent">
+						Most Shit
+					</div>
+					<div class="BottmNavBar">
+						Shit Nav
+					</div>
+				</div>
 				<div class="post border">SHIT</div>
 				<div class="post border">SHIT</div>
 				<div class="post border">SHIT</div>
