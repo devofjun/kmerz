@@ -50,8 +50,9 @@ section {
 }
 .btn
 {
+	border:0;
 	position: relative;
-	background: #2196f3;
+	background: #273c75;
 	display: inline-block;
 	color:#fff;
 	margin-top: 20px;
@@ -62,9 +63,21 @@ section {
 	letter-spacing: 2px;
 	font-weight: 500;
 }
+.btn-border
+{
+	border-style: solid;
+	border-width: 1.5px;
+	border-color: #cccccc;
+	border-radius:7px;
+}
 .btn:hover
 {
-	background: #222222;
+	background: #192a56;
+}
+.btn-stretch
+{
+	margin:10px;
+	width:90%;
 }
 .searchBar
 {
@@ -72,7 +85,6 @@ section {
 	margin:1%;
 	background-color:#fff;
 	position: relative;
-	z-index: -1;
 }
 .searchBar > input
 {
@@ -112,6 +124,7 @@ section {
 {
   position: sticky;
   top:55px;
+  z-index: 1;
 }
 .stickyUnderInfo
 {
@@ -124,16 +137,20 @@ section {
 }
 .postList
 {
-	font-size:40px;
-	text-align: center;
+	font-size:22px;
 	width: 50%;
 }
 .post
 {
+	display: flex;
 	margin: 10px;
 	background-color: #001789;
 	border-radius: 7px 7px 7px 7px;
 	height: 300px;
+}
+.post:hover
+{
+	border-color: #000;
 }
 video
 {
@@ -141,10 +158,40 @@ video
 }
 .leftbar
 {
-	background-color: green;
-	position:relative;
+	font-size:30px;
+	margin:10px;
+	float:left;
+	text-align: center;
+}
+.rightbar
+{
+	margin:10px;
+	width:100%;
+}
+.communityAdress
+{
+	width:100%;
+	height:10%;
 }
 .postTitle
+{	
+	width:100%;
+	height:15%;
+}
+.postTitle:hover
+{	
+	cursor:pointer;
+}
+.postContent
 {
-	background-color:yellow;
+	height:65%;
+}
+.postContent:hover	
+{
+	cursor:pointer;
+}
+.BottmNavBar
+{
+	margin-top:4px;	
+	height:10%;
 }
