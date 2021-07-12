@@ -3,7 +3,7 @@
 
 .rSidebar
 {
-	font-size:40px;
+	font-size:30px;
 	text-align: center;
 	width: 15%;
 }
@@ -21,4 +21,8 @@
 .hotList ul
 {
 	list-style: none;	
+}
+.hotList ul li
+{
+	font-size:20px;
 }
