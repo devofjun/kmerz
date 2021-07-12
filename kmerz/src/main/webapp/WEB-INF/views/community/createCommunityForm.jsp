@@ -15,7 +15,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
 <!-- <link rel="stylesheet" href="/resources/css/createCommunity.css"> -->
-<title>Insert title here</title>
+<title>케이머즈 커뮤니티 생성 신청</title>
 
 </head>
 <body>
