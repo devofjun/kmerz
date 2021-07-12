@@ -35,6 +35,17 @@
 			console.log($(this).val());
 		});
 		
+		
+		$("#btnTest").click(function() {
+			console.log("test");
+			var url = "/mytest";
+			var sendData = {
+					"test" : "test"
+			};
+			$.get(url, sendData, function(){
+				console.log("test2");
+			});
+		});
 	});
 </script>
 
@@ -82,6 +93,7 @@
 								</div>
 
 								<button class="btn btn-primary" type="submit">신청</button>
+								<button id="btnTest">테스트</button>
 							</form>
 						</div>
 					</div>
