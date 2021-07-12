@@ -52,6 +52,7 @@ create table tbl_posts(
     post_lastupdate timestamp default sysdate,
     post_status varchar2(15)
 );
+-- 1234
 
 
 
