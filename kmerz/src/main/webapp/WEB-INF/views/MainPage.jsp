@@ -139,6 +139,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="post border">
 					<div class="leftbar">
 						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a><br>
