@@ -11,59 +11,51 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>loginForm.jsp</title>
 </head>
-
-	<style>
-		body,html {
-    		height: 100%;
-		}
-		
-		.wrapper {
-		  display: flex;
-		  justify-content: center;
-		  align-items: center;
-		  min-height: 100vh;
-		}
-	</style>
-
 <body>
-	<main class="wrapper text-center"> <!-- bg-dark text-white -->
-		<div class="col-md-4">
-		<h1 class="display-8">LOGO</h1>
-		<form>
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-sm-1 mb-3">
-						<label for="user_id" class="visually-hidden">ID:</label>
-					</div>
-					<div class="col-md-11 mb-3">
-						<input type="text" id="user_id" class="form-control" placeholder="아이디를 입력해주세요" required autofocus>
-					</div>
-					<div class="col-md-1">
-						<label for="user_pw" class="visually-hidden">PW:</label>
-					</div>
-					<div class="col-md-11">
-						<input type="password" id="user_pw" class="form-control" placeholder="비밀번호를 입력해주세요" required>
+	<div id="wallpaper" style="height: 100vh; background-color: #dae0e6">
+		<div class="container h-100">
+			<div class="row h-100 justify-content-center align-items-center">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<div class="card shadow" style="max-height:100vh;overflow-y:auto">
+						<div class="card-header">
+							<h4 class="card-title">로그인</h4>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="form-group">
+									<label for="user_email">이메일</label> <input type="email"
+										class="form-control" id="user_email"
+										name="user_email" placeholder="이메일을 입력해주세요" required>
+								</div>
+								<div class="form-group">
+									<label for="user_pw">비밀번호</label> <input type="password"
+										class="form-control" id="user_pw"
+										name="user_pw" placeholder="비밀번호를 입력해주세요" required>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" value="saveUser_id">
+											아이디 저장
+										<a href="#">아이디 또는 비밀번호를 잊으셨나요?</a>
+									</label>
+								</div>
+								<div>
+									<button class="btn btn-primary" type="submit">로그인</button>
+								</div>
+								<div>
+									<label>
+											K-Merz가 처음이신가요?
+										<a href="/joinForm">회원가입</a>
+									</label>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
+				<div class="col-3"></div>
 			</div>
-			<div class="checkbox text-left">
-				<label>
-					<input type="checkbox" value="saveUser_id">
-						아이디 저장
-					<a href="#" style="margin-left:100">아이디 또는 비밀번호를 잊으셨나요?</a>
-				</label>
-			</div>
-			<div class="col-md-12">
-				<button class="w-75 btn btn-lg btn-primary" type="submit">로그인</button>
-			</div>
-			<div class="col-md-12">
-				<label>
-						K-Merz가 처음이신가요?
-					<a href="#">회원가입</a>
-				</label>
-			</div>
-		</form>
 		</div>
-	</main>
+	</div>
 </body>
 </html>
