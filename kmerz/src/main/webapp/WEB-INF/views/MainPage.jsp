@@ -358,8 +358,10 @@
 						</div>
 					</div>
 				</div>
+
 				<!-- 포스트 DEFAULT 끝 -->
 				<!-- 포스트 DEFAULT 시작 -->
+        
 				<div class="post border">
 					<div class="leftbar">
 					<div class="like">
