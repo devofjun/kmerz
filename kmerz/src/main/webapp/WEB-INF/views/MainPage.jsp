@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <html>
@@ -6,15 +7,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver9">
-<link rel="stylesheet" href="/resources/css/lSidebar.css?v2">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver19">
+<link rel="stylesheet" href="/resources/css/lSidebar.css?v5">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v2">
 <link rel="stylesheet" href="/resources/css/header.css?">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="module"
+	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule
+	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 	<header>
@@ -114,40 +117,67 @@
 							<li><input type="text"></li>
 						</ul>
 					</div>
-				</div>
-				<div class="searchBar border">
-					<input class="border" type="text" placeholder="New Post...">
+					<div class="searchBar border">
+						<input type="text" placeholder="New Post...">
+					</div>
 				</div>
 				<div class="post border">
 					<div class="leftbar">
-						<ion-icon name="caret-down-outline"></ion-icon>
-						<ion-icon name="caret-up-outline"></ion-icon>
+						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a><br>
+						<span>0</span><br> <a href="#"><ion-icon
+								name="caret-down-circle-outline"></ion-icon></a>
 					</div>
-					<div class="postTitle">
-						SHIT
-					</div>
-					<div class="postContent">
-						Most Shit
-					</div>
-					<div class="BottmNavBar">
-						Shit Nav
+					<div class="rightbar">
+						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
+							: 윤수</div>
+						<div class="postTitle border">홍진호 만난 썰 푼다</div>
+						<div class="postContent border">람쥐썬더</div>
+						<div class="BottmNavBar">
+							<a href="#"><ion-icon name="chatbox-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="bookmark-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="open-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+						</div>
 					</div>
 				</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT</div>
-				<div class="post border">SHIT9</div>
-				<div class="post border">SHIT9</div>
-				<div class="post border">SHIT9</div>
-				<div class="post border">SHIT9</div>
-				<div class="post border">SHIT9</div>
-				<div class="post border">SHIT9</div>
+				<div class="post border">
+					<div class="leftbar">
+						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a><br>
+						<span>0</span><br> <a href="#"><ion-icon
+								name="caret-down-circle-outline"></ion-icon></a>
+					</div>
+					<div class="rightbar">
+						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
+							: 윤수</div>
+						<div class="postTitle border">홍진호 만난 썰 푼다</div>
+						<div class="postContent border">람쥐썬더</div>
+						<div class="BottmNavBar">
+							<a href="#"><ion-icon name="chatbox-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="bookmark-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="open-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+						</div>
+					</div>
+				</div>
+				<div class="post border">
+					<div class="leftbar">
+						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a><br>
+						<span>0</span><br> <a href="#"><ion-icon
+								name="caret-down-circle-outline"></ion-icon></a>
+					</div>
+					<div class="rightbar">
+						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
+							: 윤수</div>
+						<div class="postTitle border">홍진호 만난 썰 푼다</div>
+						<div class="postContent border">람쥐썬더</div>
+						<div class="BottmNavBar">
+							<a href="#"><ion-icon name="chatbox-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="bookmark-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="open-outline"></ion-icon></a> <a
+								href="#"><ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+						</div>
+					</div>
+				</div>
 			</div>
 			<%@ include file="./include/rSidebar.jsp"%>
 		</div>
