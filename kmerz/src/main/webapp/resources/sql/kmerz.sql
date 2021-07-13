@@ -114,8 +114,8 @@ create table tbl_reply(
 -- 미디어 테이블
 create table tbl_media(
     post_no number reference tbl_posts(post_no),
-    media_type varchar2(),
-    file_name varchar2(),
+    media_type varchar2(), -- 미디어 타입??
+    file_name varchar2(), -- 몇자까지??
     upload_time timestamp default sysdate,
     delete_time timestamp default null
 );
@@ -126,7 +126,7 @@ create table tbl_change_log(
     -- 로그 코드 이름 해야합니다.
     defore_content varchar2(500),
     before_title varchar2(100),
-    before_media ,
+    before_media , -- 미디어 타입??
     change_log_time timestamp default sysdate,
     post_version number not null;
 );
