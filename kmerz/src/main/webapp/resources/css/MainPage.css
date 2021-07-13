@@ -109,20 +109,18 @@ section {
 
 .newPostBar {
 	border-radius: 7px;
-	margin: 0 1%;
 	background-color: #fff;
 	position: relative;
 }
 
 .searchBar>input {
 	border: none;
-	margin: 1%;
+	margin: 0 1%;
 	width: 99%;
 }
 
 .stickyHeader {
 	border-radius: 7px;
-	margin: 0 1%;
 	background-color: #9f9f9f;
 	position: relative;
 	list-style: none;
@@ -161,6 +159,7 @@ section {
 	position: sticky;
 	top: 55px;
 	z-index: 1;
+	margin: 0 1%;
 }
 
 .stickyUnderInfo {
