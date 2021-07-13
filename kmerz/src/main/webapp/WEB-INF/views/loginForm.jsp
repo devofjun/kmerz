@@ -20,6 +20,9 @@ $(document).ready(function(){
 			console.log(rData);
 		});
 	});
+	$("#wallpaper").click(function(){
+		
+	});
 });
 </script>	
 
