@@ -20,9 +20,11 @@ $(document).ready(function(){
 			console.log(rData);
 		});
 	});
+
 	$("#wallpaper").click(function(){
 		// 윤수바보바보바보
 		
+
 	});
 });
 </script>	
