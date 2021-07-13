@@ -14,15 +14,11 @@
 	$(document).ready(function() {
 		// 이름 입력칸을 벗어 났을때
 		$("#community_name").focusout(function() {
-			console.log($(this).val());
-			$.get("/mytest",function(rData){
-				console.log(rData);
-			});
+			
 		});
 		
 		// 태그 입력칸을 벗어 났을때
 		$("#community_tag").focusout(function() {
-			console.log($(this).val());
 			
 		});
 		
@@ -42,7 +38,7 @@
 							<h4 class="card-title">새로운 커뮤니티 설정</h4>
 						</div>
 						<div class="card-body">
-							<form>
+							<form action="">
 								<input type="hidden" id="user_email" name="user_email">
 								<!-- is-valid / is-invalid -->
 								<div class="form-group">

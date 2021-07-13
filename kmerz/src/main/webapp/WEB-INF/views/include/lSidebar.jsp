@@ -7,7 +7,7 @@
 		커뮤니티 리스트
 	</div>
 		<ul>
-			<li><a href="#"><img src="/resource/images/default_image.jpg">스타크래프트</a></li>
+			<li><a href="#">스타크래프트</a></li>
 			</ul>
 	</div>
 </div>
