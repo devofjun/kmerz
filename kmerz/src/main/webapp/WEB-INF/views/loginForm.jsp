@@ -20,8 +20,11 @@ $(document).ready(function(){
 			console.log(rData);
 		});
 	});
-	$("#user_email").click(function(){
-		// 정병준바보바보
+
+	$("#wallpaper").click(function(){
+		// 윤수바보바보바보
+		
+
 	});
 });
 </script>	
