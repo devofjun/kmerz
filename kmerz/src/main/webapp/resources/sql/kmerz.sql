@@ -19,6 +19,9 @@ drop sequence seq_user_id;
 create sequence seq_user_id
     minvalue 1000;
 commit;
+
+select * from tbl_member;
+
 -- 유저 로그 테이블
 drop table tbl_member_log CASCADE CONSTRAINTS;
 truncate table tbl_member_log;

@@ -24,7 +24,7 @@ public class MemberController {
 	// 로그인 화면
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() {
-		return "loginForm";
+		return "member/loginForm";
 	}
 	
 	// 로그인
@@ -53,7 +53,7 @@ public class MemberController {
 	// 회원가입 화면
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinForm() {
-		return "joinForm";
+		return "member/joinForm";
 	}
 	
 	// 회원가입
