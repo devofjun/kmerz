@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver32">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver33">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v8">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v8">
 <link rel="stylesheet" href="/resources/css/header.css?">
@@ -182,8 +182,8 @@ window.onclick = function(event) {
 					<div class="rightbar">
 						<div class="contentTop">
 							<div class="postTitle" onclick="openModal()">홍진호 만난 썰 푼다</div>
-							<div class="communityAdress">COMMUNITY : <a href="#"><img src="/resources/images/default_img.jpg">스타크래프트</a> - 3분전 / 작성자
-								: <a href="#">윤수</a>
+							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>스타크래프트</span></a><span> - 3분전 / 작성자
+								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">윤수</a>
 							</div>
 						</div>
 						<div class="postContent border" onclick="openModal()">
