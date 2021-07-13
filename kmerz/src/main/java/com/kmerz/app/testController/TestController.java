@@ -24,4 +24,9 @@ public class TestController {
 	public int mybatisTest() {
 		return commService.test();
 	}
+	
+	@RequestMapping(value="/m")
+	public String modalTest() {
+		return "modaltest";
+	}
 }
