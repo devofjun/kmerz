@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver21">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver24">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v8">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v8">
 <link rel="stylesheet" href="/resources/css/header.css?">
@@ -119,7 +119,9 @@
 					</div>
 					<div class="searchBar border">
 						<div class="inputSection">
-							<input class="PostingTitle" type="text" placeholder="Title..."> 
+							<div class="PostingTitleDiv">
+								<input class="PostingTitle" type="text" placeholder="Title...">
+							</div> 
 							<input class="PostingContent" type="text" placeholder="Post Content...">
 						</div>
 						<div class="inputSelection">
@@ -137,19 +139,13 @@
 				<!-- 포스트 DEFAULT 시작 -->
 				<div class="post border">
 					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
+						<div class="like">
+							<a href="#"><ion-icon size="large" name="caret-up-circle-outline"></ion-icon></a>
+						</div>
+							<span>0</span> 
+						<div class="like">
+							<a href="#"><ion-icon size="large" name="caret-down-circle-outline"></ion-icon></a>
+						</div>
 						<div class="BottmNavBar">
 							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
 								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
@@ -157,256 +153,14 @@
 								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
 						</div>
 					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
 					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+						<div class="contentTop">
+							<div class="postTitle">홍진호 만난 썰 푼다</div>
+							<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
+								: 윤수</div>
 						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-        
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-						</div>
-					</div>
-				</div>
-				<!-- 포스트 DEFAULT 끝 -->
-				<!-- 포스트 DEFAULT 시작 -->
-				<div class="post border">
-					<div class="leftbar">
-					<div class="like">
-						<a href="#"><ion-icon name="caret-up-circle-outline"></ion-icon></a>
-					</div>
-						<span>0</span> 
-					<div class="like">
-						<a href="#"><ion-icon	name="caret-down-circle-outline"></ion-icon></a>
-					</div>
-					</div>
-					<div class="rightbar">
-						<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-							: 윤수</div>
-						<div class="postTitle border">홍진호 만난 썰 푼다</div>
-						<div class="postContent border">람쥐썬더</div>
-						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+						<div class="postContent border">
+							<p>람쥐썬더</p>
 						</div>
 					</div>
 				</div>
