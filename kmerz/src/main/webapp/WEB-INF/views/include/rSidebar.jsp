@@ -8,7 +8,9 @@
 		USER INFO
 	</div>
 	
-		<button class="btn btn-stretch btn-border">Sign in</button>
+		<button class="btn btn-stretch btn-border"
+			onclick="location.href='/loginForm'"
+		>Log in</button>
 		<button class="btn btn-stretch btn-border">Sign up</button>
 	</div>
 	<div class="hotList border stickyUnderInfo">
