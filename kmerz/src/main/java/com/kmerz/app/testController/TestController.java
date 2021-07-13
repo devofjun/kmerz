@@ -16,7 +16,7 @@ public class TestController {
 	
 	@RequestMapping(value="/c")
 	public String headerTest() {
-		return "community/createCommunityForm";
+		return "community/CommunityPage";
 	}
 	
 	@RequestMapping(value="/f")

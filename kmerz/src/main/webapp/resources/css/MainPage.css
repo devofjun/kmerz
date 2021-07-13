@@ -33,6 +33,19 @@ section {
 	font-family: "Poppins", sans-serif;
 }
 
+.communitybanner {
+	min-height: 20vh;
+	max-height: 20vh;
+	overflow: hidden;
+}
+
+.communitybanner > img {
+	margin-top:55px;
+	width:100%;
+    heigth:100%;
+    object-fit:cover;
+}
+
 .banner {
 	position: relative;
 	min-height: 100vh;
@@ -94,7 +107,7 @@ section {
 	width: 90%;
 }
 
-.searchBar {
+.newPostBar {
 	border-radius: 7px;
 	margin: 1%;
 	background-color: #fff;
@@ -401,7 +414,60 @@ labelBtn:hover {
 }
 
 .modal-body {
-	background-color: pink;
 	width: 100%;
 	height: auto;
+}
+.modal-content-left
+{
+	width:70%;
+	height:100%;
+	display: flex;
+    flex-direction: column;
+}
+.modal-content-right
+{
+	width:30%;
+	height:100%;
+	display: flex;
+    flex-direction: column;
+}
+.modal-postContent
+{
+	display:flex;
+	flex-direction: row;
+}
+.replySection
+{
+	dislplay:flex;
+	height:auto;
+}
+.sortNav
+{
+	padding: 4px;
+	display:flex;
+	flex-direction: row;
+	border-bottom: 1.5px solid #718093;
+}
+.replyContent
+{
+	padding:4px;
+}
+.reply-user
+{
+	display:flex;
+	flex-direction: row;
+}
+.reply-user-profile
+{
+	display:flex;
+	flex-direction: row;
+}
+.reply-user-status
+{
+	display:flex;
+	flex-direction: row;
+}
+.reply-user-profile > img
+{
+	border-style: double;
 }
