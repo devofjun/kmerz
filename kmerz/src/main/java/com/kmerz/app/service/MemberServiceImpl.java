@@ -30,4 +30,10 @@ public class MemberServiceImpl implements MemberService {
 		return list;
 	}
 
+	@Override
+	public MemberVo login(String user_email, String user_pw) {
+		MemberVo memberVo = memberDao.selectUser(user_email, user_pw);
+		return memberVo;
+	}
+
 }

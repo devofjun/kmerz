@@ -50,7 +50,7 @@ $(document).ready(function(){
 									</label>
 								</div>
 								<div>
-									<button class="btn btn-primary" type="submit">로그인</button>
+									<button class="btn btn-primary" id="btnLogin" type="submit">로그인</button>
 								</div>
 								<div>
 									<label>

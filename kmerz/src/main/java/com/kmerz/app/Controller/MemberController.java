@@ -3,6 +3,7 @@ package com.kmerz.app.Controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,25 @@ public class MemberController {
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() {
 		return "loginForm";
+	}
+	
+	// 로그인
+	public String loginRun(String user_email, String user_pw, RedirectAttributes rttr,
+			HttpSession session) {
+		MemberVo memberVo = memberService.login(user_email, user_pw);
+		
+		String resultLogin = null;
+		String page = null;
+		
+		if(memberVo != null) {
+			resultLogin = "success";
+			page = "/c/createCommunityForm";
+		} else {
+			resultLogin = "fail";
+			page = "/m/loginForm";
+		}
+		rttr.addAttribute("resultLogin", resultLogin);
+		return page;
 	}
 
 	// 회원가입 화면
