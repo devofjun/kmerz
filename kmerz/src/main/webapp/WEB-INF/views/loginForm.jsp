@@ -55,7 +55,7 @@ $(document).ready(function(){
 								<div>
 									<label>
 											K-Merz가 처음이신가요?
-										<a href="/joinForm">회원가입</a>
+										<a href="/m/joinForm">회원가입</a>
 									</label>
 								</div>
 							</form>

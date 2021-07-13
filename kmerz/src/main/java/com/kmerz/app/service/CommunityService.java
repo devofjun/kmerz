@@ -1,5 +1,7 @@
 package com.kmerz.app.service;
 
+import com.kmerz.app.vo.CommunityVo;
+
 public interface CommunityService {
-	public int test(); 
+	public void createCommunity(CommunityVo communityVo);
 }
