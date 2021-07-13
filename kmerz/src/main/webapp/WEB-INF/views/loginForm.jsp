@@ -20,6 +20,9 @@ $(document).ready(function(){
 			console.log(rData);
 		});
 	});
+	$("#user_email").click(function(){
+		
+	});
 });
 </script>	
 
