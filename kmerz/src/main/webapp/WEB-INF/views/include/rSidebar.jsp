@@ -18,7 +18,7 @@
 			인기글
 		</div>
 		<ul>
-			<li><a href="#">홍진호 만난 썰 푼다</a></li>
+			<li><a href="#">홍진호 만난 썰 푼다rdtgdfgd</a></li>
 		</ul>
 	</div>
 </div>
