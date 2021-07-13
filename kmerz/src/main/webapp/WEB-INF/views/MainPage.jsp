@@ -44,7 +44,7 @@ window.onclick = function(event) {
 			<li><a href="#">About</a></li>
 			<li><a href="#">Product</a></li>
 			<li><a href="#">Contact</a></li>
-			<li><a href="#">Community</a></li>
+			<li><a href="/c/createForm">Community</a></li>
 		</ul>
 	</header>
 	<section class="banner">

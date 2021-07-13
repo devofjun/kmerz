@@ -38,7 +38,7 @@
 							<h4 class="card-title">새로운 커뮤니티 설정</h4>
 						</div>
 						<div class="card-body">
-							<form action="">
+							<form action="/c/createRun" method="post">
 								<input type="hidden" id="user_email" name="user_email">
 								<!-- is-valid / is-invalid -->
 								<div class="form-group">
@@ -64,12 +64,12 @@
 								</div>
 								<div class="form-group">
 									<label for="community_description">소개</label>
-									<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+									<textarea class="form-control" id="community_description" name="community_description" rows="5"
 										placeholder="어떤 커뮤니티인지 설명 해주세요." required></textarea>
 								</div>
 
 								<button class="btn btn-primary" type="submit">신청</button>
-								<button id="btnTest">테스트</button>
+								
 							</form>
 						</div>
 					</div>

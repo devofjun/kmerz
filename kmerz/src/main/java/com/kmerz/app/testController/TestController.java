@@ -16,12 +16,12 @@ public class TestController {
 	
 	@RequestMapping(value="/c")
 	public String headerTest() {
-		return "community/createCommunityForm";
+		return "community/CommunityPage";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/mytest")
-	public int mybatisTest() {
-		return commService.test();
+	@RequestMapping(value="/f")
+	public String findPassword() {
+		return "member/findPasswordForm";
 	}
+
 }

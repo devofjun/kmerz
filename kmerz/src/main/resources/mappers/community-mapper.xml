@@ -4,12 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kmerz.app.community">
 
-<select id="commtest" resultType="int">
+<!-- 모든 커뮤니티 갯수 -->
+<select id="countAllCommunity" resultType="int">
 	select count(*) from tbl_community
 </select>
 
+<!-- 커뮤니티 생성 -->
 <insert id="insertCommunity">
-	insert into tbl_community()
+	insert into tbl_community(
+		community_id, community_name, community_tag,
+		community_topic, community_description
+	)
+	values(
+		seq_comm_id.nextval, #{community_name}, #{community_tag},
+		#{community_topic}, #{community_description}
+	)
 </insert>
 
 </mapper>

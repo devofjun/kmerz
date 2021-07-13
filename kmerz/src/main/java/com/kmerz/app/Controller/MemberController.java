@@ -3,6 +3,7 @@ package com.kmerz.app.Controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +24,36 @@ public class MemberController {
 	// 로그인 화면
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() {
-		return "loginForm";
+		return "member/loginForm";
+	}
+	
+	// 로그인
+	@RequestMapping(value="/loginRun", method = RequestMethod.POST)
+	public String loginRun(String user_email, String user_pw, RedirectAttributes rttr,
+			HttpSession session) {
+		MemberVo memberVo = memberService.login(user_email, user_pw);
+		System.out.println("user_email: " + user_email);
+		System.out.println("user_pw: " + user_pw);
+		String resultLogin = null;
+		String page = null;
+		if(memberVo != null) {
+			session.setAttribute("loginVo", memberVo);
+			resultLogin = "success";
+			page = "redirect:/";
+		} else {
+			resultLogin = "success";
+			page = "redirect:/m/loginForm";
+		}
+		rttr.addFlashAttribute("resultLogin", resultLogin);
+		System.out.println("page:" + page);
+		System.out.println("resultLogin:");
+		return page;
 	}
 
 	// 회원가입 화면
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinForm() {
-		return "joinForm";
+		return "member/joinForm";
 	}
 	
 	// 회원가입
@@ -47,5 +71,10 @@ public class MemberController {
 	public List<MemberVo> getAllMember() {
 		List<MemberVo> list = memberService.getAllMembers();
 		return list;
+	}
+	
+	@RequestMapping(value = "/findPasswordForm", method = RequestMethod.GET)
+	public String findPasswordForm() {
+		return "member/findPasswordForm";
 	}
 }

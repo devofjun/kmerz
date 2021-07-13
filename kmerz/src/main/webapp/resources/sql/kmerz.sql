@@ -1,23 +1,30 @@
 create user kmerz identified by 1234;
 grant connect, resource to kmerz;
 
+commit;
 -- 유저 정보 테이블
+drop table tbl_member CASCADE CONSTRAINTS;
+truncate table tbl_member;
 create table tbl_member (
     user_id number primary key,
     user_email varchar2(50),
     user_pw varchar2(50) not null,
     user_name varchar2(50) not null,
-    user_logintime timestamp,
+    user_currentlogin timestamp,
     user_status varchar2(15),
     constraint unique_user_email unique(user_email),
     constraint unique_user_name unique(user_name)
 );
--- 유저 아이디 생성 시퀀스
+drop sequence seq_user_id;
 create sequence seq_user_id
     minvalue 1000;
-drop sequence seq_user_id;
 commit;
+
+select * from tbl_member;
+
 -- 유저 로그 테이블
+drop table tbl_member_log CASCADE CONSTRAINTS;
+truncate table tbl_member_log;
 create table tbl_member_log (
     user_log_code varchar2(20),
     user_id number references tbl_member(user_id),
@@ -27,6 +34,8 @@ create table tbl_member_log (
 );
 
 -- 커뮤니티 정보 테이블
+drop table tbl_community CASCADE CONSTRAINTS;
+truncate table tbl_community;
 create table tbl_community (
     community_id number primary key,
     user_id number references tbl_member(user_id),
@@ -36,12 +45,13 @@ create table tbl_community (
     community_description varchar2(300),
     community_status varchar2(15)
 );
+drop sequence seq_comm_id;
 create sequence seq_comm_id
     start with 1
     minvalue 1;
-drop sequence seq_comm_id;
 
 -- 카테고리 정보 테이블
+drop table tbl_category CASCADE CONSTRAINTS;
 create table tbl_category(
     category_id number primary key,
     community_id number references tbl_community(community_id),
@@ -49,22 +59,26 @@ create table tbl_category(
     category_description varchar2(300),
     category_status varchar2(15)
 );
+drop sequence seq_cate_id;
 create sequence seq_cate_id
     start with 1
     minvalue 1;
 
 -- 게시글 테이블
+drop table tbl_posts CASCADE CONSTRAINTS;
+drop table tbl_posts;
 create table tbl_posts(
     post_no number primary key,
     user_id number references tbl_member(user_id),
     category_id number references tbl_category(category_id),
     post_title varchar2(100),
     post_content varchar2(500),
-    post_recommandation number,
+    post_recommand number,
     post_lastupdate timestamp default sysdate,
     post_status varchar2(15),
     post_media varchar2(10)
 );
+drop sequence seq_post_no;
 create sequence seq_post_no
     start with 1
     minvalue 1;
@@ -100,8 +114,8 @@ create table tbl_reply(
 -- 미디어 테이블
 create table tbl_media(
     post_no number reference tbl_posts(post_no),
-    media_type varchar2(),
-    file_name varchar2(),
+    media_type varchar2(), -- 미디어 타입??
+    file_name varchar2(), -- 몇자까지??
     upload_time timestamp default sysdate,
     delete_time timestamp default null
 );
@@ -112,7 +126,7 @@ create table tbl_change_log(
     -- 로그 코드 이름 해야합니다.
     defore_content varchar2(500),
     before_title varchar2(100),
-    before_media ,
+    before_media , -- 미디어 타입??
     change_log_time timestamp default sysdate,
     post_version number not null;
 );
