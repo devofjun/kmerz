@@ -33,6 +33,19 @@ section {
 	font-family: "Poppins", sans-serif;
 }
 
+.communitybanner {
+	min-height: 20vh;
+	max-height: 20vh;
+	overflow: hidden;
+}
+
+.communitybanner > img {
+	margin-top:55px;
+	width:100%;
+    heigth:100%;
+    object-fit:cover;
+}
+
 .banner {
 	position: relative;
 	min-height: 100vh;
@@ -94,7 +107,7 @@ section {
 	width: 90%;
 }
 
-.searchBar {
+.newPostBar {
 	border-radius: 7px;
 	margin: 1%;
 	background-color: #fff;
