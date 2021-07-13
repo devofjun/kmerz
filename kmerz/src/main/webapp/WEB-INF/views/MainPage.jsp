@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver33">
-<link rel="stylesheet" href="/resources/css/lSidebar.css?v8">
-<link rel="stylesheet" href="/resources/css/rSidebar.css?v8">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver34">
+<link rel="stylesheet" href="/resources/css/lSidebar.css?v10">
+<link rel="stylesheet" href="/resources/css/rSidebar.css?v10">
 <link rel="stylesheet" href="/resources/css/header.css?">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
@@ -154,7 +154,8 @@ window.onclick = function(event) {
 				</div>
 				
 				<!-- 포스트 DEFAULT 시작 -->
-				<input type="checkbox" id="toggleBtn" style="display:none">
+				<div class="postBox">
+				<input type="checkbox" id="toggleBtn" style="display:none" checked>
 				<div class="post border">
 					<div class="leftbar">
 						<div class="like">
@@ -203,7 +204,9 @@ window.onclick = function(event) {
 						
 					</div>
 				</div>
+				</div>
 				<!-- 포스트 DEFAULT 끝 -->
+				
 			</div>
 			<%@ include file="./include/rSidebar.jsp"%>
 		</div>
