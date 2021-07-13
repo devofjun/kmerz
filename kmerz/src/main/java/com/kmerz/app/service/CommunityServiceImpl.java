@@ -25,6 +25,7 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public void createCommunity(CommunityVo communityVo) {
 		communityVo.setCommunity_status(COMM_STATUS_REQUEST);
+		System.out.println(communityVo);
 		commDao.insertCommunity(communityVo);
 	}
 	

@@ -32,6 +32,7 @@ public class MemberDaoImpl implements MemberDao{
 		return list;
 	}
 
+	// 로그인
 	@Override
 	public MemberVo selectUser(String user_email, String user_pw) {
 		Map<String, String> map = new HashMap<>();

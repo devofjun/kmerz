@@ -50,6 +50,8 @@ create sequence seq_comm_id
     start with 1
     minvalue 1;
 
+select * from tbl_community;
+
 -- 카테고리 정보 테이블
 drop table tbl_category CASCADE CONSTRAINTS;
 create table tbl_category(
