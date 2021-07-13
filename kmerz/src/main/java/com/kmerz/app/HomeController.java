@@ -37,21 +37,7 @@ public class HomeController {
 		return "MainPage";
 	}
 	
-	// 로그인 화면 요청
-	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
-	public String loginForm() {
-		return "loginForm";
-	}
 	
-	// 회원가입 화면 요청
-	@RequestMapping(value="/joinForm", method=RequestMethod.GET)
-	public String joinForm() {
-		return "joinForm";
-	}
 	
-	// 커뮤니티 생성 신청 화면 요청
-	@RequestMapping(value="/createCommunityForm", method=RequestMethod.GET)
-	public String createCommunityForm() {
-		return "community/createCommunityForm";
-	}
+	
 }

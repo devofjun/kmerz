@@ -6,7 +6,7 @@
 
 <insert id="insertMember">
 	insert into tbl_member(user_id, user_email, user_pw, user_name)
-	values(seq_user_id, #{user_email}, #{user_pw})
+	values(seq_user_id.nextval, #{user_email}, #{user_pw}, #{user_name})
 </insert>
 
 <select id="selectAll" resultType="MemberVo">
