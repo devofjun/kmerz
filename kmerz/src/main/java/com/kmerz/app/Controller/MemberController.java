@@ -32,18 +32,21 @@ public class MemberController {
 	public String loginRun(String user_email, String user_pw, RedirectAttributes rttr,
 			HttpSession session) {
 		MemberVo memberVo = memberService.login(user_email, user_pw);
-		
+		System.out.println("user_email: " + user_email);
+		System.out.println("user_pw: " + user_pw);
 		String resultLogin = null;
 		String page = null;
-		
 		if(memberVo != null) {
+			session.setAttribute("loginVo", memberVo);
 			resultLogin = "success";
 			page = "redirect:/";
 		} else {
-			resultLogin = "fail";
-			page = "/m/loginForm";
+			resultLogin = "success";
+			page = "redirect:/m/loginForm";
 		}
 		rttr.addFlashAttribute("resultLogin", resultLogin);
+		System.out.println("page:" + page);
+		System.out.println("resultLogin:");
 		return page;
 	}
 
