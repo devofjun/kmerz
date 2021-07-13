@@ -13,11 +13,11 @@
 <insert id="insertCommunity">
 	insert into tbl_community(
 		community_id, community_name, community_tag,
-		community_topic, community_description
+		community_topic, community_description, community_status
 	)
 	values(
 		seq_comm_id.nextval, #{community_name}, #{community_tag},
-		#{community_topic}, #{community_description}
+		#{community_topic}, #{community_description}, #{community_status}
 	)
 </insert>
 
