@@ -10,6 +10,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>joinForm.jsp</title>
+<script>
+$(document).ready(function() {
+	$("#test").click(function(){
+		// json 테스트용임
+		$.getJSON("/m/listAll",function(rData){
+			console.log(rData);
+		});
+	});
+});
+</script>
 </head>
 <body>
 	<div id="wallpaper" style="height: 100vh; background-color: #dae0e6">
@@ -22,7 +32,7 @@
 							<h4 class="card-title">회원가입</h4>
 						</div>
 						<div class="card-body">
-							<form>
+							<form action="/m/joinRun" method="post">
 								<div class="form-group">
 									<label for="user_email">이메일</label> <label
 										style="color: gray"> ex)K-Merz@example.com</label> <input type="email"

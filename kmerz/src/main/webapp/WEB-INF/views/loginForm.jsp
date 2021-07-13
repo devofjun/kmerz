@@ -14,18 +14,7 @@
 
 <script>
 $(document).ready(function(){
-	$("#test").click(function() {
-		url="/member/listAll"
-		$.get(url, function(rData){
-			console.log(rData);
-		});
-	});
-
-	$("#wallpaper").click(function(){
-		// 윤수바보바보바보
-		
-
-	});
+	
 });
 </script>	
 
