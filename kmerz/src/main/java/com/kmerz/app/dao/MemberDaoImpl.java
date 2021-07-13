@@ -1,6 +1,8 @@
 package com.kmerz.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -28,6 +30,15 @@ public class MemberDaoImpl implements MemberDao{
 	public List<MemberVo> selectAll() {
 		List<MemberVo> list = sqlsession.selectList(NAMESPACE+"selectAll");
 		return list;
+	}
+
+	@Override
+	public MemberVo selectUser(String user_email, String user_pw) {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_email", user_email);
+		map.put("user_pw", user_pw);
+		MemberVo memberVo = sqlsession.selectOne(NAMESPACE + "selectUser", map);
+		return memberVo;
 	}
 	
 	

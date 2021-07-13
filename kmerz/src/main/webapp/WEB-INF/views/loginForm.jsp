@@ -31,7 +31,7 @@ $(document).ready(function(){
 							<h4 class="card-title">로그인</h4>
 						</div>
 						<div class="card-body">
-							<form>
+							<form action="/m/loginRun" method="post">
 								<div class="form-group">
 									<label for="user_email">이메일</label> <input type="email"
 										class="form-control" id="user_email"
