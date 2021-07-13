@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.kmerz.community">
+	<logger name="com.kmerz.app">
 		<level value="info" />
 	</logger>
 	
