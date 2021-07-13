@@ -21,7 +21,7 @@ $(document).ready(function(){
 		});
 	});
 	$("#user_email").click(function(){
-		
+		// 정병준바보바보
 	});
 });
 </script>	
