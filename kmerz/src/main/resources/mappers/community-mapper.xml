@@ -8,4 +8,8 @@
 	select count(*) from tbl_community
 </select>
 
+<insert id="insertCommunity">
+	insert into tbl_community()
+</insert>
+
 </mapper>

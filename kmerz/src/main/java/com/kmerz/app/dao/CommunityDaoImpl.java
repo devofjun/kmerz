@@ -15,9 +15,9 @@ public class CommunityDaoImpl implements CommunityDao {
 	
 	@Override
 	public int test() {
-		System.out.println("다오");
+		System.out.println("다오실행");
 		int result = sqlsession.selectOne(NAMESPACE+"commtest");
-		System.out.println(result);
+		System.out.println("select결과:"+result);
 		return result;
 	}
 
