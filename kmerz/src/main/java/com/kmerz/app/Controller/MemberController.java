@@ -28,6 +28,7 @@ public class MemberController {
 	}
 	
 	// 로그인
+	@RequestMapping(value="/loginRun", method = RequestMethod.POST)
 	public String loginRun(String user_email, String user_pw, RedirectAttributes rttr,
 			HttpSession session) {
 		MemberVo memberVo = memberService.login(user_email, user_pw);
@@ -37,12 +38,12 @@ public class MemberController {
 		
 		if(memberVo != null) {
 			resultLogin = "success";
-			page = "/c/createCommunityForm";
+			page = "redirect:/";
 		} else {
 			resultLogin = "fail";
 			page = "/m/loginForm";
 		}
-		rttr.addAttribute("resultLogin", resultLogin);
+		rttr.addFlashAttribute("resultLogin", resultLogin);
 		return page;
 	}
 

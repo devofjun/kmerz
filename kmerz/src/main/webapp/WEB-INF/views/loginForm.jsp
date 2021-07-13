@@ -14,7 +14,8 @@
 
 <script>
 $(document).ready(function(){
-	
+	var resultLogin = "${resultLogin}"
+	console.log(resultLogin);
 });
 </script>	
 
@@ -31,7 +32,7 @@ $(document).ready(function(){
 							<h4 class="card-title">로그인</h4>
 						</div>
 						<div class="card-body">
-							<form>
+							<form action="/m/loginRun" method="post">
 								<div class="form-group">
 									<label for="user_email">이메일</label> <input type="email"
 										class="form-control" id="user_email"
@@ -55,7 +56,7 @@ $(document).ready(function(){
 								<div>
 									<label>
 											K-Merz가 처음이신가요?
-										<a href="/joinForm">회원가입</a>
+										<a href="/m/joinForm">회원가입</a>
 									</label>
 								</div>
 							</form>
