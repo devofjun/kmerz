@@ -18,5 +18,10 @@ public class TestController {
 	public String headerTest() {
 		return "community/CommunityPage";
 	}
+	
+	@RequestMapping(value="/f")
+	public String findPassword() {
+		return "member/findPasswordForm";
+	}
 
 }

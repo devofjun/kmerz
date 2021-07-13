@@ -72,4 +72,9 @@ public class MemberController {
 		List<MemberVo> list = memberService.getAllMembers();
 		return list;
 	}
+	
+	@RequestMapping(value = "/findPasswordForm", method = RequestMethod.GET)
+	public String findPasswordForm() {
+		return "member/findPasswordForm";
+	}
 }
