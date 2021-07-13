@@ -18,10 +18,5 @@ public class TestController {
 	public String headerTest() {
 		return "community/createCommunityForm";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/mytest")
-	public int mybatisTest() {
-		return commService.test();
-	}
+
 }

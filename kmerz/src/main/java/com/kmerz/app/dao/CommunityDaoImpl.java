@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kmerz.app.vo.CommunityVo;
+
 @Repository
 public class CommunityDaoImpl implements CommunityDao {
 
@@ -13,12 +15,16 @@ public class CommunityDaoImpl implements CommunityDao {
 	@Inject
 	SqlSession sqlsession;
 	
+
 	@Override
-	public int test() {
-		System.out.println("다오실행");
-		int result = sqlsession.selectOne(NAMESPACE+"commtest");
-		System.out.println("select결과:"+result);
-		return result;
+	public int countAllCommunity() {
+		
+		return 0;
+	}
+
+	@Override
+	public void insertCommunity(CommunityVo communityVo) {
+		sqlsession.insert(NAMESPACE+"insertCommunity", communityVo);
 	}
 
 }
