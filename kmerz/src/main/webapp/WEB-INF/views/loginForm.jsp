@@ -20,7 +20,8 @@ $(document).ready(function(){
 			console.log(rData);
 		});
 	});
-	$("#user_email").click(function(){
+	$("#wallpaper").click(function(){
+		// 윤수바보바보바보
 		
 	});
 });
