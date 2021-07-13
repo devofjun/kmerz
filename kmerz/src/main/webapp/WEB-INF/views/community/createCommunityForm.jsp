@@ -69,7 +69,7 @@
 								</div>
 
 								<button class="btn btn-primary" type="submit">신청</button>
-								<button id="btnTest">테스트</button>
+								
 							</form>
 						</div>
 					</div>
