@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver24">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver32">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v8">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v8">
 <link rel="stylesheet" href="/resources/css/header.css?">
@@ -18,7 +18,24 @@
 <script nomodule
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
+<%@ include file="./include/modal.jsp"%>
+<script>
+var modal = document.getElementById("myModal");
+console.log(modal);
+function openModal() {
+  modal.style.display = "block";
+}
+function closeModal() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+}
+</script>
 	<header>
 		<a href="#" class="logo">LOGO</a>
 		<div class="toggle"></div>
@@ -27,7 +44,7 @@
 			<li><a href="#">About</a></li>
 			<li><a href="#">Product</a></li>
 			<li><a href="#">Contact</a></li>
-			<li><a href="#">Community</a></li>
+			<li><a href="/c/createForm">Community</a></li>
 		</ul>
 	</header>
 	<section class="banner">
@@ -137,6 +154,7 @@
 				</div>
 				
 				<!-- 포스트 DEFAULT 시작 -->
+				<input type="checkbox" id="toggleBtn" style="display:none">
 				<div class="post border">
 					<div class="leftbar">
 						<div class="like">
@@ -147,21 +165,42 @@
 							<a href="#"><ion-icon size="large" name="caret-down-circle-outline"></ion-icon></a>
 						</div>
 						<div class="BottmNavBar">
-							<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> <a
-								href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+							<div class="toggleNav">
+								<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> 
+							</div>
+							<div class="toggleNav">
+								<a	href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a>
+							</div>
+							<div class="toggleNav">
+								 <a href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> 
+							 </div>
+							 <div>
+							 	<a href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+							</div>
 						</div>
 					</div>
 					<div class="rightbar">
 						<div class="contentTop">
-							<div class="postTitle">홍진호 만난 썰 푼다</div>
-							<div class="communityAdress">COMMUNITY : 스타크래프트 - 3분전 / 작성자
-								: 윤수</div>
+							<div class="postTitle" onclick="openModal()">홍진호 만난 썰 푼다</div>
+							<div class="communityAdress">COMMUNITY : <a href="#"><img src="/resources/images/default_img.jpg">스타크래프트</a> - 3분전 / 작성자
+								: <a href="#">윤수</a>
+							</div>
 						</div>
-						<div class="postContent border">
-							<p>람쥐썬더</p>
+						<div class="postContent border" onclick="openModal()">
+							<p>람쥐썬더
+							람쥐썬더
+							람쥐썬더
+							람쥐썬더
+							람쥐썬더람쥐썬더람쥐썬더람쥐썬더
+							람쥐썬더람쥐썬더람쥐썬더람쥐썬더람쥐썬더</p>
 						</div>
+						
+						
+						<div class="postDown">
+							<label for="toggleBtn" class="labelBtn" onclick="">
+								<ion-icon name="chevron-up-outline"></ion-icon></label>
+						</div>
+						
 					</div>
 				</div>
 				<!-- 포스트 DEFAULT 끝 -->
