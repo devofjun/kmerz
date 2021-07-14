@@ -23,5 +23,14 @@ public class TestController {
 	public String findPassword() {
 		return "member/findPasswordForm";
 	}
-
+	
+	@RequestMapping(value="/adminlogin")
+	public String testAdminLoginPage() {
+		return "admin/AdminLoginPage";
+	}
+	
+	@RequestMapping(value="/admin")
+	public String testAdminPage() {
+		return "admin/AdminPage";
+	}
 }

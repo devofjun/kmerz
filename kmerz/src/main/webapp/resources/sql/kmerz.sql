@@ -135,3 +135,26 @@ create table tbl_change_log(
 
 
 
+
+
+
+
+
+
+-- 관리자 계정 테이블
+create table tbl_management(
+    admin_id varchar(30) primary key,
+    admin_pw varchar(50) not null,
+    admin_name varchar(30) not null,
+    admin_pic varchar(1) default 'F'
+);
+
+-- 관리자 메시지 테이블
+carete table tbl_mngmessage(
+    message_no number primary key,
+    admin_id varchar(30) not null references tbl_management(admin_id),
+    message_title varchar(100) not null,
+    message_content varchar(300),
+    message_level number(1) 
+);
+
