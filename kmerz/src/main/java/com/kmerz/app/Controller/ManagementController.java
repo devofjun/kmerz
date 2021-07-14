@@ -41,7 +41,7 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
 	public void adminLoginRun(String admin_id, String admin_pw, HttpSession session) throws Exception{
-		System.out.println("관리자 컨트롤러 로그인런"+admin_id+ admin_pw);
+		//System.out.println("관리자 컨트롤러 로그인런"+admin_id+ admin_pw);
 		AdminVo loginAdminVo = adminService.loginAdmin(admin_id, admin_pw);
 		String result = "fail";
 		if(loginAdminVo != null) {
