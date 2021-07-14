@@ -23,7 +23,7 @@
 							</div>
 							<div class="reply-content">
 								<div class="reply-form-input">
-									<textarea cols="135" rows="10"></textarea>
+									<textarea cols="120" rows="10"></textarea>
 								</div>
 								<div class="reply-submit">
 									<button class="btn">CON</button>
