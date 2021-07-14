@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html>
 <head>
@@ -17,11 +18,26 @@
 <!-- JQeury CDN -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Hello, world!</title>
+<title>케이머즈 관리자 로그인</title>
 <script>
 	$(document).ready(function() {
-		$("#frmLogin").submit(function() {
-			
+		// 세션에 로그인 결과를 담는다.
+		var resultLogin = "${resultLogin}";
+		if(resultLogin == "fail"){
+			$("#spResult").show();
+		}
+		
+		$("#frmLogin").submit(function(e) {
+			// submit이 일어나면 로딩 스피너가 보이게 한다. 
+			e.preventDefault();
+			$("#btnLogin").hide();
+			$("#spnLoading").show();
+			// 비동기로 요청하여 서버로부터 응답이 오기까지 스피너가 돌게하는걸 구현함.
+			var url = $(this).attr("action");
+			var data = $(this).serialize();
+			$.post(url, data, function(){
+				location.href="/admin";
+			});
 		});
 	});
 </script>
@@ -50,14 +66,16 @@
 										name="admin_pw" placeholder="비밀번호를 입력해주세요" required> <label
 										for="floatingInput">Password</label>
 								</div>
-
-								<div class="mt-3 mb-3">
-									<button class="w-100 btn btn-lg btn-outline-primary" type="submit">
-										<div id="test" class="spinner-border text-primary" role="status"><span class="visually-hidden">Sign in</span></div>
-										</button>
+								<!-- 로그인 버튼 -->
+								<div id="btnLogin" class="mt-3 mb-3">
+									<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 								</div>
-								<div class="spinner-border text-primary" role="status">
+								<!-- 로딩 스피너 -->
+								<div id="spnLoading" class="mt-3 mb-3 spinner-border text-primary" role="status" style="display:none">
 									<span class="visually-hidden">Loading...</span>
+								</div>
+								<div id="spResult" class="mt-3" style="display:none">
+									<span class="text-danger">로그인 실패</span>
 								</div>
 							</form>
 							<!-- //로그인 폼 -->

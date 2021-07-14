@@ -16,11 +16,12 @@
 <!-- JQeury CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<title>케이머즈 관리자 페이지</title>
+<title>케이머즈 대쉬보드</title>
 
 <script>
 $(document).ready(function(){
-	console.log("hi");
+	console.log("${loginAdminVo.admin_name} hi!");
+	console.log("${resultLogin}");
 });
 </script>
 

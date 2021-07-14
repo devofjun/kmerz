@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.vo.AdminVo;
@@ -36,14 +38,18 @@ public class ManagementController {
 	}
 	
 	// 로그인 실행
+	@ResponseBody
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
-	public String adminLoginRun(String admin_id, String admin_pw, HttpSession session) throws Exception{
+	public void adminLoginRun(String admin_id, String admin_pw, HttpSession session) throws Exception{
 		System.out.println("관리자 컨트롤러 로그인런"+admin_id+ admin_pw);
 		AdminVo loginAdminVo = adminService.loginAdmin(admin_id, admin_pw);
+		String result = "fail";
 		if(loginAdminVo != null) {
 			session.setAttribute("loginAdminVo", loginAdminVo);
+			System.out.println("세션발행"+(AdminVo)session.getAttribute("loginAdminVo"));
+			result = "success";
 		}
-		return "redirect:/admin";
+		session.setAttribute("resultLogin", result);
 	}
 	
 	// 로그아웃 실행
@@ -55,7 +61,8 @@ public class ManagementController {
 	
 	// 대시보드
 	@RequestMapping(value="/dashBoard", method=RequestMethod.GET)
-	public String adminDashBoard() throws Exception{
+	public String adminDashBoard(HttpSession session) throws Exception{
+		session.removeAttribute("resultLogin");
 		return "management/AdminDashBoard";
 	}
 }
