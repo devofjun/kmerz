@@ -35,10 +35,10 @@ $(document).ready(function() {
 						<div class="card-body">
 							<form action="/m/joinRun" method="post">
 								<div class="form-group">
-									<label for="user_email">이메일</label> <label
+									<label for="user_id">이메일</label> <label
 										style="color: gray"> ex)K-Merz@example.com</label> <input type="email"
-										class="form-control" id="user_email"
-										name="user_email" placeholder="이메일" required>
+										class="form-control" id="user_id"
+										name="user_id" placeholder="이메일" required>
 								</div>
 								<div class="form-group">
 

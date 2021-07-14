@@ -3,8 +3,7 @@ package com.kmerz.app.vo;
 import java.sql.Timestamp;
 
 public class MemberVo {
-	private int user_id;
-	private String user_email;
+	private String user_id;
 	private String user_pw;
 	private String user_name;
 	private Timestamp user_logintime;
@@ -15,31 +14,21 @@ public class MemberVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberVo(int user_id, String user_email, String user_pw, String user_name, Timestamp user_logintime,
-			String user_status) {
+	public MemberVo(String user_id, String user_pw, String user_name, Timestamp user_logintime, String user_status) {
 		super();
 		this.user_id = user_id;
-		this.user_email = user_email;
 		this.user_pw = user_pw;
 		this.user_name = user_name;
 		this.user_logintime = user_logintime;
 		this.user_status = user_status;
 	}
 
-	public int getUser_id() {
+	public String getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
-	}
-
-	public String getUser_email() {
-		return user_email;
-	}
-
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
 	}
 
 	public String getUser_pw() {
@@ -76,9 +65,9 @@ public class MemberVo {
 
 	@Override
 	public String toString() {
-		return "MemberVo [user_id=" + user_id + ", user_email=" + user_email + ", user_pw=" + user_pw + ", user_name="
-				+ user_name + ", user_logintime=" + user_logintime + ", user_status=" + user_status + "]";
+		return "MemberVo [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name
+				+ ", user_logintime=" + user_logintime + ", user_status=" + user_status + "]";
 	}
-	
+
 	
 }

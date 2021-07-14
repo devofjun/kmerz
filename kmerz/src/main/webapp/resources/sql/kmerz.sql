@@ -6,19 +6,14 @@ commit;
 drop table tbl_member CASCADE CONSTRAINTS;
 truncate table tbl_member;
 create table tbl_member (
-    user_id number primary key,
-    user_email varchar2(50),
+    user_id varchar2(50) primary key,
     user_pw varchar2(50) not null,
     user_name varchar2(50) not null,
     user_currentlogin timestamp,
     user_status varchar2(15),
-    constraint unique_user_email unique(user_email),
     constraint unique_user_name unique(user_name)
 );
-drop sequence seq_user_id;
-create sequence seq_user_id
-    minvalue 1000;
-commit;
+
 
 select * from tbl_member;
 
@@ -27,7 +22,7 @@ drop table tbl_member_log CASCADE CONSTRAINTS;
 truncate table tbl_member_log;
 create table tbl_member_log (
     user_log_code varchar2(20),
-    user_id number references tbl_member(user_id),
+    user_id varchar2(50) references tbl_member(user_id),
     user_request_ip varchar2(20),
     user_request_content varchar2(200),
     user_log_time timestamp default sysdate
@@ -38,7 +33,7 @@ drop table tbl_community CASCADE CONSTRAINTS;
 truncate table tbl_community;
 create table tbl_community (
     community_id number primary key,
-    user_id number references tbl_member(user_id),
+    user_id varchar2(50) references tbl_member(user_id),
     community_tag varchar2(15),
     community_name varchar2(50),
     community_topic varchar2(50),
@@ -71,7 +66,7 @@ drop table tbl_posts CASCADE CONSTRAINTS;
 drop table tbl_posts;
 create table tbl_posts(
     post_no number primary key,
-    user_id number references tbl_member(user_id),
+    user_id varchar2(50) references tbl_member(user_id),
     category_id number references tbl_category(category_id),
     post_title varchar2(100),
     post_content varchar2(500),
@@ -96,7 +91,7 @@ start with 1;
 create table tbl_comment(
     comment_no number primary key,
     post_no number reference tbl_posts(post_no),
-    user_email varchar2(50) reference tbl_member(user_email),
+    user_id varchar2(50) reference tbl_member(user_id),
     comment_content varchar2(200) not null,
     comment_regist_date timestamp default sysdate
 );
@@ -108,7 +103,7 @@ create sequence seq_comment_no;
 create table tbl_reply(
     reply_no primary key,
     comment_no reference tbl_comment(comment_no),
-    user_email reference tbl_member(user_email),
+    user_id reference tbl_member(user_id),
     reply_content varchar2(200) not null,
     reply_regist_date timestamp default sysdate
 );

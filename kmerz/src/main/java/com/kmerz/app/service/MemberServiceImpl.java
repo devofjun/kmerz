@@ -32,8 +32,8 @@ public class MemberServiceImpl implements MemberService {
 
 	// 로그인
 	@Override
-	public MemberVo login(String user_email, String user_pw) {
-		MemberVo memberVo = memberDao.selectUser(user_email, user_pw);
+	public MemberVo login(String user_id, String user_pw) {
+		MemberVo memberVo = memberDao.selectUser(user_id, user_pw);
 		return memberVo;
 	}
 
