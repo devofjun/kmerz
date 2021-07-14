@@ -13,6 +13,7 @@
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="module"
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule
@@ -35,8 +36,12 @@ window.onclick = function(event) {
 	    modal.style.display = "none";
 	  }
 }
+$(document).ready(function(){
+	console.log("test:${loginVo}");
+});
 </script>
 	<header>
+		
 		<a href="#" class="logo">LOGO</a>
 		<div class="toggle"></div>
 		<ul>
@@ -209,6 +214,7 @@ window.onclick = function(event) {
 				
 			</div>
 			<%@ include file="./include/rSidebar.jsp"%>
+			${sessionScope.loginVo}
 		</div>
 	</section>
 </body>
