@@ -28,5 +28,15 @@
 	<!-- 트랜잭션 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
-	
+	<!-- 인터셉터 -->
+	<beans:bean id="loginInterceptor" 
+            class="com.kmerz.app.interceptor.LoginInterceptor"/>
+
+	<interceptors>
+		<interceptor>
+			<!-- login 인증이 필요한 URI 들 -->
+			<mapping path="/c/**"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>
