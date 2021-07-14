@@ -30,7 +30,7 @@
 										placeholder="이메일을 입력해주세요" required>
 								</div>
 								<div>
-									<button class="btn btn-primary" type="submit">인증코드 발송</button>
+									<button class="btn btn-primary" type="submit">확인</button>
 								</div>
 							</form>
 						</div>
