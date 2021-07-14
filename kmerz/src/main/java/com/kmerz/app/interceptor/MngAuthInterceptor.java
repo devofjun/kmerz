@@ -1,4 +1,4 @@
-package com.kmerz.app.Interceptor;
+package com.kmerz.app.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

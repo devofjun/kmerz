@@ -36,7 +36,7 @@
 
 	<!-- 관리자 인터셉터 -->
 	<beans:bean
-		class="com.kmerz.app.Interceptor.MngAuthInterceptor"
+		class="com.kmerz.app.interceptor.MngAuthInterceptor"
 		id="mngAuthInterceptor"></beans:bean>
 	<!-- 인터셉터 -->
 	<beans:bean id="loginInterceptor" 
