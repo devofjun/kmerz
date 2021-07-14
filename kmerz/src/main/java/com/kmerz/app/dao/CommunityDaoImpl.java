@@ -1,5 +1,7 @@
 package com.kmerz.app.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,6 +27,12 @@ public class CommunityDaoImpl implements CommunityDao {
 	@Override
 	public void insertCommunity(CommunityVo communityVo) {
 		sqlsession.insert(NAMESPACE+"insertCommunity", communityVo);
+	}
+
+	@Override
+	public List<CommunityVo> selectCommunityList() {
+		List<CommunityVo> list = sqlsession.selectList(NAMESPACE + "selectCommunityList");
+		return list;
 	}
 
 }
