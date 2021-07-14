@@ -36,8 +36,8 @@
 
 	<!-- 관리자 인터셉터 -->
 	<beans:bean
-		class="com.kmerz.app.interceptor.MngAuthInterceptor"
-		id="mngAuthInterceptor"></beans:bean>
+		class="com.kmerz.app.interceptor.AdminAuthInterceptor"
+		id="adminAuthInterceptor"></beans:bean>
 	<!-- 인터셉터 -->
 	<beans:bean id="loginInterceptor" 
             class="com.kmerz.app.interceptor.LoginInterceptor"/>
@@ -45,10 +45,11 @@
 	<interceptors>
 		<!-- 관리자 세션 -->
 		<interceptor>
-			<mapping path="/mng/*" />
-			<!-- exclude-mapping의 요청은 가로채지 않는다. -->
-			<!-- <exclude-mapping path="/loginProcess" /> -->
-			<beans:ref bean="mngAuthInterceptor" />
+			<mapping path="/admin"/>
+			<mapping path="/admin/*" />
+			<exclude-mapping path="/admin/loginForm" />
+			<exclude-mapping path="/admin/loginRun" />
+			<beans:ref bean="adminAuthInterceptor" />
 		</interceptor>
 		<!-- 유저 세션 -->
 		<interceptor>

@@ -18,6 +18,13 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Hello, world!</title>
+<script>
+	$(document).ready(function() {
+		$("#frmLogin").submit(function() {
+			
+		});
+	});
+</script>
 </head>
 <body>
 	<div id="wallpaper" style="height: 100vh; background-color: #dae0e6">
@@ -32,20 +39,22 @@
 						</div>
 						<div class="card-body">
 							<!-- 로그인 폼 -->
-							<form action="/admin/loginRun" method="post">
+							<form id="frmLogin" action="/admin/loginRun" method="post">
 								<div class="form-floating mb-1">
-									<input type="email" class="form-control" id="user_email"
-										name="user_email" placeholder="이메일을 입력해주세요" required>
-									<label for="floatingInput">Admin ID</label>
+									<input type="text" class="form-control" id="admin_id"
+										name="admin_id" placeholder="아이디를 입력하세요." required> <label
+										for="floatingInput">Admin ID</label>
 								</div>
 								<div class="form-floating">
-									<input type="password" class="form-control" id="user_pw"
-										name="user_pw" placeholder="비밀번호를 입력해주세요" required> <label
+									<input type="password" class="form-control" id="admin_pw"
+										name="admin_pw" placeholder="비밀번호를 입력해주세요" required> <label
 										for="floatingInput">Password</label>
 								</div>
-								
+
 								<div class="mt-3 mb-3">
-									<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+									<button class="w-100 btn btn-lg btn-outline-primary" type="submit">
+										<div id="test" class="spinner-border text-primary" role="status"><span class="visually-hidden">Sign in</span></div>
+										</button>
 								</div>
 							</form>
 							<!-- //로그인 폼 -->
