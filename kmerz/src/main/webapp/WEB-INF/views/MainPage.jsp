@@ -6,10 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=0.8 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver35">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver37">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v10">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v10">
 <link rel="stylesheet" href="/resources/css/header.css?">
+<link rel="stylesheet" href="/resources/css/font.css?">
+<link rel="stylesheet" href="/resources/css/margin.css?">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
