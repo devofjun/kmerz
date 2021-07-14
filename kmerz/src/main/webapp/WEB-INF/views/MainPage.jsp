@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/resources/css/header.css?">
 <link rel="stylesheet" href="/resources/css/font.css?">
 <link rel="stylesheet" href="/resources/css/margin.css?">
+<link rel="stylesheet" href="/resources/css/slider.css?2">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
@@ -53,8 +54,13 @@ window.onclick = function(event) {
 	</header>
 	<section class="banner">
 		<!-- <div class="tenor-gif-embed" data-postid="18605633" data-share-method="host" data-width="100%" data-aspect-ratio="1.810909090909091"><a href="https://tenor.com/view/%eb%ac%b8%ec%9e%ac%ec%9d%b8-%eb%aa%85%ec%99%95-moon-%ec%9e%ac%ec%9d%b8-%ec%a3%84%ec%9d%b8-gif-18605633">문재인 명왕 GIF</a> from <a href="https://tenor.com/search/%EB%AC%B8%EC%9E%AC%EC%9D%B8-gifs">문재인 GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script> -->
-		<div class="">
-		
+		<div class="slider" id="slider">
+			<figure>
+				<div class="align-center"><img src="/resources/images/background_Setting.png"></div>
+				<div class="align-center"><img src="/resources/images/default_image.jpg"></div>
+				<div class="align-center"><img src="/resources/images/IMG_0013.jpg"></div>
+				<div class="align-center"><img src="/resources/images/squirrel.png"></div>
+			</figure>
 		</div>
 	</section>
 	<section class="postSection">
@@ -107,8 +113,7 @@ window.onclick = function(event) {
 					session = request.getSession();
 				%>
 				<script>
-					var session = '<%out.print(session.getAttribute("test"));%>
-					';
+					var session = '<%out.print(session.getAttribute("test"));%>	';
 					console.log(session);
 					function posttoggle() {
 						var postBtn = document.getElementById("post-toggleBtn");
