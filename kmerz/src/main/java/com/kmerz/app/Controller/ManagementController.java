@@ -61,7 +61,8 @@ public class ManagementController {
 	
 	// 대시보드
 	@RequestMapping(value="/dashBoard", method=RequestMethod.GET)
-	public String adminDashBoard() throws Exception{
+	public String adminDashBoard(HttpSession session) throws Exception{
+		session.removeAttribute("resultLogin");
 		return "management/AdminDashBoard";
 	}
 }

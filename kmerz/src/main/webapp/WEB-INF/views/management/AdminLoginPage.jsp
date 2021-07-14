@@ -18,7 +18,7 @@
 <!-- JQeury CDN -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Hello, world!</title>
+<title>케이머즈 관리자 로그인</title>
 <script>
 	$(document).ready(function() {
 		// 세션에 로그인 결과를 담는다.
