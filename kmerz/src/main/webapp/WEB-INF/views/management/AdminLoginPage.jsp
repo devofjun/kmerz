@@ -21,16 +21,18 @@
 <title>Hello, world!</title>
 <script>
 	$(document).ready(function() {
+		// 세션에 로그인 결과를 담는다.
 		var resultLogin = "${resultLogin}";
 		if(resultLogin == "fail"){
 			$("#spResult").show();
 		}
 		
 		$("#frmLogin").submit(function(e) {
+			// submit이 일어나면 로딩 스피너가 보이게 한다. 
 			e.preventDefault();
 			$("#btnLogin").hide();
 			$("#spnLoading").show();
-			
+			// 비동기로 요청하여 서버로부터 응답이 오기까지 스피너가 돌게하는걸 구현함.
 			var url = $(this).attr("action");
 			var data = $(this).serialize();
 			$.post(url, data, function(){
