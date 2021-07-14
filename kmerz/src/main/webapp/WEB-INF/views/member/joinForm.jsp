@@ -22,6 +22,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+
 	<div id="wallpaper" style="height: 100vh; background-color: #dae0e6">
 		<div class="container h-100">
 			<div class="row h-100 justify-content-center align-items-center">
