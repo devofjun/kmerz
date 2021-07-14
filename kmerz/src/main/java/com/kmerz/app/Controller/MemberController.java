@@ -36,11 +36,13 @@ public class MemberController {
 		String resultLogin = null;
 		String page = null;
 		if(memberVo != null) {
+			// 로그인 성공
 			session.setAttribute("loginVo", memberVo);
 			resultLogin = "success";
 			page = "redirect:/";
 		} else {
-			resultLogin = "success";
+			// 로그인 실패
+			resultLogin = "fail";
 			page = "redirect:/m/loginForm";
 		}
 		rttr.addFlashAttribute("resultLogin", resultLogin);

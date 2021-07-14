@@ -17,16 +17,21 @@
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="module"
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+
+</script>
 </head>
 
 <body>
 	<%@ include file="./include/modal.jsp"%>
 	<script>
+
 var modal = document.getElementById("myModal");
 console.log(modal);
 function openModal() {
@@ -46,7 +51,7 @@ $(document).ready(function(){
 </script>
 
 	<header>
-		
+
 		<a href="#" class="logo">LOGO</a>
 		<div class="toggle"></div>
 		<ul>
@@ -114,6 +119,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</div>
+
 				<%
 					session = request.getSession();
 				%>
