@@ -56,6 +56,9 @@
 										<div id="test" class="spinner-border text-primary" role="status"><span class="visually-hidden">Sign in</span></div>
 										</button>
 								</div>
+								<div class="spinner-border text-primary" role="status">
+									<span class="visually-hidden">Loading...</span>
+								</div>
 							</form>
 							<!-- //로그인 폼 -->
 						</div>
