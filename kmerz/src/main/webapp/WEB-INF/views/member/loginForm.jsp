@@ -33,9 +33,9 @@ $(document).ready(function(){
 						<div class="card-body">
 							<form action="/m/loginRun" method="post">
 								<div class="form-group">
-									<label for="user_email">이메일</label> <input type="email"
-										class="form-control" id="user_email"
-										name="user_email" placeholder="이메일을 입력해주세요" required>
+									<label for="user_id">이메일</label> <input type="email"
+										class="form-control" id="user_id"
+										name="user_id" placeholder="이메일을 입력해주세요" required>
 								</div>
 								<div class="form-group">
 									<label for="user_pw">비밀번호</label> <input type="password"
