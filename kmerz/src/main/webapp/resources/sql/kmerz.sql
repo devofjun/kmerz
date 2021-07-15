@@ -32,18 +32,14 @@ create table tbl_member_log (
 drop table tbl_community CASCADE CONSTRAINTS;
 truncate table tbl_community;
 create table tbl_community (
-    community_id number primary key,
+    community_id varchar2(15) primary key,
     user_id varchar2(50) references tbl_member(user_id),
-    community_tag varchar2(15),
     community_name varchar2(50),
     community_topic varchar2(50),
     community_description varchar2(300),
     community_status varchar2(15)
 );
-drop sequence seq_comm_id;
-create sequence seq_comm_id
-    start with 1
-    minvalue 1;
+
 
 select * from tbl_community;
 
@@ -67,6 +63,7 @@ drop table tbl_posts;
 create table tbl_posts(
     post_no number primary key,
     user_id varchar2(50) references tbl_member(user_id),
+    community_id varchar2(15) references tbl_community(community_id),
     category_id number references tbl_category(category_id),
     post_title varchar2(100),
     post_content varchar2(500),
