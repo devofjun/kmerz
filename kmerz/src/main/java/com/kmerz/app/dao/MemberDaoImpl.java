@@ -34,9 +34,9 @@ public class MemberDaoImpl implements MemberDao{
 
 	// 로그인
 	@Override
-	public MemberVo selectUser(String user_email, String user_pw) {
+	public MemberVo selectUser(String user_id, String user_pw) {
 		Map<String, String> map = new HashMap<>();
-		map.put("user_email", user_email);
+		map.put("user_id", user_id);
 		map.put("user_pw", user_pw);
 		MemberVo memberVo = sqlsession.selectOne(NAMESPACE + "selectUser", map);
 		return memberVo;

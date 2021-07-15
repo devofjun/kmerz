@@ -29,18 +29,20 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping(value="/loginRun", method = RequestMethod.POST)
-	public String loginRun(String user_email, String user_pw, RedirectAttributes rttr,
+	public String loginRun(String user_id, String user_pw, RedirectAttributes rttr,
 			HttpSession session) {
-		MemberVo memberVo = memberService.login(user_email, user_pw);
+		MemberVo memberVo = memberService.login(user_id, user_pw);
 		System.out.println("memberVo: " + memberVo);
 		String resultLogin = null;
 		String page = null;
 		if(memberVo != null) {
+			// 로그인 성공
 			session.setAttribute("loginVo", memberVo);
 			resultLogin = "success";
 			page = "redirect:/";
 		} else {
-			resultLogin = "success";
+			// 로그인 실패
+			resultLogin = "fail";
 			page = "redirect:/m/loginForm";
 		}
 		rttr.addFlashAttribute("resultLogin", resultLogin);
