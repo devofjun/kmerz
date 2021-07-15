@@ -46,7 +46,7 @@ public class ManagementController {
 		String result = "fail";
 		if(loginAdminVo != null) {
 			session.setAttribute("loginAdminVo", loginAdminVo);
-			System.out.println("세션발행"+(AdminVo)session.getAttribute("loginAdminVo"));
+			System.out.println("로그인 세션발행:"+(AdminVo)session.getAttribute("loginAdminVo"));
 			result = "success";
 		}
 		session.setAttribute("resultLogin", result);
@@ -62,7 +62,9 @@ public class ManagementController {
 	// 대시보드
 	@RequestMapping(value="/dashBoard", method=RequestMethod.GET)
 	public String adminDashBoard(HttpSession session) throws Exception{
+		// 로그인 시도 세션 삭제
 		session.removeAttribute("resultLogin");
+		
 		return "management/AdminDashBoard";
 	}
 }
