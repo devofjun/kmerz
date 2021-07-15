@@ -4,11 +4,11 @@ import java.sql.Timestamp;
 
 public class PostsVo {
 	private int post_no;
-	private int user_id;
+	private String user_id;
 	private int category_id;
 	private String post_title;
 	private String post_content;
-	private String post_recommandation;
+	private int post_recommandation;
 	private Timestamp post_lastupdate;
 	private String post_status;
 	private String post_media;
@@ -18,8 +18,8 @@ public class PostsVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostsVo(int post_no, int user_id, int category_id, String post_title, String post_content,
-			String post_recommandation, Timestamp post_lastupdate, String post_status, String post_media) {
+	public PostsVo(int post_no, String user_id, int category_id, String post_title, String post_content,
+			int post_recommandation, Timestamp post_lastupdate, String post_status, String post_media) {
 		super();
 		this.post_no = post_no;
 		this.user_id = user_id;
@@ -40,11 +40,11 @@ public class PostsVo {
 		this.post_no = post_no;
 	}
 
-	public int getUser_id() {
+	public String getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
 
@@ -72,11 +72,11 @@ public class PostsVo {
 		this.post_content = post_content;
 	}
 
-	public String getPost_recommandation() {
+	public int getPost_recommandation() {
 		return post_recommandation;
 	}
 
-	public void setPost_recommandation(String post_recommandation) {
+	public void setPost_recommandation(int post_recommandation) {
 		this.post_recommandation = post_recommandation;
 	}
 
@@ -111,6 +111,5 @@ public class PostsVo {
 				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + ", post_media=" + post_media
 				+ "]";
 	}
-	
-	
+
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%-- <%@ page session="false"%> --%>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,9 +35,12 @@ window.onclick = function(event) {
 	    modal.style.display = "none";
 	  }
 }
+$(document).ready(function(){
+	console.log("test:${loginVo}");
+});
 </script>
 	<header>
-		<a href="#" class="logo">LOGO</a>
+		<a href="/" class="logo">LOGO</a>
 		<div class="toggle"></div>
 		<ul>
 			<li><a href="/">Home</a></li>
@@ -57,10 +60,9 @@ window.onclick = function(event) {
 					<div class="commHeader hr">
 					<a><img src="/resources/images/starcraft_small.jpg"><span>카테고리 리스트</span></a></div>
 					<ul>
-						<li><a href="#"><span>전략</span></a></li>
-						<li><a href="#"><span>방송</span></a></li>
-						<li><a href="#"><span>파티찾기</span></a></li>
-						<li><a href="#"><span>유즈맵추천</span></a></li>
+					<c:forEach var="CategoryVo" items="${categoryList}">
+						<li><a href="#"><span>${CategoryVo.category_name}</span></a></li>
+					</c:forEach>
 					</ul>
 				</div>
 			</div>
