@@ -21,7 +21,7 @@ public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
 		String uri = request.getRequestURI();
 		String queryString = request.getQueryString();
 		String requestPath = uri + "?" + queryString;
-		System.out.println("requestPath" + requestPath);
+		System.out.println("인터셉터 requestPath: " + requestPath);
 		session.setAttribute("requestPath", requestPath);
 		
 		AdminVo adminVo = (AdminVo) session.getAttribute("loginAdminVo");

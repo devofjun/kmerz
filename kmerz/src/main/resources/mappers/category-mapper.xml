@@ -5,10 +5,9 @@
 <mapper namespace="com.kmerz.app.category">
 
 <!-- 카테고리리스트 가져오기 -->
-<select id="selectCategory" resultType="CategoryVo">
+<select id="selectCategoryList" resultType="CategoryVo">
 	select * from tbl_category
 	where community_id = #{community_id}
-	and community_status = #{community_status}
 </select>
 
 </mapper>
