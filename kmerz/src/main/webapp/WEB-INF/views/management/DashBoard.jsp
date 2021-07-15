@@ -129,30 +129,6 @@
 						<li class="nav-item"><a class="nav-link" href="#"> <span
 								data-feather="file-text"></span> Year-end sale
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Year-end sale
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Year-end sale
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Year-end sale
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Year-end sale
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Year-end sale
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Current month
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Current month
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file-text"></span> Current month
-						</a></li>
 					</ul>
 				</div>
 			</nav>

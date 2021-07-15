@@ -27,7 +27,7 @@ public class ManagementController {
 		if(loginAdminVo == null) {
 			return "management/AdminLoginPage";			
 		} else {
-			return "management/AdminDashBoard";
+			return "management/DashBoard";
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class ManagementController {
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
 	public String adminLoginForm(HttpSession session) throws Exception{
 		if(session.getAttribute("loginAdminVo") != null) {
-			return "redirect:/admin/dashboard";
+			return "redirect:/admin/dashBoard";
 		}
 		return "management/AdminLoginPage";
 	}
@@ -68,6 +68,6 @@ public class ManagementController {
 		// 로그인 시도 세션 삭제
 		session.removeAttribute("resultLogin");
 		
-		return "management/AdminDashBoard";
+		return "management/DashBoard";
 	}
 }
