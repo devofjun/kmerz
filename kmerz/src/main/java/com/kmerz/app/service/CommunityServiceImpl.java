@@ -1,5 +1,7 @@
 package com.kmerz.app.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +29,13 @@ public class CommunityServiceImpl implements CommunityService {
 		communityVo.setCommunity_status(COMM_STATUS_REQUEST);
 		System.out.println(communityVo);
 		commDao.insertCommunity(communityVo);
+	}
+
+
+	@Override
+	public List<CommunityVo> getCommunityList() {
+		List<CommunityVo> list = commDao.selectCommunityList();
+		return list;
 	}
 	
 	

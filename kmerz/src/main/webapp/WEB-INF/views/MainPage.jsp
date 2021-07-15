@@ -45,9 +45,10 @@ window.onclick = function(event) {
 	    modal.style.display = "none";
 	  }
 }
-$(document).ready(function(){
+// 세션 확인
+/* $(document).ready(function(){
 	console.log("test:${loginVo}");
-});
+}); */
 </script>
 
 	<header>
@@ -141,7 +142,6 @@ $(document).ready(function(){
 				<%@ include file="./include/post.jsp"%>
 			</div>
 			<%@ include file="./include/rSidebar.jsp"%>
-			${sessionScope.loginVo}
 		</div>
 	</section>
 </body>

@@ -7,7 +7,7 @@
 		커뮤니티 리스트
 	</div>
 		<ul>
-			<li><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>스타크래프트</span></a></li>
+			<li><a href="/c"><img src="/resources/images/starcraft_small.jpg"><span>스타크래프트</span></a></li>
 			</ul>
 	</div>
 </div>
