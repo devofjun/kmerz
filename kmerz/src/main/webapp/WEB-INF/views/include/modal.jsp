@@ -32,12 +32,10 @@
 						console.log(replyBtn.checked);
 					};
 					</script>
-					<!-- 댓글 추가 -->
-					<%@ include file="../include/reply.jsp"%>
-					<%@ include file="../include/reply.jsp"%>
+					<!-- 모달 댓글 양식 -->
 					<%@ include file="../include/reply.jsp"%>
 			</div>
-			<!-- 모달창 오른쪽에 붙는 메뉴들 추가할때 여기서 추가하시오 -->
+			<!-- 모달 오른쪽 메뉴 -->
 			<div class="modal-content-right margin-8">
 				<%@ include file="../include/modal_right.jsp"%>
 			</div>
