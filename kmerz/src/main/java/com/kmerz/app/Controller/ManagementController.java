@@ -33,7 +33,10 @@ public class ManagementController {
 	
 	// 로그인 페이지
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
-	public String adminLoginForm() throws Exception{
+	public String adminLoginForm(HttpSession session) throws Exception{
+		if(session.getAttribute("loginAdminVo") != null) {
+			return "redirect:/admin/dashboard";
+		}
 		return "management/AdminLoginPage";
 	}
 	
