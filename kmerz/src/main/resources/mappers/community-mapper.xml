@@ -21,4 +21,10 @@
 	)
 </insert>
 
+<!-- 커뮤니티 리스트 가져오기 -->
+<select id="selectCommunityList" resultType="CommunityVo">
+	select * from tbl_community
+	where community_status = #{community_status} <!-- 'accept' 보류 -->
+</select>
+
 </mapper>

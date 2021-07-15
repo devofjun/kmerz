@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmerz.app.category">
+
+<!-- 카테고리리스트 가져오기 -->
+<select id="selectCategory" resultType="CategoryVo">
+	select * from tbl_category
+	where community_id = #{community_id}
+	and community_status = #{community_status}
+</select>
+
+</mapper>
