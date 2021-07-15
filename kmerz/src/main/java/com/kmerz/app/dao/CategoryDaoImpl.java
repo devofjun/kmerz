@@ -18,9 +18,9 @@ public class CategoryDaoImpl implements CategoryDao {
 	SqlSession sqlsession;
 	
 	@Override
-	public List<CategoryVo> selectCategoryList() {
-		sqlsession.selectList(NAMESPACE + "selectCategoryList");
-		return null;
+	public List<CategoryVo> selectCategoryList(int community_id) {
+		List<CategoryVo> list = sqlsession.selectList(NAMESPACE + "selectCategoryList", community_id);
+		return list;
 	}
 
 }
