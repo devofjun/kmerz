@@ -168,11 +168,12 @@ section {
 
 .posts {
 	display: flex;
+	justify-content: center;
 }
 
 .postList {
 	font-size: 22px;
-	width: 50%;
+	width: 40%;
 }
 
 .post {
