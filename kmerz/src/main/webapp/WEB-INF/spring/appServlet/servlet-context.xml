@@ -47,6 +47,7 @@
 		<interceptor>
 			<mapping path="/admin"/>
 			<mapping path="/admin/*" />
+			<mapping path="/admin/**/*" />
 			<exclude-mapping path="/admin/loginForm" />
 			<exclude-mapping path="/admin/loginRun" />
 			<beans:ref bean="adminAuthInterceptor" />
