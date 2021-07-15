@@ -1,15 +1,19 @@
+<%@page import="com.kmerz.app.vo.PostsVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
+<%List<PostsVo> postList = (List<PostsVo>)request.getAttribute("postList"); %>
+<%System.out.println(postList.size()); %>
 <!-- 포스트 DEFAULT 시작 -->
+<div>
+			<%for(int i = 0; i < postList.size(); i++){ %>
 				<input type="checkbox" id="post-toggleBtn" style="display:none" checked>
 				<div class="post border">
 					<div class="leftbar">
 						<div class="like">
 							<a href="#"><ion-icon size="large" name="caret-up-circle-outline"></ion-icon></a>
 						</div>
-							<span>0</span> 
+							<span><%=postList.get(i).getPost_recommandation() %></span> 
 						<div class="like">
 							<a href="#"><ion-icon size="large" name="caret-down-circle-outline"></ion-icon></a>
 						</div>
@@ -30,18 +34,13 @@
 					</div>
 					<div class="rightbar">
 						<div class="contentTop">
-							<div class="postTitle" onclick="openModal()">홍진호 만난 썰 푼다</div>
-							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>스타크래프트</span></a><span> - 3분전 / 작성자
-								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">윤수</a>
+							<div class="postTitle" onclick="openModal()"><%=postList.get(i).getPost_title() %></div>
+							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span><%=postList.get(i).getCategory_id() %></span></a><span> - 3분전 / 작성자
+								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_id() %></a>
 							</div>
 						</div>
 						<div class="postContent border" onclick="openModal()">
-							<p>람쥐썬더
-							람쥐썬더
-							람쥐썬더
-							람쥐썬더
-							람쥐썬더람쥐썬더람쥐썬더람쥐썬더
-							람쥐썬더람쥐썬더람쥐썬더람쥐썬더람쥐썬더</p>
+							<p><%=postList.get(i).getPost_content() %></p>
 						</div>
 						
 						
@@ -51,5 +50,7 @@
 						</div>
 						
 					</div>
+				</div>
+				<%} %>
 				</div>
 				<!-- 포스트 DEFAULT 끝 -->

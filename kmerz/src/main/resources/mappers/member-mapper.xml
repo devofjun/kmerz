@@ -19,7 +19,7 @@
 
 <!-- 로그인  -->
 <select id="selectUser" resultType="MemberVo">
-	select * from tbl_member where user_email = #{user_id} and user_pw = #{user_pw}
+	select * from tbl_member where user_id = #{user_id} and user_pw = #{user_pw}
 </select>
 
 </mapper>

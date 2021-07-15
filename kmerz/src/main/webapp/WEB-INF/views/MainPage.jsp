@@ -39,13 +39,12 @@
 	<div>
 		<%@ include file="./include/banner.jsp"%>
 	</div>
-</script>
 
 	
 	<section class="postSection">
 		<div class="posts">
 		<!-- 왼쪽 사이드 바 -->
-			<%@ include file="./include/lSidebar.jsp"%>
+			<%@ include file="./include/lSidebar.jsp" %>
 			<div class="postList">
 				<div class="sticky">
 					<!-- 게시글 정렬 sticky bar -->
