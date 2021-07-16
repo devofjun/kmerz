@@ -9,4 +9,6 @@
 	select * from tbl_posts
 </select>
 
+<!-- 카테고리 선택시 나오는 포스트 달기 -->
+
 </mapper>
