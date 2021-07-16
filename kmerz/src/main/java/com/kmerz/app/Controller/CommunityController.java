@@ -40,13 +40,12 @@ public class CommunityController {
 	}
 	
 	// 요청 커뮤니티 페이지
-	@RequestMapping(value="/{community_tag}", method=RequestMethod.GET)
+	/*@RequestMapping(value="/{community_tag}", method=RequestMethod.GET)
 	public String testCommunityForm(@PathVariable("community_tag") String community_tag,
 			Model model) {
-		int community_id = 1;
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
+		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
 		model.addAttribute("categoryList", categoryList);
 		return null;
-	}
+	}*/
 	
 }
