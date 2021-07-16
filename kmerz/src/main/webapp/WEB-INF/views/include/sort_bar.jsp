@@ -3,17 +3,10 @@
 
 <div class="stickyHeader">
 	<ul>
-		<li class="bd"><a href="#"><ion-icon size="large"
-					name="rocket-outline"></ion-icon><span> BEST</span></a></li>
-		<li class="bd"><a href="#"><ion-icon size="large"
-					name="flame-outline"></ion-icon><span> HOT</span></a></li>
-		<li class="bd"><a href="#"><ion-icon size="large"
-					name="flag-outline"></ion-icon><span> NEW</span></a></li>
-		<li class="bd"><a href="#"><ion-icon size="large"
-					name="podium-outline"></ion-icon><span> TOP</span></a></li>
-		<li class="bd"><a href="#"><ion-icon size="large"
-					name="trending-up-outline"></ion-icon><span> RISING</span></a></li>
-		<li class="bd"><a href="#"><ion-icon size="large"
-					name="ellipsis-horizontal-outline"></ion-icon></a></li>
+		<li class="bd"><a href="#"><img class="icon-color" src="/resources/images/star_black_36dp.svg"></img><span> BEST</span></a></li>
+		<li class="bd"><a href="#"><img class="icon-color" src="/resources/images/local_fire_department_black_36dp.svg"><span> HOT</span></a></li>
+		<li class="bd"><a href="#"><img class="icon-color" src="/resources/images/new_releases_black_36dp.svg"><span> NEW</span></a></li>
+		<li class="bd"><a href="#"><img class="icon-color" src="/resources/images/leaderboard_black_36dp.svg"><span> TOP</span></a></li>
+		<li class="bd"><a href="#"><img class="icon-color" src="/resources/images/trending_up_black_36dp.svg"><span> RISING</span></a></li>
 	</ul>
 </div>
