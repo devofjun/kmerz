@@ -57,13 +57,15 @@
 
 
 			<div class="postDown" onclick="posttoggle()">
-				<label for="toggleBtn" class="labelBtn" onclick=""> <img src="/resources/images/expand_more_black_24dp.svg"></label>
+				<label for="toggleBtn" class="labelBtn" onclick=""> <img
+					src="/resources/images/expand_more_black_24dp.svg"></label>
 			</div>
 
 		</div>
 	</div>
-	<%
-		}
-	%>
 </div>
+<%
+	}
+%>
+
 <!-- 포스트 DEFAULT 끝 -->
