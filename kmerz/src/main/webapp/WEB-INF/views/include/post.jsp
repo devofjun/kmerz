@@ -7,12 +7,12 @@
 %>
 
 <!-- 포스트 DEFAULT 시작 -->
-
-<%
-	for (int i = 0; i < postList.size(); i++) {
-%>
-<div id="<%=i%>">
-	<input type="checkbox" id="post-toggleBtn" style="display: none">
+<div>
+	<%
+		for (int i = 0; i < postList.size(); i++) {
+	%>
+	<input type="checkbox" id="post-toggleBtn" style="display: none"
+		checked>
 	<div class="post border">
 		<div class="leftbar">
 			<div class="like">
@@ -54,15 +54,15 @@
 			</div>
 
 
-			<div class="postDown" onclick="posttoggle(<%=i%>)">
-				<label for="toggleBtn" class="labelBtn" onclick=""> <img src="/resources/images/expand_more_black_24dp.svg"></label>
+			<div class="postDown" onclick="posttoggle()">
+				<label for="toggleBtn" class="labelBtn" onclick=""> <ion-icon
+						name="chevron-up-outline"></ion-icon></label>
 			</div>
 
 		</div>
 	</div>
+	<%
+		}
+	%>
 </div>
-<%
-	}
-%>
-
 <!-- 포스트 DEFAULT 끝 -->
