@@ -89,7 +89,7 @@ create sequence seq_comment_no;
 -- 답글 테이블
 drop table tbl_reply CASCADE CONSTRAINTS;
 create table tbl_reply(
-    reply_no primary key,
+    reply_no number primary key,
     comment_no number references tbl_comment(comment_no),
     user_id varchar(50) references tbl_member(user_id),
     reply_content varchar2(200) not null,
@@ -132,7 +132,7 @@ start with 1;
 
 
 -- 관리자 계정 테이블
-drop table tbl_administrator;
+drop table tbl_admin CASCADE CONSTRAINTS;
 create table tbl_admin(
     admin_id varchar(30) primary key,
     admin_pw varchar(50) not null,
@@ -147,9 +147,10 @@ values
 commit;
 
 -- 관리자 메시지 테이블
+drop table tbl_adminmessage CASCADE CONSTRAINTS;
 create table tbl_adminmessage(
     message_no number primary key,
-    admin_id varchar(30) not null references tbl_management(admin_id),
+    admin_id varchar(30) not null references tbl_admin(admin_id),
     message_title varchar(100) not null,
     message_content varchar(300),
     message_level number(1) 
