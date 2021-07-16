@@ -27,7 +27,7 @@ public class CategoryController {
 	@RequestMapping(value = "/createCategoryRun", method=RequestMethod.POST)
 	public String createCategoryRun(CategoryVo categoryVo) {
 			categoryVo.setCommunity_id("star");
-			// categoryService.createCategory(categoryVo);
+			categoryService.createCategory(categoryVo);
 			System.out.println(categoryVo);
 			return "redirect:/c";
 	}
