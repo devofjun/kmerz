@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%List<PostsVo> postList = (List<PostsVo>)request.getAttribute("postList"); %>
-<%System.out.println(postList.size()); %>
+
 <!-- 포스트 DEFAULT 시작 -->
 <div>
 			<%for(int i = 0; i < postList.size(); i++){ %>
