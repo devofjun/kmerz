@@ -57,8 +57,7 @@
 
 
 			<div class="postDown" onclick="posttoggle(<%=i%>)">
-				<label for="toggleBtn" class="labelBtn" onclick=""> <ion-icon
-						name="chevron-up-outline"></ion-icon></label>
+				<label for="toggleBtn" class="labelBtn" onclick=""> <img src="/resources/images/expand_more_black_24dp.svg"/></label>
 			</div>
 
 		</div>

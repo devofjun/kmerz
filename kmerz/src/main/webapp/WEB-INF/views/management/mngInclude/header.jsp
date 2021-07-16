@@ -58,7 +58,10 @@
 		console.log($("#ulMenus > li > a").eq(0).attr("href"));
 		for (var i = 0; i < ulSize; i++) {
 			var href = $("#ulMenus > li > a").eq(i).attr("href");
-			if (path == href) {
+			if(path == "/admin"){
+				$("#ulMenus > li > a").eq(0).addClass("active");
+			}
+			if(path == href) {
 				$("#ulMenus > li > a").eq(i).addClass("active");
 			}
 		}
