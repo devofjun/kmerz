@@ -15,6 +15,7 @@ public class CommunityVo {
 
 	public CommunityVo(String community_id, String user_id, String community_name,
 			String community_topic, String community_description, String community_status) {
+
 		super();
 		this.community_id = community_id;
 		this.user_id = user_id;
@@ -74,10 +75,11 @@ public class CommunityVo {
 
 	@Override
 	public String toString() {
-		return "CommunityVo [community_id=" + community_id + ", user_id=" + user_id
-				+ ", community_name=" + community_name + ", community_topic=" + community_topic
-				+ ", community_description=" + community_description + ", community_status=" + community_status + "]";
+		return "CommunityVo [community_id=" + community_id + ", user_id=" + user_id + ", community_name="
+				+ community_name + ", community_topic=" + community_topic + ", community_description="
+				+ community_description + ", community_status=" + community_status + "]";
 	}
 
+	
 	
 }
