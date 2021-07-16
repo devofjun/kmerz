@@ -40,8 +40,8 @@ public class CommunityController {
 	}
 	
 	// 요청 커뮤니티 페이지 우선 테스트 컨트롤러에서 test 중입니다.
-	/*@RequestMapping(value="/{community_tag}", method=RequestMethod.GET)
-	public String testCommunityForm(@PathVariable("community_tag") String community_tag,
+	/*@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
+	public String testCommunityForm(@PathVariable("community_id") String community_id,
 			Model model) {
 		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
 		model.addAttribute("categoryList", categoryList);

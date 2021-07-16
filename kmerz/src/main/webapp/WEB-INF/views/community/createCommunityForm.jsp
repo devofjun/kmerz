@@ -39,7 +39,7 @@
 						</div>
 						<div class="card-body">
 							<form action="/c/createRun" method="post">
-								<input type="hidden" id="user_email" name="user_email">
+								<input type="hidden" id="user_id" name="user_id">
 								<!-- is-valid / is-invalid -->
 								<div class="form-group">
 									<label for="community_name">커뮤니티 이름</label> <input type="text"

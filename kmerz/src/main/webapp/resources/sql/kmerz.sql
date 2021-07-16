@@ -46,12 +46,15 @@ select * from tbl_community;
 -- 카테고리 정보 테이블
 drop table tbl_category CASCADE CONSTRAINTS;
 create table tbl_category(
-    category_id varchar2(15) primary key,
+    category_id number primary key,
     community_id varchar2(15) references tbl_community(community_id),
     category_name varchar2(50),
     category_description varchar2(300),
     category_status varchar2(15)
 );
+
+drop sequence seq_category_id;
+create sequence seq_category_id;
 
 -- 게시글 테이블
 drop table tbl_posts CASCADE CONSTRAINTS;

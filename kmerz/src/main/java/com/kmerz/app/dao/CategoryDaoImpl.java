@@ -28,4 +28,9 @@ public class CategoryDaoImpl implements CategoryDao {
 		return list;
 	}
 
+	@Override
+	public void insertCategory(CategoryVo categoryVo) {
+		sqlsession.insert(NAMESPACE + "insertCategory", categoryVo);
+	}
+
 }

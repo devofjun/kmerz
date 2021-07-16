@@ -25,7 +25,7 @@
 							<h4 class="card-title">카테고리 생성</h4>
 						</div>
 						<div class="card-body">
-							<form action="/m/loginRun" method="post">
+							<form action="/c/createCategoryRun" method="post">
 								<div class="form-group">
 									<label for="category_name">카테고리 이름</label> <input type="text"
 										class="form-control" id="category_name"

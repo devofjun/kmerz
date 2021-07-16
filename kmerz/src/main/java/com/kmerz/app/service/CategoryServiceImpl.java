@@ -28,4 +28,10 @@ public class CategoryServiceImpl implements CategoryService {
 		return list;
 	}
 
+	@Override
+	public void createCategory(CategoryVo categoryVo) {
+		categoryVo.setCategory_status(COMM_STATUS_REQUEST);
+		categoryDao.insertCategory(categoryVo);
+	}
+
 }
