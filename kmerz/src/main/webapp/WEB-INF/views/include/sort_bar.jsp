@@ -3,8 +3,7 @@
 
 <div class="stickyHeader">
 	<ul>
-		<li class="bd"><a href="#"><ion-icon size="large"
-					name="rocket-outline"></ion-icon><span> BEST</span></a></li>
+		<li class="bd"><a href="#"><img src="/resources/images/star_black_24dp.svg"><span> BEST</span></a></li>
 		<li class="bd"><a href="#"><ion-icon size="large"
 					name="flame-outline"></ion-icon><span> HOT</span></a></li>
 		<li class="bd"><a href="#"><ion-icon size="large"

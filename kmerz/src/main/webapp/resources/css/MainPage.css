@@ -147,7 +147,7 @@ section {
 .stickyHeader ul li a {
 	font-size: 20px;
 	position: relative;
-	display: inline-block;
+	display: flex;
 	margin: 0 15px;
 	color: #fff;
 	height: 100%;
@@ -255,10 +255,6 @@ a
 	flex: 1 0 auto;
 }
 
-.postContent:hover {
-	cursor: pointer;
-}
-
 .BottmNavBar {
 	margin-top: 10px;
 	display: flex;
@@ -339,6 +335,12 @@ span {
 	display: flex;
 }
 
+.postDown:hover {
+	cursor: pointer;
+}
+.labelBtn:hover {
+	cursor: pointer;
+}
 .postDown {
 	display: flex;
 	align-items: center;
