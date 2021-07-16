@@ -1,10 +1,10 @@
-create user kmerz identified by 1234;
-grant connect, resource to kmerz;
+--create user kmerz identified by 1234;
+--grant connect, resource to kmerz;
 
-commit;
+--commit;
 -- 유저 정보 테이블
 drop table tbl_member CASCADE CONSTRAINTS;
-truncate table tbl_member;
+--truncate table tbl_member;
 create table tbl_member (
     user_id varchar2(50) primary key,
     user_pw varchar2(50) not null,
@@ -15,11 +15,11 @@ create table tbl_member (
 );
 
 
-select * from tbl_member;
+--select * from tbl_member;
 
 -- 유저 로그 테이블
 drop table tbl_member_log CASCADE CONSTRAINTS;
-truncate table tbl_member_log;
+--truncate table tbl_member_log;
 create table tbl_member_log (
     user_log_code varchar2(20),
     user_id varchar2(50) references tbl_member(user_id),
@@ -30,7 +30,7 @@ create table tbl_member_log (
 
 -- 커뮤니티 정보 테이블
 drop table tbl_community CASCADE CONSTRAINTS;
-truncate table tbl_community;
+--truncate table tbl_community;
 create table tbl_community (
     community_id varchar2(15) primary key,
     user_id varchar2(50) references tbl_member(user_id),
@@ -46,25 +46,20 @@ select * from tbl_community;
 -- 카테고리 정보 테이블
 drop table tbl_category CASCADE CONSTRAINTS;
 create table tbl_category(
-    category_id number primary key,
-    community_id number references tbl_community(community_id),
+    category_id varchar2(15) primary key,
+    community_id varchar2(15) references tbl_community(community_id),
     category_name varchar2(50),
     category_description varchar2(300),
     category_status varchar2(15)
 );
-drop sequence seq_cate_id;
-create sequence seq_cate_id
-    start with 1
-    minvalue 1;
 
 -- 게시글 테이블
 drop table tbl_posts CASCADE CONSTRAINTS;
-drop table tbl_posts;
 create table tbl_posts(
     post_no number primary key,
     user_id varchar2(50) references tbl_member(user_id),
     community_id varchar2(15) references tbl_community(community_id),
-    category_id number references tbl_category(category_id),
+    category_id varchar2(15) references tbl_category(category_id),
     post_title varchar2(100),
     post_content varchar2(500),
     post_recommand number,
@@ -77,44 +72,42 @@ create sequence seq_post_no
     start with 1
     minvalue 1;
 
--- 댓글
-
--- 게시글변경 버전 시퀀스
-creat sequence seq_post_version
-increment by 1
-start with 1;
-
 -- 댓글 테이블
+drop table tbl_comment CASCADE CONSTRAINTS;
 create table tbl_comment(
     comment_no number primary key,
-    post_no number reference tbl_posts(post_no),
-    user_id varchar2(50) reference tbl_member(user_id),
+    post_no number references tbl_posts(post_no),
+    user_id varchar2(50) references tbl_member(user_id),
     comment_content varchar2(200) not null,
     comment_regist_date timestamp default sysdate
 );
 
 -- 댓글 시퀀스 생성
+drop sequence seq_comment_no;
 create sequence seq_comment_no;
 
 -- 답글 테이블
+drop table tbl_reply CASCADE CONSTRAINTS;
 create table tbl_reply(
-    reply_no primary key,
-    comment_no reference tbl_comment(comment_no),
-    user_id reference tbl_member(user_id),
+    reply_no number primary key,
+    comment_no number references tbl_comment(comment_no),
+    user_id varchar(50) references tbl_member(user_id),
     reply_content varchar2(200) not null,
     reply_regist_date timestamp default sysdate
 );
 
 -- 미디어 테이블
+drop table tbl_media CASCADE CONSTRAINTS;
 create table tbl_media(
-    post_no number reference tbl_posts(post_no),
-    media_type varchar2(), -- 미디어 타입??
-    file_name varchar2(), -- 몇자까지??
+    post_no number references tbl_posts(post_no),
+    media_type varchar2(10), -- 미디어 타입??
+    file_name varchar2(100), -- 몇자까지??
     upload_time timestamp default sysdate,
     delete_time timestamp default null
 );
 
 -- 게시글변경 로그 테이블
+/*
 create table tbl_change_log(
     post_no number reference tbl_posts(post_no),
     -- 로그 코드 이름 해야합니다.
@@ -124,6 +117,11 @@ create table tbl_change_log(
     change_log_time timestamp default sysdate,
     post_version number not null;
 );
+-- 게시글변경 버전 시퀀스
+creat sequence seq_post_version
+increment by 1
+start with 1;
+*/
 
 
 
@@ -134,7 +132,7 @@ create table tbl_change_log(
 
 
 -- 관리자 계정 테이블
-drop table tbl_administrator;
+drop table tbl_admin CASCADE CONSTRAINTS;
 create table tbl_admin(
     admin_id varchar(30) primary key,
     admin_pw varchar(50) not null,
@@ -149,9 +147,10 @@ values
 commit;
 
 -- 관리자 메시지 테이블
-carete table tbl_adminmessage(
+drop table tbl_adminmessage CASCADE CONSTRAINTS;
+create table tbl_adminmessage(
     message_no number primary key,
-    admin_id varchar(30) not null references tbl_management(admin_id),
+    admin_id varchar(30) not null references tbl_admin(admin_id),
     message_title varchar(100) not null,
     message_content varchar(300),
     message_level number(1) 

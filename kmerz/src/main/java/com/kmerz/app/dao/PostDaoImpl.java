@@ -20,7 +20,7 @@ public class PostDaoImpl implements PostDao{
 	@Override
 	public List<PostsVo> selectAllPosts() {
 		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectAllPosts");
-		System.out.println(PostsList);
+		//System.out.println(PostsList);
 		return PostsList;
 	}
 
