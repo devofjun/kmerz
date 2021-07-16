@@ -32,12 +32,13 @@ create table tbl_member_log (
 drop table tbl_community CASCADE CONSTRAINTS;
 --truncate table tbl_community;
 create table tbl_community (
-    community_id varchar2(15) primary key,
+    community_id varchar2(30) primary key,
     user_id varchar2(50) references tbl_member(user_id),
     community_name varchar2(50) not null,
     community_topic varchar2(50) not null,
     community_description varchar2(300),
-    community_status varchar2(15) not null
+    community_status varchar2(15) not null,
+    constraint uq_comm_name UNIQUE(community_name)
 );
 
 
@@ -46,26 +47,30 @@ select * from tbl_community;
 -- 카테고리 정보 테이블
 drop table tbl_category CASCADE CONSTRAINTS;
 create table tbl_category(
-    category_id varchar2(15) primary key,
-    community_id varchar2(15) references tbl_community(community_id),
+    category_id number primary key,
+    community_id varchar2(30) references tbl_community(community_id),
     category_name varchar2(50),
     category_description varchar2(300),
     category_status varchar2(15)
 );
+drop sequence seq_cate_id;
+create sequence seq_cate_id
+    start with 1
+    minvalue 1;
 
 -- 게시글 테이블
 drop table tbl_posts CASCADE CONSTRAINTS;
 create table tbl_posts(
     post_no number primary key,
     user_id varchar2(50) references tbl_member(user_id),
-    community_id varchar2(15) references tbl_community(community_id),
-    category_id varchar2(15) references tbl_category(category_id),
+    community_name varchar2(50) references tbl_community(community_name),
+    category_id number references tbl_category(category_id),
     post_title varchar2(100),
     post_content varchar2(500),
-    post_recommand number,
+    post_recommand number default 0,
     post_lastupdate timestamp default sysdate,
     post_status varchar2(15),
-    post_media varchar2(10)
+    post_media varchar2(10) default 'F'
 );
 drop sequence seq_post_no;
 create sequence seq_post_no
@@ -144,7 +149,7 @@ insert into tbl_admin
 (admin_id, admin_pw, admin_name)
 values
 ('admin', '1234', '관리자');
-commit;
+
 
 -- 관리자 메시지 테이블
 drop table tbl_adminmessage CASCADE CONSTRAINTS;
@@ -156,3 +161,4 @@ create table tbl_adminmessage(
     message_level number(1) 
 );
 
+commit;
