@@ -13,7 +13,7 @@
 						<div class="like">
 							<a href="#"><ion-icon size="large" name="caret-up-circle-outline"></ion-icon></a>
 						</div>
-							<span><%=postList.get(i).getPost_recommandation() %></span> 
+							<span><%=postList.get(i).getPost_recommand() %></span> 
 						<div class="like">
 							<a href="#"><ion-icon size="large" name="caret-down-circle-outline"></ion-icon></a>
 						</div>
