@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="stickyHeader">
+<div class="stickyHeader bar-color">
 	<ul>
 		<li class="bd"><a href="#"><img class="icon-color" src="/resources/images/star_black_36dp.svg"></img><span> BEST</span></a></li>
 		<li class="bd"><a href="#"><img class="icon-color" src="/resources/images/local_fire_department_black_36dp.svg"><span> HOT</span></a></li>
