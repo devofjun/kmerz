@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=0.8 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver41">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver42">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v10">
 <link rel="stylesheet" href="/resources/css/header.css?">
@@ -23,7 +23,7 @@
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="/resources/script/MainPage.js">
+<script src="/resources/script/MainPage.js?ver2">
 
 </script>
 </head>
