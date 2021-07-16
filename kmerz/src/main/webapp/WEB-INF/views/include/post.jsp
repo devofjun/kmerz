@@ -13,8 +13,7 @@
 %>
 
 <div id="<%=i%>">
-	<input type="checkbox" id="post-toggleBtn" style="display: none"
-		checked>
+	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
 		<div class="leftbar">
 			<div class="like">
