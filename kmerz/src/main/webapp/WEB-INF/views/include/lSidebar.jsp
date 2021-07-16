@@ -5,7 +5,7 @@
 <div class="lSidebar">
 	<div class="communityList border sticky">
 	<div class="commHeader hr">
-		커뮤니티 리스트
+		<span>커뮤니티 리스트</span>
 	</div>
 		<ul>	
 		<%List<CommunityVo> list = (List<CommunityVo>)request.getAttribute("commList"); %>

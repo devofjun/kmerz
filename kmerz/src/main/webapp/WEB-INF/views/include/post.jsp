@@ -13,10 +13,9 @@
 %>
 
 <div id="<%=i%>">
-	<input type="checkbox" id="post-toggleBtn" style="display: none"
-		checked>
+	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
-		<div class="leftbar">
+		<div class="leftbar bar-color">
 			<div class="like">
 				<a href="#"><ion-icon size="large"
 						name="caret-up-circle-outline"></ion-icon></a>
@@ -44,7 +43,7 @@
 		</div>
 		<div class="rightbar">
 			<div class="contentTop">
-				<div class="postTitle" onclick="openModal()"><%=postList.get(i).getPost_title()%></div>
+				<div class="postTitle" onclick="openModal()"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
 				<div class="communityAdress">
 					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span><%=postList.get(i).getCategory_id()%></span></a><span>
 						- 3분전 / 작성자 : </span><a href="#"><img
@@ -52,7 +51,7 @@
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal()">
-				<p><%=postList.get(i).getPost_content()%></p>
+				<p class="icon-color"><%=postList.get(i).getPost_content()%></p>
 			</div>
 
 

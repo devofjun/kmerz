@@ -11,14 +11,18 @@
 	</div>
 	<div class="inputSelection">
 		<ul class="border">
-			<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>COMMUNITY</span></li>
-			<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>CATEGORY</span></li>
-			<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>POST
+			<li class="bd"><img class="icon-color"
+				src="/resources/images/menu_black_36dp.svg"><span>COMMUNITY</span></li>
+			<li class="bd"><img class="icon-color"
+				src="/resources/images/menu_black_36dp.svg"><span>CATEGORY</span></li>
+			<li class="bd"><img class="icon-color"
+				src="/resources/images/menu_black_36dp.svg"><span>POST
 					TYPE</span></li>
-			<li class="bd"><ion-icon size="large" name="add-circle-outline"></ion-icon><span>POSTING
+			<li class="bd"><img class="icon-color"
+				src="/resources/images/web_asset_black_36dp.svg"><span>POSTING
 					DETAIL</span></li>
-			<li class="bd"><ion-icon size="large"
-					name="checkmark-circle-outline"></ion-icon><span>POST</span></li>
+			<li class="bd"><img class="icon-color"
+				src="/resources/images/check_circle_outline_black_36dp.svg"><span>POST</span></li>
 		</ul>
 	</div>
 </div>
