@@ -44,6 +44,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.project
 
 # External tool builders
 .externalToolBuilders/
@@ -136,3 +137,4 @@ rebel.xml
 kmerz/.settings/org.eclipse.wst.common.component
 kmerz/src/main/resources/rebel-remote.xml
 
+kmerz/.classpath
