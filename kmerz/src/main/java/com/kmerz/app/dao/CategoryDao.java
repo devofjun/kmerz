@@ -5,5 +5,5 @@ import java.util.List;
 import com.kmerz.app.vo.CategoryVo;
 
 public interface CategoryDao {
-	public List<CategoryVo> selectCategoryList(int community_id);
+	public List<CategoryVo> selectCategoryList(String community_id, String category_status);
 }

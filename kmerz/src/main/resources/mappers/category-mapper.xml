@@ -8,6 +8,7 @@
 <select id="selectCategoryList" resultType="CategoryVo">
 	select * from tbl_category
 	where community_id = #{community_id}
+	and category_status = #{category_status}
 </select>
 
 </mapper>

@@ -3,7 +3,6 @@ package com.kmerz.app.vo;
 public class CommunityVo {
 	private String community_id;
 	private String user_id;
-	private String community_tag;
 	private String community_name;
 	private String community_topic;
 	private String community_description;
@@ -14,12 +13,11 @@ public class CommunityVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommunityVo(String community_id, String user_id, String community_tag, String community_name,
+	public CommunityVo(String community_id, String user_id, String community_name,
 			String community_topic, String community_description, String community_status) {
 		super();
 		this.community_id = community_id;
 		this.user_id = user_id;
-		this.community_tag = community_tag;
 		this.community_name = community_name;
 		this.community_topic = community_topic;
 		this.community_description = community_description;
@@ -40,14 +38,6 @@ public class CommunityVo {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
-	}
-
-	public String getCommunity_tag() {
-		return community_tag;
-	}
-
-	public void setCommunity_tag(String community_tag) {
-		this.community_tag = community_tag;
 	}
 
 	public String getCommunity_name() {
@@ -84,7 +74,7 @@ public class CommunityVo {
 
 	@Override
 	public String toString() {
-		return "CommunityVo [community_id=" + community_id + ", user_id=" + user_id + ", community_tag=" + community_tag
+		return "CommunityVo [community_id=" + community_id + ", user_id=" + user_id
 				+ ", community_name=" + community_name + ", community_topic=" + community_topic
 				+ ", community_description=" + community_description + ", community_status=" + community_status + "]";
 	}

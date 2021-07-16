@@ -39,7 +39,7 @@ public class CommunityController {
 		return "redirect:/";
 	}
 	
-	// 요청 커뮤니티 페이지
+	// 요청 커뮤니티 페이지 우선 테스트 컨트롤러에서 test 중입니다.
 	/*@RequestMapping(value="/{community_tag}", method=RequestMethod.GET)
 	public String testCommunityForm(@PathVariable("community_tag") String community_tag,
 			Model model) {

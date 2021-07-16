@@ -1,6 +1,8 @@
 package com.kmerz.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -18,8 +20,11 @@ public class CategoryDaoImpl implements CategoryDao {
 	SqlSession sqlsession;
 	
 	@Override
-	public List<CategoryVo> selectCategoryList(int community_id) {
-		List<CategoryVo> list = sqlsession.selectList(NAMESPACE + "selectCategoryList", community_id);
+	public List<CategoryVo> selectCategoryList(String community_id, String category_status) {
+		Map<String, String> map = new HashMap<>();
+		map.put("community_id", community_id);
+		map.put("category_status", category_status);
+		List<CategoryVo> list = sqlsession.selectList(NAMESPACE + "selectCategoryList", map);
 		return list;
 	}
 

@@ -49,10 +49,10 @@
 									<div class="invalid-feedback">사용 할 수 없는 이름입니다.</div>
 								</div>
 								<div class="form-group">
-									<label for="community_tag">커뮤니티 태그 </label> <label
+									<label for="community_id">커뮤니티 태그 </label> <label
 										style="color: gray">http://localhost/c/</label><label
 										id="lbl_tag" style="color: gray"></label> <input type="text"
-										class="form-control" id="community_tag" name="community_tag"
+										class="form-control" id="community_id" name="community_id"
 										placeholder="" required>
 									<div class="valid-feedback">사용 할 수 있는 태그입니다.</div>
 									<div class="invalid-feedback">사용 할 수 없는 태그입니다.</div>
