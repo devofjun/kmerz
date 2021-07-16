@@ -34,10 +34,10 @@ drop table tbl_community CASCADE CONSTRAINTS;
 create table tbl_community (
     community_id varchar2(15) primary key,
     user_id varchar2(50) references tbl_member(user_id),
-    community_name varchar2(50),
-    community_topic varchar2(50),
+    community_name varchar2(50) not null,
+    community_topic varchar2(50) not null,
     community_description varchar2(300),
-    community_status varchar2(15)
+    community_status varchar2(15) not null
 );
 
 

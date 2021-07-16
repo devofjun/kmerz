@@ -1,8 +1,8 @@
 package com.kmerz.app.vo;
 
 public class CommunityVo {
-	private int community_id;
-	private int user_id;
+	private String community_id;
+	private String user_id;
 	private String community_tag;
 	private String community_name;
 	private String community_topic;
@@ -14,7 +14,7 @@ public class CommunityVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommunityVo(int community_id, int user_id, String community_tag, String community_name,
+	public CommunityVo(String community_id, String user_id, String community_tag, String community_name,
 			String community_topic, String community_description, String community_status) {
 		super();
 		this.community_id = community_id;
@@ -26,19 +26,19 @@ public class CommunityVo {
 		this.community_status = community_status;
 	}
 
-	public int getCommunity_id() {
+	public String getCommunity_id() {
 		return community_id;
 	}
 
-	public void setCommunity_id(int community_id) {
+	public void setCommunity_id(String community_id) {
 		this.community_id = community_id;
 	}
 
-	public int getUser_id() {
+	public String getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
 
@@ -88,6 +88,6 @@ public class CommunityVo {
 				+ ", community_name=" + community_name + ", community_topic=" + community_topic
 				+ ", community_description=" + community_description + ", community_status=" + community_status + "]";
 	}
-	
+
 	
 }
