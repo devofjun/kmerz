@@ -11,6 +11,12 @@
 <%
 	for (int i = 0; i < postList.size(); i++) {
 %>
+
+
+
+
+
+
 <div id="<%=i%>">
 	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
