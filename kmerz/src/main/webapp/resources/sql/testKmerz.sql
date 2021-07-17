@@ -71,7 +71,7 @@ insert into tbl_posts values(
     1,
     '스타 첫번째 공략',
     '아무튼 이렇게 저렇게 하면 이김 OK?',
-    0, sysdate, 'accept', 'F'
+    0, 0, sysdate, 'accept', 'F'
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
@@ -80,7 +80,7 @@ insert into tbl_posts values(
     2,
     '옵치 첫번째 공략',
     '아무튼 일케 절케 하면 이김 OK?',
-    0, sysdate, 'accept', 'F'
+    0, 0, sysdate, 'accept', 'F'
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
@@ -89,7 +89,7 @@ insert into tbl_posts values(
     3,
     '롤 첫번째 공략',
     '걍 정치하셈 OK?',
-    0, sysdate, 'accept', 'F'
+    0, 0, sysdate, 'accept', 'F'
 );
 
 
