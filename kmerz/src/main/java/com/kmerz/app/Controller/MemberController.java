@@ -48,6 +48,13 @@ public class MemberController {
 		rttr.addFlashAttribute("resultLogin", resultLogin);
 		return page;
 	}
+	
+	// 로그아웃
+	@RequestMapping(value = "/logoutRun", method = RequestMethod.GET)
+	public String adminLogoutRun(HttpSession session) throws Exception {
+		session.removeAttribute("loginVo");
+		return "redirect:/";
+	}
 
 	// 회원가입 화면
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
