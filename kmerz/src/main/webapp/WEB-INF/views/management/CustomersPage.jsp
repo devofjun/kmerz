@@ -223,46 +223,5 @@ $(document).ready(function() {
   </div>
 </div>
 
-<!-- 포인트 내역 모달 -->
-<div id="modalUserPoint" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">포인트 내역</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-striped table-sm">
-        	<thead>
-        		<tr>
-        			<th>시간</th>
-        			<th>누적</th>
-        			<th>현재</th>
-        			<th>+/-</th>
-        			<th>내용</th>
-        		</tr>
-        	</thead>
-        	<tbody>
-        		<tr>
-        			<td>2021/07/18/10:12:33</td>
-        			<td>110</td>
-        			<td>10</td>
-        			<td>-100</td>
-        			<td>이모티콘 구입</td>
-        		</tr>
-        		<c:forEach var="i" begin="10" end="310" step="10">
-        		<tr>
-        			<td>2021/07/18/10:12:33</td>
-        			<td>${320-i}</td>
-        			<td>${320-i}</td>
-        			<td>+10</td>
-        			<td>출석포인트 지급</td>
-        		</tr>
-        		</c:forEach>
-        	</tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+
 <%@ include file="./mngInclude/footer.jsp"%>
