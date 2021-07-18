@@ -118,14 +118,6 @@
 							href="/admin/dashBoard"> <span data-feather="home"></span>
 								Dashboard
 						</a></li>
-						<li class="nav-item"><a class="nav-link" title="고객 주문"
-							href="/admin/orders"> <span data-feather="file"></span>
-								Orders
-						</a></li>
-						<li class="nav-item"><a class="nav-link" title="상품 관리"
-							href="/admin/products"> <span data-feather="shopping-cart"></span>
-								Products
-						</a></li>
 						<li class="nav-item"><a class="nav-link" title="고객 관리"
 							href="/admin/customers"> <span data-feather="users"></span>
 								Customers
@@ -133,6 +125,14 @@
 						<li class="nav-item"><a class="nav-link" title="컨텐츠 관리"
 							href="/admin/contents"> <span data-feather="layers"></span>
 								Contents
+						</a></li>
+						<li class="nav-item"><a class="nav-link" title="고객 주문"
+							href="/admin/orders"> <span data-feather="file"></span>
+								Orders
+						</a></li>
+						<li class="nav-item"><a class="nav-link" title="상품 관리"
+							href="/admin/products"> <span data-feather="shopping-cart"></span>
+								Products
 						</a></li>
 						<li class="nav-item"><a class="nav-link" title="보고서?"
 							href="/admin/reports"> <span data-feather="bar-chart-2"></span>
