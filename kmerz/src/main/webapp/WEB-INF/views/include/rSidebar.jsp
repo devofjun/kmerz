@@ -5,7 +5,7 @@
 <div class="rSidebar sticky">
 	<div class="userinfo border sticky">
 		<div class="hr">
-			USER INFO
+			<span>USER INFO</span>
 		</div>
 	<c:choose>
 		<c:when test="${empty sessionScope.loginVo}">
@@ -15,14 +15,14 @@
 		</div>
 		</c:when>
 		<c:otherwise>
-			${loginVo.user_name}님 환영합니다.
+			<span>${loginVo.user_name}님 환영합니다.</span>
 			<button id="btnLogout" class="btn btn-stretch btn-border">Logout</button>
 		</c:otherwise>
 	</c:choose>
 	</div>
 	<div class="hotList border stickyUnderInfo">
 		<div class="relatedPost hr">
-			인기글
+			<span>인기글</span>
 		</div>
 		<ul>
 			<li><a href="#">홍진호 만난 썰 푼다</a></li>

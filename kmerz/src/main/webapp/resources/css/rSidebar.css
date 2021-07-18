@@ -31,4 +31,5 @@
 	border-color: #cccccc;
 	border-width:1.5px;
 	border-bottom-style: solid;
+	display:flex;
 }

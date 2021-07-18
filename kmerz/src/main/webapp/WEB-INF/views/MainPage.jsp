@@ -7,23 +7,25 @@
 	content="width=device-width, initial-scale=0.8 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver42">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver45">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v10">
 <link rel="stylesheet" href="/resources/css/header.css?">
 <link rel="stylesheet" href="/resources/css/font.css?">
 <link rel="stylesheet" href="/resources/css/margin.css?">
-<link rel="stylesheet" href="/resources/css/slider.css?2">
+<link rel="stylesheet" href="/resources/css/slider.css?3">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="module"
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="/resources/script/MainPage.js?ver3">
+<script src="/resources/script/MainPage.js?ver4">
 
 </script>
 </head>

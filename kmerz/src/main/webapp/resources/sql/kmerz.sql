@@ -71,6 +71,7 @@ create table tbl_posts(
     post_title varchar2(100),
     post_content varchar2(500),
     post_recommand number default 0,
+    post_viewcount number default 0,
     post_lastupdate timestamp default sysdate,
     post_status varchar2(15),
     post_media varchar2(10) default 'F'
