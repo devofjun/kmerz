@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html>
 <head>
@@ -82,7 +83,7 @@
 		</button>
 		<!-- 검색 -->
 		<input class="form-control form-control-dark w-100" type="text"
-			placeholder="Search" aria-label="Search">
+			placeholder="" aria-label="Search">
 		<!-- 프로필 -->
 		<div class="ms-auto">
 			<div class="ms-4 me-1 flex-shrink-0 dropdown">
