@@ -13,7 +13,6 @@ import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommunityService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
-import com.kmerz.app.vo.CategoryVo;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;

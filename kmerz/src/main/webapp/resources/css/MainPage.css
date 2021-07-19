@@ -377,7 +377,6 @@ labelBtn:hover {
 }
 
 .modal {
-	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 2000; /* Sit on top */
 	padding-top: 55px; /* Location of the box */
