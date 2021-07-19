@@ -1,9 +1,11 @@
+<%@page import="com.kmerz.app.vo.MemberVo"%>
 <%@page import="com.kmerz.app.vo.PostsVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	List<PostsVo> postList = (List<PostsVo>) request.getAttribute("postList");
+	List<MemberVo> memList = (List<MemberVo>) request.getAttribute("memList");
 %>
 
 <!-- 포스트 DEFAULT 시작 -->
@@ -42,9 +44,15 @@
 			<div class="contentTop">
 				<div class="postTitle" onclick="openModal()"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
 				<div class="communityAdress">
-					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span><%=postList.get(i).getCategory_id()%></span></a><span>
+					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span><%=postList.get(i).getCommunity_name()%></span></a><span>
 						- 3분전 / 작성자 : </span><a href="#"><img
-						src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_name()%></a>
+
+						src="/resources/images/starcraft_small.jpg"><%for(int j = 0; j < memList.size(); j++){
+																									if(postList.get(i).getUser_id().equals(memList.get(j).getUser_id())){%>
+																										<%=memList.get(j).getUser_name()%>
+																									<%} 
+																						}%></a>
+
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal()">

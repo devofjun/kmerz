@@ -24,9 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	// 모든 회원 검색
 	@Override
 	public List<MemberVo> getAllMembers() {
-		System.out.println("서비스_모든회원검색");
 		List<MemberVo> list = memberDao.selectAll();
-		System.out.println("모든회원검색결과:"+list);
 		return list;
 	}
 
@@ -35,6 +33,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVo login(String user_id, String user_pw) {
 		MemberVo memberVo = memberDao.selectUser(user_id, user_pw);
 		return memberVo;
+	}
+
+	@Override
+	public MemberVo selectID(String user_id) {
+		return memberDao.selectID(user_id);
 	}
 
 }
