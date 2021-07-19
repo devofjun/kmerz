@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommunityService;
@@ -18,7 +17,11 @@ import com.kmerz.app.vo.CategoryVo;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
+
+
+
 @Controller
+@RequestMapping(value = "/")
 public class HomeController {
 	
 	@Inject
@@ -33,7 +36,7 @@ public class HomeController {
 	@Inject
 	CategoryService cateService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping
 	public String home(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
 		List<PostsVo> postList = postService.selectAllPosts();
