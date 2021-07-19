@@ -41,6 +41,11 @@ public class MemberDaoImpl implements MemberDao{
 		MemberVo memberVo = sqlsession.selectOne(NAMESPACE + "selectUser", map);
 		return memberVo;
 	}
+
+	@Override
+	public MemberVo selectID(String user_id) {
+		return sqlsession.selectOne(NAMESPACE + "selectID", user_id);
+	}
 	
 	
 
