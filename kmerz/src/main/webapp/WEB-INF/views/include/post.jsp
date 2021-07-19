@@ -17,15 +17,15 @@
 <div id="<%=i%>">
 	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
-		<div class="leftbar bar-color scale-8">
-			<div class="like">
+		<div class="leftbar bar-color">
+			<div class="like scale-8">
 				<a href="#"><img class="icon-color rotate-180 " src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
-			<span><%=postList.get(i).getPost_recommand()%></span>
-			<div class="like">
+			<span class="scale-8"><%=postList.get(i).getPost_recommand()%></span>
+			<div class="like scale-8">
 				<a href="#"><img class="icon-color" src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
-			<div class="BottmNavBar">
+			<div class="BottmNavBar scale-8">
 				<div class="toggleNav">
 					<a href="#"><img class="icon-color" src="resources/images/icons/chat_bubble_outline_black_36dp.svg"></a>
 				</div>
