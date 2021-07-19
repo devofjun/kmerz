@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=1.0 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver49">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver50">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/header.css?">
@@ -46,7 +46,7 @@
 		<!-- 왼쪽 사이드 바 -->
 			<%@ include file="./include/lSidebar.jsp" %>
 			<div class="postList">
-				<div class="sticky">
+				<div class="sticky border">
 					<!-- 게시글 정렬 sticky bar -->
 					<div>
 						<%@ include file="./include/sort_bar.jsp"%>

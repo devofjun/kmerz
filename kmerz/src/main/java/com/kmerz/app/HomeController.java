@@ -43,7 +43,6 @@ public class HomeController {
 		List<MemberVo> memList = memService.getAllMembers();
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
-		model.addAttribute("memList", memList);
 		return "MainPage";
 	}
 	
