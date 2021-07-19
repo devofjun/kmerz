@@ -2,32 +2,72 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="./mngInclude/header.jsp"%>
 <style>
-.liUserInfo {
+.cspointer {
 	cursor:pointer;
 }
 </style>
 
 <script>
 $(document).ready(function() {
+
+	// 메세지 모달 스크립트
+	var modalSendMessage = document.getElementById('modalSendMessage')
+	modalSendMessage.addEventListener('show.bs.modal', function(event) {
+		// Button that triggered the modal
+		var button = event.relatedTarget
+		// Extract info from data-bs-* attributes
+		var recipient = button.getAttribute('data-bs-whatever')
+		// If necessary, you could initiate an AJAX request here
+		// and then do the updating in a callback.
+		//
+		// Update the modal's content.
+		var modalTitle = modalSendMessage.querySelector('.modal-title')
+		var modalBodyInput = modalSendMessage
+				.querySelector('.modal-body input')
+
+		modalTitle.textContent = 'New message to ' + recipient
+		modalBodyInput.value = recipient
+	})
+	
+	// 포인트 변경 모달 스크립트
+	var modalUpdatePoint = document.getElementById('modalUpdatePoint')
+	modalUpdatePoint.addEventListener('show.bs.modal', function(event) {
+		// Button that triggered the modal
+		var button = event.relatedTarget
+		// Extract info from data-bs-* attributes
+		var recipient = button.getAttribute('data-bs-whatever')
+		// If necessary, you could initiate an AJAX request here
+		// and then do the updating in a callback.
+		//
+		// Update the modal's content.
+		var modalTitle = modalUpdatePoint.querySelector('.modal-title')
+		var modalBodyInput = modalUpdatePoint
+				.querySelector('.modal-body input')
+
+		modalTitle.textContent = recipient + '포인트 변경'
+		modalBodyInput.value = recipient
+	})
+
 	$("#btnUser").click(function() {
 	});
-	
+
 	// 검색 타입 변경
-	$("#ulSearchType > li > a").click(function(e){
-		e.preventDefault();
-		$("#btnSearchType").attr("data-SearchType",$(this).attr("href"));
-		$("#btnSearchType").text($(this).text());
-		
-	});
-	
+	$("#ulSearchType > li > a").click(
+			function(e) {
+				e.preventDefault();
+				$("#btnSearchType").attr("data-SearchType",
+						$(this).attr("href"));
+				$("#btnSearchType").text($(this).text());
+
+			});
+
 	// 테이블 유저 tr 클릭시 카드 보이기
 	$(".trUserInfo").click(function() {
 		$("#cardUserInfo").show();
 	});
-	
-	
+
 	// 유저 정보 카드 목록 하이라이트
-	$(".liUserInfo").mouseenter(function(){
+	$(".liUserInfo").mouseenter(function() {
 		//bg-primary text-white
 		$(this).addClass("bg-primary text-white");
 	});
@@ -118,23 +158,31 @@ $(document).ready(function() {
 				<img src="/resources/images/default_Profile.png" class="card-img-top" alt="프로필 사진">
 				<div class="card-body">
 					<h5 class="card-title">테스터</h5>
-					<p class="card-text">test@naver.com</p>
+					<p id="cardUserEmail" class="card-text">test@naver.com</p>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">현재 포인트: 10</li>
-					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: 5</li>
-					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">즐겨찾기 리스트</li>
-					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserReport">신고 내역</li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">현재 포인트: 10</li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: 5</li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">즐겨찾기 리스트</li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserReport">신고 내역</li>
 				</ul>
 				<div class="card-body">
-					<a href="#" class="card-link text-decoration-none">메시지 보내기</a>
-					<a href="#" class="card-link text-decoration-none">포인트 변경</a>
-					<a href="#" class="card-link text-decoration-none">정보 변경</a>
+					<span id="spSendMessage" class="mx-1 text-primary cspointer" 
+					data-bs-toggle="modal" data-bs-target="#modalSendMessage" data-bs-whatever="test@naver.com"
+					>메시지 보내기</span>
+					<span id="spUpdatePoint" class="mx-1 text-primary cspointer"
+					data-bs-toggle="modal" data-bs-target="#modalUpdatePoint" data-bs-whatever="test@naver.com"
+					>포인트 변경</span>
+<!-- 					<span id="spUpdateInfo" class="mx-1 text-primary cspointer" -->
+<!-- 					data-bs-toggle="modal" data-bs-target="#modalUpdateInfo" data-bs-whatever="test@naver.com" -->
+<!-- 					>상태 변경</span> -->
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
 
 </main>
 
@@ -293,4 +341,65 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+
+<!-- 메시지 보내기 모달 -->
+<div id="modalSendMessage" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">받는 사람:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">메시지 내용:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary">보내기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 포인트 변경 모달 -->
+<div id="modalUpdatePoint" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">포인트 변경</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <input type="hidden" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+          	<label for="recipient-name" class="col-form-label">변경할 포인트:</label>
+          	<input type="number" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">내용:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary">보내기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <%@ include file="./mngInclude/footer.jsp"%>

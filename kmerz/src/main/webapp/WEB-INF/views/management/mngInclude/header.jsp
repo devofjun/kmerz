@@ -97,9 +97,7 @@
 					aria-labelledby="dropdownUser2"
 					style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-109px, 34px);"
 					data-popper-placement="bottom-end">
-					<li><a class="dropdown-item" href="#">New project...</a></li>
-					<li><a class="dropdown-item" href="#">Settings</a></li>
-					<li><a class="dropdown-item" href="#">Profile</a></li>
+					<li><a class="dropdown-item" href="#">Message</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/admin/logoutRun">Sign
 							out</a></li>
