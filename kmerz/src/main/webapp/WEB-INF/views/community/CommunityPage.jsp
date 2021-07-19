@@ -99,7 +99,54 @@ $(document).ready(function(){
 				</div>
 				
 				<!-- 포스트 DEFAULT 시작 -->
-				<%@ include file="../include/post.jsp" %>
+				<c:forEach var="PostsVo" items="${postList}">
+					<input type="checkbox" id="toggleBtn" style="display:none">
+				<div class="post border">
+					<div class="leftbar">
+						<div class="like">
+							<a href="#"><ion-icon size="large" name="caret-up-circle-outline"></ion-icon></a>
+						</div>
+							<span>0</span> 
+						<div class="like">
+							<a href="#"><ion-icon size="large" name="caret-down-circle-outline"></ion-icon></a>
+						</div>
+						<div class="BottmNavBar">
+							<div class="toggleNav">
+								<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> 
+							</div>
+							<div class="toggleNav">
+								<a	href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a>
+							</div>
+							<div class="toggleNav">
+								 <a href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> 
+							 </div>
+							 <div>
+							 	<a href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+							</div>
+						</div>
+					</div>
+					<div class="rightbar">
+						<div class="contentTop">
+							<div class="postTitle" onclick="openModal()">
+							<span>${PostsVo.post_title}</span>
+							</div>
+							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>${PostsVo.community_name}</span></a><span> - 3분전 / 작성자
+								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">${PostsVo.user_name}</a>
+							</div>
+						</div>
+						<div class="postContent border" onclick="openModal()">
+							<p>${PostsVo.post_content}</p>
+						</div>
+						
+						
+						<div class="postDown">
+							<label for="toggleBtn" class="labelBtn" onclick="">
+								<ion-icon name="chevron-up-outline"></ion-icon></label>
+						</div>
+						
+					</div>
+				</div>
+				</c:forEach>
 				<!-- 포스트 DEFAULT 끝 -->
 			</div>
 			<%@ include file="../include/rSidebar.jsp"%>
