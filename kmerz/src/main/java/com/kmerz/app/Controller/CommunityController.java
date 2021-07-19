@@ -48,12 +48,13 @@ public class CommunityController {
 	@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
 	public String testCommunityForm(@PathVariable("community_id") String community_id, String community_name,
 			Model model) {
+		System.out.println("community_id: " + community_id);
 		String category_status = null; // 서비스 임플에서 넣어주는 값
 		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
 		model.addAttribute("categoryList", categoryList);
 		
 		// 커뮤니티 이동시 고것에 맞는 포스트만 리스트 가져오기
-		List<PostsVo> postList = postService.getCommunityPostList(community_name);
+		List<PostsVo> postList = postService.getCommunityPostList(community_id);
 		System.out.println("postList: " + postList);
 		model.addAttribute("postList", postList);
 		return "community/CommunityPage";

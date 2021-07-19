@@ -12,7 +12,7 @@
 <!-- 커뮤니티 페이지 이동후 나오는 포스트 -->
 <select id="selectCommunityPostList" resultType="PostsVo">
 	select * from tbl_posts
-	where community_name = #{community_name}
+	where community_id = #{community_id}
 </select>
 
 <!-- 카테고리 선택시 나오는 포스트 -->

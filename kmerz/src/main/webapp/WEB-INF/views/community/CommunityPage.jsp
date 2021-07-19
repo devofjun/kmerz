@@ -127,9 +127,11 @@ $(document).ready(function(){
 					</div>
 					<div class="rightbar">
 						<div class="contentTop">
-							<div class="postTitle" onclick="openModal()">${PostsVo.post_title}</div>
+							<div class="postTitle" onclick="openModal()">
+							<span>${PostsVo.post_title}</span>
+							</div>
 							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>${PostsVo.community_name}</span></a><span> - 3분전 / 작성자
-								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">${PostsVo.user_id}</a>
+								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">${PostsVo.user_name}</a>
 							</div>
 						</div>
 						<div class="postContent border" onclick="openModal()">

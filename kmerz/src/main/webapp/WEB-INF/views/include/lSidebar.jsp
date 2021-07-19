@@ -10,7 +10,7 @@
 		<ul>	
 		<%List<CommunityVo> list = (List<CommunityVo>)request.getAttribute("commList"); %>
 		<%for(int i = 0; i < list.size(); i++){ %>
-			<li><a href="/c/<%=list.get(i).getCommunity_id()%>?community_name=<%=list.get(i).getCommunity_name()%>"><img src="/resources/images/starcraft_small.jpg"><span><%=list.get(i).getCommunity_name() %></span></a></li>
+			<li><a href="/c/<%=list.get(i).getCommunity_id()%>"><img src="/resources/images/starcraft_small.jpg"><span><%=list.get(i).getCommunity_name() %></span></a></li>
 			<%}; %>
 		</ul>
 	</div>

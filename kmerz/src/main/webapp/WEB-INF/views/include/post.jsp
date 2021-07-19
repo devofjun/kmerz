@@ -44,7 +44,7 @@
 				<div class="communityAdress">
 					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span><%=postList.get(i).getCategory_id()%></span></a><span>
 						- 3분전 / 작성자 : </span><a href="#"><img
-						src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_id()%></a>
+						src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_name()%></a>
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal()">

@@ -32,8 +32,8 @@ public class PostDaoImpl implements PostDao{
 
 	// 커뮤니티 페이지 이동시 이동한 커뮤니티 포스트 리스트 가져오기
 	@Override
-	public List<PostsVo> selectCommunityPostList(String community_name) {
-		List<PostsVo> list = session.selectList(NAMESPACE + "selectCommunityPostList", community_name);
+	public List<PostsVo> selectCommunityPostList(String community_id) {
+		List<PostsVo> list = session.selectList(NAMESPACE + "selectCommunityPostList", community_id);
 		return list;
 	}
 	
