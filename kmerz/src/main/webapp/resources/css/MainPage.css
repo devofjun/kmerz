@@ -121,14 +121,12 @@ section {
 .searchBar 
 {
 	background-color: #fff;
-	margin: 0 .5%;
 }
 .stickyHeader {
 	background-color: #9f9f9f;
 	position: relative;
 	list-style: none;
 	height: 50px;
-    margin: 0 .5%;
     border-bottom: solid 1.5px #718093;
 }
 
