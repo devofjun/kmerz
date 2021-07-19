@@ -118,13 +118,18 @@ section {
 	margin: 0 1%;
 	width: 99%;
 }
-
+.searchBar 
+{
+	background-color: #fff;
+	margin: 0 .5%;
+}
 .stickyHeader {
-	border-radius: 7px;
 	background-color: #9f9f9f;
 	position: relative;
 	list-style: none;
 	height: 50px;
+    margin: 0 .5%;
+    border-bottom: solid 1.5px #718093;
 }
 
 .stickyHeader ul {
@@ -132,6 +137,7 @@ section {
 	align-items: center;
 	display: flex;
 	height: 100%;
+	justify-content: center;
 }
 
 .stickyHeader ul li {
@@ -270,8 +276,9 @@ a
 }
 
 .inputSection {
-	margin: 5px 10px;
 	display: flex;
+	border-bottom: solid 1.5px #718093;
+	padding: 5;
 }
 
 .inputSection input {
@@ -284,6 +291,7 @@ a
 	display: flex;
 	align-items: center;
 	position: relative;
+	justify-content: center;
 }
 
 .inputSelection ul li {
