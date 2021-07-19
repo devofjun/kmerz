@@ -99,8 +99,8 @@ $(document).ready(function(){
 				</div>
 				
 				<!-- 포스트 DEFAULT 시작 -->
-				
-				<input type="checkbox" id="toggleBtn" style="display:none">
+				<c:forEach var="PostsVo" items="${postList}">
+					<input type="checkbox" id="toggleBtn" style="display:none">
 				<div class="post border">
 					<div class="leftbar">
 						<div class="like">
@@ -127,18 +127,13 @@ $(document).ready(function(){
 					</div>
 					<div class="rightbar">
 						<div class="contentTop">
-							<div class="postTitle" onclick="openModal()">홍진호 만난 썰 푼다</div>
-							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>스타크래프트</span></a><span> - 3분전 / 작성자
-								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">윤수</a>
+							<div class="postTitle" onclick="openModal()">${PostsVo.post_title}</div>
+							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>${PostsVo.community_name}</span></a><span> - 3분전 / 작성자
+								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">${PostsVo.user_id}</a>
 							</div>
 						</div>
 						<div class="postContent border" onclick="openModal()">
-							<p>람쥐썬더
-							람쥐썬더
-							람쥐썬더
-							람쥐썬더
-							람쥐썬더람쥐썬더람쥐썬더람쥐썬더
-							람쥐썬더람쥐썬더람쥐썬더람쥐썬더람쥐썬더</p>
+							<p>${PostsVo.post_content}</p>
 						</div>
 						
 						
@@ -149,8 +144,7 @@ $(document).ready(function(){
 						
 					</div>
 				</div>
-				
-				
+				</c:forEach>
 				<!-- 포스트 DEFAULT 끝 -->
 			</div>
 			<%@ include file="../include/rSidebar.jsp"%>
