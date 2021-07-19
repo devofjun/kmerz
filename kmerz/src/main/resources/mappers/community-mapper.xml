@@ -12,18 +12,18 @@
 <!-- 커뮤니티 생성 -->
 <insert id="insertCommunity">
 	insert into tbl_community(
-		community_id, community_name, community_tag,
+		community_id, community_name,
 		community_topic, community_description, community_status
 	)
 	values(
-		seq_comm_id.nextval, #{community_name}, #{community_tag},
+		#{community_id}, #{community_name},
 		#{community_topic}, #{community_description}, #{community_status}
 	)
 </insert>
 
 <!-- 커뮤니티 리스트 가져오기 -->
 <select id="selectCommunityList" resultType="CommunityVo">
-	select * from tbl_community<!-- 'accept' 보류 -->
+	select * from tbl_community
 </select>
 
 </mapper>

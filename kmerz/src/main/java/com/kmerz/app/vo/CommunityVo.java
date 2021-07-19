@@ -13,8 +13,9 @@ public class CommunityVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommunityVo(String community_id, String user_id, String community_name, String community_topic,
-			String community_description, String community_status) {
+	public CommunityVo(String community_id, String user_id, String community_name,
+			String community_topic, String community_description, String community_status) {
+
 		super();
 		this.community_id = community_id;
 		this.user_id = user_id;

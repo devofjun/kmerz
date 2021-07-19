@@ -58,6 +58,9 @@ create sequence seq_cate_id
     start with 1
     minvalue 1;
 
+drop sequence seq_category_id;
+create sequence seq_category_id;
+
 -- 게시글 테이블
 drop table tbl_posts CASCADE CONSTRAINTS;
 create table tbl_posts(

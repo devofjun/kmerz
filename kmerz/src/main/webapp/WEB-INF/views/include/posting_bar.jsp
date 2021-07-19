@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="searchBar border">
+<div class="searchBar">
 	<div class="inputSection">
 		<div class="PostingTitleDiv">
 			<input class="PostingTitle" type="text" placeholder="Title...">
@@ -10,15 +10,19 @@
 			placeholder="Post Content...">
 	</div>
 	<div class="inputSelection">
-		<ul class="border">
-			<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>COMMUNITY</span></li>
-			<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>CATEGORY</span></li>
-			<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>POST
+		<ul>
+			<li><img class="icon-color"
+				src="/resources/images/icons/menu_black_24dp.svg"><span>COMMUNITY</span></li>
+			<li><img class="icon-color"
+				src="/resources/images/icons/menu_black_24dp.svg"><span>CATEGORY</span></li>
+			<li><img class="icon-color"
+				src="/resources/images/icons/menu_black_24dp.svg"><span>POST
 					TYPE</span></li>
-			<li class="bd"><ion-icon size="large" name="add-circle-outline"></ion-icon><span>POSTING
+			<li><img class="icon-color"
+				src="/resources/images/icons/web_asset_black_24dp.svg"><span>POSTING
 					DETAIL</span></li>
-			<li class="bd"><ion-icon size="large"
-					name="checkmark-circle-outline"></ion-icon><span>POST</span></li>
+			<li><img class="icon-color"
+				src="/resources/images/icons/check_circle_outline_black_24dp.svg"><span>POST</span></li>
 		</ul>
 	</div>
 </div>

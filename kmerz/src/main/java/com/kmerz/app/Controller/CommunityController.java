@@ -39,14 +39,14 @@ public class CommunityController {
 		return "redirect:/";
 	}
 	
-	// 요청 커뮤니티 페이지
-	@RequestMapping(value="/{community_tag}", method=RequestMethod.GET)
-	public String testCommunityForm(@PathVariable("community_tag") String community_tag,
+	
+	@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
+	public String testCommunityForm(@PathVariable("community_id") String community_id,
 			Model model) {
-		int community_id = 1;
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
+		String category_status = null;
+		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
 		model.addAttribute("categoryList", categoryList);
-		return null;
+		return "community/CommunityPage";
 	}
 	
 }

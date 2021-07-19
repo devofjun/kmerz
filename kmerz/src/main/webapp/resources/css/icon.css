@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.icon-circle
+{
+	border-radius:20px;
+	border-width: 3px;
+	border-style: solid;
+}

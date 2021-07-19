@@ -40,6 +40,12 @@ public class MemberController {
 			session.setAttribute("loginVo", memberVo);
 			resultLogin = "success";
 			page = "redirect:/";
+			String requestPath = 
+	 				(String)session.getAttribute("requestPath");
+	 		session.removeAttribute("requestPath");
+	 		if (requestPath != null) {
+	 			page = "redirect:" + requestPath;
+	 		}
 		} else {
 			// 로그인 실패
 			resultLogin = "fail";
@@ -47,6 +53,13 @@ public class MemberController {
 		}
 		rttr.addFlashAttribute("resultLogin", resultLogin);
 		return page;
+	}
+	
+	// 로그아웃
+	@RequestMapping(value = "/logoutRun", method = RequestMethod.GET)
+	public String adminLogoutRun(HttpSession session) throws Exception {
+		session.removeAttribute("loginVo");
+		return "redirect:/";
 	}
 
 	// 회원가입 화면

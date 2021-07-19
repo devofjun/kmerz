@@ -5,12 +5,12 @@
 <div class="lSidebar">
 	<div class="communityList border sticky">
 	<div class="commHeader hr">
-		커뮤니티 리스트
+		<span class="font-24">커뮤니티 리스트</span>
 	</div>
 		<ul>	
 		<%List<CommunityVo> list = (List<CommunityVo>)request.getAttribute("commList"); %>
 		<%for(int i = 0; i < list.size(); i++){ %>
-			<li><a href="/c"><img src="/resources/images/starcraft_small.jpg"><span><%=list.get(i).getCommunity_name() %></span></a></li>
+			<li><a href="/c/<%=list.get(i).getCommunity_id()%>"><img src="/resources/images/starcraft_small.jpg"><span><%=list.get(i).getCommunity_name() %></span></a></li>
 			<%}; %>
 		</ul>
 	</div>

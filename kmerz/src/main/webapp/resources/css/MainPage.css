@@ -14,7 +14,7 @@ a
     flex-direction: row;
     justify-content: center;
     align-content: center;
-    color:black;
+    color:#718093;
     text-decoration: none;
 }
 html, body {
@@ -48,13 +48,14 @@ section {
 
 .banner {
 	position: relative;
-	min-height: 100vh;
+	min-height: 1080px;
 	background: url(/resources/images/background.jpg);
 	background-size: cover;
 	background-position: right;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 }
 
 .banner h2 {
@@ -117,13 +118,18 @@ section {
 	margin: 0 1%;
 	width: 99%;
 }
-
+.searchBar 
+{
+	background-color: #fff;
+	margin: 0 .5%;
+}
 .stickyHeader {
-	border-radius: 7px;
 	background-color: #9f9f9f;
 	position: relative;
 	list-style: none;
 	height: 50px;
+    margin: 0 .5%;
+    border-bottom: solid 1.5px #718093;
 }
 
 .stickyHeader ul {
@@ -131,6 +137,7 @@ section {
 	align-items: center;
 	display: flex;
 	height: 100%;
+	justify-content: center;
 }
 
 .stickyHeader ul li {
@@ -145,7 +152,7 @@ section {
 }
 
 .stickyHeader ul li a {
-	font-size: 20px;
+	font-size:18px;
 	position: relative;
 	display: flex;
 	margin: 0 15px;
@@ -194,7 +201,7 @@ video {
 }
 
 .leftbar {
-	font-size: 30px;
+	font-size: 24px;
 	padding: 10px;
 	float: left;
 	width: 60px;
@@ -205,7 +212,10 @@ video {
 	align-items: center;
 	flex-direction: column;
 }
-
+.bar-color
+{
+	background-color:#f8f9fa;
+}
 .rightbar {
 	margin: 10px;
 	width: 100%;
@@ -266,8 +276,9 @@ a
 }
 
 .inputSection {
-	margin: 5px 10px;
 	display: flex;
+	border-bottom: solid 1.5px #718093;
+	padding: 5;
 }
 
 .inputSection input {
@@ -280,12 +291,13 @@ a
 	display: flex;
 	align-items: center;
 	position: relative;
+	justify-content: center;
 }
 
 .inputSelection ul li {
-	font-size: 20px;
+	font-size: 16px;
 	position: relative;
-	display: inline-block;
+	display: flex;
 	margin: 5px 5px;
 	height: 100%;
 	text-decoration: none;
@@ -324,6 +336,8 @@ span {
 	display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content:center;
+    color:#718093;
 }
 
 .like {
