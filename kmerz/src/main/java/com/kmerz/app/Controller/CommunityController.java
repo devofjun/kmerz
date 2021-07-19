@@ -39,13 +39,14 @@ public class CommunityController {
 		return "redirect:/";
 	}
 	
-	// 요청 커뮤니티 페이지 우선 테스트 컨트롤러에서 test 중입니다.
-	/*@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
+	
+	@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
 	public String testCommunityForm(@PathVariable("community_id") String community_id,
 			Model model) {
+		String category_status = null;
 		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
 		model.addAttribute("categoryList", categoryList);
-		return null;
-	}*/
+		return "community/CommunityPage";
+	}
 	
 }
