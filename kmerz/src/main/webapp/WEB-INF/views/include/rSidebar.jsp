@@ -16,7 +16,7 @@
 		</c:when>
 		<c:otherwise>
 			<span>${loginVo.user_name}님 환영합니다.</span>
-			<button id="btnLogout" class="btn btn-stretch btn-border">Logout</button>
+			<a class="btn btn-stretch btn-border" href="/m/logoutRun">LOGOUT</a>
 		</c:otherwise>
 	</c:choose>
 	</div>

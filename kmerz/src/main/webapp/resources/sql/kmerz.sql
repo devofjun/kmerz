@@ -58,6 +58,9 @@ create sequence seq_cate_id
     start with 1
     minvalue 1;
 
+drop sequence seq_category_id;
+create sequence seq_category_id;
+
 -- 게시글 테이블
 drop table tbl_posts CASCADE CONSTRAINTS;
 create table tbl_posts(
@@ -106,8 +109,8 @@ create table tbl_reply(
 drop table tbl_media CASCADE CONSTRAINTS;
 create table tbl_media(
     post_no number references tbl_posts(post_no),
-    media_type varchar2(10), -- 미디어 타입??
-    file_name varchar2(100), -- 몇자까지??
+    media_type varchar2(10),
+    file_name varchar2(100),
     upload_time timestamp default sysdate,
     delete_time timestamp default null
 );
