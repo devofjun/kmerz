@@ -8,4 +8,5 @@ public interface MemberService {
 	public void joinMember(MemberVo memberVo);
 	public List<MemberVo> getAllMembers();
 	public MemberVo login(String user_id, String user_pw);
+	public MemberVo selectID(String user_id);
 }
