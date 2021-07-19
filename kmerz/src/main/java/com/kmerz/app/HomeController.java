@@ -39,7 +39,6 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
 		List<PostsVo> postList = postService.selectAllPosts();
-		List<MemberVo> memList = memService.getAllMembers();
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
 		return "MainPage";
