@@ -48,6 +48,7 @@ $(document).ready(function(){
 			<li><a href="#">Product</a></li>
 			<li><a href="#">Contact</a></li>
 			<li><a href="/c/createForm">Community</a></li>
+			<li><a href="/c/createCategoryForm">Category</a></li>
 		</ul>
 	</header>
 	<div class="communitybanner">

@@ -15,10 +15,23 @@ public class CategoryServiceImpl implements CategoryService {
 	@Inject
 	CategoryDao categoryDao;
 	
+	private static final String COMM_STATUS_REQUEST = "request";		// 신청됨
+	private static final String COMM_STATUS_WAIT = "wait";				// 검수중
+	private static final String COMM_STATUS_ACCEPT = "accept";			// 승인됨
+	private static final String COMM_STATUS_DENY = "deny";				// 반려됨
+	private static final String COMM_STATUS_STOP = "stop";				// 운영정지
+	
 	@Override
-	public List<CategoryVo> getCategoryList(int community_id) {
-		List<CategoryVo> list = categoryDao.selectCategoryList(community_id);
+	public List<CategoryVo> getCategoryList(String community_id, String category_status) {
+		category_status = COMM_STATUS_ACCEPT;
+		List<CategoryVo> list = categoryDao.selectCategoryList(community_id, category_status);
 		return list;
+	}
+
+	@Override
+	public void createCategory(CategoryVo categoryVo) {
+		categoryVo.setCategory_status(COMM_STATUS_REQUEST);
+		categoryDao.insertCategory(categoryVo);
 	}
 
 }

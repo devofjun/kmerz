@@ -25,9 +25,10 @@ public class TestController {
 	CategoryService categoryService;
 	
 	@RequestMapping(value="/c")
-	public String headerTest(Model model) {
-		int community_id = 1;
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
+	public String headerTest(Model model, CategoryVo categoryVo) {
+		String community_id = "star";
+		String category_status = null;
+		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
 		System.out.println("categoryList: " + categoryList);
 		model.addAttribute("categoryList", categoryList);
 		return "community/CommunityPage";
