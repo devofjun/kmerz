@@ -14,9 +14,9 @@ public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
+		
 		HttpSession session = request.getSession();
-
+		
 		// 요청 경로 세션에 추가하기
 		String uri = request.getRequestURI();
 		String queryString = request.getQueryString();

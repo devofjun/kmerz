@@ -15,29 +15,26 @@
 <div id="<%=i%>">
 	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
-		<div class="leftbar bar-color">
+		<div class="leftbar bar-color scale-8">
 			<div class="like">
-				<a href="#"><ion-icon size="large"
-						name="caret-up-circle-outline"></ion-icon></a>
+				<a href="#"><img class="icon-color rotate-180 " src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
 			<span><%=postList.get(i).getPost_recommand()%></span>
 			<div class="like">
-				<a href="#"><ion-icon size="large"
-						name="caret-down-circle-outline"></ion-icon></a>
+				<a href="#"><img class="icon-color" src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
 			<div class="BottmNavBar">
 				<div class="toggleNav">
-					<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a>
+					<a href="#"><img class="icon-color" src="resources/images/icons/chat_bubble_outline_black_36dp.svg"></a>
 				</div>
 				<div class="toggleNav">
-					<a href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a>
+					<a href="#"><img class="icon-color" src="resources/images/icons/bookmark_border_black_36dp.svg"></a>
 				</div>
 				<div class="toggleNav">
-					<a href="#"><ion-icon size="large" name="open-outline"></ion-icon></a>
+					<a href="#"><img class="icon-color" src="resources/images/icons/ios_share_black_36dp.svg"></a>
 				</div>
 				<div>
-					<a href="#"><ion-icon size="large"
-							name="ellipsis-horizontal-circle-outline"></ion-icon></a>
+					<a href="#"><img class="icon-color" src="resources/images/icons/more_black_36dp.svg"></a>
 				</div>
 			</div>
 		</div>
