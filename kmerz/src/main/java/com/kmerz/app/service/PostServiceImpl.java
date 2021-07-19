@@ -26,4 +26,10 @@ public class PostServiceImpl implements PostService{
 		return post;
 	}
 
+	@Override
+	public List<PostsVo> getCommunityPostList(String community_id) {
+		List<PostsVo> list = postdao.selectCommunityPostList(community_id);
+		return list;
+	}
+
 }

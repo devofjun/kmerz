@@ -37,9 +37,9 @@ public class MemberController {
 		String page = null;
 		if(memberVo != null) {
 			// 로그인 성공
-			session.setAttribute("loginVo", memberVo);
 			resultLogin = "success";
 			page = "redirect:/";
+			session.setAttribute("loginVo", memberVo);
 			String requestPath = 
 	 				(String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
