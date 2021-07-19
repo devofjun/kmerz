@@ -16,6 +16,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					throws Exception {
 			HttpSession session = request.getSession();
 			
+			// 요청 경로 얻기
+			String uri = request.getRequestURI();
+			String queryString = request.getQueryString();
+			String requestPath = uri + "?" + queryString;
+			System.out.println("requestPath:" + requestPath);
+			session.setAttribute("requestPath", requestPath);
+			
 			MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 			if(memberVo == null) {
 				// 로그인 하지 않은 사용자일 경우 로그인 페이지로 이동

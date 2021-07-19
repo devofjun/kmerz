@@ -40,6 +40,12 @@ public class MemberController {
 			session.setAttribute("loginVo", memberVo);
 			resultLogin = "success";
 			page = "redirect:/";
+			String requestPath = 
+	 				(String)session.getAttribute("requestPath");
+	 		session.removeAttribute("requestPath");
+	 		if (requestPath != null) {
+	 			page = "redirect:" + requestPath;
+	 		}
 		} else {
 			// 로그인 실패
 			resultLogin = "fail";
