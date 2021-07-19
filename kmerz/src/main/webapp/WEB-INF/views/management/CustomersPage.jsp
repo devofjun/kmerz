@@ -123,8 +123,8 @@ $(document).ready(function() {
 				<ul class="list-group list-group-flush">
 					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">현재 포인트: 10</li>
 					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: 5</li>
-					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">즐겨찾기 리스트</li>
-					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">신고 내역</li>
+					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">즐겨찾기 리스트</li>
+					<li class="liUserInfo list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserReport">신고 내역</li>
 				</ul>
 				<div class="card-body">
 					<a href="#" class="card-link text-decoration-none">메시지 보내기</a>
@@ -162,15 +162,15 @@ $(document).ready(function() {
         			<td>2021/07/18/10:12:33</td>
         			<td>110</td>
         			<td>10</td>
-        			<td>-100</td>
+        			<td class="text-danger">-100</td>
         			<td>이모티콘 구입</td>
         		</tr>
-        		<c:forEach var="i" begin="10" end="310" step="10">
+        		<c:forEach var="i" begin="10" end="110" step="10">
         		<tr>
         			<td>2021/07/18/10:12:33</td>
-        			<td>${320-i}</td>
-        			<td>${320-i}</td>
-        			<td>+10</td>
+        			<td>${120-i}</td>
+        			<td>${120-i}</td>
+        			<td class="text-success">+10</td>
         			<td>출석포인트 지급</td>
         		</tr>
         		</c:forEach>
@@ -197,6 +197,7 @@ $(document).ready(function() {
         			<th>글제목</th>
         			<th>조회수</th>
         			<th>추천수</th>
+        			<th>신고수</th>
         			<th>현재 상태</th>
         			<th><input type="checkbox"/></th>
         		</tr>
@@ -208,6 +209,7 @@ $(document).ready(function() {
         			<td><a class="text-decoration-none" href="#">안녕하세요.</a></td>
         			<td>47</td>
         			<td>12</td>
+        			<td>0</td>
         			<td>open</td>
         			<td><input type="checkbox"/></td>
         		</tr>
@@ -223,5 +225,72 @@ $(document).ready(function() {
   </div>
 </div>
 
+<!-- 즐겨찾기 리스트 모달 -->
+<div id="modalUserFavorite" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">즐겨찾기 리스트</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-sm text-center">
+        	<thead>
+        		<tr>
+        			<th>커뮤니티 이름</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr>
+        			<td>스타크래프트</td>
+        		</tr>
+        		<tr>
+        			<td>리그오브레전드</td>
+        		</tr>
+        		<tr>
+        			<td>오버워치</td>
+        		</tr>
+        		
+        	</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- 신고 내역 모달 -->
+<div id="modalUserReport" data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">신고 내역</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<h5>누적 신고수: 5</h5>
+        <table class="table table-striped table-sm">
+        	<thead>
+        		<tr>
+        			<th>신고 시간</th>
+        			<th>글 제목</th>
+        			<th>신고 내용</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	<c:forEach var="i" begin="1" end="5" step="1">
+        		<tr>
+        			<td>2021/07/18/10:12:33</td>
+        			<td><a class="text-decoration-none" href="#">안녕하세요.</a></td>
+        			<td>게시물 신고</td>
+        		</tr>
+        	</c:forEach>
+        	</tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger">사용자 차단</button>
+      </div>
+    </div>
+  </div>
+</div>
 <%@ include file="./mngInclude/footer.jsp"%>
