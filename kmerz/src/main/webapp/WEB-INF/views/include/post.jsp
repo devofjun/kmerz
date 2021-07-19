@@ -44,11 +44,11 @@
 			<div class="contentTop">
 				<div class="postTitle" onclick="openModal()"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
 				<div class="communityAdress">
-					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span><%=postList.get(i).getCommunity_name()%></span></a><span>
+					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span><%=postList.get(i).getCommunity_id()%></span></a><span>
 						- 3분전 / 작성자 : </span><a href="#"><img
 
 						src="/resources/images/starcraft_small.jpg"><%for(int j = 0; j < memList.size(); j++){
-																									if(postList.get(i).getUser_id().equals(memList.get(j).getUser_id())){%>
+																									if(postList.get(i).getUser_name().equals(memList.get(j).getUser_id())){%>
 																										<%=memList.get(j).getUser_name()%>
 																									<%} 
 																						}%></a>
