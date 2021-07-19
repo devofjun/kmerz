@@ -6,10 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver36">
-<link rel="stylesheet" href="/resources/css/lSidebar.css?v8">
-<link rel="stylesheet" href="/resources/css/rSidebar.css?v8">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver49">
+<link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
+<link rel="stylesheet" href="/resources/css/rSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/header.css?">
+<link rel="stylesheet" href="/resources/css/font.css?">
+<link rel="stylesheet" href="/resources/css/margin.css?">
+<link rel="stylesheet" href="/resources/css/slider.css?3">
+<link rel="stylesheet" href="/resources/css/icon.css?3">
+<link rel="stylesheet" href="/resources/css/transform.css?4">
 <link
 	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
 	rel="stylesheet" type="text/css">
@@ -17,6 +22,7 @@
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script src="/resources/script/MainPage.js?ver4"></script>
 </head>
 
 <body>
@@ -99,54 +105,7 @@ $(document).ready(function(){
 				</div>
 				
 				<!-- 포스트 DEFAULT 시작 -->
-				<c:forEach var="PostsVo" items="${postList}">
-					<input type="checkbox" id="toggleBtn" style="display:none">
-				<div class="post border">
-					<div class="leftbar">
-						<div class="like">
-							<a href="#"><ion-icon size="large" name="caret-up-circle-outline"></ion-icon></a>
-						</div>
-							<span>0</span> 
-						<div class="like">
-							<a href="#"><ion-icon size="large" name="caret-down-circle-outline"></ion-icon></a>
-						</div>
-						<div class="BottmNavBar">
-							<div class="toggleNav">
-								<a href="#"><ion-icon size="large" name="chatbox-outline"></ion-icon></a> 
-							</div>
-							<div class="toggleNav">
-								<a	href="#"><ion-icon size="large" name="bookmark-outline"></ion-icon></a>
-							</div>
-							<div class="toggleNav">
-								 <a href="#"><ion-icon size="large" name="open-outline"></ion-icon></a> 
-							 </div>
-							 <div>
-							 	<a href="#"><ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon></a>
-							</div>
-						</div>
-					</div>
-					<div class="rightbar">
-						<div class="contentTop">
-							<div class="postTitle" onclick="openModal()">
-							<span>${PostsVo.post_title}</span>
-							</div>
-							<div class="communityAdress"><a href="#"><img src="/resources/images/starcraft_small.jpg"><span>${PostsVo.community_name}</span></a><span> - 3분전 / 작성자
-								: </span><a href="#"><img src="/resources/images/starcraft_small.jpg">${PostsVo.user_name}</a>
-							</div>
-						</div>
-						<div class="postContent border" onclick="openModal()">
-							<p>${PostsVo.post_content}</p>
-						</div>
-						
-						
-						<div class="postDown">
-							<label for="toggleBtn" class="labelBtn" onclick="">
-								<ion-icon name="chevron-up-outline"></ion-icon></label>
-						</div>
-						
-					</div>
-				</div>
-				</c:forEach>
+					<%@ include file="../include/community_post.jsp" %>
 				<!-- 포스트 DEFAULT 끝 -->
 			</div>
 			<%@ include file="../include/rSidebar.jsp"%>
