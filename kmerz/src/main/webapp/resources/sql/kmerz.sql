@@ -66,7 +66,7 @@ drop table tbl_posts CASCADE CONSTRAINTS;
 create table tbl_posts(
     post_no number primary key,
     user_name varchar2(50) references tbl_member(user_name),
-    community_id varchar2(50) references tbl_community(community_name),
+    community_id varchar2(50) references tbl_community(community_id),
     category_id number references tbl_category(category_id),
     post_title varchar2(100),
     post_content varchar2(500),
@@ -76,6 +76,7 @@ create table tbl_posts(
     post_status varchar2(15),
     post_media varchar2(10) default 'F'
 );
+select * from tbl_posts;
 drop sequence seq_post_no;
 create sequence seq_post_no
     start with 1
