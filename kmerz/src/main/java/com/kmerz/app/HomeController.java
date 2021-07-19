@@ -13,7 +13,6 @@ import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommunityService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
-import com.kmerz.app.vo.CategoryVo;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
@@ -43,7 +42,6 @@ public class HomeController {
 		List<MemberVo> memList = memService.getAllMembers();
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
-		model.addAttribute("memList", memList);
 		return "MainPage";
 	}
 	
