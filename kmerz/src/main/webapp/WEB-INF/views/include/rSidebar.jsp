@@ -5,7 +5,7 @@
 <div class="rSidebar sticky">
 	<div class="userinfo border sticky">
 		<div class="hr">
-			<span>USER INFO</span>
+			<span class="font-24">USER INFO</span>
 		</div>
 	<c:choose>
 		<c:when test="${empty sessionScope.loginVo}">
@@ -22,7 +22,7 @@
 	</div>
 	<div class="hotList border stickyUnderInfo">
 		<div class="relatedPost hr">
-			<span>인기글</span>
+			<span class="font-24">인기글</span>
 		</div>
 		<ul>
 			<li><a href="#">홍진호 만난 썰 푼다</a></li>

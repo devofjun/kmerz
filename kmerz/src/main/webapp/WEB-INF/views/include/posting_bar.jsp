@@ -12,17 +12,17 @@
 	<div class="inputSelection">
 		<ul class="border">
 			<li class="bd"><img class="icon-color"
-				src="/resources/images/menu_black_36dp.svg"><span>COMMUNITY</span></li>
+				src="/resources/images/icons/menu_black_24dp.svg"><span>COMMUNITY</span></li>
 			<li class="bd"><img class="icon-color"
-				src="/resources/images/menu_black_36dp.svg"><span>CATEGORY</span></li>
+				src="/resources/images/icons/menu_black_24dp.svg"><span>CATEGORY</span></li>
 			<li class="bd"><img class="icon-color"
-				src="/resources/images/menu_black_36dp.svg"><span>POST
+				src="/resources/images/icons/menu_black_24dp.svg"><span>POST
 					TYPE</span></li>
 			<li class="bd"><img class="icon-color"
-				src="/resources/images/web_asset_black_36dp.svg"><span>POSTING
+				src="/resources/images/icons/web_asset_black_24dp.svg"><span>POSTING
 					DETAIL</span></li>
 			<li class="bd"><img class="icon-color"
-				src="/resources/images/check_circle_outline_black_36dp.svg"><span>POST</span></li>
+				src="/resources/images/icons/check_circle_outline_black_24dp.svg"><span>POST</span></li>
 		</ul>
 	</div>
 </div>

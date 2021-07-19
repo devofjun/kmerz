@@ -3,7 +3,6 @@
 
 .rSidebar
 {
-	font-size:30px;
 	text-align: center;
 	width: 15%;
 }
@@ -32,4 +31,5 @@
 	border-width:1.5px;
 	border-bottom-style: solid;
 	display:flex;
+	justify-content: center;
 }
