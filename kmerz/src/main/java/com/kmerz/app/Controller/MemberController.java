@@ -43,8 +43,8 @@ public class MemberController {
 			String requestPath = 
 	 				(String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
-	 		if (requestPath != null) {
-	 			page = "redirect:" + requestPath;
+	 		if (requestPath.equals("/c/createForm")) {
+	 			page = "community/createCommunityForm";
 	 		}
 		} else {
 			// 로그인 실패

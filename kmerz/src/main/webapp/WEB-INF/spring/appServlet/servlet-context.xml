@@ -55,7 +55,7 @@
 		<!-- 유저 세션 -->
 		<interceptor>
 			<!-- login 인증이 필요한 URI 들 -->
-			<mapping path="/c/**"/>
+			<mapping path="/c/*"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
