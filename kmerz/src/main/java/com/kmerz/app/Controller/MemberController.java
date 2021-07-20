@@ -33,7 +33,7 @@ public class MemberController {
 			HttpSession session) {
 		MemberVo memberVo = memberService.login(user_id, user_pw);
 		String resultLogin = null;
-		String page = null;
+		String page = "member/loginForm";
 		// 로그인 성공
 		if(memberVo != null) {
 			resultLogin = "success";
@@ -42,8 +42,10 @@ public class MemberController {
 			String requestPath = 
 	 				(String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
-	 		if (requestPath.equals("/c/createForm")) {
-	 			page = "community/createCommunityForm";
+	 		if(requestPath != null) {
+		 		if (requestPath.equals("/c/createForm")) {
+		 			page = "community/createCommunityForm";
+		 		}
 	 		}
 	 	// 로그인 실패
 		} else {
