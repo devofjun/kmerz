@@ -3,9 +3,11 @@
     
 
 				<div class="modal-community-info border">
-					<div class="community-name">
+				<div>
+					<div id="community-name">
 						<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-30">스타크래프트</span></a>
 					</div>
+				</div>
 					<div class="community-desc">
 						스타크래프트를 플레이하는 사람들의 모임
 					</div>

@@ -14,7 +14,7 @@
 	for (int i = 0; i < postList.size(); i++) {
 %>
 
-<div id="<%=i%>">
+<div id="<%=postList.get(i).getPost_no()%>">
 	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
 		<div class="leftbar bar-color">
@@ -42,7 +42,7 @@
 		</div>
 		<div class="rightbar">
 			<div class="contentTop">
-				<div class="postTitle" onclick="openModal()"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
+				<div class="postTitle" onclick="openModal(<%=postList.get(i).getPost_no()%>)"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
 				<div class="communityAdress">
 
 					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-14"><%for(int j = 0; j < commList.size(); j++){
@@ -53,7 +53,7 @@
 						src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_name()%></a>
 				</div>
 			</div>
-			<div class="postContent border" onclick="openModal()">
+			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">
 				<p class="icon-color"><%=postList.get(i).getPost_content()%></p>
 			</div>
 

@@ -23,14 +23,15 @@
       rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/resources/script/MainPage.js?ver8">
+<script src="/resources/script/MainPage.js?ver31">
 
 </script>
 </head>
 
 <body>
-	<%@ include file="./include/modal.jsp"%>
-
+	<div class="modal-section">
+	
+	</div>
 	<!-- 상단 메뉴바 -->
 	<div>
 		<%@ include file="./include/top_menu_bar.jsp"%>
