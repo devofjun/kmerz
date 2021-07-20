@@ -16,5 +16,10 @@
 		</button>
 	</div>
 </div>
+
+<div style="background-image: url('/resources/images/page_sample.png'); width:100%; height:800px">
+	
+</div>
+
 </main>
 <%@ include file="./mngInclude/footer.jsp"%>
