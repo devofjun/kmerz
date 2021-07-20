@@ -506,31 +506,15 @@ labelBtn:hover {
 {
 	justify-content: flex-end;
 }
-
-#reply-toggleBtn:checked ~ .replyContent {
+#reply-toggleBtn:checked ~ .replyContent>.rightbar>.postDown {
+	transform: rotateX(180deg);
 	transition: all ease 1s;
 }
 
-#reply-toggleBtn:not(:checked) ~ .replyContent {
-	transition: all ease 1s;
-}
-#reply-toggleBtn:checked ~ .replyContent {
-	height: 400px;
-	transition: all ease 1s;
-}
-
-#reply-toggleBtn:not(:checked) ~ .replyContent {
-	transition: all ease 1s;
-}
-#reply-toggleBtn:checked ~ .replyContent > .reply-form
-{
-	display:flex;
-}
 .reply-form
 {
 	padding: 10px 0;
 	margin-top: 20px;
-	display:none;
 }
 .reply-form-input
 {

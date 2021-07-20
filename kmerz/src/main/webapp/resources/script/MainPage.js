@@ -5,8 +5,15 @@
 	var commentNo = document.getElementById(i);
 	var replyBtn = commentNo.querySelector("#reply-toggleBtn");
 	var comment = commentNo.querySelector(".replyContent");
-	includeHTML(commentNo.querySelector('.reply-section'), '/include/reply_input');
 	replyBtn.click();
+	if(replyBtn.checked){
+	console.log("체크됨");
+	includeHTML(commentNo.querySelector('.reply-section'), '/include/reply_input');
+	}
+	else{
+	var replyInput = comment.querySelector(".reply-content");
+  	replyInput.remove();
+	}
 }
 
 function setModal(i){

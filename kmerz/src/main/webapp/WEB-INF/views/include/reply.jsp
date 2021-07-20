@@ -39,17 +39,7 @@
 		</div>
 
 		<div class="reply-form border">
-			<div class="reply-form-userinfo">
-				<a href="#"><img src="/resources/images/starcraft_small.jpg"><span>
-						<%
-							for (int j = 0; j < memList.size(); j++) {
-							if (mentList.get(i).getUser_id().equals(memList.get(j).getUser_id())) {
-						%> <%=memList.get(j).getUser_name()%> <%
- 	}
- }
- %>
-				</span></a>
-			</div>
+			
 			<div class="reply-section">
 				
 				
