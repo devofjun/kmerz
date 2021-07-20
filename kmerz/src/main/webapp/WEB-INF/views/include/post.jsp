@@ -59,7 +59,7 @@
 
 
 
-			<div class="postDown" onclick="posttoggle(<%=i%>)">
+			<div class="postDown" onclick="posttoggle(<%=postList.get(i).getPost_no()%>)">
 				<label for="toggleBtn" class="labelBtn" onclick=""> <img src="/resources/images/expand_more_black_24dp.svg"/></label>
 			</div>
 

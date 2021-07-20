@@ -1,8 +1,11 @@
 /**
  * 
  */
- function replytoggle(){
-	var replyBtn = document.getElementById("reply-toggleBtn");
+ function replytoggle(i){
+	var commentNo = document.getElementById(i);
+	var replyBtn = commentNo.querySelector("#reply-toggleBtn");
+	var comment = commentNo.querySelector(".replyContent");
+	includeHTML(commentNo.querySelector('.reply-section'), '/include/reply_input');
 	replyBtn.click();
 }
 
@@ -11,9 +14,6 @@ function setModal(i){
 	var content = document.getElementById('modal-post-content');
 	var commName = document.getElementsByClassName('community-name');
 	var title_text = document.createTextNode('<%=postList.get(i).getPost_title()%>');	
-	console.log(title);
-	console.log(content);
-	console.log(commName);
 	content.innerText = '<%=postList.get(i).getPost_content()%>';
 	commName.innerText = '<%for(int j = 0; j < commList.size(); j++){if(postList.get(i).getCommunity_id().equals(commList.get(j).getCommunity_id())){%><%=commList.get(j).getCommunity_name()%><%}}%>';
 }

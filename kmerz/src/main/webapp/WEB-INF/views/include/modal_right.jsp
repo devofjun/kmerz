@@ -1,15 +1,16 @@
+<%@page import="com.kmerz.app.vo.CommunityVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-
+<%CommunityVo commVo = (CommunityVo)request.getAttribute("commVo"); %>
 				<div class="modal-community-info border">
 				<div>
 					<div id="community-name">
-						<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-30">스타크래프트</span></a>
+						<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-30"><%=commVo.getCommunity_name() %></span></a>
 					</div>
 				</div>
 					<div class="community-desc">
-						스타크래프트를 플레이하는 사람들의 모임
+						<%=commVo.getCommunity_description() %>
 					</div>
 					<div class="community-count align-center">
 						<div class="member-count width-50 align-center align-column" >

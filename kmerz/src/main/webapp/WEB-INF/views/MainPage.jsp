@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=1.0 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver53">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver54">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/header.css?">
