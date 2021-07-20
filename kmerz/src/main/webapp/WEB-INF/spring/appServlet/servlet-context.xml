@@ -55,8 +55,7 @@
 		<!-- 유저 세션 -->
 		<!-- login 인증이 필요한 URI 들 -->
 		<interceptor>
-			<mapping path="/c/createForm"/>
-			<mapping path="/c/createCategoryForm"/>
+			<mapping path="/c/*"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>

@@ -19,7 +19,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			// 요청 경로 얻기
 			String uri = request.getRequestURI();
 			String queryString = request.getQueryString();
-			String requestPath = uri + "?" + queryString;
+			String requestPath = uri;
+			if(queryString != null) {
+				requestPath += "?" + queryString;
+			}
 			System.out.println("requestPath:" + requestPath);
 			session.setAttribute("requestPath", requestPath);
 			
