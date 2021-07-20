@@ -75,31 +75,12 @@ $(document).ready(function(){
 			</div>
 			<div class="postList">
 				<div class="sticky">
-					<div class="stickyHeader">
-						<ul>
-							<li class="bd"><a href="#"><ion-icon size="large" name="rocket-outline" ></ion-icon><span> BEST</span></a></li>
-							<li class="bd"><a href="#"><ion-icon size="large" name="flame-outline"></ion-icon><span> HOT</span></a></li>
-							<li class="bd"><a href="#"><ion-icon size="large" name="flag-outline"></ion-icon><span> NEW</span></a></li>
-							<li class="bd"><a href="#"><ion-icon size="large" name="podium-outline"></ion-icon><span> TOP</span></a></li>
-							<li class="bd"><a href="#"><ion-icon size="large" name="trending-up-outline"></ion-icon><span> RISING</span></a></li>
-							<li class="bd"><a href="#"><ion-icon size="large" name="ellipsis-horizontal-outline"></ion-icon></a></li>
-						</ul>
-					</div>
 					<div class="newPostBar border">
 						<div class="inputSection">
 							<div class="PostingTitleDiv">
 								<input class="PostingTitle" type="text" placeholder="Title...">
 							</div> 
 							<input class="PostingContent" type="text" placeholder="Post Content...">
-						</div>
-						<div class="inputSelection">
-							<ul class="border">
-								<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>COMMUNITY</span></li>
-								<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>CATEGORY</span></li>
-								<li class="bd"><ion-icon size="large" name="caret-down-outline"></ion-icon><span>POST TYPE</span></li>
-								<li class="bd"><ion-icon size="large" name="add-circle-outline"></ion-icon><span>POSTING DETAIL</span></li>
-								<li class="bd"><ion-icon size="large" name="checkmark-circle-outline"></ion-icon><span>POST</span></li>
-							</ul>
 						</div>
 					</div>
 				</div>
