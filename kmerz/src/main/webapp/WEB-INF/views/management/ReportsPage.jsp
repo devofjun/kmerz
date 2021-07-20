@@ -16,5 +16,19 @@
 		</button>
 	</div>
 </div>
+
+<div id="imgUploadBox">
+	<h3 id="uploadTitle">배너 이미지 업로드</h3>
+	<div class="w-100 border bg-light" style="height: 150px">
+		<span class="ms-2"></span>
+	</div>
+	<div class="input-group">
+		<input type="file" class="form-control" id="inputGroupFile04"
+			aria-describedby="inputGroupFileAddon04" aria-label="Upload"
+			multiple="multiple">
+		<button class="btn btn-outline-secondary" type="button"
+			id="inputGroupFileAddon04">업로드</button>
+	</div>
+</div>
 </main>
 <%@ include file="./mngInclude/footer.jsp"%>
