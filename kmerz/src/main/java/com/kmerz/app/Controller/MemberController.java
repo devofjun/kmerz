@@ -35,19 +35,21 @@ public class MemberController {
 		System.out.println("memberVo: " + memberVo);
 		String resultLogin = null;
 		String page = null;
+		// 로그인 성공
 		if(memberVo != null) {
-			// 로그인 성공
 			resultLogin = "success";
 			page = "redirect:/";
 			session.setAttribute("loginVo", memberVo);
 			String requestPath = 
 	 				(String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
-	 		if (requestPath != null) {
-	 			page = "redirect:" + requestPath;
+	 		if (requestPath == "/c/createForm") {
+	 			page = "community/createCommunityForm";
+	 		} else if(requestPath == "/c/createCategoryForm") {
+	 			page = "category/createCategoryForm";
 	 		}
+	 	// 로그인 실패
 		} else {
-			// 로그인 실패
 			resultLogin = "fail";
 			page = "redirect:/m/loginForm";
 		}
