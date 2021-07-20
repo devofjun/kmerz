@@ -32,7 +32,6 @@ public class MemberController {
 	public String loginRun(String user_id, String user_pw, RedirectAttributes rttr,
 			HttpSession session) {
 		MemberVo memberVo = memberService.login(user_id, user_pw);
-		System.out.println("memberVo: " + memberVo);
 		String resultLogin = null;
 		String page = null;
 		// 로그인 성공
