@@ -86,6 +86,13 @@ public class MemberController {
 		return list;
 	}
 	
+	// 회원정보 보기 페이지
+	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+	public String getUserInfo(HttpSession session) {
+		return "member/userInfo";
+	}
+	
+	// 비밀번호 찾기 폼 이동
 	@RequestMapping(value = "/findPasswordForm", method = RequestMethod.GET)
 	public String findPasswordForm() {
 		return "member/findPasswordForm";

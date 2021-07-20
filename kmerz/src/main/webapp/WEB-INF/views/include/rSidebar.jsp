@@ -16,6 +16,11 @@
 		</c:when>
 		<c:otherwise>
 			<span>${loginVo.user_name}님 환영합니다.</span>
+			<!-- <div class="align-center">
+				<img src="/resources/images/default_Profile.png">
+			</div>
+			<a href="/m/logoutRun">로그아웃</a>
+			<a href="/m/userInfo">회원정보</a> -->
 			<a class="btn btn-stretch btn-border" href="/m/logoutRun">LOGOUT</a>
 		</c:otherwise>
 	</c:choose>
