@@ -27,7 +27,7 @@ public class PostDaoImpl implements PostDao{
 	@Override
 	public PostsVo selectPost(int post_no) {
 		PostsVo Post = session.selectOne(NAMESPACE + "selectPost", post_no);
-		return null;
+		return Post;
 	}
 
 	// 커뮤니티 페이지 이동시 이동한 커뮤니티 포스트 리스트 가져오기

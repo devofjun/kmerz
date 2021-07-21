@@ -8,4 +8,5 @@ public interface CommunityDao {
 	public int countAllCommunity();
 	public void insertCommunity(CommunityVo communityVo);
 	public List<CommunityVo> selectCommunityList();
+	public CommunityVo getOneCommunity(String community_id);
 }
