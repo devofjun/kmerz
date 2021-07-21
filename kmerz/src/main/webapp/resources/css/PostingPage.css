@@ -35,3 +35,80 @@ textarea {
   font-size: 18px;
   color: #718093;
 }
+
+span {
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+}
+
+div {}
+
+.right-menu {
+    width: calc(30% - 30px);
+    height: 690px;
+    margin: 15px;
+    margin-left: 30px;
+    background: #fff;
+}
+
+.post {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px;
+}
+
+.insert-text {
+    display: flex;
+    padding: 0 10px;
+}
+
+.posting-nav {
+    display: flex;
+    padding: 7px;
+    border-bottom: solid 1.5px hsl(206deg 7% 60%);
+}
+
+.insert-space {
+    display: flex;
+    padding: 0 10px;
+}
+
+.insert-reference {}
+
+.insert-reference {
+    display: flex;
+    padding: 0 10px;
+}
+
+d {}
+
+.refer-insert {
+    display: flex;
+    padding: 0 20px;
+}
+
+.posting-nav {
+}
+
+.posting-input {
+    margin: 15px;
+    width: 70%;
+    background: #fff;
+}
+
+.editable {
+    overflow: auto;
+    resize: vertical;
+    min-height: 480px;
+    padding: 15px;
+    white-space: pre-wrap;
+    outline: none;
+    word-wrap: break-word;
+}
+
+.page-title {
+    padding: 8px;
+    font-size: 20px;
+    border-bottom: solid 1.5px #718093;
+}

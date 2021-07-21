@@ -27,12 +27,14 @@
 }
 .communityList ul
 {
-	list-style: none;	
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
 }
 .communityList ul li
 {
-	font-size:20px;	
+	font-size:20px;
 	display: flex;
-    align-items: center;
-    justify-content: center;
+	justify-content: center;
 }

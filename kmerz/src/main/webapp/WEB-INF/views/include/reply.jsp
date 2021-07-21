@@ -19,7 +19,7 @@
 			<div class="reply-user-profile">
 				<img src="/resources/images/starcraft_small.jpg">
 				<div class="reply-user-status">
-					<span> <%
+					<span class="reply-user-name"> <%
  	for (int j = 0; j < memList.size(); j++) {
  	if (mentList.get(i).getUser_id().equals(memList.get(j).getUser_id())) {
  %> <%=memList.get(j).getUser_name()%> <%
