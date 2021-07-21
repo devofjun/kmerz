@@ -54,7 +54,7 @@
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">
-				<p class="icon-color"><%=postList.get(i).getPost_content()%></p>
+				<p class="icon-color post-content"><%=postList.get(i).getPost_content()%></p>
 			</div>
 
 

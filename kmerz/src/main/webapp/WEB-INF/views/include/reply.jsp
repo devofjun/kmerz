@@ -37,14 +37,10 @@
 				<span>3분전</span>
 			</div>
 		</div>
-
-		<div class="reply-form border">
-			
 			<div class="reply-section">
 				
 				
 			</div>
-		</div>
 	</div>
 </div>
 <%
