@@ -53,8 +53,8 @@
 			<beans:ref bean="adminAuthInterceptor" />
 		</interceptor>
 		<!-- 유저 세션 -->
+		<!-- login 인증이 필요한 URI 들 -->
 		<interceptor>
-			<!-- login 인증이 필요한 URI 들 -->
 			<mapping path="/c/*"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
