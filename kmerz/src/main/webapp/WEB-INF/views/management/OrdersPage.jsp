@@ -18,7 +18,7 @@
 </div>
 
 <div class="video-container" style="TEXT-ALIGN: center">
-
-<object type="text/html" width="500" height="500" data="//www.youtube.com/embed/E0sQzMRlYzI" allowfullscreen=""></object> </div>
+	<object type="text/html" width="500" height="500" data="//www.youtube.com/embed/o4ux9zNx930" allowfullscreen=""></object>
+</div>
 </main>
 <%@ include file="./mngInclude/footer.jsp"%>
