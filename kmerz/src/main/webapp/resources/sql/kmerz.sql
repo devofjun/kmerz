@@ -6,14 +6,17 @@
 drop table tbl_member CASCADE CONSTRAINTS;
 --truncate table tbl_member;
 create table tbl_member (
-    user_id varchar2(50) primary key,
+    user_no number primary key,
+    user_id varchar2(50) not null,
     user_pw varchar2(50) not null,
     user_name varchar2(50) not null,
     user_currentlogin timestamp,
     user_status varchar2(15),
+    constraint unique_user_id unique(user_id),
     constraint unique_user_name unique(user_name)
 );  
-
+drop sequence seq_user_no;
+create sequence seq_user_no;
 
 --select * from tbl_member;
 
@@ -31,6 +34,8 @@ create table tbl_member_log (
 -- 커뮤니티 정보 테이블
 drop table tbl_community CASCADE CONSTRAINTS;
 --truncate table tbl_community;
+
+-- community_id = tag
 create table tbl_community (
     community_id varchar2(30) primary key,
     user_id varchar2(50) references tbl_member(user_id),
@@ -109,12 +114,14 @@ create table tbl_reply(
 -- 미디어 테이블
 drop table tbl_media CASCADE CONSTRAINTS;
 create table tbl_media(
-    post_no number references tbl_posts(post_no),
-    media_type varchar2(10),
-    file_name varchar2(100),
+    media_no number references tbl_posts(post_no),
+    media_id varchar2(100),
+    media_path varchar2(100),
     upload_time timestamp default sysdate,
     delete_time timestamp default null
 );
+
+create sequence seq_media_no;
 
 -- 게시글변경 로그 테이블
 /*
@@ -132,6 +139,7 @@ creat sequence seq_post_version
 increment by 1
 start with 1;
 */
+
 
 
 

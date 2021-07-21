@@ -35,4 +35,10 @@ public class CommunityDaoImpl implements CommunityDao {
 		return list;
 	}
 
+	@Override
+	public CommunityVo getOneCommunity(String community_id) {
+		CommunityVo vo = sqlsession.selectOne(NAMESPACE + "getOneCommunity", community_id);
+		return vo;
+	}
+
 }
