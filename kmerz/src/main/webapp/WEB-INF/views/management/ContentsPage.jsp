@@ -133,7 +133,7 @@ $(document).ready(function() {
 					<!-- 선택한 게임 목록 -->
 					<div class="row w-100" style="height: auto">
 						<div class="col-12">
-							<span class="badge rounded-pill bg-dark border border-1 mouse-border-primary">Don't Starve Together <span class="ms-1">&#10005;</span></span>
+							<span class="badge rounded-pill bg-dark border border-1 border-dark mouse-border-primary">Don't Starve Together <span class="ms-1">&#10005;</span></span>
 						</div>
 					</div>
 					<div class="row w-100" style="height: auto">

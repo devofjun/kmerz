@@ -38,10 +38,13 @@
 	<beans:bean
 		class="com.kmerz.app.interceptor.AdminAuthInterceptor"
 		id="adminAuthInterceptor"></beans:bean>
-	<!-- 인터셉터 -->
+	<!-- 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor" 
             class="com.kmerz.app.interceptor.LoginInterceptor"/>
-
+	<!-- 메인페이지 인터셉터 -->
+	<beans:bean id="mainPageInterceptor" 
+            class="com.kmerz.app.interceptor.MainPageInterceptor"/>
+	
 	<interceptors>
 		<!-- 관리자 세션 -->
 		<interceptor>
@@ -57,6 +60,11 @@
 		<interceptor>
 			<mapping path="/c/*"/>
 			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<!-- 메인 페이지 인터셉터 -->
+		<interceptor>
+			<mapping path="/"/>
+			<beans:ref bean="mainPageInterceptor"/>
 		</interceptor>
 	</interceptors>
 	<!-- //인터셉터 -->

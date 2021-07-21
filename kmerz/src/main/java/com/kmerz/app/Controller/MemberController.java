@@ -38,10 +38,10 @@ public class MemberController {
 			resultLogin = "success";
 			page = "redirect:/";
 			session.setAttribute("loginVo", memberVo);
-			String requestPath = 
-	 				(String)session.getAttribute("requestPath");
+			String requestPath = (String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
 	 		if(requestPath != null) {
+	 			//System.out.println(requestPath);
 		 		if (requestPath.equals("/c/createForm")) {
 		 			page = "community/createCommunityForm";
 		 		}
