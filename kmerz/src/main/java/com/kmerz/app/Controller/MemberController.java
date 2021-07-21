@@ -19,10 +19,16 @@ import com.kmerz.app.vo.MemberVo;
 public class MemberController {
 	@Inject
 	private MemberService memberService;
-
+	
 	// 로그인 화면
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() {
+		return "member/loginForm";
+	}
+	
+	// 리퀘스트가 있는 로그인 화면
+	@RequestMapping(value="/requestLoginForm", method=RequestMethod.GET)
+	public String reqLoginForm() {
 		return "member/loginForm";
 	}
 	
@@ -38,10 +44,10 @@ public class MemberController {
 			resultLogin = "success";
 			page = "redirect:/";
 			session.setAttribute("loginVo", memberVo);
-			String requestPath = 
-	 				(String)session.getAttribute("requestPath");
+			String requestPath = (String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
 	 		if(requestPath != null) {
+	 			//System.out.println(requestPath);
 		 		if (requestPath.equals("/c/createForm")) {
 		 			page = "community/createCommunityForm";
 		 		}
