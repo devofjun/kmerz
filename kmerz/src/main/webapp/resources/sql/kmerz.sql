@@ -108,8 +108,9 @@ drop sequence seq_reply_no;
 create sequence seq_reply_no
     start  with 100;
 
-
+--==================================================
 -- 미디어 테이블
+--==================================================
 drop table tbl_media CASCADE CONSTRAINTS;
 create table tbl_media(
     media_no number references tbl_posts(post_no),
