@@ -69,8 +69,8 @@ insert into tbl_category values(
 -- 게시글 테스트 데이터
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    'test1@naver.com',
-    '스타크래프트',
+    'tester1',
+    'star',
     1,
     '스타 첫번째 공략',
     '아무튼 이렇게 저렇게 하면 이김 OK?',
@@ -78,8 +78,8 @@ insert into tbl_posts values(
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    'test2@naver.com',
-    '리그오브레전드',
+    'tester2',
+    'lol',
     2,
     '옵치 첫번째 공략',
     '아무튼 일케 절케 하면 이김 OK?',
@@ -87,8 +87,8 @@ insert into tbl_posts values(
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    'test3@naver.com',
-    '오버워치',
+    'tester3',
+    'overwatch',
     3,
     '롤 첫번째 공략',
     '걍 정치하셈 OK?',

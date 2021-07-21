@@ -120,6 +120,8 @@ create table tbl_media(
     delete_time timestamp default null
 );
 
+create sequence seq_media_no;
+
 -- 게시글변경 로그 테이블
 /*
 create table tbl_change_log(
