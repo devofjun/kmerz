@@ -14,18 +14,18 @@
 	for (int i = 0; i < postList.size(); i++) {
 %>
 
-<div id="<%=i%>">
+<div id="<%=postList.get(i).getPost_no()%>">
 	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
-		<div class="leftbar bar-color scale-8">
-			<div class="like">
+		<div class="leftbar bar-color">
+			<div class="like scale-8">
 				<a href="#"><img class="icon-color rotate-180 " src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
-			<span><%=postList.get(i).getPost_recommand()%></span>
-			<div class="like">
+			<span class="scale-8"><%=postList.get(i).getPost_recommand()%></span>
+			<div class="like scale-8">
 				<a href="#"><img class="icon-color" src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
-			<div class="BottmNavBar">
+			<div class="BottmNavBar scale-8">
 				<div class="toggleNav">
 					<a href="#"><img class="icon-color" src="resources/images/icons/chat_bubble_outline_black_36dp.svg"></a>
 				</div>
@@ -42,8 +42,9 @@
 		</div>
 		<div class="rightbar">
 			<div class="contentTop">
-				<div class="postTitle" onclick="openModal()"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
+				<div class="postTitle" onclick="openModal(<%=postList.get(i).getPost_no()%>)"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
 				<div class="communityAdress">
+
 					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-14"><%for(int j = 0; j < commList.size(); j++){
 					if(postList.get(i).getCommunity_id().equals(commList.get(j).getCommunity_id())){%>
 						<%=commList.get(j).getCommunity_name()%>
@@ -52,13 +53,13 @@
 						src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_name()%></a>
 				</div>
 			</div>
-			<div class="postContent border" onclick="openModal()">
-				<p class="icon-color"><%=postList.get(i).getPost_content()%></p>
+			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">
+				<p class="icon-color post-content"><%=postList.get(i).getPost_content()%></p>
 			</div>
 
 
 
-			<div class="postDown" onclick="posttoggle(<%=i%>)">
+			<div class="postDown" onclick="posttoggle(<%=postList.get(i).getPost_no()%>)">
 				<label for="toggleBtn" class="labelBtn" onclick=""> <img src="/resources/images/expand_more_black_24dp.svg"/></label>
 			</div>
 

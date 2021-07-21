@@ -37,6 +37,13 @@ public class CommunityServiceImpl implements CommunityService {
 		List<CommunityVo> list = commDao.selectCommunityList();
 		return list;
 	}
+
+
+	@Override
+	public CommunityVo getOneCommunity(String community_id) {
+		CommunityVo vo = commDao.getOneCommunity(community_id);
+		return vo;
+	}
 	
 	
 

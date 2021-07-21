@@ -8,6 +8,9 @@
 <select id="selectAllPosts" resultType="PostsVo">
 	select * from tbl_posts
 </select>
+<select id="selectPost" resultType="PostsVo">
+	select * from tbl_posts where post_no = #{post_no}
+</select>
 
 <!-- 커뮤니티 페이지 이동후 나오는 포스트 -->
 <select id="selectCommunityPostList" resultType="PostsVo">

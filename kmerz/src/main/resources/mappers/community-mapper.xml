@@ -9,6 +9,10 @@
 	select count(*) from tbl_community
 </select>
 
+<select id="getOneCommunity" resultType="CommunityVo">
+	select * from tbl_community where community_id = #{community_id}
+</select>
+
 <!-- 커뮤니티 생성 -->
 <insert id="insertCommunity">
 	insert into tbl_community(
