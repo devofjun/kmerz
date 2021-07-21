@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,22 +31,23 @@ public class MemberController {
 	public String loginRun(String user_id, String user_pw, RedirectAttributes rttr,
 			HttpSession session) {
 		MemberVo memberVo = memberService.login(user_id, user_pw);
-		System.out.println("memberVo: " + memberVo);
 		String resultLogin = null;
-		String page = null;
+		String page = "member/loginForm";
+		// 로그인 성공
 		if(memberVo != null) {
-			// 로그인 성공
 			resultLogin = "success";
 			page = "redirect:/";
 			session.setAttribute("loginVo", memberVo);
 			String requestPath = 
 	 				(String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
-	 		if (requestPath.equals("/c/createForm")) {
-	 			page = "community/createCommunityForm";
+	 		if(requestPath != null) {
+		 		if (requestPath.equals("/c/createForm")) {
+		 			page = "community/createCommunityForm";
+		 		}
 	 		}
+	 	// 로그인 실패
 		} else {
-			// 로그인 실패
 			resultLogin = "fail";
 			page = "redirect:/m/loginForm";
 		}
@@ -85,6 +85,13 @@ public class MemberController {
 		return list;
 	}
 	
+	// 회원정보 보기 페이지
+	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+	public String getUserInfo(HttpSession session) {
+		return "member/userInfo";
+	}
+	
+	// 비밀번호 찾기 폼 이동
 	@RequestMapping(value = "/findPasswordForm", method = RequestMethod.GET)
 	public String findPasswordForm() {
 		return "member/findPasswordForm";

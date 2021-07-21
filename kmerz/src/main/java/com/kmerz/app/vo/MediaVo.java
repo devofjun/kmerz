@@ -3,9 +3,9 @@ package com.kmerz.app.vo;
 import java.sql.Timestamp;
 
 public class MediaVo {
-	private int post_no;
-	private String media_type;
-	private String file_name;
+	private int media_no;
+	private String media_id;
+	private String file_path;
 	private Timestamp upload_time;
 	private Timestamp delete_time;
 	
@@ -14,37 +14,37 @@ public class MediaVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MediaVo(int post_no, String media_type, String file_name, Timestamp upload_time, Timestamp delete_time) {
+	public MediaVo(int media_no, String media_id, String file_path, Timestamp upload_time, Timestamp delete_time) {
 		super();
-		this.post_no = post_no;
-		this.media_type = media_type;
-		this.file_name = file_name;
+		this.media_no = media_no;
+		this.media_id = media_id;
+		this.file_path = file_path;
 		this.upload_time = upload_time;
 		this.delete_time = delete_time;
 	}
 
-	public int getPost_no() {
-		return post_no;
+	public int getMedia_no() {
+		return media_no;
 	}
 
-	public void setPost_no(int post_no) {
-		this.post_no = post_no;
+	public void setMedia_no(int media_no) {
+		this.media_no = media_no;
 	}
 
-	public String getMedia_type() {
-		return media_type;
+	public String getMedia_id() {
+		return media_id;
 	}
 
-	public void setMedia_type(String media_type) {
-		this.media_type = media_type;
+	public void setMedia_id(String media_id) {
+		this.media_id = media_id;
 	}
 
-	public String getFile_name() {
-		return file_name;
+	public String getFile_path() {
+		return file_path;
 	}
 
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
 	}
 
 	public Timestamp getUpload_time() {
@@ -65,9 +65,8 @@ public class MediaVo {
 
 	@Override
 	public String toString() {
-		return "MediaVo [post_no=" + post_no + ", media_type=" + media_type + ", file_name=" + file_name
+		return "MediaVo [media_no=" + media_no + ", media_id=" + media_id + ", file_path=" + file_path
 				+ ", upload_time=" + upload_time + ", delete_time=" + delete_time + "]";
 	}
-	
 	
 }

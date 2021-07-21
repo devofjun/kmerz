@@ -81,6 +81,7 @@ create table tbl_posts(
     post_status varchar2(15),
     post_media varchar2(10) default 'F'
 );
+select * from tbl_posts;
 drop sequence seq_post_no;
 create sequence seq_post_no
     start with 1

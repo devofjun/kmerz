@@ -80,7 +80,7 @@ insert into tbl_posts values(
     SEQ_POST_NO.nextval,
     'tester2',
     'lol',
-    2,
+    1,
     '옵치 첫번째 공략',
     '아무튼 일케 절케 하면 이김 OK?',
     0, 0, sysdate, 'accept', 'F'
@@ -89,7 +89,7 @@ insert into tbl_posts values(
     SEQ_POST_NO.nextval,
     'tester3',
     'overwatch',
-    3,
+    1,
     '롤 첫번째 공략',
     '걍 정치하셈 OK?',
     0, 0, sysdate, 'accept', 'F'

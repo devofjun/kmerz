@@ -20,7 +20,7 @@ public class CategoryController {
 	// 카테고리 생성 페이지로 이동
 	@RequestMapping(value="/createCategoryForm", method = RequestMethod.GET)
 	public String createCategoryForm() {
-		return "/category/createCategoryForm";
+		return "category/createCategoryForm";
 	}
 	
 	// 카테고리 생성
