@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="/resources/css/rSidebar.css?v5">
+<link rel="stylesheet" href="/resources/css/rSidebar.css?v8">
 <div class="rSidebar sticky">
 	<div class="userinfo border sticky">
 		<div class="hr">
@@ -24,8 +24,17 @@
 		<div class="relatedPost hr">
 			<span class="font-24">인기글</span>
 		</div>
-		<ul>
-			<li><a href="#">홍진호 만난 썰 푼다</a></li>
-		</ul>
+		<ol>
+			<li><a href="#">인기글1</a></li>
+			<li><a href="#">인기글2</a></li>
+			<li><a href="#">인기글3</a></li>
+			<li><a href="#">인기글4</a></li>
+			<li><a href="#">인기글5</a></li>
+			<li><a href="#">인기글6</a></li>
+			<li><a href="#">인기글7</a></li>
+			<li><a href="#">인기글8</a></li>
+			<li><a href="#">인기글9</a></li>
+			<li><a href="#">인기글10</a></li>
+		</ol>
 	</div>
 </div>
