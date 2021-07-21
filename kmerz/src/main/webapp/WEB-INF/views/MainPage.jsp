@@ -16,11 +16,6 @@
 <link rel="stylesheet" href="/resources/css/slider.css?3">
 <link rel="stylesheet" href="/resources/css/icon.css?3">
 <link rel="stylesheet" href="/resources/css/transform.css?4">
-<link
-	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/resources/script/MainPage.js?ver31">
