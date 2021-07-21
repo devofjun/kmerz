@@ -4,6 +4,7 @@
 
 -- 임시 테스트 계정 삽입
 insert into tbl_member values(
+    SEQ_USER_NO.nextval,
     'test1@naver.com',
     '1234',
     'tester1',
@@ -11,6 +12,7 @@ insert into tbl_member values(
     'OK'
 );
 insert into tbl_member values(
+    SEQ_USER_NO.nextval,
     'test2@naver.com',
     '1234',
     'tester2',
@@ -18,6 +20,7 @@ insert into tbl_member values(
     'OK'
 );
 insert into tbl_member values(
+    SEQ_USER_NO.nextval,
     'test3@naver.com',
     '1234',
     'tester3',
