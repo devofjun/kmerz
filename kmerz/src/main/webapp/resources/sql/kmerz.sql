@@ -31,6 +31,8 @@ create table tbl_member_log (
 -- 커뮤니티 정보 테이블
 drop table tbl_community CASCADE CONSTRAINTS;
 --truncate table tbl_community;
+
+-- community_id = tag
 create table tbl_community (
     community_id varchar2(30) primary key,
     user_id varchar2(50) references tbl_member(user_id),
