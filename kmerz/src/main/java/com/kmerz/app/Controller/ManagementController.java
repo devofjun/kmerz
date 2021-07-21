@@ -29,7 +29,7 @@ public class ManagementController {
 			return "management/DashBoardPage";
 		}
 	}
-
+	
 	// 로그인 페이지
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String adminLoginForm(HttpSession session) throws Exception {

@@ -41,9 +41,9 @@
 	<!-- 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor" 
             class="com.kmerz.app.interceptor.LoginInterceptor"/>
-	<!-- 메인페이지 인터셉터 -->
-	<beans:bean id="mainPageInterceptor" 
-            class="com.kmerz.app.interceptor.MainPageInterceptor"/>
+	<!-- 커뮤니티 인터셉터 -->
+	<beans:bean id="communityInterceptor" 
+            class="com.kmerz.app.interceptor.CommunityInterceptor"/>
 	
 	<interceptors>
 		<!-- 관리자 세션 -->
@@ -55,16 +55,18 @@
 			<exclude-mapping path="/admin/loginRun" />
 			<beans:ref bean="adminAuthInterceptor" />
 		</interceptor>
+		
 		<!-- 유저 세션 -->
 		<!-- login 인증이 필요한 URI 들 -->
 		<interceptor>
-			<mapping path="/c/*"/>
+			<mapping path="/m/loginForm"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
-		<!-- 메인 페이지 인터셉터 -->
+		<!-- 커뮤니티 인터셉터 -->
 		<interceptor>
-			<mapping path="/"/>
-			<beans:ref bean="mainPageInterceptor"/>
+			<mapping path="/c/createForm"/>
+			<mapping path="/c/createRun"/>
+			<beans:ref bean="communityInterceptor"/>
 		</interceptor>
 	</interceptors>
 	<!-- //인터셉터 -->
