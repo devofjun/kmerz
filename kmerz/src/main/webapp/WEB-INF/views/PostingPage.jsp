@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scale=no">
 <link rel="stylesheet" href="/resources/css/PostingPage.css?ver1">
 <link rel="stylesheet" href="/resources/css/header.css?ver1">
-<script src="/resources/script/PostingPage.js?ver1"></script>
+<script src="/resources/script/PostingPage.js?ver5"></script>
 <title>Posting to KMerz</title>
 </head>
 <body>
