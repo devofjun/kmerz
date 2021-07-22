@@ -21,8 +21,8 @@
 <!-- 카테고리 선택시 나오는 포스트 -->
 <select id="selectCategoryPostList">
 	select * from tbl_posts
-	where community_name = #{community_name}
-	and category_id = #{category_id}
+	where community_id = #{community_id}
+	and category_no = #{category_no}
 </select>
 
 </mapper>

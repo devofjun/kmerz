@@ -97,9 +97,27 @@ public class MemberController {
 		return "member/userInfo";
 	}
 	
+	// 회원비밀번호 변경 폼 이동
+	@RequestMapping(value = "/userPasswordChangeForm", method = RequestMethod.GET)
+	public String userPasswordChangeForm() {
+		return "member/userPasswordChangeForm";
+	}
+	
+	// 회원 프로필 사진 변경 폼 이동
+	@RequestMapping(value = "/userProfileImagesChangeForm", method = RequestMethod.GET)
+	public String userProfileImagesChangeForm() {
+		return "member/userProfileImagesChangeForm";
+	}
+	
 	// 비밀번호 찾기 폼 이동
 	@RequestMapping(value = "/findPasswordForm", method = RequestMethod.GET)
 	public String findPasswordForm() {
 		return "member/findPasswordForm";
+	}
+	
+	// 비밀번호 변경 폼 이동
+	@RequestMapping(value = "/userSecessionForm", method = RequestMethod.GET)
+	public String userSecessionForm() {
+		return "member/userSecessionForm";
 	}
 }
