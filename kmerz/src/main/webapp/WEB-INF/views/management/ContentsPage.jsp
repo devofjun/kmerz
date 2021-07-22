@@ -56,12 +56,23 @@ $(document).ready(function() {
 		$("#cardRightSetting").hide();
 		switch(setting){
 		case "banner":
+			// 배너설정 영역 클릭시
+			// 로딩
+			$("#settingCardLoading").css("display","inline");
+			
+			var url = "/admin/getSteamJson";
+			$.get(url, function(rData){
+				console.log(rData);
+			});
+			// 서버와 통신이 끝나면 셋팅키드가 보이게 한다.
 			$("#cardBannerSetting").show();
 			break;
 		case "left":
+			// 왼쪽 사이드바 설정 영역 클릭시 
 			$("#cardLeftSetting").show();
 			break;
 		case "right":
+			// 오른쪽 사이드바 설정 영역 클릭시
 			$("#cardRightSetting").show();
 			break;
 		}
@@ -124,8 +135,13 @@ $(document).ready(function() {
 		}
 	});
 	
+	// 선택 취소 하면 db banner 에서 삭제함
 	function bannerSelectCancel(appid){
-		
+		var url = "";
+		var sendData = {
+				"appid" : appid
+		};
+		$.get();
 	}
 });
 </script>
@@ -184,7 +200,18 @@ $(document).ready(function() {
 		</div>
 	</div>
 </div>
-
+<div id="settingCardLoading" class="container my-5" style="display:none">
+	<div class="row">
+		<!-- 검색 로딩바 -->
+		<div class="row w-100">
+			<div class="text-center mt-3">
+				<div class="spinner-border" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- 배너 게임 설정 카드 -->
 <div id="cardBannerSetting" class="container my-5" style="display:default">
 	<div class="row">
