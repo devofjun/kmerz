@@ -1,23 +1,22 @@
 function posting(){
 	var content = document.getElementById("editable").innerHTML;
 	var textFile = null,
-	makeTextFile = function(text){
-		var file = new File([text], {type: 'text/plain'});
+  makeTextFile = function (content) {
+    var data = new File([content], "1.txt",{type: "text/plain", lastModified: Date.now()});
+	return data;
+  };
+      upload(makeTextFile(content));
+}
+function upload(file){
 		var data = new FormData();
-		data.append("upfile", file);
+		data.append("file", file);
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "upload_media.jsp");
+		xhr.open("POST", "media/upload_media");
 		xhr.onload = function () {
-    	console.log(this.status);
-   	 	console.log(this.response);
  	 };
 		xhr.send(data);
-	}
-	var file = makeTextFile(content);
-		console.log(file);
 }
 function openFILE_INSERT_Modal() {
-console.log("클릭됨");
   includeHTML(document.querySelector('.modal-section'), '/include/FILE_INSERT_MODAL');
 }
 function closeModal() {
