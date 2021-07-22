@@ -1,10 +1,8 @@
---------------------
--- 테스트 데이터 삽입
---------------------
-
--- 임시 테스트 계정 삽입
+----------------------------------------------------
+-- 테스트 데이터 삽입(유저 테이블)
+----------------------------------------------------
 insert into tbl_member values(
-    SEQ_USER_NO.nextval,
+    seq_user_no.nextval,
     'test1@naver.com',
     '1234',
     'tester1',
@@ -27,9 +25,12 @@ insert into tbl_member values(
     sysdate,
     'OK'
 );
+--select * from tbl_member;
 
 
--- 커뮤니티 테스트 데이터 삽입
+----------------------------------------------------
+-- 테스트 데이터 삽입(커뮤니티 테이블)
+----------------------------------------------------
 insert into tbl_community values(
     'star',
     'test1@naver.com',
@@ -54,45 +55,113 @@ insert into tbl_community values(
     '오버워치 임시 커뮤니티입니다.',
     'wait'
 );
+-- select * from tbl_community;
 
--- 카테고리 테스트 데이터
+----------------------------------------------------
+-- 테스트 데이터 삽입(카테고리 테이블)
+----------------------------------------------------
 insert into tbl_category values(
-    seq_cate_id.nextval, 'star', '공략', '스타공략임', 'accept'
+    seq_category_id.nextval, 'star', '공략', '스타공략임', 'accept'
 );
 insert into tbl_category values(
-    seq_cate_id.nextval, 'lol', '공략', '롤공략임', 'accept'
+    seq_category_id.nextval, 'lol', '공략', '롤공략임', 'accept'
 );
 insert into tbl_category values(
-    seq_cate_id.nextval, 'overwatch', '공략', '옵치공략임', 'accept'
+    seq_category_id.nextval, 'overwatch', '공략', '옵치공략임', 'accept'
 );
 
--- 게시글 테스트 데이터
+----------------------------------------------------
+-- 테스트 데이터 삽입(게시글 테이블)
+----------------------------------------------------
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
     'tester1',
     'star',
-    1,
+    100,
     '스타 첫번째 공략',
-    '아무튼 이렇게 저렇게 하면 이김 OK?',
-    0, 0, sysdate, 'accept', 'F'
+    '전략게임이다 전략이 중요해!',
+    0, 0, sysdate, 'accept'
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
     'tester2',
     'lol',
-    1,
-    '옵치 첫번째 공략',
-    '아무튼 일케 절케 하면 이김 OK?',
-    0, 0, sysdate, 'accept', 'F'
+    101,
+    '롤 첫번째 공략',
+    '정치 잘하면 됨',
+    0, 0, sysdate, 'accept'
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
     'tester3',
     'overwatch',
-    1,
-    '롤 첫번째 공략',
-    '걍 정치하셈 OK?',
-    0, 0, sysdate, 'accept', 'F'
+    102,
+    '옵치 첫번째 공략',
+    '말로 하는 게임임',
+    0, 0, sysdate, 'accept'
+);
+
+----------------------------------------------------
+-- 테스트 데이터 삽입(댓글 테이블)
+----------------------------------------------------
+insert into tbl_comment values(
+    SEQ_COMMENT_NO.nextval,
+    100,
+    'tester3',
+    '와.그.렇.군.요.',
+    0,
+    sysdate
+);
+insert into tbl_comment values(
+    SEQ_COMMENT_NO.nextval,
+    101,
+    'tester1',
+    '정치질하려고 겜하냐?',
+    0,
+    sysdate
+);
+insert into tbl_comment values(
+    SEQ_COMMENT_NO.nextval,
+    102,
+    'tester2',
+    '님 마이크 냄새남',
+    0,
+    sysdate
+);
+
+
+----------------------------------------------------
+-- 테스트 데이터 삽입(답글 테이블)
+----------------------------------------------------
+update tbl_comment set
+    comment_reply_count = comment_reply_count+1
+    where comment_no = 100;
+insert into tbl_reply values(
+    seq_reply_no.nextval,
+    100,
+    'tester1',
+    '^^',
+    sysdate
+);
+update tbl_comment set
+    comment_reply_count = comment_reply_count+1
+    where comment_no = 101;
+insert into tbl_reply values(
+    seq_reply_no.nextval,
+    101,
+    'tester2',
+    'ㅇㅇ 꿀잼임',
+    sysdate
+);
+update tbl_comment set
+    comment_reply_count = comment_reply_count+1
+    where comment_no = 102;
+insert into tbl_reply values(
+    seq_reply_no.nextval,
+    102,
+    'tester3',
+    'ㅗ',
+    sysdate
 );
 
 

@@ -3,10 +3,11 @@ package com.kmerz.app.vo;
 import java.sql.Timestamp;
 
 public class MemberVo {
+	private int user_no;
 	private String user_id;
 	private String user_pw;
 	private String user_name;
-	private Timestamp user_logintime;
+	private Timestamp user_currentlogin;
 	private String user_status;
 	
 	public MemberVo() {
@@ -14,13 +15,23 @@ public class MemberVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberVo(String user_id, String user_pw, String user_name, Timestamp user_logintime, String user_status) {
+	public MemberVo(int user_no, String user_id, String user_pw, String user_name, Timestamp user_currentlogin,
+			String user_status) {
 		super();
+		this.user_no = user_no;
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 		this.user_name = user_name;
-		this.user_logintime = user_logintime;
+		this.user_currentlogin = user_currentlogin;
 		this.user_status = user_status;
+	}
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 
 	public String getUser_id() {
@@ -47,12 +58,12 @@ public class MemberVo {
 		this.user_name = user_name;
 	}
 
-	public Timestamp getUser_logintime() {
-		return user_logintime;
+	public Timestamp getUser_currentlogin() {
+		return user_currentlogin;
 	}
 
-	public void setUser_logintime(Timestamp user_logintime) {
-		this.user_logintime = user_logintime;
+	public void setUser_currentlogin(Timestamp user_currentlogin) {
+		this.user_currentlogin = user_currentlogin;
 	}
 
 	public String getUser_status() {
@@ -65,8 +76,8 @@ public class MemberVo {
 
 	@Override
 	public String toString() {
-		return "MemberVo [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name
-				+ ", user_logintime=" + user_logintime + ", user_status=" + user_status + "]";
+		return "MemberVo [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
+				+ user_name + ", user_currentlogin=" + user_currentlogin + ", user_status=" + user_status + "]";
 	}
 
 	

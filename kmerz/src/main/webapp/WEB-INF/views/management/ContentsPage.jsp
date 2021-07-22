@@ -54,8 +54,37 @@ $(document).ready(function() {
 	});
 	
 	// 배너 스팀 게임 선택
-	$(".steamapps").click(function() {
+	$(".steamApps").click(function() {
+		var isSelected = $(this).attr("data-selected");
+		var cardAppid = $(this).attr("data-appid");
+		var cardAppname = $(this).find(".appname").text();
 		
+		
+		if(isSelected == "false"){
+			// 카드가 선택된적 없을때
+			$(this).attr("data-selected", "true");
+			
+			var cloneBadge = $("#selectApps > .selectApp:first").clone();
+			var cloneSpan = cloneBadge.find("span:first");
+			
+			cloneBadge.css("display", "inline");
+			cloneSpan.attr("data-appid", cardAppid);
+			cloneSpan.text(cardAppname);
+			
+			$("#selectApps").append(cloneBadge);
+		} else if(isSelected == "true"){
+			// 카드가 선택된적 있을때
+			$(this).attr("data-selected", "false");
+			// 선택된 카드의 동일한 appid를 가지고 있는 badge를 탐색하여 remove한다.
+			var count = $(".selectApp").length;
+			for(var i=0; i<count; i++){
+				var appid = $(".selectApp").eq(i).find("span:first").attr("data-appid");
+				if(appid == cardAppid){
+					$(".selectApp").eq(i).remove();
+					break;
+				}
+			}
+		}
 	});
 });
 </script>
@@ -106,7 +135,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 배너 게임 설정 카드 -->
-<div id="cardBannerSetting" class="container mt-5" style="display:default">
+<div id="cardBannerSetting" class="container my-5" style="display:default">
 	<div class="row">
 		<div class="col">
 			
@@ -130,29 +159,56 @@ $(document).ready(function() {
 						</div>
 						
 					</div>
-					<!-- 선택한 게임 목록 -->
-					<div class="row w-100" style="height: auto">
-						<div class="col-12">
-							<span class="badge rounded-pill bg-dark border border-1 border-dark mouse-border-primary">Don't Starve Together <span class="ms-1">&#10005;</span></span>
-						</div>
-					</div>
-					<div class="row w-100" style="height: auto">
-						<!-- 검색 로딩바 -->
+					<!-- 검색 로딩바 -->
+					<div class="row w-100">
 						<div class="text-center mt-3" style="display:none">
 							<div class="spinner-border" role="status">
 								<span class="visually-hidden">Loading...</span>
 							</div>
 						</div>
+					</div>
+					<!-- 선택한 게임 목록 -->
+					<div id="selectApps" class="row w-100" style="height: auto">
+						<div class="selectApp w-auto ms-3 my-1 badge rounded-pill bg-dark border border-1 border-dark" style="display:none">
+							<span data-appid=""></span>
+							<span class="ms-1">&#10005;</span>
+						</div>
+						
+					</div>
+					<div class="row w-100" style="height: auto">
 						<!-- 게임 검색 결과 카드 -->
 						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
-							<div class="card cspointer mouse-border-primary">
-								<img src="/resources/images/testImg/test1.jpg" class="card-img-top" alt="appid">
+							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="322330">
+								<img src="https://cdn.akamai.steamstatic.com/steam/apps/322330/header_alt_assets_23.jpg?t=1624553984" class="card-img-top" alt="">
 								<div class="card-body">
-									<p class="card-text text-dark">Don't Starve Together</p>
+									<p class="appname card-text text-dark">Don't Starve Together</p>
 								</div>
 							</div>
 						</div>
-						
+						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
+							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="578080">
+								<img src="https://cdn.akamai.steamstatic.com/steam/apps/578080/header.jpg?t=1626232783" class="card-img-top" alt="">
+								<div class="card-body">
+									<p class="appname card-text text-dark">PUBG: BATTLEGROUNDS</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
+							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="1426210">
+								<img src="https://cdn.akamai.steamstatic.com/steam/apps/1426210/header_alt_assets_0.jpg?t=1625770916" class="card-img-top" alt="">
+								<div class="card-body">
+									<p class="appname card-text text-dark">It Takes Two</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
+							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="1338770">
+								<img src="https://cdn.akamai.steamstatic.com/steam/apps/1338770/header.jpg?t=1626873655" class="card-img-top" alt="">
+								<div class="card-body">
+									<p class="appname card-text text-dark">Sniper Ghost Warrior Contracts 2</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
