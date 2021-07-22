@@ -122,6 +122,7 @@ public class PostsVo {
 				+ post_content_file + ", post_readcount=" + post_readcount + ", post_recommand=" + post_recommand
 				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + "]";
 	}
+
 	
 	
 }
