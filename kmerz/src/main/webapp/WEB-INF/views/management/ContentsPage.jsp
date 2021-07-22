@@ -9,6 +9,28 @@
 </style>
 <script>
 $(document).ready(function() {
+	// 배너/사이드바 설정 버튼
+	$("#btnSelectBS").click(function() {
+		if($(this).is(".active")){
+			// 이미 클릭 되었다면 함수 종료
+			return;
+		} else {
+			$("#btnSelectPost").removeClass("active");
+			$(this).addClass("active");
+		}
+	});
+	
+	// 게시글 설정 버튼
+	$("#btnSelectPost").click(function() {
+		if($(this).is(".active")){
+			// 이미 클릭 되었다면 함수 종료
+			return;
+		} else {
+			$("#btnSelectBS").removeClass("active");
+			$(this).addClass("active");
+		}
+	});
+	
 	// 컨텐츠 관리 영역 마우스 오버
 	$(".mouse-border-primary").mouseenter(function() {
 		$(this).addClass("border-primary");
@@ -86,6 +108,25 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	// 배너 게임 선택취소("X")버튼 눌렀을때
+	$("#selectApps").on("click", ".selectAppCancel", function() {
+		var appid = $(this).prev().attr("data-appid");
+		$(this).parent().remove();
+		
+		var count = $(".steamApps").length;
+		for(var i=0; i<count; i++){
+			var cardAppid = $(".steamApps").eq(i).attr("data-appid");
+			if(appid == cardAppid){
+				$(".steamApps").eq(i).attr("data-selected","false");
+				break;
+			}
+		}
+	});
+	
+	function bannerSelectCancel(appid){
+		
+	}
 });
 </script>
 
@@ -93,6 +134,16 @@ $(document).ready(function() {
 <div
 	class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 	<h1 class="h2">컨텐츠 관리</h1>
+	<div class="btn-toolbar mb-2 mb-md-0">
+		<div class="btn-group me-2">
+			<button id="btnSelectBS" type="button" class="btn btn-sm btn-outline-secondary active">배너 / 사이드바</button>
+			<button id="btnSelectPost"type="button" class="btn btn-sm btn-outline-secondary">게시글</button>
+		</div>
+		<button type="button"
+			class="btn btn-sm btn-outline-danger">
+			적용하기
+		</button>
+	</div>
 </div>
 
 <div class="container">
@@ -171,7 +222,7 @@ $(document).ready(function() {
 					<div id="selectApps" class="row w-100" style="height: auto">
 						<div class="selectApp w-auto ms-3 my-1 badge rounded-pill bg-dark border border-1 border-dark" style="display:none">
 							<span data-appid=""></span>
-							<span class="ms-1">&#10005;</span>
+							<span class="selectAppCancel cspointer ms-1">&#10005;</span>
 						</div>
 						
 					</div>
