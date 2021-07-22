@@ -104,6 +104,9 @@ insert into tbl_posts values(
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
+update tbl_comment set
+    comment_reply_count = comment_reply_count+1
+    where comment_no = 100;
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     100,
@@ -112,6 +115,9 @@ insert into tbl_comment values(
     0,
     sysdate
 );
+update tbl_comment set
+    comment_reply_count = comment_reply_count+1
+    where comment_no = 101;
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     101,
@@ -120,6 +126,9 @@ insert into tbl_comment values(
     0,
     sysdate
 );
+update tbl_comment set
+    comment_reply_count = comment_reply_count+1
+    where comment_no = 102;
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     102,

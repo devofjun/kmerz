@@ -12,7 +12,7 @@ public class PostsVo {
 	private int post_readcount;
 	private int post_recommand;
 	private Timestamp post_lastupdate;
-	private int post_status;
+	private String post_status;
 	
 	public PostsVo() {
 		super();
@@ -21,7 +21,7 @@ public class PostsVo {
 
 	public PostsVo(int post_no, String user_name, String community_id, int category_no, String post_title,
 			String post_content_file, int post_readcount, int post_recommand, Timestamp post_lastupdate,
-			int post_status) {
+			String post_status) {
 		super();
 		this.post_no = post_no;
 		this.user_name = user_name;
@@ -107,11 +107,11 @@ public class PostsVo {
 		this.post_lastupdate = post_lastupdate;
 	}
 
-	public int getPost_status() {
+	public String getPost_status() {
 		return post_status;
 	}
 
-	public void setPost_status(int post_status) {
+	public void setPost_status(String post_status) {
 		this.post_status = post_status;
 	}
 
@@ -122,6 +122,7 @@ public class PostsVo {
 				+ post_content_file + ", post_readcount=" + post_readcount + ", post_recommand=" + post_recommand
 				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + "]";
 	}
+
 	
 	
 }
