@@ -36,5 +36,11 @@ public class PostDaoImpl implements PostDao{
 		List<PostsVo> list = session.selectList(NAMESPACE + "selectCommunityPostList", community_id);
 		return list;
 	}
+
+	@Override
+	public int selectUserPostCount(String user_name) {
+		int count = session.selectOne(NAMESPACE + "selectUserPostCount", user_name);
+		return count;
+	}
 	
 }

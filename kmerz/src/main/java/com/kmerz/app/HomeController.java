@@ -14,6 +14,7 @@ import com.kmerz.app.service.CommunityService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.vo.CommunityVo;
+import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 
 
@@ -38,8 +39,16 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
 		List<PostsVo> postList = postService.selectAllPosts();
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		int userPostCount = 0;
+		// 로그인이 되어 있을때 유저의 게시글 갯수 구하기
+		if(memberVo != null) {
+			String user_name = memberVo.getUser_name();
+			userPostCount = postService.getUserPostCount(user_name);
+		}
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
+		model.addAttribute("userPostCount", userPostCount);
 		return "MainPage";
 	}
 	@RequestMapping(value="posting")

@@ -32,4 +32,10 @@ public class PostServiceImpl implements PostService{
 		return list;
 	}
 
+	@Override
+	public int getUserPostCount(String user_name) {
+		int count = postdao.selectUserPostCount(user_name);
+		return count;
+	}
+
 }

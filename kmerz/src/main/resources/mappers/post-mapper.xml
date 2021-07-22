@@ -25,4 +25,10 @@
 	and category_no = #{category_no}
 </select>
 
+<!-- 로그인 유저가 작성한 개시글 갯수 구하기 -->
+<select id="selectUserPostCount" resultType="int">
+	select count(*) from tbl_posts
+	where user_name = #{user_name}
+</select>
+
 </mapper>

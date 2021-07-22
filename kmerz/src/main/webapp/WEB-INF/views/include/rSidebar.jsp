@@ -21,7 +21,7 @@
 				<div>
 					<div>
 						<div style="float: left; width: 50%;">
-							<img src="/resources/images/default_Profile3.png"
+							<img style="margin-top:10px" src="/resources/images/default_Profile3.png"
 								class="img-thumbnail" alt="...">
 						</div>
 						<div style="float: left; width: 50%;">
@@ -37,7 +37,7 @@
 							<div style="float: left; width: 100%;">
 								<div style="float: left; width: 50%;">개시글:</div>
 								<div style="float: left; width: 50%;">
-									<a href="#">0개</a>
+									<a href="#">${userPostCount}개</a>
 								</div>
 							</div>
 							<div style="float: left; width: 100%;">
