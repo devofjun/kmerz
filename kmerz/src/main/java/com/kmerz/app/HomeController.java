@@ -42,8 +42,8 @@ public class HomeController {
 		model.addAttribute("postList", postList);
 		return "MainPage";
 	}
-	
-	
-	
-	
+	@RequestMapping(value="posting")
+	public String posting() {
+		return "PostingPage";
+	}
 }

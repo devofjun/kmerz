@@ -26,7 +26,6 @@
 </head>
 
 <body>
-<%@ include file="../include/modal.jsp"%>
 <script>
 var modal = document.getElementById("myModal");
 console.log(modal);
