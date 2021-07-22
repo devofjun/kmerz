@@ -1,10 +1,15 @@
 package com.kmerz.app.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +22,10 @@ public class SteamUtil {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("key", "F8FFD310D21B47B80811A652B7AADDB1");
 		parameter.put("format", "json");
+		
+		String html = getRequest(url, HttpMethod.GET, parameter);
+		System.out.println("응답 html:");
+		System.out.println(html);
 	}
 	
 	public static void getAppdetails() {
@@ -26,9 +35,18 @@ public class SteamUtil {
 		parameter.put("l", "korean");
 		parameter.put("appids", "322330");
 		
+		
 		String html = getRequest(url, HttpMethod.GET, parameter);
-		System.out.println("응답 html:");
-		System.out.println(html);
+		
+		File file = new File("D:/test/");
+
+		try {
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		    writer.write(html);
+		    writer.close();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 	
 	

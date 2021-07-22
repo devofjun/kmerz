@@ -9,6 +9,18 @@
 </style>
 <script>
 $(document).ready(function() {
+	// json 파일 받아오기
+	var steamJson
+	$("#settingCardLoading").show();
+	//$.getJSON('http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=STEAMKEY&format=json', function(json) {
+	//$.getJSON('http://api.steampowered.com/IStoreService/GetAppList/v0001/?key=E7C4563CA09F3BB39360ECCEA67F68F8&include_dlc=false',function(json){
+	$.getJSON('https://store.steampowered.com/api/appdetails?l=koreana&appids=322330',function(json){
+		steamJson = json;
+		console.log(steamJson);
+		$("#settingCardLoading").hide();
+		$("#cardBannerSetting").show();
+	});
+
 	// 배너/사이드바 설정 버튼
 	$("#btnSelectBS").click(function() {
 		if($(this).is(".active")){
@@ -57,14 +69,6 @@ $(document).ready(function() {
 		switch(setting){
 		case "banner":
 			// 배너설정 영역 클릭시
-			// 로딩
-			$("#settingCardLoading").css("display","inline");
-			
-			var url = "/admin/getSteamJson";
-			$.get(url, function(rData){
-				console.log(rData);
-			});
-			// 서버와 통신이 끝나면 셋팅키드가 보이게 한다.
 			$("#cardBannerSetting").show();
 			break;
 		case "left":
@@ -85,6 +89,45 @@ $(document).ready(function() {
 				$(this).attr("href"));
 		$("#btnSearchType").text($(this).text());
 	});
+	
+	// 게임 검색 버튼 클릭
+	$("#btnAppSearch").click(function(){
+		// 게임id 검색
+		var searchText = $(this).prev().val();
+		var searchType = $("#btnSearchType").attr("data-searchType");
+		var resultApps = [];
+		if(searchType == "/admin/searchId"){
+			// id로 검색
+			for(key in steamJson.applist.apps){
+				var appid = steamJson.applist.apps[key].appid;
+				console.log(appid);
+				if(appid.indexOf(searchText) != -1){
+					//console.log(appid);
+					resultApps.push(appid);
+				}
+			}
+		} else {
+			// 게임이룸으로 검색
+			for(key in steamJson.applist.apps){
+				var appname = steamJson.applist.apps[key].name;
+				if(appname.indexOf(searchText) != -1){
+					//console.log(steamJson.applist.apps[key].appid);
+					resultApps.push(steamJson.applist.apps[key].appid);
+				}
+			}
+		}
+		
+		// 검색 결과 id
+		console.log(resultApps);
+		var resultCount = resultApps.length;
+		//for(var i=0; i<resultCount; i++){
+			$.getJSON('https://store.steampowered.com/api/appdetails?l=koreana&appids=322330', function(json) {
+				appdetailsJson = json;
+				console.log(appdetailsJson.resultApps[0].data.type);
+			});
+		//}
+	});
+	
 	
 	// 배너 스팀 게임 선택
 	$(".steamApps").click(function() {
@@ -172,7 +215,7 @@ $(document).ready(function() {
 				<div class="card-body">
 					<div class="container">
 						<div
-							class="sample mouse-border-primary row h-25 bg-light border border-1 rounded-1 p-3 m-1"
+							class="sample mouse-border-primary row h-25 bg-primary text-white border border-1 rounded-1 p-3 m-1"
 							data-sample="banner">
 							<span>Banner</span>
 						</div>
@@ -213,7 +256,7 @@ $(document).ready(function() {
 	</div>
 </div>
 <!-- 배너 게임 설정 카드 -->
-<div id="cardBannerSetting" class="container my-5" style="display:default">
+<div id="cardBannerSetting" class="container my-5" style="display:none">
 	<div class="row">
 		<div class="col">
 			
@@ -233,7 +276,7 @@ $(document).ready(function() {
 							</ul>
 							<input type="text" class="form-control"
 								aria-label="Text input with dropdown button">
-							<button class="btn btn-secondary" type="button" id="btnSearch">검색</button>
+							<button id="btnAppSearch" class="btn btn-secondary" type="button">검색</button>
 						</div>
 						
 					</div>
@@ -255,7 +298,7 @@ $(document).ready(function() {
 					</div>
 					<div class="row w-100" style="height: auto">
 						<!-- 게임 검색 결과 카드 -->
-						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
+						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4" style="display:none">
 							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="322330">
 								<img src="https://cdn.akamai.steamstatic.com/steam/apps/322330/header_alt_assets_23.jpg?t=1624553984" class="card-img-top" alt="">
 								<div class="card-body">
@@ -263,30 +306,7 @@ $(document).ready(function() {
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
-							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="578080">
-								<img src="https://cdn.akamai.steamstatic.com/steam/apps/578080/header.jpg?t=1626232783" class="card-img-top" alt="">
-								<div class="card-body">
-									<p class="appname card-text text-dark">PUBG: BATTLEGROUNDS</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
-							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="1426210">
-								<img src="https://cdn.akamai.steamstatic.com/steam/apps/1426210/header_alt_assets_0.jpg?t=1625770916" class="card-img-top" alt="">
-								<div class="card-body">
-									<p class="appname card-text text-dark">It Takes Two</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-sm-6  text-center p-4">
-							<div class="card steamApps cspointer mouse-border-primary" data-selected="false" data-appid="1338770">
-								<img src="https://cdn.akamai.steamstatic.com/steam/apps/1338770/header.jpg?t=1626873655" class="card-img-top" alt="">
-								<div class="card-body">
-									<p class="appname card-text text-dark">Sniper Ghost Warrior Contracts 2</p>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
