@@ -49,8 +49,9 @@
 					if(postList.get(i).getCommunity_id().equals(commList.get(j).getCommunity_id())){%>
 						<%=commList.get(j).getCommunity_name()%>
 					<%}
-					}%></span></a><span>  </span><a href="#"><img
-						src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_name()%></a>
+					}%></span></a><a href="#"><img
+						src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=postList.get(i).getUser_name()%>
+						</span></a>
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">
