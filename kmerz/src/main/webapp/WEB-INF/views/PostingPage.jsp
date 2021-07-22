@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scale=no">
 <link rel="stylesheet" href="/resources/css/PostingPage.css?ver1">
 <link rel="stylesheet" href="/resources/css/header.css?ver1">
+<script src="/resources/script/PostingPage.js?ver1"></script>
 <title>Posting to KMerz</title>
 </head>
 <body>
@@ -35,8 +36,8 @@
 					</div>
 				</div>
 				<textarea maxlength="300" placeholder="Title"></textarea>
-				<div class="editable" contenteditable="true"></div>
-				<button class="post">Post</button>
+				<div id="editable" class="editable" contenteditable="true"></div>
+				<button class="posting" onclick="posting()">Post</button>
 			</div>
 			<div class="right-menu">
 				<div class="post-rule">post-rule</div>

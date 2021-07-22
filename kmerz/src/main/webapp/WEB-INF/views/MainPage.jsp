@@ -7,15 +7,15 @@
 	content="width=device-width, initial-scale=1.0 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver57">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver58">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v11">
-<link rel="stylesheet" href="/resources/css/header.css?ver2	?">
+<link rel="stylesheet" href="/resources/css/header.css?ver4">
 <link rel="stylesheet" href="/resources/css/font.css?">
 <link rel="stylesheet" href="/resources/css/margin.css?">
 <link rel="stylesheet" href="/resources/css/slider.css?3">
 <link rel="stylesheet" href="/resources/css/icon.css?3">
-<link rel="stylesheet" href="/resources/css/transform.css?4">
+<link rel="stylesheet" href="/resources/css/transform.css?5">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/resources/script/MainPage.js?ver31">

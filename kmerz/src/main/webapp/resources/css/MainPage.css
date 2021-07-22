@@ -183,7 +183,7 @@ p.icon-color {
 	margin: 10px;
 	background-color: #001789;
 	height: 180px;
-	transition: all ease 1s;
+	transition: all ease .3s;
 }
 
 .post:hover {
@@ -416,7 +416,7 @@ labelBtn:hover {
 	flex-direction: column;
 	margin-right: 20px;
 	background: #fff;
-	align-items: center;
+	/* align-items: center; */
 }
 .modal-content-right
 {
@@ -611,10 +611,11 @@ labelBtn:hover {
 .icon-color
 {
 	filter: invert(53%) sepia(11%) saturate(679%) hue-rotate(174deg) brightness(92%) contrast(90%);
+	/* transform: scale(0.88); */
 }
 .post-content
 {
 	    width: 100%;
-    overflow: hidden;
+	    overflow: hidden;
 }
 }

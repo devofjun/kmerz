@@ -14,11 +14,24 @@
 		</div>
 		<div class="modal-postContent">
 			<div class="modal-content-left">
-				<div class="modal-background border">
-					<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
-					<div class="modal-body">
-						<img src="/resources/images/squirrel.png">
-						<p><%=postVo.getPost_content()%></p>
+				<div class="modal-content-left-top">
+					<div class="recommandation scale-8">
+						<div class="like">
+							<a href="#"><img class="icon-color rotate-180 "
+								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
+						</div>
+						<span><%=postVo.getPost_recommand()%></span>
+						<div class="like">
+							<a href="#"><img class="icon-color"
+								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
+						</div>
+					</div>
+					<div class="modal-background border">
+						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
+						<div class="modal-body">
+							<img src="/resources/images/squirrel.png">
+							<p><%=postVo.getPost_content()%></p>
+						</div>
 					</div>
 				</div>
 				<div class="button-nav">
@@ -37,15 +50,6 @@
 					<div class="button-nav-btn">
 						<a href="#"><img class="icon-color"
 							src="resources/images/icons/outlined_flag_black_36dp.svg">Report</a>
-					</div>
-				</div>
-				<div class="recommend-section">
-					<div class="recommend-btn">
-					<a href="#"><img class="icon-color"
-							src="resources/images/icons/favorite_black_48dp.svg"></a>
-					<div>
-						0
-					</div>
 					</div>
 				</div>
 				<div class="replySection">

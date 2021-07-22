@@ -7,6 +7,14 @@
 	font-family: "Poppins", sans-serif;
 }
 
+.modal-content-left-top {
+    display: flex;
+}
+
+.reply-panel {
+    width: 100%;
+}
+
 .recommend-btn {
     display: flex;
     flex-direction: column;
@@ -14,8 +22,8 @@
 }
 
 .recommend-section {
-    border: solid #718093 2px;
-    width: 100px;
+    /* border: solid #718093 2px; */
+    width: 100%;
     margin: 10px;
 }
 
