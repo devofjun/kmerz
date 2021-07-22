@@ -159,6 +159,8 @@ p.icon-color {
 	top: 35px;
 	z-index: 1;
 	margin: 0 1%;
+	position: sticky;
+    top: 35px;
 }
 
 .stickyUnderInfo {
@@ -414,6 +416,7 @@ labelBtn:hover {
 	flex-direction: column;
 	margin-right: 20px;
 	background: #fff;
+	align-items: center;
 }
 .modal-content-right
 {

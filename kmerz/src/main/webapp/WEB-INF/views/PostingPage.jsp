@@ -36,7 +36,7 @@
 				</div>
 				<textarea maxlength="300" placeholder="Title"></textarea>
 				<div class="editable" contenteditable="true"></div>
-				<div class="post">Post</div>
+				<button class="post">Post</button>
 			</div>
 			<div class="right-menu">
 				<div class="post-rule">post-rule</div>

@@ -7,9 +7,16 @@
 	font-family: "Poppins", sans-serif;
 }
 
+.recommend-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .recommend-section {
     border: solid #718093 2px;
     width: 100px;
+    margin: 10px;
 }
 
 img.icon-color {}
