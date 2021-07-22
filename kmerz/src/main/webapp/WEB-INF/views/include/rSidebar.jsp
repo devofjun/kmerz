@@ -29,9 +29,15 @@
 								<div style="float: left; width: 50%;">
 									<strong>${loginVo.user_name}님</strong>
 								</div>
-								<div style="float: left; width: 50%;">
+								<!-- 메시지가 있을때 black 이미지 사용 -->
+								<div style="float: left; width: 25%;">
 									<a href="#"><img
 										src="/resources/images/icons/notifications_black_24dp.svg"></a>
+								</div>
+								<!-- 메시지가 있을때 active 이미지 사용 -->
+								<div style="float: left; width: 25%;">
+									<a href="#"><img
+										src="/resources/images/icons/notifications_active_black_24dp.svg"></a>
 								</div>
 							</div>
 							<div style="float: left; width: 100%;">
