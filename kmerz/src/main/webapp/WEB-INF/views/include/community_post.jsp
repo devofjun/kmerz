@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal()">
-				<p class="icon-color">${PostVo.post_content}</p>
+				<p class="icon-color">${PostVo.post_content_file}</p>
 			</div>
 
 

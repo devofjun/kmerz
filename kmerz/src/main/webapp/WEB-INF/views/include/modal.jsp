@@ -30,7 +30,7 @@
 						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
 						<div class="modal-body">
 							<img src="/resources/images/squirrel.png">
-							<p><%=postVo.getPost_content()%></p>
+							<p><%=postVo.getPost_content_file()%></p>
 						</div>
 					</div>
 				</div>

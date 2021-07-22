@@ -10,6 +10,9 @@
 <title>Posting to KMerz</title>
 </head>
 <body>
+	<div class="modal-section">
+	
+	</div>
 	<div>
 		<%@ include file="./include/top_menu_bar.jsp"%>
 	</div>
@@ -31,7 +34,7 @@
 					</div>
 					<div class="insert-reference">
 						<div><span><button><img src="/resources/images/icons/postingNav/window_black_24dp.svg"></button></span></div>
-						<div><span><button><img src="/resources/images/icons/postingNav/image_black_24dp.svg"></button></span></div>
+						<div><span><button onclick="openFILE_INSERT_Modal()"><img src="/resources/images/icons/postingNav/image_black_24dp.svg"></button></span></div>
 						<div><span><button><img src="/resources/images/icons/postingNav/smart_display_black_24dp.svg"></button></span></div>
 					</div>
 				</div>
