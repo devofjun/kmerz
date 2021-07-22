@@ -19,10 +19,16 @@ import com.kmerz.app.vo.MemberVo;
 public class MemberController {
 	@Inject
 	private MemberService memberService;
-
+	
 	// 로그인 화면
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() {
+		return "member/loginForm";
+	}
+	
+	// 리퀘스트가 있는 로그인 화면
+	@RequestMapping(value="/requestLoginForm", method=RequestMethod.GET)
+	public String reqLoginForm() {
 		return "member/loginForm";
 	}
 	
