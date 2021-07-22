@@ -13,9 +13,9 @@
 
 <!-- 카테고리 생성 -->
 <insert id="insertCategory">
-	insert into tbl_category(category_id, community_id,
+	insert into tbl_category(category_no, community_id,
 							 category_name, category_description, category_status)
-	values(seq_category_id.nextval, #{community_id},
+	values(seq_category_no.nextval, #{community_id},
 	#{category_name}, #{category_description}, #{category_status})
 </insert>
 

@@ -12,7 +12,7 @@ public class MemberLogVo {
 	public MemberLogVo() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
+	}	
 
 	public MemberLogVo(String user_log_code, String user_id, String user_request_ip, String user_request_content,
 			Timestamp user_log_time) {
