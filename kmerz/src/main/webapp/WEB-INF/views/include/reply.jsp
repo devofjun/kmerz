@@ -21,7 +21,6 @@
 				<div class="reply-user-status">
 					<span> 
  	 <%=memList.get(i).getUser_name()%>
-
 					</span>
 				</div>
 			</div>
@@ -35,7 +34,7 @@
 		</div>
 			<div class="reply-section">
 				
-				
+
 			</div>
 	</div>
 </div>

@@ -5,6 +5,8 @@
 	transform: rotate(180deg);
 }
 
+img.icon-color.rotate-180 {}
+
 .scale-8
 {
 	transform: scale(0.8);

@@ -18,13 +18,15 @@
 	<input type="checkbox" id="post-toggleBtn" style="display: none">
 	<div class="post border">
 		<div class="leftbar bar-color">
-			<div class="like scale-8">
+		<div class="recommandation scale-8">
+			<div class="like">
 				<a href="#"><img class="icon-color rotate-180 " src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
-			<span class="scale-8"><%=postList.get(i).getPost_recommand()%></span>
-			<div class="like scale-8">
+			<span><%=postList.get(i).getPost_recommand()%></span>
+			<div class="like">
 				<a href="#"><img class="icon-color" src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
+		</div>
 			<div class="BottmNavBar scale-8">
 				<div class="toggleNav">
 					<a href="#"><img class="icon-color" src="resources/images/icons/chat_bubble_outline_black_36dp.svg"></a>
@@ -49,8 +51,9 @@
 					if(postList.get(i).getCommunity_id().equals(commList.get(j).getCommunity_id())){%>
 						<%=commList.get(j).getCommunity_name()%>
 					<%}
+
 					}%></span></a><span>  </span><a href="#"><img
-						src="/resources/images/starcraft_small.jpg"><%=postList.get(i).getUser_name()%></a>
+						src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=postList.get(i).getUser_name()%></span></a>
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">

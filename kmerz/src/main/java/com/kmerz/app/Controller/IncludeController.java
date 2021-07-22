@@ -22,7 +22,6 @@ import com.kmerz.app.vo.PostsVo;
 @Controller
 @RequestMapping(value = "/include")
 public class IncludeController {
-	
 	@Inject
 	MemberService memService;
 	
@@ -50,5 +49,9 @@ public class IncludeController {
 	@RequestMapping(value="/reply_input", method=RequestMethod.GET)
 	public String openReplyInput() {
 		return "/include/reply_input";
+	}
+	@RequestMapping(value="/FILE_INSERT_MODAL")
+	public String openFILE_INSERT_MODAL() {
+		return "/include/FILE_INSERT_MODAL";
 	}
 }

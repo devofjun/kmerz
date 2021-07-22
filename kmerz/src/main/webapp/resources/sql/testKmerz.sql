@@ -5,7 +5,7 @@ insert into tbl_member values(
     seq_user_no.nextval,
     'test1@naver.com',
     '1234',
-    'tester1',
+    '테스터1',
     sysdate,
     'OK'
 );
@@ -13,7 +13,7 @@ insert into tbl_member values(
     SEQ_USER_NO.nextval,
     'test2@naver.com',
     '1234',
-    'tester2',
+    '테스터2',
     sysdate,
     'OK'
 );
@@ -21,7 +21,7 @@ insert into tbl_member values(
     SEQ_USER_NO.nextval,
     'test3@naver.com',
     '1234',
-    'tester3',
+    '테스터3',
     sysdate,
     'OK'
 );
@@ -75,7 +75,7 @@ insert into tbl_category values(
 ----------------------------------------------------
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    'tester1',
+    '테스터1',
     'star',
     100,
     '스타 첫번째 공략',
@@ -84,7 +84,7 @@ insert into tbl_posts values(
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    'tester2',
+    '테스터2',
     'lol',
     101,
     '롤 첫번째 공략',
@@ -93,7 +93,7 @@ insert into tbl_posts values(
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    'tester3',
+    '테스터3',
     'overwatch',
     102,
     '옵치 첫번째 공략',
@@ -110,7 +110,7 @@ update tbl_comment set
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     100,
-    'tester3',
+    '테스터3',
     '와.그.렇.군.요.',
     0,
     sysdate
@@ -121,7 +121,7 @@ update tbl_comment set
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     101,
-    'tester1',
+    '테스터1',
     '정치질하려고 겜하냐?',
     0,
     sysdate
@@ -132,7 +132,7 @@ update tbl_comment set
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     102,
-    'tester2',
+    '테스터2',
     '님 마이크 냄새남',
     0,
     sysdate
@@ -148,7 +148,7 @@ update tbl_comment set
 insert into tbl_reply values(
     seq_reply_no.nextval,
     100,
-    'tester1',
+    '테스터1',
     '^^',
     sysdate
 );
@@ -158,7 +158,7 @@ update tbl_comment set
 insert into tbl_reply values(
     seq_reply_no.nextval,
     101,
-    'tester2',
+    '테스터2',
     'ㅇㅇ 꿀잼임',
     sysdate
 );
@@ -168,7 +168,7 @@ update tbl_comment set
 insert into tbl_reply values(
     seq_reply_no.nextval,
     102,
-    'tester3',
+    '테스터3',
     'ㅗ',
     sysdate
 );
