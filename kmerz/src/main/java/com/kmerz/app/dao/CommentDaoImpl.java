@@ -18,5 +18,10 @@ public class CommentDaoImpl implements CommentDao {
 		List<CommentVo> list = session.selectList(NAMESPACE + "selectCommentOnPost", post_no);
 		return list;
 	}
+	@Override
+	public int selectuserCommentCount(String user_name) {
+		int count = session.selectOne(NAMESPACE + "selectuserCommentCount", user_name);
+		return count;
+	}
 
 }

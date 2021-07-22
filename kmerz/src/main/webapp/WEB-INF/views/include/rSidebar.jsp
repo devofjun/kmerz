@@ -43,7 +43,7 @@
 							<div style="float: left; width: 100%;">
 								<div style="float: left; width: 50%;">댓글:</div>
 								<div style="float: left; width: 50%;">
-									<a href="#">0개</a>
+									<a href="#">${userCommentCount}개</a>
 								</div>
 							</div>
 							<div style="float: left; width: 100%;">
