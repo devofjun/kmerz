@@ -1,7 +1,7 @@
 package com.kmerz.app.vo;
 
 public class CategoryVo {
-	private String category_id;
+	private int category_no;
 	private String community_id;
 	private String category_name;
 	private String category_description;
@@ -12,22 +12,22 @@ public class CategoryVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CategoryVo(String category_id, String community_id, String category_name, String category_description,
+	public CategoryVo(int category_no, String community_id, String category_name, String category_description,
 			String category_status) {
 		super();
-		this.category_id = category_id;
+		this.category_no = category_no;
 		this.community_id = community_id;
 		this.category_name = category_name;
 		this.category_description = category_description;
 		this.category_status = category_status;
 	}
 
-	public String getCategory_id() {
-		return category_id;
+	public int getCategory_no() {
+		return category_no;
 	}
 
-	public void setCategory_id(String category_id) {
-		this.category_id = category_id;
+	public void setCategory_no(int category_no) {
+		this.category_no = category_no;
 	}
 
 	public String getCommunity_id() {
@@ -64,7 +64,7 @@ public class CategoryVo {
 
 	@Override
 	public String toString() {
-		return "CategoryVo [category_id=" + category_id + ", community_id=" + community_id + ", category_name="
+		return "CategoryVo [category_no=" + category_no + ", community_id=" + community_id + ", category_name="
 				+ category_name + ", category_description=" + category_description + ", category_status="
 				+ category_status + "]";
 	}
