@@ -32,7 +32,7 @@
 		</div>
 		<div class="rightbar">
 			<div class="contentTop">
-				<div class="postTitle" onclick="openModal()"><h4 class="icon-color">${PostVo.post_title}</h4></div>
+				<div class="postTitle" onclick="openModal(${PostVo.post_no})"><h4 class="icon-color">${PostVo.post_title}</h4></div>
 				<div class="communityAdress">
 					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span>${PostVo.community_id}</span></a><span>
 						- 3분전 / 작성자 : ${PostVo.user_name}</span><a href="#"><img
@@ -41,7 +41,7 @@
 
 				</div>
 			</div>
-			<div class="postContent border" onclick="openModal()">
+			<div class="postContent border" onclick="openModal(${PostVo.post_no})">
 				<p class="icon-color">${PostVo.post_content_file}</p>
 			</div>
 

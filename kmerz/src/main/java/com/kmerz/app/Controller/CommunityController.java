@@ -44,7 +44,7 @@ public class CommunityController {
 		return "redirect:/";
 	}
 	
-	
+	// 커뮤니티 페이지 이동
 	@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
 	public String testCommunityForm(@PathVariable("community_id") String community_id, String community_name,
 			Model model) {
