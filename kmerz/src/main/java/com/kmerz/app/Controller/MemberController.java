@@ -114,4 +114,10 @@ public class MemberController {
 	public String findPasswordForm() {
 		return "member/findPasswordForm";
 	}
+	
+	// 비밀번호 변경 폼 이동
+	@RequestMapping(value = "/userSecessionForm", method = RequestMethod.GET)
+	public String userSecessionForm() {
+		return "member/userSecessionForm";
+	}
 }

@@ -31,7 +31,7 @@
 					<a href="/m/userInfo" class="btn btn-secondary">개인정보 변경</a> <a
 						href="/m/userProfileImagesChangeForm" class="btn btn-secondary">프로필
 						사진 변경</a> <a href="/m/userPasswordChangeForm"
-						class="btn btn-secondary">비밀번호 변경</a> <a href="/m/userSecession"
+						class="btn btn-secondary">비밀번호 변경</a> <a href="/m/userSecessionForm"
 						class="btn btn-secondary">회원 탈퇴</a>
 				</div>
 				<div style="margin-top: 50px">

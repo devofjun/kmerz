@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/userInfoHeader.jsp"%>
-<h3>프로필 사진변경</h3>
+<h3>회원 탈퇴</h3>
 </div>
 <hr>
 <div>

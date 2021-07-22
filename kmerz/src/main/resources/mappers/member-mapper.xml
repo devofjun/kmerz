@@ -5,8 +5,8 @@
 <mapper namespace="com.kmerz.app.member">
 
 <insert id="insertMember">
-	insert into tbl_member(user_id, user_pw, user_name)
-	values(#{user_id}, #{user_pw}, #{user_name})
+	insert into tbl_member(user_no, user_id, user_pw, user_name)
+	values(seq_user_no.nextval, #{user_id}, #{user_pw}, #{user_name})
 </insert>
 
 <select id="selectAll" resultType="MemberVo">
