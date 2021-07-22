@@ -15,14 +15,16 @@ public class MediaController {
 	
 	// 스팀전체 앱 JSON 파일 다운로드
 	@ResponseBody
-	@RequestMapping(value="/downloadSteamApps")
+	@RequestMapping(value="/steam/appList")
 	public void downloadSteamApps() {
-		SteamUtil.getAppdetails();
+		SteamUtil.getSteamApps();
 	}
 	
 	// 스팀앱 상세보기 JSON 파일 다운로드
+	@ResponseBody
+	@RequestMapping(value="/steam/appDetails")
 	public String searchSteamApp() {
-		
+		SteamUtil.getAppdetails();
 		return null;
 	}
 	
