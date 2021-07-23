@@ -1,43 +1,32 @@
 package com.kmerz.app.Controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kmerz.app.util.MyFileUploadUtil;
 import com.kmerz.app.util.SteamUtil;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import com.kmerz.app.vo.SteamAppVo;
 
 
 @Controller
 @RequestMapping(value = "/media")
 public class MediaController {
-	
-	// 스팀전체 앱 JSON 파일 다운로드
+
 	@ResponseBody
-	@RequestMapping(value="/steam/appList")
-	public void downloadSteamApps() {
-		SteamUtil.getSteamApps();
-	}
-	
-	// 스팀앱 상세보기 JSON 파일 다운로드
-	@ResponseBody
-	@RequestMapping(value="/steam/appDetails")
-	public String searchSteamApp() {
-		SteamUtil.getAppdetails();
-		return null;
+	@RequestMapping(value="/steam/searchApp", method=RequestMethod.POST)
+	public List<SteamAppVo> searchApp(String searchType,String searchWord) {
+		List<String> list = new ArrayList<String>();
+		if(searchType.equals("searchName")) {
+			list = SteamUtil.appSearch(searchWord);
+		} else if(searchType.equals("searchId")) {
+			list.add(searchWord);
+		}
+		List<SteamAppVo> appList = SteamUtil.getAppdetails(list);
+		return appList;
 	}
 	
 	// post 업로드
