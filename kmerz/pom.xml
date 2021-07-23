@@ -122,8 +122,14 @@
     <version>3.3.1</version>
 </dependency>
 <!-- 썸네일 이미지 -->
-	
-	
+
+<!-- JSON -->
+<dependency>
+	<groupId>org.json</groupId>
+	<artifactId>json</artifactId>
+	<version>20180813</version>
+</dependency>
+
 	
 		<!-- Spring -->
 		<dependency>

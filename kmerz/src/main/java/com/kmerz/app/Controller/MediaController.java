@@ -1,56 +1,54 @@
 package com.kmerz.app.Controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.kmerz.app.util.SteamUtil;
+import com.kmerz.app.vo.SteamAppVo;
+
 
 @Controller
 @RequestMapping(value = "/media")
 public class MediaController {
-	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
-	public String upload_media(@RequestParam("file") MultipartFile file) throws IOException {
-		Path uploadDir = Paths.get("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post");	
-		if (!Files.isDirectory(uploadDir)) {
-			try {
-				Files.createDirectories(uploadDir);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		System.out.println(file);
-		try {
-			UUID tempFileName = UUID.randomUUID();
-			String originalFileName = file.getOriginalFilename();
-			String fileExt = FilenameUtils.getExtension(originalFileName);
 
-			if (originalFileName.toLowerCase().endsWith(".txt")) {
-				fileExt = "txt";
-			}
-			String logicalFileName = tempFileName.toString() + "." + fileExt;
-
-			byte[] fileBytes = file.getBytes();
-			Path filePath = uploadDir.resolve(logicalFileName);
-			Files.write(filePath, fileBytes);
-			System.out.println(filePath);
-			System.out.println(logicalFileName);
-		} catch (IOException e) {
-			e.printStackTrace();
+	@ResponseBody
+	@RequestMapping(value="/steam/searchApp", method=RequestMethod.POST)
+	public List<SteamAppVo> searchApp(String searchType,String searchWord) {
+		List<String> list = new ArrayList<String>();
+		if(searchType.equals("searchName")) {
+			list = SteamUtil.appSearch(searchWord);
+		} else if(searchType.equals("searchId")) {
+			list.add(searchWord);
 		}
-		return "include/upload_media";
+		List<SteamAppVo> appList = SteamUtil.getAppdetails(list);
+		return appList;
 	}
-	@RequestMapping(value="/images")
-	public String images() {
-		return "D:\\upload\\images\\battlefield 2042.jpg";
+	
+	// post 업로드
+	
+	// post 이미지 파일 업로드
+	@RequestMapping(value="/uploadPostImage", method=RequestMethod.POST)
+	public void uploadPostImage() {
+		
 	}
+	// post 동영상 파일 업로드
+	
+	
+	// profile 이미지 파일 업로드
+	@RequestMapping(value="uploadProfileImage", method=RequestMethod.POST)
+	public void uploadProfileImage() {
+		//String media_id = "profileimg_"+loginVo.getUser_no 
+		//String path = "/D:/upload/profileimage/" + loginVo.getUser_no() + "/" ;
+		//int user_no = ;
+		//파일이름
+		//MyFileUploadUtil.uploadFile(uploadPath, originalFilename, fileData);
+		// /D:/upload/profileimage/1000/파일이름+랜덤이름.jpg
+	}
+	
+	
 }
