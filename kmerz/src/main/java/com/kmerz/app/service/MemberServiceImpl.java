@@ -40,4 +40,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectID(user_id);
 	}
 
+	@Override
+	public int getUserNameCheckResult(String user_name) {
+		int count = memberDao.selectUserCount(user_name);
+		return count;
+	}
+
 }

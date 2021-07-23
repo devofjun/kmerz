@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MediaController {
 	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
 	public String upload_media(@RequestParam("file") MultipartFile file) throws IOException {
-		Path uploadDir = Paths.get("d:/upload/post");	
+		Path uploadDir = Paths.get("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post");	
 		if (!Files.isDirectory(uploadDir)) {
 			try {
 				Files.createDirectories(uploadDir);
@@ -48,5 +48,9 @@ public class MediaController {
 			e.printStackTrace();
 		}
 		return "include/upload_media";
+	}
+	@RequestMapping(value="/images")
+	public String images() {
+		return "D:\\upload\\images\\battlefield 2042.jpg";
 	}
 }

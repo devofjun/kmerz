@@ -15,12 +15,17 @@
 				email with anyone else.</div>
 		</div>
 		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">변경할
+			<label for="exampleInputPassword1" class="form-label">현재
 				비밀번호</label> <input type="password" class="form-control"
 				id="exampleInputPassword1">
 		</div>
 		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">비밀번호 확인</label>
+			<label for="exampleInputPassword1" class="form-label">새
+				비밀번호</label> <input type="password" class="form-control"
+				id="exampleInputPassword1">
+		</div>
+		<div class="mb-3">
+			<label for="exampleInputPassword1" class="form-label">새 비밀번호 확인</label>
 			<input type="password" class="form-control"
 				id="exampleInputPassword1">
 		</div>
