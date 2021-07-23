@@ -1,7 +1,7 @@
 package com.kmerz.app.vo;
 
 public class SteamAppVo {
-	private String appid;
+	private int appid;
 	private String name;
 	private String description;
 	private String imgPath;
@@ -13,7 +13,7 @@ public class SteamAppVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SteamAppVo(String appid, String name, String description, String imgPath, String appPrice, String appMovie) {
+	public SteamAppVo(int appid, String name, String description, String imgPath, String appPrice, String appMovie) {
 		super();
 		this.appid = appid;
 		this.name = name;
@@ -23,11 +23,11 @@ public class SteamAppVo {
 		this.appMovie = appMovie;
 	}
 
-	public String getAppid() {
+	public int getAppid() {
 		return appid;
 	}
 
-	public void setAppid(String appid) {
+	public void setAppid(int appid) {
 		this.appid = appid;
 	}
 
@@ -76,6 +76,6 @@ public class SteamAppVo {
 		return "SteamAppVo [appid=" + appid + ", name=" + name + ", description=" + description + ", imgPath=" + imgPath
 				+ ", appPrice=" + appPrice + ", appMovie=" + appMovie + "]";
 	}
-
+	
 	
 }

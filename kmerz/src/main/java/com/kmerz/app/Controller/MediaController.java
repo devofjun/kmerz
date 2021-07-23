@@ -23,7 +23,12 @@ public class MediaController {
 		if(searchType.equals("searchName")) {
 			list = SteamUtil.appSearch(searchWord);
 		} else if(searchType.equals("searchId")) {
-			list.add(searchWord);
+			try {
+				Integer.parseInt(searchWord);
+				list.add(searchWord);
+			} catch(Exception e) {
+				return null;
+			}
 		}
 		List<SteamAppVo> appList = SteamUtil.getAppdetails(list);
 		return appList;
