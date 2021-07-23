@@ -1,94 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%@ page session="false"%> --%>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver49">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver58">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v11">
-<link rel="stylesheet" href="/resources/css/header.css?">
+<link rel="stylesheet" href="/resources/css/header.css?ver4">
 <link rel="stylesheet" href="/resources/css/font.css?">
 <link rel="stylesheet" href="/resources/css/margin.css?">
 <link rel="stylesheet" href="/resources/css/slider.css?3">
 <link rel="stylesheet" href="/resources/css/icon.css?3">
-<link rel="stylesheet" href="/resources/css/transform.css?4">
-<link
-	href="https://store.akamai.steamstatic.com/public/css/promo/summer2021_sale.css?v=r8ONinfHtGU6&l=koreana"
-	rel="stylesheet" type="text/css">
-<script type="module"
-	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule
-	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-	<script src="/resources/script/MainPage.js?ver4"></script>
+<link rel="stylesheet" href="/resources/css/transform.css?5">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/resources/script/MainPage.js?ver31">
+
+</script>
 </head>
 
 <body>
-<%@ include file="../include/modal.jsp"%>
-<script>
-var modal = document.getElementById("myModal");
-console.log(modal);
-function openModal() {
-  modal.style.display = "block";
-}
-function closeModal() {
-  modal.style.display = "none";
-}
-window.onclick = function(event) {
-	  if (event.target == modal) {
-	    modal.style.display = "none";
-	  }
-}
-$(document).ready(function(){
-	console.log("test:${loginVo}");
-});
-</script>
-	<header>
-		<a href="/" class="logo">LOGO</a>
-		<div class="toggle"></div>
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Product</a></li>
-			<li><a href="#">Contact</a></li>
-			<li><a href="/c/createForm">Community</a></li>
-			<li><a href="/c/createCategoryForm">Category</a></li>
-		</ul>
-	</header>
+<div class="modal-section">
+
+</div>
+	<!-- 커뮤니티 상단 메뉴바 -->
+	<%@ include file="../include/community_top_menu_bar.jsp"%>
 	<div class="communitybanner">
 		<img src="/resources/images/background_Setting.png" />
 	</div>
 	<section class="postSection">
 		<div class="posts">
-			<div class="lSidebar">
-				<div class="communityList border sticky">
-					<div class="commHeader hr">
-					<a><img src="/resources/images/starcraft_small.jpg"><span>카테고리 리스트</span></a></div>
-					<ul>
-					<c:forEach var="CategoryVo" items="${categoryList}">
-						<li><a href="#"><span>${CategoryVo.category_name}</span></a></li>
-					</c:forEach>
-					</ul>
-				</div>
-			</div>
+			<!-- 왼쪽 사이드 바 -->
+			<%@ include file="../include/community_lSidebar.jsp"%>
 			<div class="postList">
-				<div class="sticky">
-					<div class="newPostBar border">
-						<div class="inputSection">
-							<div class="PostingTitleDiv">
-								<input class="PostingTitle" type="text" placeholder="Title...">
-							</div> 
-							<input class="PostingContent" type="text" placeholder="Post Content...">
-						</div>
+				<div class="sticky border">
+					<!-- 게시글 정렬 sticky bar -->
+					<div>
+						<%@ include file="../include/sort_bar.jsp"%>
+					</div>
+					<!-- 게시글 작성 sticky bar  -->
+					<div>
+						<%@ include file="../include/posting_bar.jsp"%>
 					</div>
 				</div>
-				
-				<!-- 포스트 DEFAULT 시작 -->
-					<%@ include file="../include/community_post.jsp" %>
-				<!-- 포스트 DEFAULT 끝 -->
+
+
+				<!-- 게시글 양식 -->
+				<%@ include file="../include/community_post.jsp"%>
 			</div>
+			<!-- 오른쪽 사이드 바 -->
 			<%@ include file="../include/rSidebar.jsp"%>
 		</div>
 	</section>

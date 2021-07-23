@@ -97,27 +97,42 @@ public class MemberController {
 		return "member/userInfo";
 	}
 	
-	// 회원비밀번호 변경 폼 이동
+	// 회원비밀번호 변경 페이지
 	@RequestMapping(value = "/userPasswordChangeForm", method = RequestMethod.GET)
 	public String userPasswordChangeForm() {
 		return "member/userPasswordChangeForm";
 	}
 	
-	// 회원 프로필 사진 변경 폼 이동
+	// 회원 프로필 사진 변경 페이지
 	@RequestMapping(value = "/userProfileImagesChangeForm", method = RequestMethod.GET)
 	public String userProfileImagesChangeForm() {
 		return "member/userProfileImagesChangeForm";
 	}
 	
-	// 비밀번호 찾기 폼 이동
+	// 비밀번호 찾기 페이지
 	@RequestMapping(value = "/findPasswordForm", method = RequestMethod.GET)
 	public String findPasswordForm() {
 		return "member/findPasswordForm";
 	}
 	
-	// 비밀번호 변경 폼 이동
+	// 회원 탈퇴 페이지
 	@RequestMapping(value = "/userSecessionForm", method = RequestMethod.GET)
 	public String userSecessionForm() {
 		return "member/userSecessionForm";
+	}
+	
+	// 유저 닉네임 변경 가능 여부 체크(사용가능 여부)
+	@RequestMapping(value = "/userNameCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String userNameCheck(String user_name) {
+		System.out.println("user_name: " + user_name);
+		int count = memberService.getUserNameCheckResult(user_name);
+		String userNameCheckResult = "";
+		if(count == 0) {
+			userNameCheckResult = "Available";
+		} else if(count == 1) {
+			userNameCheckResult = "unAvailable";
+		}
+		return userNameCheckResult;
 	}
 }

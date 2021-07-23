@@ -1,17 +1,29 @@
 package com.kmerz.app.Controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kmerz.app.util.MyFileUploadUtil;
 import com.kmerz.app.util.SteamUtil;
 
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+
 @Controller
-@RequestMapping(value="/media")
+@RequestMapping(value = "/media")
 public class MediaController {
-	
 	
 	// 스팀전체 앱 JSON 파일 다운로드
 	@ResponseBody

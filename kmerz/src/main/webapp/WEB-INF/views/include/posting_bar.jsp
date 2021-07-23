@@ -18,9 +18,9 @@
 			<li><img class="icon-color"
 				src="/resources/images/icons/menu_black_24dp.svg"><span>POST
 					TYPE</span></li>
-			<li><img class="icon-color"
+			<li><a href="/posting"><img class="icon-color"
 				src="/resources/images/icons/web_asset_black_24dp.svg"><span>POSTING
-					DETAIL</span></li>
+					DETAIL</span></a></li>
 			<li><img class="icon-color"
 				src="/resources/images/icons/check_circle_outline_black_24dp.svg"><span>POST</span></li>
 		</ul>
