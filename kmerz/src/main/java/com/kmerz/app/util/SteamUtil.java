@@ -129,7 +129,8 @@ public class SteamUtil {
 						} catch(Exception e) {
 							System.out.println("영상 없음");
 						}
-						appList.add(new SteamAppVo(appids.get(i), name, description, imgPath, appPrice, appMovie));
+						
+						appList.add(new SteamAppVo(Integer.parseInt(appids.get(i)), name, description, imgPath, appPrice, appMovie));
 					} else {
 						System.out.println("게임 아님");
 					}
