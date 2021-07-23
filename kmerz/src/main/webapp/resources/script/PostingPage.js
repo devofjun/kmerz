@@ -10,10 +10,11 @@ function posting(){
 function upload(file){
 		var data = new FormData();
 		data.append("file", file);
+		data.append("community_id", community_id);
+		data.append("category_no", category_no);
+		data.append("post_title", post_title);
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "media/upload_media");
-		xhr.onload = function () {
- 	 };
 		xhr.send(data);
 }
 function openFILE_INSERT_Modal() {
