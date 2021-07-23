@@ -1,6 +1,8 @@
 package com.kmerz.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,17 +12,17 @@ import org.springframework.stereotype.Repository;
 import com.kmerz.app.vo.PostsVo;
 
 @Repository
-public class PostDaoImpl implements PostDao{
-	
+public class PostDaoImpl implements PostDao {
+
 	private static final String NAMESPACE = "com.kmerz.app.posts.";
-	
+
 	@Inject
 	SqlSession session;
-	
+
 	@Override
 	public List<PostsVo> selectAllPosts() {
 		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectAllPosts");
-		//System.out.println(PostsList);
+		// System.out.println(PostsList);
 		return PostsList;
 	}
 
@@ -38,9 +40,18 @@ public class PostDaoImpl implements PostDao{
 	}
 
 	@Override
+	public List<PostsVo> selectCategoryPostList(String community_id, int category_no) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("community_id", community_id);
+		map.put("category_no", category_no);
+		List<PostsVo> list = session.selectList(NAMESPACE + "selectCategoryPostList", map);
+		return list;
+	}
+
+	@Override
 	public int selectUserPostCount(String user_name) {
 		int count = session.selectOne(NAMESPACE + "selectUserPostCount", user_name);
 		return count;
 	}
-	
+
 }

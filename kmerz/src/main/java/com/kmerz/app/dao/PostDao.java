@@ -8,5 +8,6 @@ public interface PostDao {
 	public List<PostsVo> selectAllPosts();
 	public PostsVo selectPost(int post_no);
 	public List<PostsVo> selectCommunityPostList(String community_id);
+	public List<PostsVo> selectCategoryPostList(String community_id, int category_no);
 	public int selectUserPostCount(String user_name);
 }
