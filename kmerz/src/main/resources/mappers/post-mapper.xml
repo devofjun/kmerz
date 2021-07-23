@@ -19,11 +19,12 @@
 </select>
 
 <!-- 카테고리 선택시 나오는 포스트 -->
-<select id="selectCategoryPostList">
+<select id="selectCategoryPostList" resultType="PostsVo">
 	select * from tbl_posts
 	where community_id = #{community_id}
 	and category_no = #{category_no}
 </select>
+
 
 <insert id="postingDetail">
 	insert into tbl_posts values(
@@ -40,4 +41,10 @@
 	
 	)
 </insert>
+
+<!-- 로그인 유저가 작성한 개시글 갯수 구하기 -->
+<select id="selectUserPostCount" resultType="int">
+	select count(*) from tbl_posts where user_name = #{user_name}
+</select>
+
 </mapper>

@@ -33,8 +33,21 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
+
 	public void posting(PostsVo vo) {
 		postdao.posting(vo);
+	}
+
+	public List<PostsVo> getCategoryPostList(String community_id, int category_no) {
+		List<PostsVo> list = postdao.selectCategoryPostList(community_id, category_no);
+		return list;
+	}
+	
+	@Override
+	public int getUserPostCount(String user_name) {
+		int count = postdao.selectUserPostCount(user_name);
+		return count;
+
 	}
 
 }

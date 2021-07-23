@@ -17,5 +17,10 @@ public class CommentServiceImpl implements CommentService {
 		List<CommentVo> list = CommentDao.selectCommentOnPost(post_no);
 		return list;
 	}
+	@Override
+	public int getUserCommentCount(String user_name) {
+		int count = CommentDao.selectuserCommentCount(user_name);
+		return count;
+	}
 
 }

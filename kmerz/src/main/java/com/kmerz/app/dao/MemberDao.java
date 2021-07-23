@@ -9,4 +9,5 @@ public interface MemberDao {
 	public List<MemberVo> selectAll();
 	public MemberVo selectUser(String user_id, String user_pw);
 	public MemberVo selectID(String user_id);
+	public int selectUserCount(String user_name);
 }
