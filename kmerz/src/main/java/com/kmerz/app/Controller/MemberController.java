@@ -120,4 +120,19 @@ public class MemberController {
 	public String userSecessionForm() {
 		return "member/userSecessionForm";
 	}
+	
+	// 유저 닉네임 변경 가능 여부 체크(사용가능 여부)
+	@RequestMapping(value = "/userNameCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String userNameCheck(String user_name) {
+		System.out.println("user_name: " + user_name);
+		int count = memberService.getUserNameCheckResult(user_name);
+		String userNameCheckResult = "";
+		if(count == 0) {
+			userNameCheckResult = "Available";
+		} else if(count == 1) {
+			userNameCheckResult = "unAvailable";
+		}
+		return userNameCheckResult;
+	}
 }
