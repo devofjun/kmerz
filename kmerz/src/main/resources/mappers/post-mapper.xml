@@ -25,4 +25,19 @@
 	and category_no = #{category_no}
 </select>
 
+<insert id="postingDetail">
+	insert into tbl_posts values(
+	seq_post_no.nextval,
+	#{user_name},
+	#{community_id},
+	#{category_no},
+	#{post_title},
+	#{post_content_file},
+	0,
+	0,
+	sysdate,
+	'accept'
+	
+	)
+</insert>
 </mapper>

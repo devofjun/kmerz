@@ -32,4 +32,9 @@ public class PostServiceImpl implements PostService{
 		return list;
 	}
 
+	@Override
+	public void posting(PostsVo vo) {
+		postdao.posting(vo);
+	}
+
 }

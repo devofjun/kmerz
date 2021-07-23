@@ -36,5 +36,10 @@ public class PostDaoImpl implements PostDao{
 		List<PostsVo> list = session.selectList(NAMESPACE + "selectCommunityPostList", community_id);
 		return list;
 	}
+
+	@Override
+	public void posting(PostsVo vo) {
+		session.insert(NAMESPACE + vo);
+	}
 	
 }

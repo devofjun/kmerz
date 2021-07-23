@@ -8,4 +8,5 @@ public interface PostService {
 	public List<PostsVo> selectAllPosts();
 	public PostsVo selectPost(int post_no);
 	public List<PostsVo> getCommunityPostList(String community_id);
+	public void posting(PostsVo vo);
 }
