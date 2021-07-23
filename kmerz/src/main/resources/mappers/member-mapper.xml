@@ -22,4 +22,11 @@
 	select * from tbl_member where user_id = #{user_id} and user_pw = #{user_pw}
 </select>
 
+<!-- 닉네임 사용가능 여부 체크 -->
+<select id="selectUserCount" resultType="int">
+	select count(*) from tbl_member
+	where user_name = #{user_name}
+	and user_status = #{user_status}
+</select>
+
 </mapper>

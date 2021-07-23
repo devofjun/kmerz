@@ -49,4 +49,8 @@ public class MediaController {
 		}
 		return "include/upload_media";
 	}
+	@RequestMapping(value="/images")
+	public String images() {
+		return "D:\\upload\\images\\battlefield 2042.jpg";
+	}
 }
