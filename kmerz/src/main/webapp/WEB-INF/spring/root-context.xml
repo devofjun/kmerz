@@ -36,7 +36,10 @@
 
 	<!-- @Transactional 가능 -->
 	<tx:annotation-driven />
-
+	<!-- 파일 업로두 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="2000000" />
+    </bean>
 	<!-- setAutoCommit, commit, rollback -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
