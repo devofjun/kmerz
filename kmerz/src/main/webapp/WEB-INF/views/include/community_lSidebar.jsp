@@ -8,7 +8,7 @@
 		</div>
 		<ul>
 			<c:forEach var="CategoryVo" items="${categoryList}">
-				<li><a href="/c/${CategoryVo.community_id}/${CategoryVo.category_no}"><span>${CategoryVo.category_name}</span></a></li>
+				<li><a href="#"><span>${CategoryVo.category_name}</span></a></li>
 			</c:forEach>
 		</ul>
 	</div>
