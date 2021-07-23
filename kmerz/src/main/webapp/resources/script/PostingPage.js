@@ -15,8 +15,6 @@ function upload(file){
 		data.append("post_title", post_title);
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "media/upload_media");
-		xhr.onload = function () {
- 	 };
 		xhr.send(data);
 }
 function openFILE_INSERT_Modal() {
