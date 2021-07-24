@@ -7,6 +7,7 @@
 <insert id="insertSteamApp">
 	insert into tbl_steamapp values(
 		#{app_id},
+		#{app_type},
 		#{app_name},
 		#{app_description, jdbcType=VARCHAR},
 		#{app_header, jdbcType=VARCHAR},
@@ -15,5 +16,10 @@
 		#{app_background, jdbcType=VARCHAR}
 	)
 </insert>
+
+<select id="selectSteamApp" resultType="SteamAppVo">
+	select * from tbl_steamapp
+	where app_id = #{app_id}
+</select>
 
 </mapper>

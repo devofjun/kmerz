@@ -179,8 +179,12 @@ insert into tbl_reply values(
 -- 테스트 데이터 삽입(스팀 앱 테이블)
 ----------------------------------------------------
 
-select * from tbl_steamapp;
+select * from tbl_steamapp
+where app_id = 245850;
 
+update tbl_steamapp set
+    app_type = 'empty'
+    where app_id = 245850;
 
 --------------------
 -- 테스트 데이터 삽입 끝

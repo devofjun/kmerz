@@ -124,7 +124,7 @@ $(document).ready(function() {
 				$("#searchingSpinner").hide();
 			},
 			success:function(rData){
-				//console.log(rData);
+				console.log(rData);
 				// 검색 결과였던 카드들을 지워줘야함.
 				//console.log($(".appCard").length);
 				var appCardFirst = $(".appCard:first").clone();

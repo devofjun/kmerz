@@ -19,7 +19,7 @@ import com.kmerz.app.vo.SteamAppVo;
 
 public class SteamUtil {
 
-	// 스팀앱 리스트 가져와서 검색
+	// 스팀앱 전체 리스트 가져와서 검색
 	public static List<String> appSearch(String schWord) {
 		String url = "http://api.steampowered.com/ISteamApps/GetAppList/v0002/";
 		Map<String, Object> parameter = new HashMap<>();
@@ -67,8 +67,76 @@ public class SteamUtil {
 		*/
 		return idList;
 	}
-
+	
 	// 스팀앱 디테일에서 필요한 부분 가져오기
+	public static SteamAppVo getAppdetail(String appid) {
+		final String url = "https://store.steampowered.com/api/appdetails";
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("l", "koreana");
+		parameter.put("appids", appid);
+		// http 요청 시작
+		String html = getRequest(url, HttpMethod.GET, parameter);
+
+		JSONObject jsonObj = new JSONObject(html);
+
+		SteamAppVo appVo = null;
+		try {
+			String type = null;
+			String name = null;
+			String description = null;
+			String imgPath = null;
+			String appPrice = null;
+			String appMovie = null;
+			String background = null;
+
+			boolean success = jsonObj.getJSONObject(appid).getBoolean("success");
+			if (success) {
+				// 데이터가 있을때(스토어 등록된 앱일때)
+				type = jsonObj.getJSONObject(appid).getJSONObject("data").getString("type");
+				name = jsonObj.getJSONObject(appid).getJSONObject("data").getString("name");
+				try{
+					description = jsonObj.getJSONObject(appid).getJSONObject("data").getString("short_description");
+				} catch(Exception e) {
+					System.out.println("설명없음");
+				}
+				try{
+					imgPath = jsonObj.getJSONObject(appid).getJSONObject("data").getString("header_image");
+				} catch(Exception e) {
+					System.out.println("이미지 없음");
+				}
+				try {
+					appPrice = jsonObj.getJSONObject(appid).getJSONObject("data").getJSONObject("price_overview")
+							.getString("final_formatted");
+				} catch (Exception e) {
+					System.out.println("무료이거나 판매중이 아님");
+				}
+				try {
+					appMovie = jsonObj.getJSONObject(appid).getJSONObject("data").getJSONArray("movies")
+							.optJSONObject(1).getJSONObject("webm").getString("480");
+				} catch (Exception e) {
+					System.out.println("영상 없음");
+				}
+				try {
+					background = jsonObj.getJSONObject(appid).getJSONObject("data").getString("background");
+				} catch (Exception e) {
+					System.out.println("배경이미지 없음");
+				}
+				appVo = new SteamAppVo(Integer.parseInt(appid), type, name, description, imgPath, appPrice, appMovie,
+						background);
+			} else {
+				appVo = new SteamAppVo(Integer.parseInt(appid), "empty", "empty", null, null, null, null, null);
+				System.out.println("스토어에 등록되지 않음");
+			}
+		} catch (Exception e) {
+			System.out.println("데이터 셋이 맞지 않음");
+		}
+		System.out.println(appVo);
+		return appVo;
+	}
+	
+	
+
+	// (여러개)스팀앱 디테일에서 필요한 부분 가져오기
 	public static List<SteamAppVo> getAppdetails(List<String> appids) {
 		final String url = "https://store.steampowered.com/api/appdetails";
 		final int appsNum = appids.size();
@@ -97,50 +165,43 @@ public class SteamUtil {
 						.getBoolean("success");
 				if(success) {
 					// 데이터가 있을때(스토어 등록된 앱일때)
-					type = jsonObj[i].getJSONObject(appids.get(i))
-							.getJSONObject("data")
-							.getString("type");
-					if(type.equals("game")) {
-						// 타입이 게임일때만 데이터를 가져온다.
-						name = jsonObj[i].getJSONObject(appids.get(i))
-								.getJSONObject("data")
-								.getString("name");
-						description = jsonObj[i].getJSONObject(appids.get(i))
-								.getJSONObject("data")
+					type = jsonObj[i].getJSONObject(appids.get(i)).getJSONObject("data").getString("type");
+
+					// 타입이 게임일때만 데이터를 가져온다.
+					name = jsonObj[i].getJSONObject(appids.get(i)).getJSONObject("data").getString("name");
+					try {
+						description = jsonObj[i].getJSONObject(appids.get(i)).getJSONObject("data")
 								.getString("short_description");
-						imgPath = jsonObj[i].getJSONObject(appids.get(i))
-								.getJSONObject("data")
-								.getString("header_image");
-						try {
-						appPrice = jsonObj[i].getJSONObject(appids.get(i))
-								.getJSONObject("data")
-								.getJSONObject("price_overview")
-								.getString("final_formatted");
-						} catch(Exception e) {
-							System.out.println("무료이거나 판매중이 아님");
-						}
-						try {
-						appMovie = jsonObj[i].getJSONObject(appids.get(i))
-								.getJSONObject("data")
-								.getJSONArray("movies")
-								.optJSONObject(1)
-								.getJSONObject("webm")
-								.getString("480");
-						} catch(Exception e) {
-							System.out.println("영상 없음");
-						}
-						try {
-						background = jsonObj[i].getJSONObject(appids.get(i))
-								.getJSONObject("data")
-								.getString("background");
-						} catch(Exception e) {
-							System.out.println("배경이미지 없음");
-						}
-						appList.add(new SteamAppVo(Integer.parseInt(appids.get(i)), name, description, imgPath, appPrice, appMovie, background));
-					} else {
-						System.out.println("게임 아님");
+					} catch(Exception e) {
+						System.out.println("설명없음");
 					}
+					try {
+						imgPath = jsonObj[i].getJSONObject(appids.get(i)).getJSONObject("data").getString("header_image");
+					} catch(Exception e) {
+						System.out.println("이미지 없음");
+					}
+					try {
+						appPrice = jsonObj[i].getJSONObject(appids.get(i)).getJSONObject("data")
+								.getJSONObject("price_overview").getString("final_formatted");
+					} catch (Exception e) {
+						System.out.println("무료이거나 판매중이 아님");
+					}
+					try {
+						appMovie = jsonObj[i].getJSONObject(appids.get(i)).getJSONObject("data").getJSONArray("movies")
+								.optJSONObject(1).getJSONObject("webm").getString("480");
+					} catch (Exception e) {
+						System.out.println("영상 없음");
+					}
+					try {
+						background = jsonObj[i].getJSONObject(appids.get(i)).getJSONObject("data")
+								.getString("background");
+					} catch (Exception e) {
+						System.out.println("배경이미지 없음");
+					}
+					appList.add(new SteamAppVo(Integer.parseInt(appids.get(i)), type, name, description, imgPath,
+							appPrice, appMovie, background));
 				} else {
+					appList.add(new SteamAppVo(Integer.parseInt(appids.get(i)), null, "empty", null, null, null, null, null));
 					System.out.println("스토어에 등록되지 않음");
 				}
 			} catch(Exception e) {
