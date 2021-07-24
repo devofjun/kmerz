@@ -15,5 +15,8 @@
 	)
 </insert>
 
+<select id="selectAll" resultType="BannerVo">
+	select * from tbl_banner
+</select>
 
 </mapper>

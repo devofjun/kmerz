@@ -16,6 +16,7 @@
 </style>
 <script>
 $(document).ready(function() {
+	console.log("${bannerAppList}");
 	// steam app list 담을 변수
 	var steamJson
 	
@@ -67,19 +68,26 @@ $(document).ready(function() {
 		$("#cardBannerSetting").hide();
 		$("#cardLeftSetting").hide();
 		$("#cardRightSetting").hide();
+		$("#preBanner").hide();
+		$("#preLeft").hide();
+		$("#preRight").hide();
 		switch(setting){
 		case "banner":
 			// 배너설정 영역 클릭시
 			// 미리보기 영역
-			
+			$("#preBanner").show();
 			// 설정 선택 영역
 			$("#cardBannerSetting").show();
 			break;
 		case "left":
+			// 미리보기 영역
+			$("#preLeft").show();
 			// 왼쪽 사이드바 설정 영역 클릭시 
 			$("#cardLeftSetting").show();
 			break;
 		case "right":
+			// 미리보기 영역
+			$("#preRight").show();
 			// 오른쪽 사이드바 설정 영역 클릭시
 			$("#cardRightSetting").show();
 			break;
@@ -127,23 +135,24 @@ $(document).ready(function() {
 				console.log(rData);
 				// 검색 결과였던 카드들을 지워줘야함.
 				//console.log($(".appCard").length);
-				var appCardFirst = $(".appCard:first").clone();
 				$(".appCards").empty();
-				$(".appCards").append(appCardFirst);
 				$.each(rData, function(){
-					var cloneDivCard = $(".appCard:first").clone();
+					
+					var cloneDivCard = $("#hiddenAppCard").clone();
 					var card = cloneDivCard.find(".card");
 					var cardInfo = card.find(".appInfo");
 					
-					card.find("img").attr("src",this.imgPath);
-					card.find(".card-body > p").text(this.name);
+					card.find("img").attr("src",this.app_header);
+					card.find(".card-body > p").text(this.app_name);
 					
-					cardInfo.find("form > input[name='appid']").val(this.appid);
-					cardInfo.find("form > input[name='name']").val(this.name);
-					cardInfo.find("form > input[name='description']").val(this.description);
-					cardInfo.find("form > input[name='imgPath']").val(this.imgPath);
-					cardInfo.find("form > input[name='appPrice']").val(this.appPrice);
-					cardInfo.find("form > input[name='appMovie']").val(this.appMovie);
+					cardInfo.find("form > input[name='app_id']").val(this.app_id);
+					cardInfo.find("form > input[name='app_type']").val(this.app_type);
+					cardInfo.find("form > input[name='app_name']").val(this.app_name);
+					cardInfo.find("form > input[name='app_description']").val(this.app_description);
+					cardInfo.find("form > input[name='app_header']").val(this.app_header);
+					cardInfo.find("form > input[name='app_price']").val(this.app_price);
+					cardInfo.find("form > input[name='app_movie']").val(this.app_movie);
+					cardInfo.find("form > input[name='app_background']").val(this.app_background);
 					
 					$(".appCards").append(cloneDivCard);
 					cloneDivCard.show();
@@ -158,28 +167,33 @@ $(document).ready(function() {
 	
 	// 배너 스팀 게임 선택
 	$(".appCards").on("click", ".card", function(){
-		var cardAppid = $(this).find(".appInfo > form > input[name='appid']").val();
+		var cardAppid = $(this).find(".appInfo > form > input[name='app_id']").val();
 		var cardAppInfo = $(this).find(".appInfo").clone();
 		//console.log(cardAppInfo.find("input[name='appid']").val());
 		
 		var count = 0;
 		var length = $(".selectApp").length;
 		for(var i=0; i<length; i++){
-			if(cardAppid == $(".selectApp").eq(i).find("input[name='appid']").val()){
+			if(cardAppid == $(".selectApp").eq(i).find("input[name='app_id']").val()){
 				count++;
 				$(".selectApp").eq(i).remove();
 			}
 		}
+		
+		// 선택 리스트에 들어갈때
 		if(count <= 0){
-			var cloneBadge = $("#selectApps > .selectApp:first").clone();
+			var cloneBadge = $("#hiddenSelectApp").clone();
 			cloneBadge.find(".appInfo").remove();
 			cloneBadge.append(cardAppInfo);
 			
-			var cardAppName = cloneBadge.find("input[name='name']").val();
+			var cardAppName = cloneBadge.find("input[name='app_name']").val();
 			cloneBadge.find("span:first").text(cardAppName);
 			
 			$("#selectApps").append(cloneBadge);
 			cloneBadge.show();
+			
+			// 미리보기 새로 그리기
+			
 		}
 	});
 	
@@ -188,24 +202,12 @@ $(document).ready(function() {
 		var appid = $(this).prev().attr("data-appid");
 		$(this).parent().remove();
 		
-		var count = $(".appCard").length;
-		for(var i=0; i<count; i++){
-			var cardAppid = $(".appInfo > form > input[name='appid']").val();
-			if(appid == cardAppid){
-				$(".appCard").eq(i).find(".card").attr("data-selected","false");
-				break;
-			}
-		}
+		// 미리보기 새로 그리기
+		
 	});
 	
-	// 선택 취소 하면 db banner 에서 삭제함
-	function bannerSelectCancel(appid){
-		var url = "";
-		var sendData = {
-				"appid" : appid
-		};
-		$.get();
-	}
+	// 적용하기도 구현해야함
+	
 });
 </script>
 
@@ -236,7 +238,7 @@ $(document).ready(function() {
 					<div class="container h-100">
 						<div class="row">
 							<div
-								class="sample mouse-border-primary row bg-light border border-1 rounded-1 p-3 m-1 v-m-parent"
+								class="sample row w-100 mouse-border-primary bg-primary text-light border border-1 rounded-1 p-3 m-1 v-m-parent"
 								data-sample="banner">
 								<span class="v-m-child">Banner</span>
 							</div>
@@ -262,7 +264,82 @@ $(document).ready(function() {
 		<div class="col-xl-8">
 			<div class="card shadow">
 				<div id="previewTitle" class="card-header text-center">배너 미리보기</div>
-					<div style="background-color:red; height:300px">
+					<!-- 배너 미리보기 -->
+				<div id="preBanner" class="w-100"
+					style="background-color: gray; height: 300px">
+					<div id="carouselExampleControls" class="carousel slide h-100"
+						data-bs-ride="carousel" data-bs-interval="false">
+						<div class="carousel-inner h-100">
+							<c:forEach var="bannerApp" items="${bannerAppList }" varStatus="status">
+							<div class="carousel-item h-100 <c:if test='${status.index == 0}'>active </c:if>"
+								style="background-image:url(${bannerApp.app_background })">
+								<div class="row mt-4">
+									<div class="col-6">
+										<video class="w-100" autoplay muted>
+											<source src="${bannerApp.app_movie }" type="video/webm">
+										</video>
+									</div>
+									<div class="col-3">
+										<div class="h-50">
+											<img class="d-block w-100" src="${bannerApp.app_header }" alt="header">
+										</div>
+										<div class="h-50 bg-dark text-light">
+											<p>${bannerApp.app_name }</p>
+											<p>${bannerApp.app_price }</p>
+										</div>
+									</div>
+									<div class="col-3 bg-dark text-light">
+										${bannerApp.app_description }
+									</div>
+								</div>
+							</div>
+							</c:forEach>
+						</div>
+						<div style="display:none">
+							<!-- 미리보기 clone 되는곳 -->
+							<div id="hiddenPreview" class="carousel-item active h-100"
+								style="background-image:url()">
+								<div ></div>
+								<div class="row mt-4">
+									<div class="col-6">
+										<video class="w-100" autoplay muted>
+											<source src="" type="video/webm">
+										</video>
+									</div>
+									<div class="col-3">
+										<div class="h-50">
+											<img class="d-block w-100" src="" alt="header">
+										</div>
+										<div class="h-50 bg-dark text-light">
+											<p></p>
+											<p></p>
+										</div>
+									</div>
+									<div class="col-3 bg-dark text-light">
+									
+									</div>
+								</div>
+							</div>
+							<!-- 클론 끝 -->
+						</div>
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+				<!-- 왼쪽 사이드바 미리보기 -->
+					<div id="preLeft" style="background-color:blue; height:300px; display:none">
+					</div>
+					
+					<!-- 오른쪽 사이드바 미리보기 -->
+					<div id="preRight" style="background-color:red; height:300px; display:none">
 					</div>
 				<div id="previewContent" class="card-body"></div>
 			</div>
@@ -282,7 +359,7 @@ $(document).ready(function() {
 	</div>
 </div>
 <!-- 배너 게임 설정 카드 -->
-<div id="cardBannerSetting" class="container my-5" style="display:none">
+<div id="cardBannerSetting" class="container my-5">
 	<div class="row">
 		<div class="col">
 			
@@ -311,22 +388,45 @@ $(document).ready(function() {
 					
 					<!-- 선택한 게임 목록 -->
 					<div id="selectApps" class="row w-100" style="height: auto">
-						<div class="selectApp w-auto ms-3 my-1 badge rounded-pill bg-dark border border-1 border-dark" style="display:none">
+						<c:forEach var="bannerApp" items="${bannerAppList }">
+						<div class="selectApp w-auto ms-3 my-1 badge rounded-pill bg-dark border border-1 border-dark">
+							<span>${bannerApp.app_name }</span>
+							<span class="selectAppCancel cspointer ms-1">&#10005;</span>
+							<div class="appInfo"style="display:none">
+								<form>
+									<input type="hidden" name="app_id" value="${bannerApp.app_id }"/>
+									<input type="hidden" name="app_type" value="${bannerApp.app_type }"/>
+									<input type="hidden" name="app_name" value="${bannerApp.app_name}"/>
+									<input type="hidden" name="app_description" value="${bannerApp.app_description }"/>
+									<input type="hidden" name="app_header" value="${bannerApp.app_header }"/>
+									<input type="hidden" name="app_price" value="${bannerApp.app_price }"/>
+									<input type="hidden" name="app_movie" value="${bannerApp.app_movie }"/>
+									<input type="hidden" name="app_background" value="${bannerApp.app_background }"/>
+								</form>
+							</div>
+						</div>
+						</c:forEach>
+					</div>
+					<div style="display:none">
+						<!-- 선택 리스트 클론 -->
+						<div id="hiddenSelectApp" class="selectApp w-auto ms-3 my-1 badge rounded-pill bg-dark border border-1 border-dark">
 							<span></span>
 							<span class="selectAppCancel cspointer ms-1">&#10005;</span>
 							<div class="appInfo"style="display:none">
 								<form>
-									<input type="hidden" name="appid" value=""/>
-									<input type="hidden" name="name" value=""/>
-									<input type="hidden" name="description" value=""/>
-									<input type="hidden" name="imgPath" value=""/>
-									<input type="hidden" name="appPrice" value=""/>
-									<input type="hidden" name="appMovie" value=""/>
+									<input type="hidden" name="app_id" value=""/>
+									<input type="hidden" name="app_type" value=""/>
+									<input type="hidden" name="app_name" value=""/>
+									<input type="hidden" name="app_description" value=""/>
+									<input type="hidden" name="app_header" value=""/>
+									<input type="hidden" name="app_price" value=""/>
+									<input type="hidden" name="app_movie" value=""/>
+									<input type="hidden" name="app_background" value=""/>
 								</form>
 							</div>
-						</div>	
+						</div>
+						<!-- 클론 끝 -->
 					</div>
-					
 					<!-- 검색 로딩바 -->
 					<div id="searchingSpinner" class="row w-100 h-auto" style="display:none">
 						<div class="text-center mt-3">
@@ -338,25 +438,50 @@ $(document).ready(function() {
 					
 					<div class="appCards row w-100" style="height: auto">
 						<!-- 게임 검색 결과 카드 -->
-						<div class="appCard col-xl-3 col-lg-4 col-sm-6  text-center p-4" style="display:none">
+						<c:forEach var="bannerApp" items="${bannerAppList }">
+						<div class="appCard col-xl-3 col-lg-4 col-sm-6  text-center p-4">
 							<div class="card cspointer mouse-border-primary">
-								<img src="https://cdn.akamai.steamstatic.com/steam/apps/322330/header_alt_assets_23.jpg?t=1624553984" class="card-img-top" alt="">
+								<img src="${bannerApp.app_header }" class="card-img-top" alt="${bannerApp.app_id }">
 								<div class="card-body">
-									<p class="appname card-text text-dark">Don't Starve Together</p>
+									<p class="appname card-text text-dark">${bannerApp.app_name }</p>
 								</div>
 								<div class="appInfo"style="display:none">
 									<form>
-										<input type="hidden" name="appid" value=""/>
-										<input type="hidden" name="name" value=""/>
-										<input type="hidden" name="description" value=""/>
-										<input type="hidden" name="imgPath" value=""/>
-										<input type="hidden" name="appPrice" value=""/>
-										<input type="hidden" name="appMovie" value=""/>
+										<input type="hidden" name="app_id" value="${bannerApp.app_id }"/>
+										<input type="hidden" name="app_type" value="${bannerApp.app_type }"/>
+										<input type="hidden" name="app_name" value="${bannerApp.app_name}"/>
+										<input type="hidden" name="app_description" value="${bannerApp.app_description }"/>
+										<input type="hidden" name="app_header" value="${bannerApp.app_header }"/>
+										<input type="hidden" name="app_price" value="${bannerApp.app_price }"/>
+										<input type="hidden" name="app_movie" value="${bannerApp.app_movie }"/>
+										<input type="hidden" name="app_background" value="${bannerApp.app_background }"/>
 									</form>
 								</div>
 							</div>
 						</div>
-						
+						</c:forEach>
+					</div>
+					<div style="display:none">
+						<div id="hiddenAppCard" class="appCard col-xl-3 col-lg-4 col-sm-6  text-center p-4">
+							<div class="card cspointer mouse-border-primary">
+								<img src="" class="card-img-top" alt="">
+								<div class="card-body">
+									<p class="appname card-text text-dark"></p>
+								</div>
+								<div class="appInfo"style="display:none">
+									<form>
+										<input type="hidden" name="app_id" value=""/>
+										<input type="hidden" name="app_type" value=""/>
+										<input type="hidden" name="app_name" value=""/>
+										<input type="hidden" name="app_description" value=""/>
+										<input type="hidden" name="app_header" value=""/>
+										<input type="hidden" name="app_price" value=""/>
+										<input type="hidden" name="app_movie" value=""/>
+										<input type="hidden" name="app_background" value=""/>
+									</form>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

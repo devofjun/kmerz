@@ -144,7 +144,7 @@ start with 1;
 --==================================================
 -- 스팀 앱 테이블
 --==================================================
---drop table tbl_steamapp CASCADE CONSTRAINTS;
+drop table tbl_steamapp CASCADE CONSTRAINTS;
 create table tbl_steamapp(
     app_id number primary key,
     app_type varchar2(20) not null,
@@ -160,7 +160,7 @@ create table tbl_steamapp(
 --==================================================
 -- 배너 테이블
 --==================================================
---drop table tbl_banner cascade constraints;
+drop table tbl_banner cascade constraints;
 create table tbl_banner(
     banner_no number primary key,
     app_id number not null references tbl_steamapp(app_id)

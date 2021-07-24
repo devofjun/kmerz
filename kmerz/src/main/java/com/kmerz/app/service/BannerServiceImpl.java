@@ -25,4 +25,10 @@ public class BannerServiceImpl implements BannerService {
 		}
 	}
 
+	@Override
+	public List<BannerVo> getList() {
+		// TODO Auto-generated method stub
+		return bannerDao.selectAll();
+	}
+
 }

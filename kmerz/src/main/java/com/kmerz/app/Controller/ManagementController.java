@@ -1,16 +1,23 @@
 package com.kmerz.app.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmerz.app.service.AdminService;
+import com.kmerz.app.service.BannerService;
+import com.kmerz.app.service.SteamAppService;
 import com.kmerz.app.vo.AdminVo;
+import com.kmerz.app.vo.BannerVo;
+import com.kmerz.app.vo.SteamAppVo;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -18,6 +25,10 @@ public class ManagementController {
 
 	@Inject
 	AdminService adminService;
+	@Inject
+	BannerService bannerService;
+	@Inject
+	SteamAppService steamAppService;
 
 	// uri 간편화 admin 입력하면 로그인 페이지나 대시보드 페이지로 넘어감
 	@RequestMapping
@@ -88,9 +99,16 @@ public class ManagementController {
 		return "management/CustomersPage";
 	}
 
-	// 고객 주문 페이지
+	// 컨텐츠 관리 페이지
 	@RequestMapping(value = "/contents", method = RequestMethod.GET)
-	public String contents() throws Exception {
+	public String contents(Model model) throws Exception {
+		List<BannerVo> bannerList = bannerService.getList();
+		List<SteamAppVo> appList = new ArrayList<SteamAppVo>();
+		for(BannerVo vo : bannerList) {
+			appList.add(steamAppService.getSteamAppID(vo.getApp_id()));
+		}
+		model.addAttribute("bannerAppList", appList);
+		
 		return "management/ContentsPage";
 	}
 

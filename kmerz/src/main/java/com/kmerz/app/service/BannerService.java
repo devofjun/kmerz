@@ -6,4 +6,5 @@ import com.kmerz.app.vo.BannerVo;
 
 public interface BannerService {
 	public void initBanner(List<BannerVo> list);
+	public List<BannerVo> getList();
 }

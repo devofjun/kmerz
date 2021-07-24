@@ -1,5 +1,7 @@
 package com.kmerz.app.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,6 +26,12 @@ public class BannerDaoImpl implements BannerDao {
 	@Override
 	public void insertBanner(BannerVo bannerVo) {
 		session.insert(NAMESPACE+"insertBanner", bannerVo);
+	}
+
+	@Override
+	public List<BannerVo> selectAll() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+"selectAll");
 	}
 
 }
