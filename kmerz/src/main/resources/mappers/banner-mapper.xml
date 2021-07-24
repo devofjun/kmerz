@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmerz.app.banner">
+
+<delete id="deleteAll">
+	delete from tbl_banner;
+</delete>
+
+<insert id="insertBanner">
+	insert into tbl_banner values(
+		#{banner_no},
+		#{app_id}
+	)
+</insert>
+
+<select id="selectAll" resultType="BannerVo">
+	select * from tbl_banner
+</select>
+
+</mapper>
