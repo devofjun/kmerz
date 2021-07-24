@@ -6,6 +6,13 @@
 .cspointer {
 	cursor:pointer;
 }
+.v-m-parent {
+	display:table;
+}
+.v-m-child {
+	display:table-cell;
+	vertical-align:middle;
+}
 </style>
 <script>
 $(document).ready(function() {
@@ -49,24 +56,23 @@ $(document).ready(function() {
 		$(this).removeClass("bg-light");
 		$(this).addClass("bg-primary");
 		$(this).addClass("text-white");
+		var setting = $(this).attr("data-sample");
 		
+		// 미리보기 영역 셋팅
 		var title = $(this).children('span').text();
 		$("#previewTitle").text(title+" 미리보기");
+		$("#previewContent").empty();
 		
-		var setting = $(this).attr("data-sample");
+		// 설정 선택 영역 셋팅
 		$("#cardBannerSetting").hide();
 		$("#cardLeftSetting").hide();
 		$("#cardRightSetting").hide();
 		switch(setting){
 		case "banner":
 			// 배너설정 영역 클릭시
-			// steam app list json 받아오기
-// 			$("#settingCardLoading").show();
-// 			$.getJSON('http://api.steampowered.com/IStoreService/GetAppList/v0001/?key=E7C4563CA09F3BB39360ECCEA67F68F8&include_dlc=false',function(json){
-// 				steamJson = json;
-// 				$("#settingCardLoading").hide();
-// 				$("#cardBannerSetting").show();
-// 			});
+			// 미리보기 영역
+			
+			// 설정 선택 영역
 			$("#cardBannerSetting").show();
 			break;
 		case "left":
@@ -120,10 +126,12 @@ $(document).ready(function() {
 			success:function(rData){
 				//console.log(rData);
 				// 검색 결과였던 카드들을 지워줘야함.
-				console.log($(".appCard").length);
+				//console.log($(".appCard").length);
+				var appCardFirst = $(".appCard:first").clone();
+				$(".appCards").empty();
+				$(".appCards").append(appCardFirst);
 				$.each(rData, function(){
 					var cloneDivCard = $(".appCard:first").clone();
-					console.log(cloneDivCard);
 					var card = cloneDivCard.find(".card");
 					var cardInfo = card.find(".appInfo");
 					
@@ -150,35 +158,28 @@ $(document).ready(function() {
 	
 	// 배너 스팀 게임 선택
 	$(".appCards").on("click", ".card", function(){
-		var isSelected = $(this).attr("data-selected");
-		var cardAppid = $(this).find(".appInfo > form > input:first").val();
-		var cardAppname = $(this).find(".appname").text();
+		var cardAppid = $(this).find(".appInfo > form > input[name='appid']").val();
+		var cardAppInfo = $(this).find(".appInfo").clone();
+		//console.log(cardAppInfo.find("input[name='appid']").val());
 		
-		
-		if(isSelected == "false"){
-			// 카드가 선택된적 없을때
-			$(this).attr("data-selected", "true");
-			
+		var count = 0;
+		var length = $(".selectApp").length;
+		for(var i=0; i<length; i++){
+			if(cardAppid == $(".selectApp").eq(i).find("input[name='appid']").val()){
+				count++;
+				$(".selectApp").eq(i).remove();
+			}
+		}
+		if(count <= 0){
 			var cloneBadge = $("#selectApps > .selectApp:first").clone();
-			var cloneSpan = cloneBadge.find("span:first");
+			cloneBadge.find(".appInfo").remove();
+			cloneBadge.append(cardAppInfo);
 			
-			cloneBadge.css("display", "inline");
-			cloneSpan.attr("data-appid", cardAppid);
-			cloneSpan.text(cardAppname);
+			var cardAppName = cloneBadge.find("input[name='name']").val();
+			cloneBadge.find("span:first").text(cardAppName);
 			
 			$("#selectApps").append(cloneBadge);
-		} else if(isSelected == "true"){
-			// 카드가 선택된적 있을때
-			$(this).attr("data-selected", "false");
-			// 선택된 카드의 동일한 appid를 가지고 있는 badge를 탐색하여 remove한다.
-			var count = $(".selectApp").length;
-			for(var i=0; i<count; i++){
-				var appid = $(".selectApp").eq(i).find("span:first").attr("data-appid");
-				if(appid == cardAppid){
-					$(".selectApp").eq(i).remove();
-					break;
-				}
-			}
+			cloneBadge.show();
 		}
 	});
 	
@@ -226,27 +227,31 @@ $(document).ready(function() {
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-4 text-center">
-			<div class="card shadow" style="border-color: #ffe69c;">
+		<div class="col-xl-4 text-center">
+			<div class="card shadow h-100" style="border-color: #ffe69c;">
 				<div class="card-header"
 					style="background-color: #ffe69c; border-color: #ffe69c">설정
 					영역</div>
 				<div class="card-body">
-					<div class="container">
-						<div
-							class="sample mouse-border-primary row h-25 bg-light border border-1 rounded-1 p-3 m-1"
-							data-sample="banner">
-							<span>Banner</span>
-						</div>
+					<div class="container h-100">
 						<div class="row">
-							<div class="sample mouse-border-primary col-3 bg-light border border-1 rounded-1 py-5"
-								data-sample="left">
-								<span>Left</span>
+							<div
+								class="sample mouse-border-primary row bg-light border border-1 rounded-1 p-3 m-1 v-m-parent"
+								data-sample="banner">
+								<span class="v-m-child">Banner</span>
 							</div>
-							<div class="col-6 py-5">게시물</div>
-							<div class="sample mouse-border-primary col-3 bg-light border border-1 rounded-1 py-5"
+						</div>
+						<div class="row h-75">
+							<div class="sample mouse-border-primary col-3 bg-light border border-1 rounded-1 v-m-parent"
+								data-sample="left">
+								<span class="v-m-child">Left</span>
+							</div>
+							<div class="col-6 v-m-parent">
+								<span class="v-m-child">게시물</span>
+							</div>
+							<div class="sample mouse-border-primary col-3 bg-light border border-1 rounded-1 v-m-parent"
 								data-sample="right">
-								<span>Right</span>
+								<span class="v-m-child">Right</span>
 							</div>
 						</div>
 					</div>
@@ -254,10 +259,12 @@ $(document).ready(function() {
 			</div>
 		</div>
 
-		<div class="col-lg-8">
-			<div class="card h-100 shadow">
+		<div class="col-xl-8">
+			<div class="card shadow">
 				<div id="previewTitle" class="card-header text-center">배너 미리보기</div>
-				<div class="card-body"></div>
+					<div style="background-color:red; height:300px">
+					</div>
+				<div id="previewContent" class="card-body"></div>
 			</div>
 		</div>
 	</div>
@@ -301,6 +308,25 @@ $(document).ready(function() {
 						</div>
 						
 					</div>
+					
+					<!-- 선택한 게임 목록 -->
+					<div id="selectApps" class="row w-100" style="height: auto">
+						<div class="selectApp w-auto ms-3 my-1 badge rounded-pill bg-dark border border-1 border-dark" style="display:none">
+							<span></span>
+							<span class="selectAppCancel cspointer ms-1">&#10005;</span>
+							<div class="appInfo"style="display:none">
+								<form>
+									<input type="hidden" name="appid" value=""/>
+									<input type="hidden" name="name" value=""/>
+									<input type="hidden" name="description" value=""/>
+									<input type="hidden" name="imgPath" value=""/>
+									<input type="hidden" name="appPrice" value=""/>
+									<input type="hidden" name="appMovie" value=""/>
+								</form>
+							</div>
+						</div>	
+					</div>
+					
 					<!-- 검색 로딩바 -->
 					<div id="searchingSpinner" class="row w-100 h-auto" style="display:none">
 						<div class="text-center mt-3">
@@ -309,18 +335,11 @@ $(document).ready(function() {
 							</div>
 						</div>
 					</div>
-					<!-- 선택한 게임 목록 -->
-					<div id="selectApps" class="row w-100" style="height: auto">
-						<div class="selectApp w-auto ms-3 my-1 badge rounded-pill bg-dark border border-1 border-dark" style="display:none">
-							<span data-appid=""></span>
-							<span class="selectAppCancel cspointer ms-1">&#10005;</span>
-						</div>
-						
-					</div>
+					
 					<div class="appCards row w-100" style="height: auto">
 						<!-- 게임 검색 결과 카드 -->
 						<div class="appCard col-xl-3 col-lg-4 col-sm-6  text-center p-4" style="display:none">
-							<div class="card cspointer mouse-border-primary" data-selected="false">
+							<div class="card cspointer mouse-border-primary">
 								<img src="https://cdn.akamai.steamstatic.com/steam/apps/322330/header_alt_assets_23.jpg?t=1624553984" class="card-img-top" alt="">
 								<div class="card-body">
 									<p class="appname card-text text-dark">Don't Starve Together</p>

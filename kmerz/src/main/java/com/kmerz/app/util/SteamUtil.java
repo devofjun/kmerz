@@ -91,7 +91,7 @@ public class SteamUtil {
 				String imgPath = null;
 				String appPrice = null;
 				String appMovie = null;
-				
+				String background = null;
 				
 				boolean success = jsonObj[i].getJSONObject(appids.get(i))
 						.getBoolean("success");
@@ -129,8 +129,14 @@ public class SteamUtil {
 						} catch(Exception e) {
 							System.out.println("영상 없음");
 						}
-						
-						appList.add(new SteamAppVo(Integer.parseInt(appids.get(i)), name, description, imgPath, appPrice, appMovie));
+						try {
+						background = jsonObj[i].getJSONObject(appids.get(i))
+								.getJSONObject("data")
+								.getString("background");
+						} catch(Exception e) {
+							System.out.println("배경이미지 없음");
+						}
+						appList.add(new SteamAppVo(Integer.parseInt(appids.get(i)), name, description, imgPath, appPrice, appMovie, background));
 					} else {
 						System.out.println("게임 아님");
 					}
@@ -197,7 +203,7 @@ public class SteamUtil {
 			
 			// 프로토콜의 반환 코드를 받을 수 있다. (200이면 정상이다.)
 			int code = connection.getResponseCode();
-			System.out.println("결과[getRequest]: " + code);
+			System.out.println("요청 결과[HTTP Code]: " + code);
 			// 스트림으로 반환 결과값을 받는다.
 			try (BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
 				String line;

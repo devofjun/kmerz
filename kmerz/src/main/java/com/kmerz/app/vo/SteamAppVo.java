@@ -1,81 +1,93 @@
 package com.kmerz.app.vo;
 
 public class SteamAppVo {
-	private int appid;
-	private String name;
-	private String description;
-	private String imgPath;
-	private String appPrice;
-	private String appMovie;
+	private int app_id;
+	private String app_name;
+	private String app_description;
+	private String app_header;
+	private String app_price;
+	private String app_movie;
+	private String app_background;
 	
 	public SteamAppVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public SteamAppVo(int appid, String name, String description, String imgPath, String appPrice, String appMovie) {
+	public SteamAppVo(int app_id, String app_name, String app_description, String app_header, String app_price,
+			String app_movie, String app_background) {
 		super();
-		this.appid = appid;
-		this.name = name;
-		this.description = description;
-		this.imgPath = imgPath;
-		this.appPrice = appPrice;
-		this.appMovie = appMovie;
+		this.app_id = app_id;
+		this.app_name = app_name;
+		this.app_description = app_description;
+		this.app_header = app_header;
+		this.app_price = app_price;
+		this.app_movie = app_movie;
+		this.app_background = app_background;
 	}
 
-	public int getAppid() {
-		return appid;
+	public int getApp_id() {
+		return app_id;
 	}
 
-	public void setAppid(int appid) {
-		this.appid = appid;
+	public void setApp_id(int app_id) {
+		this.app_id = app_id;
 	}
 
-	public String getName() {
-		return name;
+	public String getApp_name() {
+		return app_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setApp_name(String app_name) {
+		this.app_name = app_name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getApp_description() {
+		return app_description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setApp_description(String app_description) {
+		this.app_description = app_description;
 	}
 
-	public String getImgPath() {
-		return imgPath;
+	public String getApp_header() {
+		return app_header;
 	}
 
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+	public void setApp_header(String app_header) {
+		this.app_header = app_header;
 	}
 
-	public String getAppPrice() {
-		return appPrice;
+	public String getApp_price() {
+		return app_price;
 	}
 
-	public void setAppPrice(String appPrice) {
-		this.appPrice = appPrice;
+	public void setApp_price(String app_price) {
+		this.app_price = app_price;
 	}
 
-	public String getAppMovie() {
-		return appMovie;
+	public String getApp_movie() {
+		return app_movie;
 	}
 
-	public void setAppMovie(String appMovie) {
-		this.appMovie = appMovie;
+	public void setApp_movie(String app_movie) {
+		this.app_movie = app_movie;
+	}
+
+	public String getApp_background() {
+		return app_background;
+	}
+
+	public void setApp_background(String app_background) {
+		this.app_background = app_background;
 	}
 
 	@Override
 	public String toString() {
-		return "SteamAppVo [appid=" + appid + ", name=" + name + ", description=" + description + ", imgPath=" + imgPath
-				+ ", appPrice=" + appPrice + ", appMovie=" + appMovie + "]";
+		return "SteamAppVo [app_id=" + app_id + ", app_name=" + app_name + ", app_description=" + app_description
+				+ ", app_header=" + app_header + ", app_price=" + app_price + ", app_movie=" + app_movie
+				+ ", app_background=" + app_background + "]";
 	}
-	
+
 	
 }

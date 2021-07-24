@@ -141,10 +141,29 @@ start with 1;
 */
 
 
+--==================================================
+-- 스팀 앱 테이블
+--==================================================
+drop table tbl_steamapp CASCADE CONSTRAINTS;
+create table tbl_steamapp(
+    app_id number primary key,
+    app_name varchar2(50) not null,
+    app_description varchar2(1000),
+    app_header varchar2(255),
+    app_price varchar2(50),
+    app_movie varchar2(255),
+    app_background varchar2(255)
+);
 
 
-
-
+--==================================================
+-- 배너 테이블
+--==================================================
+drop table tbl_banner cascade constraints;
+create table tbl_banner(
+    banner_no number primary key,
+    app_id number not null references tbl_steamapp(app_id)
+);
 
 
 
