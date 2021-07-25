@@ -36,7 +36,7 @@ public class SteamAppServiceImpl implements SteamAppService {
 	@Override
 	public SteamAppVo getSteamAppID(int appid) {
 		// appid로 저장된 스팀앱 정보 가져오기
-		SteamAppVo vo = appDao.selectSteamApp(appid);
+		SteamAppVo vo = appDao.selectAppOne(appid);
 		return vo;
 	}
 

@@ -211,7 +211,6 @@ $(document).ready(function() {
 	});
 	
 	function preBannerRefresh(){
-		
 		$(".carPreBanners").empty();
 		var appLength = $("#selectApps > .selectApp").length;
 		for(var i=0; i<appLength; i++) {
@@ -233,6 +232,8 @@ $(document).ready(function() {
 			$(".carPreBanners").append(clonePreBanner);
 		}
 		$(".carPreBanners").children().eq(0).addClass("active");
+		$("#btnSave").removeClass("btn-outline-success");
+		$("#btnSave").addClass("btn-outline-danger");
 	}
 	
 	// 적용하기도 구현해야함
@@ -247,18 +248,20 @@ $(document).ready(function() {
 			appList.push(data);
 		}
 		var bannerList = JSON.stringify(appList);
+		var url = $(this).attr("data-url");
 		//console.log(jsonAppList);
 		$.ajax({
-			type:"POST",
-			url:$(this).attr("data-url"),
-			data:{
-				"bannerList" : bannerList
-			},
-			error:function(request, status, error){
+			type : "POST",
+			url : url,
+			contentType : "application/json; charset=UTF-8",
+			data : bannerList,
+			error : function(request, status, error){
 				console.log(request + "/" + status + "/" + error);
 			},
-			success:function(rData){
+			success : function(rData){
 				console.log(rData);
+				$("#btnSave").removeClass("btn-outline-danger");
+				$("#btnSave").addClass("btn-outline-success");
 			}
 		});
 	});
@@ -275,7 +278,7 @@ $(document).ready(function() {
 			<button id="btnSelectPost"type="button" class="btn btn-sm btn-outline-secondary">게시글</button>
 		</div>
 		<button id="btnSave" type="button"
-			class="btn btn-sm btn-outline-danger"
+			class="btn btn-sm btn-outline-success"
 			data-url="/admin/contents/setBanner">
 			적용하기
 		</button>

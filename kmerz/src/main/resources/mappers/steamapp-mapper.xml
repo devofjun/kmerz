@@ -17,9 +17,17 @@
 	)
 </insert>
 
-<select id="selectSteamApp" resultType="SteamAppVo">
+<select id="selectAppOne" resultType="SteamAppVo">
 	select * from tbl_steamapp
 	where app_id = #{app_id}
+</select>
+
+<select id="selectBannerAppList" resultType="SteamAppVo">
+	select * from tbl_steamapp
+	where app_id IN
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			${item}
+		</foreach>
 </select>
 
 </mapper>
