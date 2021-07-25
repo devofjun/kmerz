@@ -228,8 +228,9 @@ insert into tbl_banner values(3, 1097150);
 insert into tbl_banner values(4, 322330);
 
 select * from tbl_steamapp
-where 1=1 and app_id in (1049590, 578080, 1097150, 322330);
+where app_id in (1049590, 578080, 1097150, 322330);
 
+select * from tbl_banner;
 
 --------------------
 -- 테스트 데이터 삽입 끝
