@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -100,7 +101,7 @@ public class ManagementController {
 	}
 
 	// 컨텐츠 관리 페이지
-	@RequestMapping(value = "/contents", method = RequestMethod.GET)
+	@RequestMapping(value = "/contents.do", method = RequestMethod.GET)
 	public String contents(Model model) throws Exception {
 		List<BannerVo> bannerList = bannerService.getList();
 		List<SteamAppVo> appList = new ArrayList<SteamAppVo>();
@@ -111,7 +112,14 @@ public class ManagementController {
 		
 		return "management/ContentsPage";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/contents/setBanner",  method = RequestMethod.POST)
+	public String setBanner(HttpServletRequest request) throws Exception {
+		System.out.println("셋배너: "+request.getParameter("bannerList"));
+		return "success";
+	}
+	
 	// 고객 주문 페이지
 	@RequestMapping(value = "/reports", method = RequestMethod.GET)
 	public String reports() throws Exception {
