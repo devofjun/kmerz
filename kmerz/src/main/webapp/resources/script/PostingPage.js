@@ -1,18 +1,22 @@
 function posting(){
 	var content = document.getElementById("editable").innerHTML;
+	var community_id = 'star';
+	var category_no = 100;
+	var post_title = document.getElementById("post_title").value;
 	var textFile = null,
   makeTextFile = function (content) {
     var data = new File([content], "1.txt",{type: "text/plain", lastModified: Date.now()});
 	return data;
   };
-      upload(makeTextFile(content));
+      upload(makeTextFile(content), community_id, category_no, post_title);
 }
-function upload(file){
+function upload(file, community_id, category_no, post_title){
 		var data = new FormData();
 		data.append("file", file);
 		data.append("community_id", community_id);
 		data.append("category_no", category_no);
 		data.append("post_title", post_title);
+		console.log(data);
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "media/upload_media");
 		xhr.send(data);

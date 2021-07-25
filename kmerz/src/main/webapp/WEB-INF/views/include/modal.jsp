@@ -1,3 +1,4 @@
+<%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
 <%@page import="com.kmerz.app.vo.CommunityVo"%>
 <%@page import="com.kmerz.app.vo.PostsVo"%>
 <%@page import="java.util.List"%>
@@ -9,8 +10,7 @@
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
-			<span class="modal-close" onclick="closeModal()"><ion-icon
-					size="large" name="close-sharp"></ion-icon></span>
+			<span class="modal-close" onclick="closeModal()">x</span>
 		</div>
 		<div class="modal-postContent">
 			<div class="modal-content-left">
@@ -28,9 +28,7 @@
 					</div>
 					<div class="modal-background border">
 						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
-						<div class="modal-body">
-							<img src="/resources/images/squirrel.png">
-							<p><%=postVo.getPost_content_file()%></p>
+						<div class="modal-body" id="modal-body">
 						</div>
 					</div>
 				</div>
@@ -74,3 +72,7 @@
 		</div>
 	</div>
 </div>
+<script>
+	console.log(document.getElementById("modal-body"));
+	document.getElementById("modal-body").innerHTML = <%=ContentReadAndWrite.ReadContent("C:\\Users\\vip\\Desktop\\spring\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postVo.getPost_content_file())%>;
+</script>

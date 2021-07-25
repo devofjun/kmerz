@@ -41,7 +41,7 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public void posting(PostsVo vo) {
-		session.insert(NAMESPACE + vo);
+		session.insert(NAMESPACE + "postingDetail", vo);
 	}
 	
 	public List<PostsVo> selectCategoryPostList(String community_id, int category_no) {
