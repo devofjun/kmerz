@@ -54,6 +54,7 @@ $(document).ready(function() {
 		$(".sample").removeClass("bg-primary");
 		$(".sample").removeClass("text-white");
 		$(".sample").addClass("bg-light");
+		$(".sample").addClass("text-dark");
 		$(this).removeClass("bg-light");
 		$(this).addClass("bg-primary");
 		$(this).addClass("text-white");
@@ -73,19 +74,21 @@ $(document).ready(function() {
 		$("#preRight").hide();
 		switch(setting){
 		case "banner":
-			// 배너설정 영역 클릭시
+			$("#btnSave").attr("data-url", "/admin/contents/setBanner");
 			// 미리보기 영역
 			$("#preBanner").show();
 			// 설정 선택 영역
 			$("#cardBannerSetting").show();
 			break;
 		case "left":
+			$("#btnSave").attr("data-url", "");
 			// 미리보기 영역
 			$("#preLeft").show();
 			// 왼쪽 사이드바 설정 영역 클릭시 
 			$("#cardLeftSetting").show();
 			break;
 		case "right":
+			$("#btnSave").attr("data-url", "");
 			// 미리보기 영역
 			$("#preRight").show();
 			// 오른쪽 사이드바 설정 영역 클릭시
@@ -139,6 +142,7 @@ $(document).ready(function() {
 				$.each(rData, function(){
 					
 					var cloneDivCard = $("#hiddenAppCard").clone();
+					cloneDivCard.removeAttr("id");
 					var card = cloneDivCard.find(".card");
 					var cardInfo = card.find(".appInfo");
 					
@@ -183,6 +187,7 @@ $(document).ready(function() {
 		// 선택 리스트에 들어갈때
 		if(count <= 0){
 			var cloneBadge = $("#hiddenSelectApp").clone();
+			cloneBadge.removeAttr("id");
 			cloneBadge.find(".appInfo").remove();
 			cloneBadge.append(cardAppInfo);
 			
@@ -191,10 +196,9 @@ $(document).ready(function() {
 			
 			$("#selectApps").append(cloneBadge);
 			cloneBadge.show();
-			
-			// 미리보기 새로 그리기
-			
 		}
+		// 미리보기 새로 그리기
+		preBannerRefresh();
 	});
 	
 	// 배너 게임 선택취소("X")버튼 눌렀을때
@@ -203,11 +207,64 @@ $(document).ready(function() {
 		$(this).parent().remove();
 		
 		// 미리보기 새로 그리기
-		
+		preBannerRefresh();
 	});
 	
-	// 적용하기도 구현해야함
+	function preBannerRefresh(){
+		$(".carPreBanners").empty();
+		var appLength = $("#selectApps > .selectApp").length;
+		for(var i=0; i<appLength; i++) {
+			var background = $(".selectApp").eq(i).find("input[name='app_background']").val();
+			var movie = $(".selectApp").eq(i).find("input[name='app_movie']").val();
+			var header = $(".selectApp").eq(i).find("input[name='app_header']").val();
+			var name = $(".selectApp").eq(i).find("input[name='app_name']").val();
+			var price = $(".selectApp").eq(i).find("input[name='app_price']").val();
+			var description = $(".selectApp").eq(i).find("input[name='app_description']").val();
+			
+			var clonePreBanner = $("#hiddenPreview").clone();
+			clonePreBanner.css("background-image", "url("+background+")");
+			clonePreBanner.find("source").attr("src", movie);
+			clonePreBanner.find("img[alt='header']").attr("src", header);
+			clonePreBanner.find(".preAppName").text(name);
+			clonePreBanner.find(".preAppPrice").text(price);
+			clonePreBanner.find(".preAppDescription").text(description);
+			
+			$(".carPreBanners").append(clonePreBanner);
+		}
+		$(".carPreBanners").children().eq(0).addClass("active");
+		$("#btnSave").removeClass("btn-outline-success");
+		$("#btnSave").addClass("btn-outline-danger");
+	}
 	
+	// 적용하기도 구현해야함
+	$("#btnSave").click(function() {
+		var appList = new Array();
+		var selectApps = $("#selectApps").find(".selectApp");
+		for(var i=0; i<selectApps.length; i++){
+			var data = new Object();
+			data.banner_no = i;
+			data.app_id = selectApps.eq(i).find("input[name='app_id']").val();
+			
+			appList.push(data);
+		}
+		var bannerList = JSON.stringify(appList);
+		var url = $(this).attr("data-url");
+		//console.log(jsonAppList);
+		$.ajax({
+			type : "POST",
+			url : url,
+			contentType : "application/json; charset=UTF-8",
+			data : bannerList,
+			error : function(request, status, error){
+				console.log(request + "/" + status + "/" + error);
+			},
+			success : function(rData){
+				console.log(rData);
+				$("#btnSave").removeClass("btn-outline-danger");
+				$("#btnSave").addClass("btn-outline-success");
+			}
+		});
+	});
 });
 </script>
 
@@ -217,11 +274,12 @@ $(document).ready(function() {
 	<h1 class="h2">컨텐츠 관리</h1>
 	<div class="btn-toolbar mb-2 mb-md-0">
 		<div class="btn-group me-2">
-			<button id="btnSelectBS" type="button" class="btn btn-sm btn-outline-secondary active">배너 / 사이드바</button>
+			<button id="btnSelectBS" type="button" class="btn btn-sm btn-outline-secondary active">배너/사이드바</button>
 			<button id="btnSelectPost"type="button" class="btn btn-sm btn-outline-secondary">게시글</button>
 		</div>
-		<button type="button"
-			class="btn btn-sm btn-outline-danger">
+		<button id="btnSave" type="button"
+			class="btn btn-sm btn-outline-success"
+			data-url="/admin/contents/setBanner">
 			적용하기
 		</button>
 	</div>
@@ -269,7 +327,7 @@ $(document).ready(function() {
 					style="background-color: gray; height: 300px">
 					<div id="carouselExampleControls" class="carousel slide h-100"
 						data-bs-ride="carousel" data-bs-interval="false">
-						<div class="carousel-inner h-100">
+						<div class="carPreBanners carousel-inner h-100">
 							<c:forEach var="bannerApp" items="${bannerAppList }" varStatus="status">
 							<div class="carousel-item h-100 <c:if test='${status.index == 0}'>active </c:if>"
 								style="background-image:url(${bannerApp.app_background })">
@@ -297,7 +355,7 @@ $(document).ready(function() {
 						</div>
 						<div style="display:none">
 							<!-- 미리보기 clone 되는곳 -->
-							<div id="hiddenPreview" class="carousel-item active h-100"
+							<div id="hiddenPreview" class="carousel-item h-100"
 								style="background-image:url()">
 								<div ></div>
 								<div class="row mt-4">
@@ -311,12 +369,12 @@ $(document).ready(function() {
 											<img class="d-block w-100" src="" alt="header">
 										</div>
 										<div class="h-50 bg-dark text-light">
-											<p></p>
-											<p></p>
+											<p class="preAppName"></p>
+											<p class="preAppPrice"></p>
 										</div>
 									</div>
 									<div class="col-3 bg-dark text-light">
-									
+										<span class="preAppDescription"></span>
 									</div>
 								</div>
 							</div>
