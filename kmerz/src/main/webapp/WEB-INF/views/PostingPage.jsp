@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scale=no">
-<link rel="stylesheet" href="/resources/css/PostingPage.css?ver2">
-<link rel="stylesheet" href="/resources/css/header.css?ver2">
-<script src="/resources/script/PostingPage.js?ver6"></script>
+<link rel="stylesheet" href="/resources/css/PostingPage.css?ver3">
+<link rel="stylesheet" href="/resources/css/header.css?ver4">
+<script src="/resources/script/PostingPage.js?ver7"></script>
 <title>Posting to KMerz</title>
 </head>
 <body>

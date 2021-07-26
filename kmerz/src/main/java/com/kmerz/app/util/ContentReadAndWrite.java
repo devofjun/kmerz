@@ -23,6 +23,7 @@ public class ContentReadAndWrite {
 			}
 		}
 		System.out.println(file);
+		Path filePath = null;
 		try {
 			UUID tempFileName = UUID.randomUUID();
 			String originalFileName = file.getOriginalFilename();
@@ -34,14 +35,14 @@ public class ContentReadAndWrite {
 			logicalFileName = tempFileName.toString() + "." + fileExt;
 
 			byte[] fileBytes = file.getBytes();
-			Path filePath = uploadDir.resolve(logicalFileName);
+			filePath = uploadDir.resolve(logicalFileName);
 			Files.write(filePath, fileBytes);
 			System.out.println(filePath);
 			System.out.println(logicalFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return logicalFileName;
+		return filePath.toString();
 	}
 
 	public static String ReadContent(String filePath) throws IOException {
