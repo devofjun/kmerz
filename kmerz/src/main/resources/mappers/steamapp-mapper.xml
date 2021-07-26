@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmerz.app.steamapp">
+
+<insert id="insertSteamApp">
+	insert into tbl_steamapp values(
+		#{app_id},
+		#{app_type},
+		#{app_name},
+		#{app_description, jdbcType=VARCHAR},
+		#{app_header, jdbcType=VARCHAR},
+		#{app_price, jdbcType=VARCHAR},
+		#{app_movie, jdbcType=VARCHAR},
+		#{app_background, jdbcType=VARCHAR}
+	)
+</insert>
+
+<select id="selectAppOne" resultType="SteamAppVo">
+	select * from tbl_steamapp
+	where app_id = #{app_id}
+</select>
+
+<select id="selectBannerAppList" resultType="SteamAppVo">
+	select * from tbl_steamapp
+	where app_id IN
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			${item}
+		</foreach>
+</select>
+
+</mapper>
