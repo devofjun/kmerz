@@ -34,6 +34,7 @@ public class ContentReadAndWrite {
 			}
 		}
 		System.out.println(file);
+
 		Path filePath = null;
 		try {
 			UUID tempFileName = UUID.randomUUID();
@@ -54,6 +55,7 @@ public class ContentReadAndWrite {
 			e.printStackTrace();
 		}
 		return filePath.toString();
+
 	}
 
 	public static String ReadContent(String filePath) throws IOException {
