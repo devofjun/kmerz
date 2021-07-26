@@ -53,8 +53,8 @@ public class PostDaoImpl implements PostDao {
 	}
 
 	@Override
-	public int selectUserPostCount(String user_name) {
-		int count = session.selectOne(NAMESPACE + "selectUserPostCount", user_name);
+	public int selectUserPostCount(int user_no) {
+		int count = session.selectOne(NAMESPACE + "selectUserPostCount", user_no);
 		return count;
 	}
 }

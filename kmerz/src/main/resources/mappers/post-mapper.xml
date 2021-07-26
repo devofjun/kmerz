@@ -29,7 +29,7 @@
 <insert id="postingDetail">
 	insert into tbl_posts values(
 	seq_post_no.nextval,
-	#{user_name},
+	#{user_no},
 	#{community_id},
 	#{category_no},
 	#{post_title},
@@ -44,7 +44,7 @@
 
 <!-- 로그인 유저가 작성한 개시글 갯수 구하기 -->
 <select id="selectUserPostCount" resultType="int">
-	select count(*) from tbl_posts where user_name = #{user_name}
+	select count(*) from tbl_posts where user_no = #{user_no}
 </select>
 
 </mapper>

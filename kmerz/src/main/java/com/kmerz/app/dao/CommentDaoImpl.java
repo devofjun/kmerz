@@ -19,8 +19,8 @@ public class CommentDaoImpl implements CommentDao {
 		return list;
 	}
 	@Override
-	public int selectuserCommentCount(String user_name) {
-		int count = session.selectOne(NAMESPACE + "selectuserCommentCount", user_name);
+	public int selectuserCommentCount(int user_no) {
+		int count = session.selectOne(NAMESPACE + "selectuserCommentCount", user_no);
 		return count;
 	}
 
