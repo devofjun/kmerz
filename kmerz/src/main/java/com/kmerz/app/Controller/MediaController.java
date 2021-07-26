@@ -42,10 +42,13 @@ public class MediaController {
 							   @RequestParam("post_title")   String post_title,	
 							   HttpSession session
 							   ) throws IOException {
-		String fileName = ContentReadAndWrite.WriteContent(file);
+		int seqPostNo = pService.getNewPostSeq();
+		
+		String fileName = ContentReadAndWrite.WriteContent(file, seqPostNo);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		String user_name = memberVo.getUser_name();
 		PostsVo vo = new PostsVo();
+		vo.setPost_no(seqPostNo);
 		vo.setCategory_no(category_no);
 		vo.setCommunity_id(community_id);
 		vo.setPost_title(post_title);

@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">
-				<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postList.get(i).getPost_content_file())%></p>
+				<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent(postList.get(i).getPost_content_file())%></p>
 			</div>
 
 
