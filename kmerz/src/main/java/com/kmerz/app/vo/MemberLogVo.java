@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class MemberLogVo {
 	private String user_log_code;
-	private String user_id;
+	private int user_no;
 	private String user_request_ip;
 	private String user_request_content;
 	private Timestamp user_log_time;
@@ -14,11 +14,11 @@ public class MemberLogVo {
 		// TODO Auto-generated constructor stub
 	}	
 
-	public MemberLogVo(String user_log_code, String user_id, String user_request_ip, String user_request_content,
+	public MemberLogVo(String user_log_code, int user_no, String user_request_ip, String user_request_content,
 			Timestamp user_log_time) {
 		super();
 		this.user_log_code = user_log_code;
-		this.user_id = user_id;
+		this.user_no = user_no;
 		this.user_request_ip = user_request_ip;
 		this.user_request_content = user_request_content;
 		this.user_log_time = user_log_time;
@@ -32,12 +32,12 @@ public class MemberLogVo {
 		this.user_log_code = user_log_code;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public int getUser_no() {
+		return user_no;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 
 	public String getUser_request_ip() {
@@ -66,7 +66,7 @@ public class MemberLogVo {
 
 	@Override
 	public String toString() {
-		return "MemberLogVo [user_log_code=" + user_log_code + ", user_id=" + user_id + ", user_request_ip="
+		return "MemberLogVo [user_log_code=" + user_log_code + ", user_no=" + user_no + ", user_request_ip="
 				+ user_request_ip + ", user_request_content=" + user_request_content + ", user_log_time="
 				+ user_log_time + "]";
 	}

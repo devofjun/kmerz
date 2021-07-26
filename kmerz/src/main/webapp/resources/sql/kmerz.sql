@@ -28,7 +28,7 @@ drop table tbl_community CASCADE CONSTRAINTS;
 --truncate table tbl_community;
 create table tbl_community (
     community_id varchar2(30) primary key,
-    user_id varchar2(50) references tbl_member(user_id),
+    user_no number references tbl_member(user_no),
     community_name varchar2(50) not null,
     community_topic varchar2(50) not null,
     community_description varchar2(300),
@@ -61,7 +61,7 @@ create sequence seq_category_id
 drop table tbl_posts CASCADE CONSTRAINTS;
 create table tbl_posts(
     post_no number primary key,
-    user_name varchar2(50) references tbl_member(user_name),
+    user_no number references tbl_member(user_no),
     community_id varchar2(50) references tbl_community(community_id),
     category_no number references tbl_category(category_no),
     post_title varchar2(100),
@@ -83,7 +83,7 @@ drop table tbl_comment CASCADE CONSTRAINTS;
 create table tbl_comment(
     comment_no number primary key,
     post_no number references tbl_posts(post_no),
-    user_name varchar2(50) references tbl_member(user_name),
+    user_no number references tbl_member(user_no),
     comment_content varchar2(200) not null,
     comment_reply_count number default 0,
     comment_regist_date timestamp default sysdate
@@ -100,7 +100,7 @@ drop table tbl_reply CASCADE CONSTRAINTS;
 create table tbl_reply(
     reply_no number primary key,
     comment_no number references tbl_comment(comment_no),
-    user_name varchar(50) references tbl_member(user_name),
+    user_no number references tbl_member(user_no),
     reply_content varchar2(200) not null,
     reply_regist_date timestamp default sysdate
 );
@@ -202,7 +202,7 @@ drop table tbl_member_log CASCADE CONSTRAINTS;
 --truncate table tbl_member_log;
 create table tbl_member_log (
     user_log_code varchar2(20),
-    user_id varchar2(50) references tbl_member(user_id),
+    user_no number references tbl_member(user_no),
     user_request_ip varchar2(20),
     user_request_content varchar2(200),
     user_log_time timestamp default sysdate
