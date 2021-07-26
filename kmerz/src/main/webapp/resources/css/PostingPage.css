@@ -44,6 +44,19 @@ span {
 
 div {}
 
+.policy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-rule {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 .modal-postContent {
     width: 100%;
     background: #fff;
@@ -157,4 +170,8 @@ d {}
 	justify-content: center;
 	align-items: center;
 	/* width: 100%; */
+}
+.rule-list{
+	/* display:flex; */
+	/* justify-content: center; */
 }
