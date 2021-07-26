@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/resources/css/PostingPage.css?ver3">
 <link rel="stylesheet" href="/resources/css/header.css?ver4">
 <script src="/resources/script/PostingPage.js?ver7"></script>
+
 <title>Posting to KMerz</title>
 </head>
 <body>

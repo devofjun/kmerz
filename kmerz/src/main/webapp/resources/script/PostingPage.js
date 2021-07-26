@@ -44,5 +44,5 @@ function includeHTML(divContainer, urlHTML) {
 function insertLink(){
 	var url = document.getElementById("url");
 	var content = document.getElementById("editable");
-	content.innerHTML += "<div><img draggable='false' src='" + url.value + "'><div>"
+	content.innerHTML += "<div><figure class='align-center'><img draggable='false' src='" + url.value + "'></figure><div>"
 }
