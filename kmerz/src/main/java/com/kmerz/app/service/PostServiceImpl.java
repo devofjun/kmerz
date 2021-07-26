@@ -50,4 +50,10 @@ public class PostServiceImpl implements PostService{
 
 	}
 
+	@Override
+	public int getNewPostSeq() {
+		// 새로운 글 시퀀스 생성
+		return postdao.selectSeqPostno();
+	}
+
 }

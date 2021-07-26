@@ -1,3 +1,4 @@
+<%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
 <%@page import="com.kmerz.app.vo.CommunityVo"%>
 <%@page import="com.kmerz.app.vo.PostsVo"%>
 <%@page import="java.util.List"%>
@@ -29,8 +30,7 @@
 					<div class="modal-background border">
 						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
 						<div class="modal-body">
-							<img src="/resources/images/squirrel.png">
-							<p><%=postVo.getPost_content_file()%></p>
+							<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
 						</div>
 					</div>
 				</div>

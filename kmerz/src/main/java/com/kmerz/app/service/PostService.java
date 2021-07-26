@@ -11,4 +11,5 @@ public interface PostService {
 	public void posting(PostsVo vo);
 	public List<PostsVo> getCategoryPostList(String community_id, int category_no);
 	public int getUserPostCount(int user_no);
+	public int getNewPostSeq();
 }

@@ -29,6 +29,7 @@ public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect("/admin/loginForm");
 			return false;
 		} else {
+			//System.out.println("인터셉터 통과");
 			return true;
 		}
 	}

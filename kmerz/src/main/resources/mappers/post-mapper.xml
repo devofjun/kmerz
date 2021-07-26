@@ -25,9 +25,14 @@
 	and category_no = #{category_no}
 </select>
 
+<!-- 글번호 시퀀스 조회 -->
+<select id="selectSeqPostno" resultType="Integer">
+	select seq_post_no.nextval from dual
+</select>
+
 
 <insert id="postingDetail">
-	insert into tbl_posts values(
+insert into tbl_posts values(
 	seq_post_no.nextval,
 	#{user_no},
 	#{community_id},

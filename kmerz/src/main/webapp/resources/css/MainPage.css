@@ -83,6 +83,7 @@ p.icon-color {
 	text-decoration: none;
 	letter-spacing: 2px;
 	font-weight: 500;
+	font-size: 14;
 	cursor: pointer;
 }
 
@@ -174,7 +175,7 @@ p.icon-color {
 }
 
 .postList {
-	font-size: 22px;
+	/* font-size: 22px; */
 	width: 40%;
 }
 
@@ -184,6 +185,8 @@ p.icon-color {
 	background-color: #001789;
 	height: 180px;
 	transition: all ease .3s;
+	/* overflow: hidden; */
+	/* height: 720px; */
 }
 
 .post:hover {
@@ -215,6 +218,7 @@ video {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 }
 
 .communityAdress {
@@ -259,6 +263,9 @@ a {}
 .postContent {
 	display: flex;
 	flex: 1 0 auto;
+	flex-direction: column;
+	overflow: hidden;
+	height: 100;
 }
 
 .BottmNavBar {
@@ -523,8 +530,9 @@ labelBtn:hover {
 {
 	display:flex;
 	justify-content: center;
-	padding: 10px;
-	margin: 10;
+	/* padding: 10px; */
+	/* margin: 10; */
+	/* width: 100%; */
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
@@ -536,18 +544,25 @@ labelBtn:hover {
 {
 	display:flex;
 	flex-direction: column;
+	margin: 0 60;
 }
 .reply-submit
 {
 	display:flex;
-	margin: 10 60px;
+	/* margin: 10 60px; */
 	margin-top: 0;
 	padding: 10px 0;
 	justify-content: space-between;
 }
+.align-center{
+	display: flex;
+	/* justify-content: center; */
+	/* align-items: center; */
+}
 .modal-background
 {
 	background-color: #fff;
+	width: 90%;
 }
 .modal-community-info
 {
@@ -574,14 +589,16 @@ labelBtn:hover {
 }
 .align-center > img
 {
-	min-width: 100%;
-	min-height: 100%;
+	/* min-width: 100%; */
+	/* min-height: 100%; */
 }
 .align-center
 {
+	/* width: 10; */
 	display:flex;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 }
 .align-row
 {

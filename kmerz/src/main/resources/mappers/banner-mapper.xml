@@ -5,7 +5,7 @@
 <mapper namespace="com.kmerz.app.banner">
 
 <delete id="deleteAll">
-	delete from tbl_banner;
+	delete from tbl_banner
 </delete>
 
 <insert id="insertBanner">

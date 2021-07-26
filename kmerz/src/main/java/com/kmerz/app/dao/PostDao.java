@@ -11,5 +11,5 @@ public interface PostDao {
 	public void posting(PostsVo vo);
 	public List<PostsVo> selectCategoryPostList(String community_id, int category_no);
 	public int selectUserPostCount(int user_no);
-
+	public int selectSeqPostno();
 }

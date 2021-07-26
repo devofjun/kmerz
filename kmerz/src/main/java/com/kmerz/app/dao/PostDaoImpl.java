@@ -41,7 +41,7 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public void posting(PostsVo vo) {
-		session.insert(NAMESPACE + vo);
+		session.insert(NAMESPACE + "postingDetail", vo);
 	}
 	
 	public List<PostsVo> selectCategoryPostList(String community_id, int category_no) {
@@ -56,5 +56,11 @@ public class PostDaoImpl implements PostDao {
 	public int selectUserPostCount(int user_no) {
 		int count = session.selectOne(NAMESPACE + "selectUserPostCount", user_no);
 		return count;
+	}
+
+	@Override
+	public int selectSeqPostno() {
+		// 글번호 시퀀스 생성
+		return session.selectOne(NAMESPACE+"selectSeqPostno");
 	}
 }

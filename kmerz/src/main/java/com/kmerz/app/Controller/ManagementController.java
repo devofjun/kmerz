@@ -1,6 +1,5 @@
 package com.kmerz.app.Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -82,37 +82,49 @@ public class ManagementController {
 	}
 
 	// 고객 주문 페이지
+	@RequestMapping(value = "/customers", method = RequestMethod.GET)
+	public String customers() throws Exception {
+		return "management/CustomersPage";
+	}
+	
+	// 배너/사이드바 관리 페이지
+	@RequestMapping(value = "/bsSetting.do", method = RequestMethod.GET)
+	public String bsSetting(Model model) throws Exception {
+		List<SteamAppVo> bannerList = bannerService.getBannerList();
+		
+		model.addAttribute("bannerAppList", bannerList);
+		
+		return "management/ContentsBSPage";
+	}
+	// 배너 적용하기
+	@ResponseBody
+	@RequestMapping(value = "/contents/setBanner",  method = RequestMethod.POST)
+	public String setBanner(@RequestBody List<BannerVo> bannerList) throws Exception {
+		System.out.println("setBanner :" + bannerList);
+		bannerService.initBanner(bannerList);
+		return "success";
+	}
+	
+	// 게시물 관리 페이지
+	@RequestMapping(value = "/postSetting.do", method = RequestMethod.GET)
+	public String postSetting() throws Exception {
+		
+		return "management/ContentsPostPage";
+	}
+	
+	// 고객 주문 관리 페이지
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	public String oders() throws Exception {
 		return "management/OrdersPage";
 	}
 
-	// 고객 주문 페이지
+	// 상품 관리 페이지
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String products() throws Exception {
 		return "management/ProductsPage";
 	}
-
-	// 고객 주문 페이지
-	@RequestMapping(value = "/customers", method = RequestMethod.GET)
-	public String customers() throws Exception {
-		return "management/CustomersPage";
-	}
-
-	// 컨텐츠 관리 페이지
-	@RequestMapping(value = "/contents", method = RequestMethod.GET)
-	public String contents(Model model) throws Exception {
-		List<BannerVo> bannerList = bannerService.getList();
-		List<SteamAppVo> appList = new ArrayList<SteamAppVo>();
-		for(BannerVo vo : bannerList) {
-			appList.add(steamAppService.getSteamAppID(vo.getApp_id()));
-		}
-		model.addAttribute("bannerAppList", appList);
-		
-		return "management/ContentsPage";
-	}
-
-	// 고객 주문 페이지
+	
+	// 리포트 페이지
 	@RequestMapping(value = "/reports", method = RequestMethod.GET)
 	public String reports() throws Exception {
 		return "management/ReportsPage";

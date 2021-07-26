@@ -27,7 +27,6 @@ insert into tbl_member values(
 );
 --select * from tbl_member;
 
-
 ----------------------------------------------------
 -- 테스트 데이터 삽입(커뮤니티 테이블)
 ----------------------------------------------------
@@ -69,6 +68,7 @@ insert into tbl_category values(
 insert into tbl_category values(
     seq_category_id.nextval, 'overwatch', '공략', '옵치공략임', 'accept'
 );
+
 
 ----------------------------------------------------
 -- 테스트 데이터 삽입(게시글 테이블)
@@ -175,6 +175,7 @@ insert into tbl_reply values(
 
 
 
+
 ----------------------------------------------------
 -- 테스트 데이터 삽입(스팀 앱 테이블)
 ----------------------------------------------------
@@ -227,6 +228,11 @@ insert into tbl_banner values(2, 578080);
 insert into tbl_banner values(3, 1097150);
 insert into tbl_banner values(4, 322330);
 
+select * from tbl_steamapp
+where app_id in (1049590, 578080, 1097150, 322330);
+
+
+select * from tbl_banner;
 
 
 --------------------
