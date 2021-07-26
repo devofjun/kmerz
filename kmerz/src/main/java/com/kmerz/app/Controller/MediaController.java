@@ -1,25 +1,62 @@
 package com.kmerz.app.Controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kmerz.app.service.PostService;
 import com.kmerz.app.service.SteamAppService;
+import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.util.SteamUtil;
+import com.kmerz.app.vo.MemberVo;
+import com.kmerz.app.vo.PostsVo;
 import com.kmerz.app.vo.SteamAppVo;
-
 
 @Controller
 @RequestMapping(value = "/media")
 public class MediaController {
 	
 	@Inject
+	PostService pService;
+	
+	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
+	public String upload_media(@RequestParam("file") MultipartFile file,
+							   @RequestParam("community_id") String community_id,
+							   @RequestParam("category_no")  int category_no,
+							   @RequestParam("post_title")   String post_title,	
+							   HttpSession session
+							   ) throws IOException {
+		String fileName = ContentReadAndWrite.WriteContent(file);
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		String user_name = memberVo.getUser_name();
+		PostsVo vo = new PostsVo();
+		vo.setCategory_no(category_no);
+		vo.setCommunity_id(community_id);
+		vo.setPost_title(post_title);
+		vo.setUser_name(user_name);
+		vo.setPost_content_file(fileName);
+		vo.setPost_lastupdate(new Timestamp(System.currentTimeMillis()));
+		vo.setPost_status("accept");
+		System.out.println(vo);
+		pService.posting(vo);
+		return "include/upload_media";
+		}		
 	private SteamAppService steamAppService;
 	
 	private List<SteamAppVo> testData() {
@@ -99,6 +136,7 @@ public class MediaController {
 			}
 		}
 		
+		
 		List<SteamAppVo> appList = new ArrayList<>();
 		for(String appid : appidList) {
 			System.out.println("앱아이디 "+appid+"를 탐색합니다.");
@@ -136,7 +174,5 @@ public class MediaController {
 		//파일이름
 		//MyFileUploadUtil.uploadFile(uploadPath, originalFilename, fileData);
 		// /D:/upload/profileimage/1000/파일이름+랜덤이름.jpg
-	}
-	
-	
+	}	
 }

@@ -25,9 +25,10 @@
 	and category_no = #{category_no}
 </select>
 
-
 <insert id="postingDetail">
-	insert into tbl_posts values(
+	insert into tbl_posts(post_no, user_name, community_id, category_no, post_title,
+	post_content_file, post_readcount, post_recommand, post_lastupdate, post_status) 
+	values(
 	seq_post_no.nextval,
 	#{user_name},
 	#{community_id},
@@ -36,9 +37,8 @@
 	#{post_content_file},
 	0,
 	0,
-	sysdate,
-	'accept'
-	
+	#{post_lastupdate},
+	#{post_status}
 	)
 </insert>
 

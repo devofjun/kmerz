@@ -1,3 +1,4 @@
+<%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -7,7 +8,7 @@
 	content="width=device-width, initial-scale=1.0 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver58">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver62">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v11">
 <link rel="stylesheet" href="/resources/css/header.css?ver4">
