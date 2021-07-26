@@ -21,25 +21,13 @@ $(document).ready(function() {
 	var steamJson
 	
 	// 배너/사이드바 설정 버튼
-	$("#btnSelectBS").click(function() {
-		if($(this).is(".active")){
-			// 이미 클릭 되었다면 함수 종료
-			return;
-		} else {
-			$("#btnSelectPost").removeClass("active");
-			$(this).addClass("active");
-		}
+	$("#btnBSSetting").click(function() {
+		location.href = "/admin/bsSetting.do";
 	});
 	
 	// 게시글 설정 버튼
-	$("#btnSelectPost").click(function() {
-		if($(this).is(".active")){
-			// 이미 클릭 되었다면 함수 종료
-			return;
-		} else {
-			$("#btnSelectBS").removeClass("active");
-			$(this).addClass("active");
-		}
+	$("#btnPostSetting").click(function() {
+		location.href = "/admin/postSetting.do";
 	});
 	
 	// 컨텐츠 관리 영역 마우스 오버
@@ -274,8 +262,8 @@ $(document).ready(function() {
 	<h1 class="h2">컨텐츠 관리</h1>
 	<div class="btn-toolbar mb-2 mb-md-0">
 		<div class="btn-group me-2">
-			<button id="btnSelectBS" type="button" class="btn btn-sm btn-outline-secondary active">배너/사이드바</button>
-			<button id="btnSelectPost"type="button" class="btn btn-sm btn-outline-secondary">게시글</button>
+			<button id="btnBSSetting" type="button" class="btn btn-sm btn-outline-secondary active">배너/사이드바</button>
+			<button id="btnPostSetting"type="button" class="btn btn-sm btn-outline-secondary">게시글</button>
 		</div>
 		<button id="btnSave" type="button"
 			class="btn btn-sm btn-outline-success"
@@ -302,14 +290,14 @@ $(document).ready(function() {
 							</div>
 						</div>
 						<div class="row h-75">
-							<div class="sample mouse-border-primary col-3 bg-light border border-1 rounded-1 v-m-parent"
+							<div class="sample mouse-border-primary col-3 h-100 bg-light border border-1 rounded-1 v-m-parent"
 								data-sample="left">
 								<span class="v-m-child">Left</span>
 							</div>
-							<div class="col-6 v-m-parent">
+							<div class="col-6 h-100 v-m-parent">
 								<span class="v-m-child">게시물</span>
 							</div>
-							<div class="sample mouse-border-primary col-3 bg-light border border-1 rounded-1 v-m-parent"
+							<div class="sample mouse-border-primary col-3 h-100 bg-light border border-1 rounded-1 v-m-parent"
 								data-sample="right">
 								<span class="v-m-child">Right</span>
 							</div>
