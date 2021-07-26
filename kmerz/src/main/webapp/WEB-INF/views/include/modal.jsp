@@ -7,6 +7,8 @@
 <%
 	PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 %>
+<head>
+</head>
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
@@ -28,7 +30,8 @@
 					</div>
 					<div class="modal-background border">
 						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
-						<div class="modal-body" id="modal-body">
+						<div class="modal-body" id="modal-body" >
+						<%=ContentReadAndWrite.ReadContent("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postVo.getPost_content_file())%>
 						</div>
 					</div>
 				</div>
@@ -72,7 +75,3 @@
 		</div>
 	</div>
 </div>
-<script>
-	console.log(document.getElementById("modal-body"));
-	document.getElementById("modal-body").innerHTML = <%=ContentReadAndWrite.ReadContent("C:\\Users\\vip\\Desktop\\spring\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postVo.getPost_content_file())%>;
-</script>

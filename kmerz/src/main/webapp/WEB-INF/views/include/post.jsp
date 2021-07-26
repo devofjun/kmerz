@@ -1,3 +1,4 @@
+<%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
 <%@page import="com.kmerz.app.vo.CommunityVo"%>
 <%@page import="com.kmerz.app.vo.PostsVo"%>
 <%@page import="java.util.List"%>
@@ -57,7 +58,7 @@
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">
-				<p class="icon-color post-content"><%=postList.get(i).getPost_content_file()%></p>
+				<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postList.get(i).getPost_content_file())%></p>
 			</div>
 
 

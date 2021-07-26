@@ -12,8 +12,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ContentReadAndWrite {
-	public static void WriteContent(MultipartFile file) {
+	public static String WriteContent(MultipartFile file) {
 		Path uploadDir = Paths.get("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post");
+		String logicalFileName = null;
 		if (!Files.isDirectory(uploadDir)) {
 			try {
 				Files.createDirectories(uploadDir);
@@ -30,7 +31,7 @@ public class ContentReadAndWrite {
 			if (originalFileName.toLowerCase().endsWith(".txt")) {
 				fileExt = "txt";
 			}
-			String logicalFileName = tempFileName.toString() + "." + fileExt;
+			logicalFileName = tempFileName.toString() + "." + fileExt;
 
 			byte[] fileBytes = file.getBytes();
 			Path filePath = uploadDir.resolve(logicalFileName);
@@ -40,6 +41,7 @@ public class ContentReadAndWrite {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return logicalFileName;
 	}
 
 	public static String ReadContent(String filePath) throws IOException {
