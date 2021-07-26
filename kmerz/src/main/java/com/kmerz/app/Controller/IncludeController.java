@@ -36,6 +36,7 @@ public class IncludeController {
 	
 	@RequestMapping(value="/modal", method = RequestMethod.GET)
 	public String openModal(Model model,@RequestParam(value="post_no") int post_no) {
+		System.out.println(post_no);
 		PostsVo postVo = pService.selectPost(post_no);
 		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
 		List<CommentVo> mentList = mentService.selectCommentOnPost(post_no);
