@@ -27,13 +27,12 @@ insert into tbl_member values(
 );
 --select * from tbl_member;
 
-
 ----------------------------------------------------
 -- 테스트 데이터 삽입(커뮤니티 테이블)
 ----------------------------------------------------
 insert into tbl_community values(
     'star',
-    'test1@naver.com',
+    1000,
     '스타크래프트',
     'starcraft',
     '스타크래프트 임시 커뮤니티입니다.',
@@ -41,7 +40,7 @@ insert into tbl_community values(
 );
 insert into tbl_community values(
     'lol',
-    'test2@naver.com',
+    1001,
     '리그오브레전드',
     'League of Legends',
     '롤 임시 커뮤니티입니다.',
@@ -49,7 +48,7 @@ insert into tbl_community values(
 );
 insert into tbl_community values(
     'overwatch',
-    'test3@naver.com',
+    1002,
     '오버워치',
     'overwatch',
     '오버워치 임시 커뮤니티입니다.',
@@ -70,12 +69,13 @@ insert into tbl_category values(
     seq_category_id.nextval, 'overwatch', '공략', '옵치공략임', 'accept'
 );
 
+
 ----------------------------------------------------
 -- 테스트 데이터 삽입(게시글 테이블)
 ----------------------------------------------------
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    '테스터1',
+    1000,
     'star',
     100,
     '스타 첫번째 공략',
@@ -84,7 +84,7 @@ insert into tbl_posts values(
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    '테스터2',
+    1001,
     'lol',
     101,
     '롤 첫번째 공략',
@@ -93,7 +93,7 @@ insert into tbl_posts values(
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
-    '테스터3',
+    1002,
     'overwatch',
     102,
     '옵치 첫번째 공략',
@@ -110,7 +110,7 @@ update tbl_comment set
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     100,
-    '테스터3',
+    1002,
     '와.그.렇.군.요.',
     0,
     sysdate
@@ -121,7 +121,7 @@ update tbl_comment set
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     101,
-    '테스터1',
+    1000,
     '정치질하려고 겜하냐?',
     0,
     sysdate
@@ -132,7 +132,7 @@ update tbl_comment set
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     102,
-    '테스터2',
+    1001,
     '님 마이크 냄새남',
     0,
     sysdate
@@ -148,7 +148,7 @@ update tbl_comment set
 insert into tbl_reply values(
     seq_reply_no.nextval,
     100,
-    '테스터1',
+    1000,
     '^^',
     sysdate
 );
@@ -158,7 +158,7 @@ update tbl_comment set
 insert into tbl_reply values(
     seq_reply_no.nextval,
     101,
-    '테스터2',
+    1001,
     'ㅇㅇ 꿀잼임',
     sysdate
 );
@@ -168,10 +168,11 @@ update tbl_comment set
 insert into tbl_reply values(
     seq_reply_no.nextval,
     102,
-    '테스터3',
+    1002,
     'ㅗ',
     sysdate
 );
+
 
 
 
@@ -230,7 +231,9 @@ insert into tbl_banner values(4, 322330);
 select * from tbl_steamapp
 where app_id in (1049590, 578080, 1097150, 322330);
 
+
 select * from tbl_banner;
+
 
 --------------------
 -- 테스트 데이터 삽입 끝

@@ -10,4 +10,5 @@ public interface MemberService {
 	public MemberVo login(String user_id, String user_pw);
 	public MemberVo selectID(String user_id);
 	public int getUserNameCheckResult(String user_name);
+	public void changeUserName(int user_no, String user_name);
 }

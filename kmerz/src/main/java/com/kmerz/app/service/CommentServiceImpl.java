@@ -18,8 +18,8 @@ public class CommentServiceImpl implements CommentService {
 		return list;
 	}
 	@Override
-	public int getUserCommentCount(String user_name) {
-		int count = CommentDao.selectuserCommentCount(user_name);
+	public int getUserCommentCount(int user_no) {
+		int count = CommentDao.selectuserCommentCount(user_no);
 		return count;
 	}
 	@Override

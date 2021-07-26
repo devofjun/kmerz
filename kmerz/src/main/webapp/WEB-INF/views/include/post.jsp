@@ -54,7 +54,7 @@
 					<%}
 
 					}%></span></a><span>  </span><a href="#"><img
-						src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=postList.get(i).getUser_name()%></span></a>
+						src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=postList.get(i).getUser_no()%></span></a>
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(<%=postList.get(i).getPost_no()%>)">

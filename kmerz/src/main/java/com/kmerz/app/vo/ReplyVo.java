@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class ReplyVo {
 	private int reply_no;
 	private int comment_no;
-	private String user_name;
+	private int user_no;
 	private String reply_content;
 	private Timestamp reply_regist_date;
 	
@@ -14,11 +14,11 @@ public class ReplyVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReplyVo(int reply_no, int comment_no, String user_name, String reply_content, Timestamp reply_regist_date) {
+	public ReplyVo(int reply_no, int comment_no, int user_no, String reply_content, Timestamp reply_regist_date) {
 		super();
 		this.reply_no = reply_no;
 		this.comment_no = comment_no;
-		this.user_name = user_name;
+		this.user_no = user_no;
 		this.reply_content = reply_content;
 		this.reply_regist_date = reply_regist_date;
 	}
@@ -39,12 +39,12 @@ public class ReplyVo {
 		this.comment_no = comment_no;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public int getUser_no() {
+		return user_no;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 
 	public String getReply_content() {
@@ -65,7 +65,7 @@ public class ReplyVo {
 
 	@Override
 	public String toString() {
-		return "ReplyVo [reply_no=" + reply_no + ", comment_no=" + comment_no + ", user_name=" + user_name
+		return "ReplyVo [reply_no=" + reply_no + ", comment_no=" + comment_no + ", user_no=" + user_no
 				+ ", reply_content=" + reply_content + ", reply_regist_date=" + reply_regist_date + "]";
 	}
 

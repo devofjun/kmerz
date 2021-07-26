@@ -44,10 +44,16 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	@Override
-	public int getUserPostCount(String user_name) {
-		int count = postdao.selectUserPostCount(user_name);
+	public int getUserPostCount(int user_no) {
+		int count = postdao.selectUserPostCount(user_no);
 		return count;
 
+	}
+
+	@Override
+	public int getNewPostSeq() {
+		// 새로운 글 시퀀스 생성
+		return postdao.selectSeqPostno();
 	}
 
 }

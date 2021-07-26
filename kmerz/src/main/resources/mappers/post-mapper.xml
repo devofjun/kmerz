@@ -25,26 +25,31 @@
 	and category_no = #{category_no}
 </select>
 
+<!-- 글번호 시퀀스 조회 -->
+<select id="selectSeqPostno" resultType="Integer">
+	select seq_post_no.nextval from dual
+</select>
+
+
 <insert id="postingDetail">
-	insert into tbl_posts(post_no, user_name, community_id, category_no, post_title,
-	post_content_file, post_readcount, post_recommand, post_lastupdate, post_status) 
-	values(
+insert into tbl_posts values(
 	seq_post_no.nextval,
-	#{user_name},
+	#{user_no},
 	#{community_id},
 	#{category_no},
 	#{post_title},
 	#{post_content_file},
 	0,
 	0,
-	#{post_lastupdate},
-	#{post_status}
+	sysdate,
+	'accept'
+	
 	)
 </insert>
 
 <!-- 로그인 유저가 작성한 개시글 갯수 구하기 -->
 <select id="selectUserPostCount" resultType="int">
-	select count(*) from tbl_posts where user_name = #{user_name}
+	select count(*) from tbl_posts where user_no = #{user_no}
 </select>
 
 </mapper>

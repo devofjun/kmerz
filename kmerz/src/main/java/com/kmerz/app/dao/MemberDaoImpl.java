@@ -56,6 +56,14 @@ public class MemberDaoImpl implements MemberDao{
 		int count = sqlsession.selectOne(NAMESPACE + "selectUserCount", map);
 		return count;
 	}
+
+	@Override
+	public void updateUserName(int user_no, String user_name) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_no", user_no);
+		map.put("user_name", user_name);
+		sqlsession.update(NAMESPACE + "updateUserName", map);
+	}
 	
 	
 
