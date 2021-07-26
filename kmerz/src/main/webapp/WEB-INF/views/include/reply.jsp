@@ -19,8 +19,7 @@
 			<div class="reply-user-profile">
 				<img src="/resources/images/starcraft_small.jpg">
 				<div class="reply-user-status">
-					<span> 
- 	 <%=memList.get(i).getUser_name()%>
+					<span> <%=mentList.get(i).getUser_name()%>
 					</span>
 				</div>
 			</div>
@@ -32,10 +31,18 @@
 				<span>3분전</span>
 			</div>
 		</div>
-			<div class="reply-section">
-				
-
+		<div class="reply-section">
+			<div class="reply-content">
+				<div class="reply-form-input">
+					<textarea id="comment_content" cols="120" rows="10"></textarea>
+				</div>
+				<div class="reply-submit">
+					<button class="btn">CON</button>
+					<button class="btn"
+						onclick="addReply()">REPLY</button>
+				</div>
 			</div>
+		</div>
 	</div>
 </div>
 <%

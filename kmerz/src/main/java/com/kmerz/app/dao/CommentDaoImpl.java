@@ -23,5 +23,9 @@ public class CommentDaoImpl implements CommentDao {
 		int count = session.selectOne(NAMESPACE + "selectuserCommentCount", user_name);
 		return count;
 	}
+	@Override
+	public void insertComment(CommentVo commentVo) {
+		session.insert(NAMESPACE + "insertComment", commentVo);
+	}
 
 }

@@ -22,5 +22,9 @@ public class CommentServiceImpl implements CommentService {
 		int count = CommentDao.selectuserCommentCount(user_name);
 		return count;
 	}
+	@Override
+	public void insertComment(CommentVo commentVo) {
+		CommentDao.insertComment(commentVo);
+	}
 
 }
