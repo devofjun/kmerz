@@ -59,7 +59,9 @@ public class MediaController {
 		System.out.println(vo);
 		pService.posting(vo);
 		return "include/upload_media";
-		}		
+		}	
+	
+	@Inject
 	private SteamAppService steamAppService;
 
 	@ResponseBody

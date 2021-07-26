@@ -104,15 +104,13 @@
 		<div id="cardUserInfo" class="col-5" style="display: inline">
 			<div class="card text-center">
 				<div class="card-header">
-					<div class="row">
-					<div class="col">
-						<span>카테고리</span>
-					</div>
-					<div class="col">
-						<span>이름</span>
-					</div>
-					</div>
+					<span>글번호</span>
 				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">An item</li>
+					<li class="list-group-item">A second item</li>
+					<li class="list-group-item">A third item</li>
+				</ul>
 				<div class="card-body">
 					<h5 class="card-title">글제목</h5>
 					<p class="card-text">글내용~~~</p>
