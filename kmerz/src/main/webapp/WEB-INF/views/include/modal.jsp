@@ -30,7 +30,7 @@
 					<div class="modal-background border">
 						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
 						<div class="modal-body">
-							<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postVo.getPost_content_file())%></p>
+							<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
 						</div>
 					</div>
 				</div>
