@@ -72,15 +72,17 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach var="postsVo" items="${postList }">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${postsVo.post_no }</td>
+						<td>${postsVo.post_lastupdate }</td>
+						<td>${postsVo.community_id }/${postVo.category_no }</td>
+						<td>${postsVo.post_title }</td>
+						<td>${postsVo.user_id }</td>
+						<td>${postsVo.post_readcount }</td>
+						<td>${postsVo.post_recommand }</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 

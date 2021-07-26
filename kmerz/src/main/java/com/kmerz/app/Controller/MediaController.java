@@ -1,18 +1,13 @@
 package com.kmerz.app.Controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,13 +41,13 @@ public class MediaController {
 		
 		String fileName = ContentReadAndWrite.WriteContent(file, seqPostNo);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		String user_name = memberVo.getUser_name();
+		String user_id = memberVo.getUser_id();
 		PostsVo vo = new PostsVo();
 		vo.setPost_no(seqPostNo);
 		vo.setCategory_no(category_no);
 		vo.setCommunity_id(community_id);
 		vo.setPost_title(post_title);
-		vo.setUser_name(user_name);
+		vo.setUser_id(user_id);
 		vo.setPost_content_file(fileName);
 		vo.setPost_lastupdate(new Timestamp(System.currentTimeMillis()));
 		vo.setPost_status("accept");

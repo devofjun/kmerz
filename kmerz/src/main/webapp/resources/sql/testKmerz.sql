@@ -113,6 +113,7 @@ insert into tbl_steamapp values(
     'http://cdn.akamai.steamstatic.com/steam/apps/256805055/movie480_vp9.webm?t=1602985982',
     'https://cdn.akamai.steamstatic.com/steam/apps/1049590/page_bg_generated_v6b.jpg?t=1626949132'
 );
+select * from tbl_steamapp;
 
 ----------------------------------------------------
 -- 테스트 데이터 삽입(스팀 앱 테이블)

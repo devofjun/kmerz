@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class PostsVo {
 	private int post_no;
-	private String user_name;
+	private String user_id;
 	private String community_id;
 	private int category_no;
 	private String post_title;
@@ -19,12 +19,12 @@ public class PostsVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostsVo(int post_no, String user_name, String community_id, int category_no, String post_title,
+	public PostsVo(int post_no, String user_id, String community_id, int category_no, String post_title,
 			String post_content_file, int post_readcount, int post_recommand, Timestamp post_lastupdate,
 			String post_status) {
 		super();
 		this.post_no = post_no;
-		this.user_name = user_name;
+		this.user_id = user_id;
 		this.community_id = community_id;
 		this.category_no = category_no;
 		this.post_title = post_title;
@@ -43,12 +43,12 @@ public class PostsVo {
 		this.post_no = post_no;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public String getUser_id() {
+		return user_id;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getCommunity_id() {
@@ -117,12 +117,11 @@ public class PostsVo {
 
 	@Override
 	public String toString() {
-		return "PostsVo [post_no=" + post_no + ", user_name=" + user_name + ", community_id=" + community_id
+		return "PostsVo [post_no=" + post_no + ", user_id=" + user_id + ", community_id=" + community_id
 				+ ", category_no=" + category_no + ", post_title=" + post_title + ", post_content_file="
 				+ post_content_file + ", post_readcount=" + post_readcount + ", post_recommand=" + post_recommand
 				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + "]";
 	}
 
-	
 	
 }
