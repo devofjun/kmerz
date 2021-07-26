@@ -7,12 +7,11 @@
 <%
 	PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 %>
-<head>
-</head>
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
-			<span class="modal-close" onclick="closeModal()">x</span>
+			<span class="modal-close" onclick="closeModal()"><ion-icon
+					size="large" name="close-sharp"></ion-icon></span>
 		</div>
 		<div class="modal-postContent">
 			<div class="modal-content-left">
@@ -30,8 +29,8 @@
 					</div>
 					<div class="modal-background border">
 						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
-						<div class="modal-body" id="modal-body" >
-						<%=ContentReadAndWrite.ReadContent("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postVo.getPost_content_file())%>
+						<div class="modal-body">
+							<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post\\" + postList.get(i).getPost_content_file())%></p>
 						</div>
 					</div>
 				</div>
