@@ -57,4 +57,10 @@ public class PostDaoImpl implements PostDao {
 		int count = session.selectOne(NAMESPACE + "selectUserPostCount", user_name);
 		return count;
 	}
+
+	@Override
+	public int selectSeqPostno() {
+		// 글번호 시퀀스 생성
+		return session.selectOne(NAMESPACE+"selectSeqPostno");
+	}
 }

@@ -33,7 +33,7 @@ public class BannerServiceImpl implements BannerService {
 	@Transactional
 	@Override
 	public List<SteamAppVo> getBannerList() {
-		// TODO Auto-generated method stub
+		// 배너 정보 가져오기
 		List<BannerVo> bannerList = bannerDao.selectAll();
 		List<SteamAppVo> appList = new ArrayList<>();
 		for(BannerVo vo : bannerList) {

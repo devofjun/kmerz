@@ -87,14 +87,14 @@ public class ManagementController {
 		return "management/CustomersPage";
 	}
 	
-	// 컨텐츠 관리 페이지
-	@RequestMapping(value = "/contents.do", method = RequestMethod.GET)
-	public String contents(Model model) throws Exception {
+	// 배너/사이드바 관리 페이지
+	@RequestMapping(value = "/bsSetting.do", method = RequestMethod.GET)
+	public String bsSetting(Model model) throws Exception {
 		List<SteamAppVo> bannerList = bannerService.getBannerList();
 		
 		model.addAttribute("bannerAppList", bannerList);
 		
-		return "management/ContentsPage";
+		return "management/ContentsBSPage";
 	}
 	// 배너 적용하기
 	@ResponseBody
@@ -103,6 +103,13 @@ public class ManagementController {
 		System.out.println("setBanner :" + bannerList);
 		bannerService.initBanner(bannerList);
 		return "success";
+	}
+	
+	// 게시물 관리 페이지
+	@RequestMapping(value = "/postSetting.do", method = RequestMethod.GET)
+	public String postSetting() throws Exception {
+		
+		return "management/ContentsPostPage";
 	}
 	
 	// 고객 주문 관리 페이지
