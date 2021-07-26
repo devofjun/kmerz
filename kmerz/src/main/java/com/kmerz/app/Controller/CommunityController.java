@@ -71,11 +71,11 @@ public class CommunityController {
 		// 로그인이 되어 있을때
 		if(memberVo != null) {
 			// 유저의 게시글 갯수 구하기
-			String user_name = memberVo.getUser_name();
-			userPostCount = postService.getUserPostCount(user_name);
+			int user_no = memberVo.getUser_no();
+			userPostCount = postService.getUserPostCount(user_no);
 			
 			//유저의 댓글 갯수 구하기
-			userCommentCount = commentService.getUserCommentCount(user_name);
+			userCommentCount = commentService.getUserCommentCount(user_no);
 		}
 		model.addAttribute("userPostCount", userPostCount);
 		model.addAttribute("userCommentCount", userCommentCount);

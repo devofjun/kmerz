@@ -46,4 +46,9 @@ public class MemberServiceImpl implements MemberService {
 		return count;
 	}
 
+	@Override
+	public void changeUserName(int user_no, String user_name) {
+		memberDao.updateUserName(user_no, user_name);
+	}
+
 }

@@ -45,7 +45,7 @@
 						
 					</c:forEach>
 					</span></a><span>
-						- 3분전 / 작성자 : ${PostVo.user_name}</span><a href="#"><img
+						- 3분전 / 작성자 : ${PostVo.user_no}</span><a href="#"><img
 
 						src="/resources/images/starcraft_small.jpg"></a>
 

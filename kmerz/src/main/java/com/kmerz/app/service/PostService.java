@@ -10,6 +10,6 @@ public interface PostService {
 	public List<PostsVo> getCommunityPostList(String community_id);
 	public void posting(PostsVo vo);
 	public List<PostsVo> getCategoryPostList(String community_id, int category_no);
-	public int getUserPostCount(String user_name);
+	public int getUserPostCount(int user_no);
 	public int getNewPostSeq();
 }

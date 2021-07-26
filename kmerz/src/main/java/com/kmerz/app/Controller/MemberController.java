@@ -125,7 +125,7 @@ public class MemberController {
 	@RequestMapping(value = "/userNameCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String userNameCheck(String user_name) {
-		System.out.println("user_name: " + user_name);
+		// System.out.println("user_name: " + user_name);
 		int count = memberService.getUserNameCheckResult(user_name);
 		String userNameCheckResult = "";
 		if(count == 0) {
@@ -134,5 +134,16 @@ public class MemberController {
 			userNameCheckResult = "unAvailable";
 		}
 		return userNameCheckResult;
+	}
+	
+	@RequestMapping(value = "/changeUserName", method = RequestMethod.GET)
+	public String changeUserName(String user_name, HttpSession session) {
+		// System.out.println("user_name :" + user_name);
+		MemberVo getMemberVo = (MemberVo)session.getAttribute("loginVo");
+		int user_no = getMemberVo.getUser_no();
+		String user_id = getMemberVo.getUser_id();
+		String user_pw = getMemberVo.getUser_pw();
+		memberService.changeUserName(user_no, user_name);
+		return "redirect:/m/userInfo";
 	}
 }

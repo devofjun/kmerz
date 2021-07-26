@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class CommentVo {
 	private int comment_no;
 	private int post_no;
-	private String user_name;
+	private int user_no;
 	private String comment_content;
 	private int comment_reply_count;
 	private Timestamp comment_regist_date;
@@ -15,12 +15,12 @@ public class CommentVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommentVo(int comment_no, int post_no, String user_name, String comment_content, int comment_reply_count,
+	public CommentVo(int comment_no, int post_no, int user_no, String comment_content, int comment_reply_count,
 			Timestamp comment_regist_date) {
 		super();
 		this.comment_no = comment_no;
 		this.post_no = post_no;
-		this.user_name = user_name;
+		this.user_no = user_no;
 		this.comment_content = comment_content;
 		this.comment_reply_count = comment_reply_count;
 		this.comment_regist_date = comment_regist_date;
@@ -42,12 +42,12 @@ public class CommentVo {
 		this.post_no = post_no;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public int getUser_no() {
+		return user_no;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 
 	public String getComment_content() {
@@ -76,7 +76,7 @@ public class CommentVo {
 
 	@Override
 	public String toString() {
-		return "CommentVo [comment_no=" + comment_no + ", post_no=" + post_no + ", user_name=" + user_name
+		return "CommentVo [comment_no=" + comment_no + ", post_no=" + post_no + ", user_no=" + user_no
 				+ ", comment_content=" + comment_content + ", comment_reply_count=" + comment_reply_count
 				+ ", comment_regist_date=" + comment_regist_date + "]";
 	}
