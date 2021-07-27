@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- post시작 -->
 <c:forEach var="PostVo" items="${postList}">
@@ -52,13 +51,7 @@
 			</div>
 			<div class="postContent border" onclick="openModal(${PostVo.post_no})">
 				<p class="icon-color post-content">
-					<c:forEach var="ContentReadAndWrite" items="${contentReadAndWrite}">
-						<c:choose>
-							<c:when test="${CategoryVo.category_no == PostVo.category_no}">
-								${ContentReadAndWrite.ReadContent(${PostVo.post_content_file})}
-							</c:when>
-						</c:choose>
-					</c:forEach>
+					${PostVo.post_content_file}
 				</p>
 			</div>
 
