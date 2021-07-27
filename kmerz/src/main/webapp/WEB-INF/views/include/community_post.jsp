@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!-- post시작 -->
 <c:forEach var="PostVo" items="${postList}">
 <div id="${PostVo.post_no}">
@@ -44,15 +44,22 @@
 						</c:choose>
 						
 					</c:forEach>
-					</span></a><span>
-						- 3분전 / 작성자 : ${PostVo.user_no}</span><a href="#"><img
-
-						src="/resources/images/starcraft_small.jpg"></a>
+					</span></a> <span>  </span>
+					<img src="/resources/images/starcraft_small.jpg">
+					<span>${PostVo.user_no}</span><a href="#"></a>
 
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(${PostVo.post_no})">
-				<p class="icon-color">${PostVo.post_content_file}</p>
+				<p class="icon-color post-content">
+					<c:forEach var="ContentReadAndWrite" items="${contentReadAndWrite}">
+						<c:choose>
+							<c:when test="${CategoryVo.category_no == PostVo.category_no}">
+								${ContentReadAndWrite.ReadContent(${PostVo.post_content_file})}
+							</c:when>
+						</c:choose>
+					</c:forEach>
+				</p>
 			</div>
 
 

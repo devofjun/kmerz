@@ -4,7 +4,7 @@
 <script>
 $(document).ready(function() {
 	var user_name = "";
-	$("#btnUserNameCheck").click(function() {
+	$("#user_name").keyup(function() {
 //		console.log("click");
 		user_name = $("#user_name").val();
 //		console.log("requestName: " + requestName);
@@ -24,10 +24,14 @@ $(document).ready(function() {
 	});
 	$("#btnChangeUserName").click(function() {
 		if($("#spanMessage").text() == "") {
-			console.log("중복 체크해주세요");
-		}
-		if(user_name != $("#user_name").val()) {
+			$("#span").text("닉네임을 바꿔주세요");
+		} else if($("#spanMessage").text() == "이미 사용중인 닉네임 입니다.") {
+			console.log("사용할 수 없는 닉네임 입니다.");
+		} else if(user_name != $("#user_name").val()) {
 			console.log("중복체크를 다시 해주세요.");
+		} else if ($("#spanMessage").text() == "사용가능한 닉네임 입니다.") {
+			alert("수정완료");
+			$("#changeUserNameForm").submit();
 		}
 	});
 });
@@ -37,7 +41,7 @@ $(document).ready(function() {
 <hr>
 <div>
 	<!-- 여기가 폼 -->
-	<form action="/m/changeUserName" method="get">
+	<form id="changeUserNameForm" action="/m/changeUserName" method="get">
 		<div class="mb-3 form-group">
 			<label for="exampleInputEmail1" class="form-label">Email </label> <input
 				type="email" class="form-control" id="exampleInputEmail1"
@@ -48,14 +52,16 @@ $(document).ready(function() {
 		<div class="mb-3 form-group">
 			<label style="float:left; margin-top:5px; margin-right:5px;"
 				for="user_name" class="form-label">닉네임</label>
-			<button style="float:left;" type="button" class="btn btn-primary btn-sm"
-					id="btnUserNameCheck">중복 확인</button>
-			<span style="float:left; margin-top:5px;" id = "spanMessage"></span>
+			<!-- <button style="float:left;" type="button" class="btn btn-primary btn-sm"
+					id="btnUserNameCheck">중복 확인</button> -->
+			<span style="float:left; margin-top:5px; color:red;" id = "spanMessage" value=""></span>
 			<input type="text" class="form-control" id="user_name" name="user_name"
 				value="${loginVo.user_name}">
 		</div>
 		<div>
-			<button type="button" class="btn btn-primary btn-sm" id="btnChangeUserName">변경</button>
+			<button type="button" class="btn btn-primary btn-sm" id="btnChangeUserName"
+					style="float:left; margin-top:5px; margin-right:5px;">변경</button>
+			<span style="float:left; margin-top:5px; color:red;" id="span" value=""></span>
 		</div>
 	</form>
 </div>
