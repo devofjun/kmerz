@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
+import com.kmerz.app.service.PostService;
 import com.kmerz.app.service.SteamAppService;
+import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.AdminVo;
 import com.kmerz.app.vo.BannerVo;
+import com.kmerz.app.vo.PostsVo;
 import com.kmerz.app.vo.SteamAppVo;
 
 @Controller
@@ -29,6 +32,8 @@ public class ManagementController {
 	BannerService bannerService;
 	@Inject
 	SteamAppService steamAppService;
+	@Inject
+	PostService postService;
 
 	// uri 간편화 admin 입력하면 로그인 페이지나 대시보드 페이지로 넘어감
 	@RequestMapping
@@ -81,14 +86,14 @@ public class ManagementController {
 		return "management/DashBoardPage";
 	}
 
-	// 고객 주문 페이지
+	// 고객 관리 페이지
 	@RequestMapping(value = "/customers", method = RequestMethod.GET)
 	public String customers() throws Exception {
 		return "management/CustomersPage";
 	}
 	
 	// 배너/사이드바 관리 페이지
-	@RequestMapping(value = "/bsSetting.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/contents/bsSettingPage", method = RequestMethod.GET)
 	public String bsSetting(Model model) throws Exception {
 		List<SteamAppVo> bannerList = bannerService.getBannerList();
 		
@@ -106,11 +111,30 @@ public class ManagementController {
 	}
 	
 	// 게시물 관리 페이지
-	@RequestMapping(value = "/postSetting.do", method = RequestMethod.GET)
-	public String postSetting() throws Exception {
-		
+	@RequestMapping(value = "/contents/postSettingPage", method = RequestMethod.GET)
+	public String postSetting(Model model) throws Exception {
+		List<PostsVo> postsVo = postService.selectAllPosts();
+		System.out.println(postsVo);
+		model.addAttribute("postList", postsVo);
 		return "management/ContentsPostPage";
 	}
+	
+	// 게시물 정보 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/contents/getPostInfo", method = RequestMethod.GET)
+	public PostsVo getPostInfo(int post_no) throws Exception {
+		return postService.selectPost(post_no);
+	}
+	
+	// 게시물 내용 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/contents/getPostContent", method = RequestMethod.GET)
+	public String getPostContent(String post_content_file) throws Exception {
+		return ContentReadAndWrite.ReadContent(post_content_file);
+	}
+	
+	
+	
 	
 	// 고객 주문 관리 페이지
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
