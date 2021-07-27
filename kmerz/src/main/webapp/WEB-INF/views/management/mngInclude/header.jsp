@@ -40,6 +40,10 @@
 		font-size: 3.5rem;
 	}
 }
+
+.cspointer {
+	cursor:pointer;
+}
 </style>
 <!-- Custom styles for this template -->
 <link href="/resources/bootstrap/dashboard.css" rel="stylesheet">
