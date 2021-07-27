@@ -8,7 +8,6 @@
 	List<PostsVo> postList = (List<PostsVo>) request.getAttribute("postList");
 	List<CommunityVo> commList = (List<CommunityVo>) request.getAttribute("commList");
 %>
-
 <!-- 포스트 DEFAULT 시작 -->
 
 <%

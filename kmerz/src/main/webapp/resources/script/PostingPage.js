@@ -1,6 +1,5 @@
 function getCategoryInput(){
 	var communityid = document.getElementById("community-input").value;
-	console.log("ang");
 	var categoryinput = document.getElementById("category-input");
 	var appendedcategory = document.getElementById("appended-category");
 	includeHTML(categoryinput, 'include/setCategory?communityid=' + communityid);
@@ -9,7 +8,10 @@ function posting(){
 	var content = document.getElementById("editable").innerHTML;
 	var community_id = document.getElementById("community-input").value;
 	console.log(community_id);
-	var category_no = document.getElementById("category-input").value;
+	var categoryinput = document.getElementById("category-input-val");
+	console.log(categoryinput);
+	var category_no = categoryinput.value;
+	console.log(category_no);
 	var post_title = document.getElementById("post_title").value;
 	var textFile = null,
   makeTextFile = function (content) {
@@ -28,6 +30,9 @@ function upload(file, community_id, category_no, post_title){
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "media/upload_media");
 		xhr.send(data);
+		var post_no = xhr.response;
+		console.log(post_no);
+		location.href="/include/modal?post_no="+ post_no;
 }
 function openFILE_INSERT_Modal() {
   includeHTML(document.querySelector('.modal-section'), '/include/FILE_INSERT_MODAL');
