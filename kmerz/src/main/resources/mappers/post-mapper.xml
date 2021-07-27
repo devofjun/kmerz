@@ -33,7 +33,7 @@
 
 <insert id="postingDetail">
 insert into tbl_posts values(
-	#{post_no},	
+	#{post_no},
 	#{user_no},
 	#{community_id},
 	#{category_no},

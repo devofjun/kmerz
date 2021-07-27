@@ -8,10 +8,6 @@
 	PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 	System.out.println(postVo);
 %>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
-<link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
-<link rel="stylesheet" href="/resources/css/header.css?ver6">
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
@@ -26,7 +22,7 @@
 							<a href="#"><img class="icon-color rotate-180 "
 								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 						</div>
-						<span><%=postVo.getPost_recommand()%></span>
+						<span>0</span>
 						<div class="like">
 							<a href="#"><img class="icon-color"
 								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>

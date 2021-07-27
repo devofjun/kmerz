@@ -19,7 +19,7 @@
 	#{post_no},
 	#{user_name},
 	#{comment_content},
-	#{comment_reply_count},
+	0,
 	sysdate
 	)
 </insert>

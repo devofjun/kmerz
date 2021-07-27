@@ -16,11 +16,9 @@
 			<li><img class="icon-color"
 				src="/resources/images/icons/menu_black_24dp.svg"><span>CATEGORY</span></li>
 			<li><img class="icon-color"
-				src="/resources/images/icons/menu_black_24dp.svg"><span>POST
-					TYPE</span></li>
+				src="/resources/images/icons/menu_black_24dp.svg"><span>TYPE</span></li>
 			<li><a href="/posting"><img class="icon-color"
-				src="/resources/images/icons/web_asset_black_24dp.svg"><span>POSTING
-					DETAIL</span></a></li>
+				src="/resources/images/icons/web_asset_black_24dp.svg"><span>DETAIL</span></a></li>
 			<li><img class="icon-color"
 				src="/resources/images/icons/check_circle_outline_black_24dp.svg"><span>POST</span></li>
 		</ul>
