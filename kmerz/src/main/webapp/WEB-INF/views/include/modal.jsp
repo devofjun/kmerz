@@ -8,6 +8,10 @@
 	PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 	System.out.println(postVo);
 %>
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
+<link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
+<link rel="stylesheet" href="/resources/css/header.css?ver6">
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
