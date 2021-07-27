@@ -30,9 +30,7 @@ function upload(file, community_id, category_no, post_title){
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "media/upload_media");
 		xhr.send(data);
-		var post_no = xhr.response;
-		console.log(post_no);
-		location.href="/include/modal?post_no="+ post_no;
+
 }
 function openFILE_INSERT_Modal() {
   includeHTML(document.querySelector('.modal-section'), '/include/FILE_INSERT_MODAL');

@@ -31,8 +31,13 @@ public class MediaController {
 	@Inject
 	PostService pService;
 	
+	@RequestMapping(value = "/modal", method = RequestMethod.GET)
+	public String modal() {
+		return "modal";
+	}
+	
 	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
-	public void upload_media(@RequestParam("file") MultipartFile file,
+	public String upload_media(@RequestParam("file") MultipartFile file,
 							   @RequestParam("community_id") String community_id,
 							   @RequestParam("category_no")  int category_no,
 							   @RequestParam("post_title")   String post_title,	
@@ -55,7 +60,8 @@ public class MediaController {
 		vo.setPost_status("accept");
 		System.out.println(vo);
 		pService.posting(vo);
-		model.addAttribute("post_no",seqPostNo);
+		model.addAttribute("post_no", seqPostNo);
+		return "/include/modal";
 		}	
 	
 	@Inject
