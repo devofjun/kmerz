@@ -42,9 +42,16 @@ public class MemberDaoImpl implements MemberDao{
 		return memberVo;
 	}
 
+	// id로 유저 정보 찾기
 	@Override
 	public MemberVo selectID(String user_id) {
 		return sqlsession.selectOne(NAMESPACE + "selectID", user_id);
+	}
+	
+	// 유저고유번호로 유저 정보 가져오기
+	@Override
+	public MemberVo selectNO(int user_no) {
+		return sqlsession.selectOne(NAMESPACE+"selectNO", user_no);
 	}
 
 	@Override
