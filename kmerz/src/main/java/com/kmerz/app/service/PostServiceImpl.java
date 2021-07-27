@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kmerz.app.dao.CategoryDao;
 import com.kmerz.app.dao.CommunityDao;
@@ -26,6 +27,7 @@ public class PostServiceImpl implements PostService{
 	@Inject
 	CategoryDao categoryDao;
 	
+	@Transactional
 	@Override
 	public List<PostsVo> selectAllPosts() {
 		// 모든 게시글 
@@ -46,8 +48,17 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	public PostsVo selectPost(int post_no) {
-		PostsVo post = postdao.selectPost(post_no);
-		return post;
+		PostsVo postVo = postdao.selectPost(post_no);
+		// 유저 이름
+		MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
+		postVo.setUser_name(memberVo.getUser_name());
+		// 커뮤니티 이름
+		CommunityVo commVo = communityDao.getOneCommunity(postVo.getCommunity_id());
+		postVo.setCommunity_name(commVo.getCommunity_name());
+		// 카테고리 이름
+		CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
+		postVo.setCategory_name(categoryVo.getCategory_name());		
+		return postVo;
 	}
 
 	@Override

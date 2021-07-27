@@ -20,16 +20,6 @@ $(document).ready(function() {
 	// steam app list 담을 변수
 	var steamJson
 	
-	// 배너/사이드바 설정 버튼
-	$("#btnBSSetting").click(function() {
-		location.href = "/admin/contents/bsSettingPage";
-	});
-	
-	// 게시글 설정 버튼
-	$("#btnPostSetting").click(function() {
-		location.href = "/admin/contents/postSettingPage";
-	});
-	
 	// 컨텐츠 관리 영역 마우스 오버
 	$(".mouse-border-primary").mouseenter(function() {
 		$(this).addClass("border-primary");
@@ -262,8 +252,10 @@ $(document).ready(function() {
 	<h1 class="h2">컨텐츠 관리</h1>
 	<div class="btn-toolbar mb-2 mb-md-0">
 		<div class="btn-group me-2">
-			<button id="btnBSSetting" type="button" class="btn btn-sm btn-outline-secondary active">배너/사이드바</button>
-			<button id="btnPostSetting"type="button" class="btn btn-sm btn-outline-secondary">게시글</button>
+			<a href="/admin/contents/bsSettingPage" type="button"
+				class="btn btn-sm btn-outline-secondary active">배너/사이드바</a>
+			<a href="/admin/contents/postSettingPage" id="btnPostSetting" type="button"
+				class="btn btn-sm btn-outline-secondary">게시글</a>
 		</div>
 		<button id="btnSave" type="button"
 			class="btn btn-sm btn-outline-success"
