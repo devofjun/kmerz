@@ -6,17 +6,41 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kmerz.app.dao.CategoryDao;
+import com.kmerz.app.dao.CommunityDao;
+import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dao.PostDao;
+import com.kmerz.app.vo.CategoryVo;
+import com.kmerz.app.vo.CommunityVo;
+import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 @Service
 public class PostServiceImpl implements PostService{
 
 	@Inject
 	PostDao postdao;
+	@Inject
+	MemberDao memberDao;
+	@Inject
+	CommunityDao communityDao;
+	@Inject
+	CategoryDao categoryDao;
 	
 	@Override
 	public List<PostsVo> selectAllPosts() {
+		// 모든 게시글 
 		List<PostsVo> PostsList = postdao.selectAllPosts();
+		for(PostsVo postVo : PostsList) {
+			// 유저 이름
+			MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
+			postVo.setUser_name(memberVo.getUser_name());
+			// 커뮤니티 이름
+			CommunityVo commVo = communityDao.getOneCommunity(postVo.getCommunity_id());
+			postVo.setCommunity_name(commVo.getCommunity_name());
+			// 카테고리 이름
+			CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
+			postVo.setCategory_name(categoryVo.getCategory_name());
+		}
 		return PostsList;
 	}
 
