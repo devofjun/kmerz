@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,12 +31,18 @@ public class MediaController {
 	@Inject
 	PostService pService;
 	
+	@RequestMapping(value = "/modal", method = RequestMethod.GET)
+	public String modal() {
+		return "modal";
+	}
+	
 	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
 	public String upload_media(@RequestParam("file") MultipartFile file,
 							   @RequestParam("community_id") String community_id,
 							   @RequestParam("category_no")  int category_no,
 							   @RequestParam("post_title")   String post_title,	
-							   HttpSession session
+							   HttpSession session,
+							   Model model
 							   ) throws IOException {
 		int seqPostNo = pService.getNewPostSeq();
 		
@@ -53,7 +60,8 @@ public class MediaController {
 		vo.setPost_status("accept");
 		System.out.println(vo);
 		pService.posting(vo);
-		return "include/upload_media";
+		model.addAttribute("post_no", seqPostNo);
+		return "redirect:/include/modal";
 		}	
 	
 	@Inject

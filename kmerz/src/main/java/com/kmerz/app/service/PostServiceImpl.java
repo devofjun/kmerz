@@ -50,6 +50,8 @@ public class PostServiceImpl implements PostService{
 	public PostsVo selectPost(int post_no) {
 		PostsVo postVo = postdao.selectPost(post_no);
 		// 유저 이름
+		System.out.println("포스트노:" + post_no);
+		System.out.println("포스트븨오:" + postVo);
 		MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
 		postVo.setUser_name(memberVo.getUser_name());
 		// 커뮤니티 이름

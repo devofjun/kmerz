@@ -8,7 +8,7 @@
 }
 .userinfo
 {
-	margin:5%;	
+	margin: 0 5%;
 	width: 90%;
 	height:200px;
 }
@@ -23,7 +23,7 @@
 }
 .hotList ol li
 {
-	font-size:20px;
+	font-size:18;
 }
 .hr
 {
@@ -32,4 +32,5 @@
 	border-bottom-style: solid;
 	display:flex;
 	justify-content: center;
+	height:35;
 }

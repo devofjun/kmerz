@@ -1,7 +1,17 @@
+function getCategoryInput(){
+	var communityid = document.getElementById("community-input").value;
+	var categoryinput = document.getElementById("category-input");
+	var appendedcategory = document.getElementById("appended-category");
+	includeHTML(categoryinput, 'include/setCategory?communityid=' + communityid);
+}
 function posting(){
 	var content = document.getElementById("editable").innerHTML;
-	var community_id = 'star';
-	var category_no = 100;
+	var community_id = document.getElementById("community-input").value;
+	console.log(community_id);
+	var categoryinput = document.getElementById("category-input-val");
+	console.log(categoryinput);
+	var category_no = categoryinput.value;
+	console.log(category_no);
 	var post_title = document.getElementById("post_title").value;
 	var textFile = null,
   makeTextFile = function (content) {
@@ -20,6 +30,7 @@ function upload(file, community_id, category_no, post_title){
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "media/upload_media");
 		xhr.send(data);
+
 }
 function openFILE_INSERT_Modal() {
   includeHTML(document.querySelector('.modal-section'), '/include/FILE_INSERT_MODAL');
@@ -44,5 +55,5 @@ function includeHTML(divContainer, urlHTML) {
 function insertLink(){
 	var url = document.getElementById("url");
 	var content = document.getElementById("editable");
-	content.innerHTML += "<div><figure class='align-center'><img draggable='false' src='" + url.value + "'></figure><div>"
+	content.innerHTML += "<div><img draggable='false' src='" + url.value + "'><div>"
 }

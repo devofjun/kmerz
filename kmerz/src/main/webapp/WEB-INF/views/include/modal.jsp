@@ -6,6 +6,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	PostsVo postVo = (PostsVo) request.getAttribute("postVo");
+	System.out.println(postVo);
 %>
 <div id="myModal" class="modal">
 	<div class="modal-content">
@@ -30,7 +31,7 @@
 					<div class="modal-background border">
 						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
 						<div class="modal-body">
-							<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
+							<p class="post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
 						</div>
 					</div>
 				</div>
@@ -55,7 +56,15 @@
 				<div class="replySection">
 					<div class="reply_input">
 						<span>Comment This Post</span>
-						<%@ include file="reply_input.jsp"%>
+						<div class="reply-content">
+							<div class="reply-form-input">
+								<textarea id="comment_content" cols="120" rows="10"></textarea>
+							</div>
+							<div class="reply-submit">
+								<button class="btn">CON</button>
+								<button class="btn" onclick="addComment('<%=postVo.getPost_no()%>')">COMMENT</button>
+							</div>
+						</div>
 					</div>
 					<div class="replyNav">
 						<span>sort by</span> <select><option>best</option></select>
