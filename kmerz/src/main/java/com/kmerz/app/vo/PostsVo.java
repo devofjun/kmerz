@@ -19,6 +19,7 @@ public class PostsVo {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public PostsVo(int post_no, int user_no, String community_id, int category_no, String post_title,
 			String post_content_file, int post_readcount, int post_recommand, Timestamp post_lastupdate,
 			String post_status) {
@@ -123,6 +124,5 @@ public class PostsVo {
 				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + "]";
 	}
 
-	
 	
 }

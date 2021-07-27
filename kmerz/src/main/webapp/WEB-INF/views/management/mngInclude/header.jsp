@@ -122,7 +122,7 @@
 								Customers
 						</a></li>
 						<li class="nav-item"><a class="nav-link" title="컨텐츠 관리"
-							href="/admin/bsSetting.do"> <span data-feather="layers"></span>
+							href="/admin/contents/bsSettingPage"> <span data-feather="layers"></span>
 								Contents
 						</a></li>
 						<li class="nav-item"><a class="nav-link" title="고객 주문"

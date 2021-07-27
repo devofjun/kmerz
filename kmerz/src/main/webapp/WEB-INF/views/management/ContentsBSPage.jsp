@@ -22,12 +22,12 @@ $(document).ready(function() {
 	
 	// 배너/사이드바 설정 버튼
 	$("#btnBSSetting").click(function() {
-		location.href = "/admin/bsSetting.do";
+		location.href = "/admin/contents/bsSettingPage";
 	});
 	
 	// 게시글 설정 버튼
 	$("#btnPostSetting").click(function() {
-		location.href = "/admin/postSetting.do";
+		location.href = "/admin/contents/postSettingPage";
 	});
 	
 	// 컨텐츠 관리 영역 마우스 오버
