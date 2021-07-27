@@ -19,4 +19,8 @@
 	#{category_name}, #{category_description}, #{category_status})
 </insert>
 
+<select id="selectNO" resultType="CategoryVo">
+	select * from tbl_category where category_no = #{category_no}
+</select>
+
 </mapper>

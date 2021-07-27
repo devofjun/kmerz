@@ -4,16 +4,14 @@
 <%@ include file="./mngInclude/header.jsp"%>
 <script>
 	$(document).ready(function() {
-		//배너/사이드바 설정 버튼
+		// 배너/사이드바 설정 버튼
 		$("#btnBSSetting").click(function() {
-
-			location.href = "/admin/bsSetting.do";
+			location.href = "/admin/contents/bsSettingPage";
 		});
-
+		
 		// 게시글 설정 버튼
 		$("#btnPostSetting").click(function() {
-
-			location.href = "/admin/postSetting.do";
+			location.href = "/admin/contents/postSettingPage";
 		});
 	});
 </script>
@@ -69,6 +67,7 @@
 						<th>작성자</th>
 						<th>조회수</th>
 						<th>추천수</th>
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -76,9 +75,9 @@
 					<tr> 
 						<td>${postsVo.post_no }</td>
 						<td>${postsVo.post_lastupdate }</td>
-						<td>${postsVo.community_id }/${postVo.category_no }</td>
+						<td><span>${postsVo.community_name }/${postsVo.category_name }</span></td>
 						<td>${postsVo.post_title }</td>
-						<td>${postsVo.user_no }</td>
+						<td>${postsVo.user_name }</td>
 						<td>${postsVo.post_readcount }</td>
 						<td>${postsVo.post_recommand }</td>
 					</tr>
