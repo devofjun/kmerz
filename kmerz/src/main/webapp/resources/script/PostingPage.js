@@ -28,9 +28,10 @@ function upload(file, community_id, category_no, post_title){
 		data.append("post_title", post_title);
 		console.log(data);
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "media/upload_media");
+		xhr.open("POST", "media/upload_media", false);
 		xhr.send(data);
-
+		var page = document.querySelector('.modal-section');
+		page.innerHTML = xhr.responseText;
 }
 function openFILE_INSERT_Modal() {
   includeHTML(document.querySelector('.modal-section'), '/include/FILE_INSERT_MODAL');
@@ -39,7 +40,6 @@ function closeModal() {
   var modal = document.getElementById("myModal");
   modal.remove();
 }
-
 function includeHTML(divContainer, urlHTML) {
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -47,8 +47,7 @@ function includeHTML(divContainer, urlHTML) {
             if (this.status == 200) { divContainer.innerHTML = xhttp.responseText; }
             if (this.status == 404) { divContainer.innerHTML = "Page not found."; }
         }
-    }
-    console.log(urlHTML);	
+    }	
     xhttp.open("GET", urlHTML, true);
     xhttp.send();
 }
