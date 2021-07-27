@@ -1,13 +1,16 @@
+<%@page import="java.util.List"%>
+<%@page import="com.kmerz.app.vo.CommunityVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%List<CommunityVo> commList = (List<CommunityVo>)request.getAttribute("commList"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0 user-scale=no">
-<link rel="stylesheet" href="/resources/css/PostingPage.css?ver4">
-<link rel="stylesheet" href="/resources/css/header.css?ver4">
-<script src="/resources/script/PostingPage.js?ver7"></script>
+<link rel="stylesheet" href="/resources/css/PostingPage.css?ver5">
+<link rel="stylesheet" href="/resources/css/header.css?ver5">
+<script src="/resources/script/PostingPage.js?ver8"></script>
 
 <title>Posting to KMerz</title>
 </head>
@@ -90,14 +93,20 @@
 						</div>
 					</div>
 					<div class="community-input">
-						<datalist id="community-input-list">
-							<option value="star">
-						</datalist>
+						<select id="community-input">
+							<option value="0">Select Community:</option>
+							<%for(int i = 0; i < commList.size(); i++){ %>
+							<option value="<%=commList.get(i).getCommunity_id()%>"><%=commList.get(i).getCommunity_name() %></option>
+							<%} %>
+						</select>
 					</div>
 					<div class="category-input">
-						<datalist id="category-input-list">
-							<option value="100">
-						</datalist>
+						<select id="category-input">
+						<option value="0">Select Category:</option>
+						<optgroup disabled>
+							
+						</optgroup>
+						</select>
 					</div>
 				</div>
 				<textarea id="post_title" maxlength="300" placeholder="Title"></textarea>

@@ -1,6 +1,7 @@
 function posting(){
 	var content = document.getElementById("editable").innerHTML;
-	var community_id = 'star';
+	var community_id = document.getElementById("community-input").value;
+	console.log(community_id);
 	var category_no = 100;
 	var post_title = document.getElementById("post_title").value;
 	var textFile = null,
