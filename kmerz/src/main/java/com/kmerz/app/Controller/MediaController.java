@@ -61,7 +61,7 @@ public class MediaController {
 		System.out.println(vo);
 		pService.posting(vo);
 		model.addAttribute("post_no", seqPostNo);
-		return "/include/modal";
+		return "redirect:/include/modal";
 		}	
 	
 	@Inject
