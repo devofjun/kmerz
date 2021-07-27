@@ -144,6 +144,9 @@ public class MemberController {
 		String user_id = getMemberVo.getUser_id();
 		String user_pw = getMemberVo.getUser_pw();
 		memberService.changeUserName(user_no, user_name);
+		session.removeAttribute("loginVo");
+		MemberVo membervo = memberService.login(user_id, user_pw);
+		session.setAttribute("loginVo", membervo);
 		return "redirect:/m/userInfo";
 	}
 }

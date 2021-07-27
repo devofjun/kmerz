@@ -21,6 +21,15 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$("#btnChangeUserName").click(function() {
+		if($("span").val() == "") {
+			console.log("중복 체크해주세요");
+		} else if($("span").val() == "이미 사용중인 닉네임 입니다.") {
+			console.log("사용할수 없는 닉네임 입니다.");
+		} else if($("span").val() == "사용가능한 닉네임 입니다.") {
+			console.log("사용 가능한 닉네임 입니다.");
+		}
+	});
 });
 </script>
 <h3>개인정보 변경</h3>
@@ -46,7 +55,7 @@ $(document).ready(function() {
 				value="${loginVo.user_name}">
 		</div>
 		<div>
-			<button type="submit" class="btn btn-primary btn-sm">변경</button>
+			<button type="button" class="btn btn-primary btn-sm" id="btnChangeUserName">변경</button>
 		</div>
 	</form>
 </div>
