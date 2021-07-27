@@ -8,7 +8,7 @@
 	content="width=device-width, initial-scale=1.0 user-scale=no">
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver65">
+<link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/header.css?ver6">
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/resources/css/transform.css?6">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/resources/script/MainPage.js?ver31">
+<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>">
 
 </script>
 </head>

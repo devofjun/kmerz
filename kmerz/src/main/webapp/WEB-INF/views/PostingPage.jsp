@@ -1,16 +1,18 @@
+<%@page import="com.kmerz.app.vo.CategoryVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kmerz.app.vo.CommunityVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%List<CommunityVo> commList = (List<CommunityVo>)request.getAttribute("commList"); %>
+	<%List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0 user-scale=no">
-<link rel="stylesheet" href="/resources/css/PostingPage.css?ver5">
+<link rel="stylesheet" href="/resources/css/PostingPage.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/header.css?ver5">
-<script src="/resources/script/PostingPage.js?ver8"></script>
+<script src="/resources/script/PostingPage.js?ver<%=System.currentTimeMillis()%>"></script>
 
 <title>Posting to KMerz</title>
 </head>
@@ -93,20 +95,15 @@
 						</div>
 					</div>
 					<div class="community-input">
-						<select id="community-input">
+						<select id="community-input" onchange="getCategoryInput()">
 							<option value="0">Select Community:</option>
 							<%for(int i = 0; i < commList.size(); i++){ %>
 							<option value="<%=commList.get(i).getCommunity_id()%>"><%=commList.get(i).getCommunity_name() %></option>
 							<%} %>
 						</select>
 					</div>
-					<div class="category-input">
-						<select id="category-input">
-						<option value="0">Select Category:</option>
-						<optgroup disabled>
-							
-						</optgroup>
-						</select>
+					<div id="category-input">
+
 					</div>
 				</div>
 				<textarea id="post_title" maxlength="300" placeholder="Title"></textarea>

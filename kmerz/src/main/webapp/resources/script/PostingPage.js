@@ -1,8 +1,15 @@
+function getCategoryInput(){
+	var communityid = document.getElementById("community-input").value;
+	console.log("ang");
+	var categoryinput = document.getElementById("category-input");
+	var appendedcategory = document.getElementById("appended-category");
+	includeHTML(categoryinput, 'include/setCategory?communityid=' + communityid);
+}
 function posting(){
 	var content = document.getElementById("editable").innerHTML;
 	var community_id = document.getElementById("community-input").value;
 	console.log(community_id);
-	var category_no = 100;
+	var category_no = document.getElementById("category-input").value;
 	var post_title = document.getElementById("post_title").value;
 	var textFile = null,
   makeTextFile = function (content) {
