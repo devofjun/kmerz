@@ -79,7 +79,7 @@ insert into tbl_posts values(
     'star',
     100,
     '스타 첫번째 공략',
-    '전략게임이다 전략이 중요해!',
+    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
     0, 0, sysdate, 'accept'
 );
 insert into tbl_posts values(
@@ -88,7 +88,7 @@ insert into tbl_posts values(
     'lol',
     101,
     '롤 첫번째 공략',
-    '정치 잘하면 됨',
+    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
     0, 0, sysdate, 'accept'
 );
 insert into tbl_posts values(
@@ -97,44 +97,38 @@ insert into tbl_posts values(
     'overwatch',
     102,
     '옵치 첫번째 공략',
-    '말로 하는 게임임',
+    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
     0, 0, sysdate, 'accept'
 );
 
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
-update tbl_comment set
-    comment_reply_count = comment_reply_count+1
-    where comment_no = 100;
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     100,
     1002,
     '와.그.렇.군.요.',
-    0,
+    null,
+    null,
     sysdate
 );
-update tbl_comment set
-    comment_reply_count = comment_reply_count+1
-    where comment_no = 101;
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     101,
     1000,
     '정치질하려고 겜하냐?',
-    0,
+    null,
+    null,
     sysdate
 );
-update tbl_comment set
-    comment_reply_count = comment_reply_count+1
-    where comment_no = 102;
 insert into tbl_comment values(
     SEQ_COMMENT_NO.nextval,
     102,
     1001,
     '님 마이크 냄새남',
-    0,
+    null,
+    null,
     sysdate
 );
 
@@ -142,36 +136,6 @@ insert into tbl_comment values(
 ----------------------------------------------------
 -- 테스트 데이터 삽입(답글 테이블)
 ----------------------------------------------------
-update tbl_comment set
-    comment_reply_count = comment_reply_count+1
-    where comment_no = 100;
-insert into tbl_reply values(
-    seq_reply_no.nextval,
-    100,
-    1000,
-    '^^',
-    sysdate
-);
-update tbl_comment set
-    comment_reply_count = comment_reply_count+1
-    where comment_no = 101;
-insert into tbl_reply values(
-    seq_reply_no.nextval,
-    101,
-    1001,
-    'ㅇㅇ 꿀잼임',
-    sysdate
-);
-update tbl_comment set
-    comment_reply_count = comment_reply_count+1
-    where comment_no = 102;
-insert into tbl_reply values(
-    seq_reply_no.nextval,
-    102,
-    1002,
-    'ㅗ',
-    sysdate
-);
 
 
 
@@ -219,7 +183,7 @@ insert into tbl_steamapp values(
     'http://cdn.akamai.steamstatic.com/steam/apps/256805055/movie480_vp9.webm?t=1602985982',
     'https://cdn.akamai.steamstatic.com/steam/apps/1049590/page_bg_generated_v6b.jpg?t=1626949132'
 );
-select * from tbl_steamapp;
+--select * from tbl_steamapp;
 
 ----------------------------------------------------
 -- 테스트 데이터 삽입(스팀 앱 테이블)
@@ -229,11 +193,11 @@ insert into tbl_banner values(2, 578080);
 insert into tbl_banner values(3, 1097150);
 insert into tbl_banner values(4, 322330);
 
-select * from tbl_steamapp
-where app_id in (1049590, 578080, 1097150, 322330);
+--select * from tbl_steamapp
+--where app_id in (1049590, 578080, 1097150, 322330);
 
 
-select * from tbl_banner;
+--select * from tbl_banner;
 
 
 --------------------

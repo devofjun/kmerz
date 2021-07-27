@@ -41,13 +41,13 @@ public class MediaController {
 		
 		String fileName = ContentReadAndWrite.WriteContent(file, seqPostNo);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		String user_id = memberVo.getUser_id();
+		int user_no = memberVo.getUser_no();
 		PostsVo vo = new PostsVo();
 		vo.setPost_no(seqPostNo);
 		vo.setCategory_no(category_no);
 		vo.setCommunity_id(community_id);
 		vo.setPost_title(post_title);
-		vo.setUser_id(user_id);
+		vo.setUser_no(user_no);
 		vo.setPost_content_file(fileName);
 		vo.setPost_lastupdate(new Timestamp(System.currentTimeMillis()));
 		vo.setPost_status("accept");
