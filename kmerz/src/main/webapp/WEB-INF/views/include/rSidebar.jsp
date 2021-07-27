@@ -16,7 +16,7 @@ $(document).ready(function() {
 <div class="rSidebar sticky">
 	<div class="userinfo border sticky">
 		<div class="hr">
-			<span class="font-24">USER INFO</span>
+			<span class="font-18">USER INFO</span>
 		</div>
 		<c:choose>
 			<c:when test="${empty sessionScope.loginVo}">
@@ -90,7 +90,7 @@ $(document).ready(function() {
 	</div>
 	<div class="hotList border stickyUnderInfo">
 		<div class="relatedPost hr">
-			<span class="font-24">인기글</span>
+			<span class="font-18">인기글</span>
 		</div>
 		<ol>
 			<li><a href="#">인기글1</a></li>

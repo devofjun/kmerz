@@ -4,16 +4,37 @@
 <%@ include file="./mngInclude/header.jsp"%>
 <script>
 	$(document).ready(function() {
-		//배너/사이드바 설정 버튼
-		$("#btnBSSetting").click(function() {
-
-			location.href = "/admin/bsSetting.do";
-		});
-
-		// 게시글 설정 버튼
-		$("#btnPostSetting").click(function() {
-
-			location.href = "/admin/postSetting.do";
+		// 게시글 선택했을때
+		$(".trPost").click(function(){
+			// 게시글 정보 가져오기
+			var post_no = $(this).children().first().text();
+			var urlInfo = "/admin/contents/getPostInfo";
+			var dataInfo = {
+					"post_no" : post_no
+			};
+			$.get(urlInfo, dataInfo, function(rData) {
+				console.log(rData);
+				var postInfo = rData;
+				$("#cardPostTitle").text(postInfo.post_title);
+				$("#cardPostCommName").text(postInfo.community_name);
+				$("#cardPostCateName").text(postInfo.category_name);
+				$("#cardPostReadCount").text(postInfo.post_readcount);
+				$("#cardPostRecommand").text(postInfo.post_recommand);
+				// 신고수?
+				
+				var lastupdate = new Date(postInfo.post_lastupdate);
+				$("#cardPostLastupdate").text(lastupdate);
+			});
+			// 게시글 내용 가져오기
+			var post_content_file = $(this).find("input[name='post_content_file']").val();
+			var urlContent = "/admin/contents/getPostContent";
+			var dataContent = {
+					"post_content_file" : post_content_file
+			};
+			$.get(urlContent, dataContent, function(rData){
+				console.log(rData);
+				$("#cardPostContent").html(rData);
+			});
 		});
 	});
 </script>
@@ -25,10 +46,10 @@
 	<h1 class="h2">컨텐츠 관리</h1>
 	<div class="btn-toolbar mb-2 mb-md-0">
 		<div class="btn-group me-2">
-			<button id="btnBSSetting" type="button"
-				class="btn btn-sm btn-outline-secondary">배너/사이드바</button>
-			<button id="btnPostSetting" type="button"
-				class="btn btn-sm btn-outline-secondary active">게시글</button>
+			<a href="/admin/contents/bsSettingPage" type="button"
+				class="btn btn-sm btn-outline-secondary">배너/사이드바</a>
+			<a href="/admin/contents/postSettingPage" id="btnPostSetting" type="button"
+				class="btn btn-sm btn-outline-secondary active">게시글</a>
 		</div>
 		<button id="btnSave" type="button"
 			class="btn btn-sm btn-outline-success"
@@ -69,18 +90,20 @@
 						<th>작성자</th>
 						<th>조회수</th>
 						<th>추천수</th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="postsVo"  items="${postList }">
-					<tr> 
+					<tr class="trPost cspointer"> 
 						<td>${postsVo.post_no }</td>
 						<td>${postsVo.post_lastupdate }</td>
-						<td>${postsVo.community_id }/${postVo.category_no }</td>
+						<td><span>${postsVo.community_name }/${postsVo.category_name }</span></td>
 						<td>${postsVo.post_title }</td>
-						<td>${postsVo.user_no }</td>
+						<td>${postsVo.user_name }</td>
 						<td>${postsVo.post_readcount }</td>
 						<td>${postsVo.post_recommand }</td>
+						<td style="display:none"><input type="hidden" name="post_content_file" value="${postsVo.post_content_file }"/></td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -102,23 +125,35 @@
 			</nav>
 		</div>
 
-		<!-- 유저 정보 카드 -->
+		<!-- 게시글 정보 카드 -->
 		<div id="cardUserInfo" class="col-5" style="display: inline">
 			<div class="card text-center">
 				<div class="card-header">
-					<span>글번호</span>
+					<h5 id="cardPostTitle" class="card-title">글제목</h5>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item">An item</li>
-					<li class="list-group-item">A second item</li>
-					<li class="list-group-item">A third item</li>
+					<li class="list-group-item">
+						<div>
+							<span id="cardPostCommName">커뮤니티</span>
+							<span>/</span>
+							<span id="cardPostCateName">카테고리</span>
+						</div>
+					</li>
 				</ul>
 				<div class="card-body">
-					<h5 class="card-title">글제목</h5>
-					<p class="card-text">글내용~~~</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+					<p id="cardPostContent" class="card-text">글내용</p>
 				</div>
-				<div class="card-footer text-muted">2 days ago</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						<div>
+							<span id="cardPostReadCount">조회수: 1</span>
+							<span id="cardPostRecommand">추천수: 1</span>
+							<span id="cardPostReport">신고수: 1</span>
+						</div>
+					</li>
+				</ul>
+				
+				<div id="cardPostLastupdate" class="card-footer text-muted">2021-07-27 10:26:22.0</div>
 			</div>
 		</div>
 	</div>

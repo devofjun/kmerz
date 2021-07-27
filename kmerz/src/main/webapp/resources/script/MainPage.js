@@ -1,7 +1,18 @@
 /**
  * 
  */
-
+function addComment(post_no){
+	console.log("댓글쓰기");
+	console.log(post_no);
+	var commentContent = document.getElementById("comment_content").value;
+	console.log(commentContent);
+	var data = new FormData();
+	data.append("commentContent", commentContent);
+	data.append("post_no", post_no);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "comment/addComment");
+	xhr.send(data);
+}
  function replytoggle(i){
 	var commentNo = document.getElementById(i);
 	var replyBtn = commentNo.querySelector("#reply-toggleBtn");

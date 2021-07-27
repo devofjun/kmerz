@@ -22,7 +22,7 @@
 							<a href="#"><img class="icon-color rotate-180 "
 								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 						</div>
-						<span><%=postVo.getPost_recommand()%></span>
+						<span>0</span>
 						<div class="like">
 							<a href="#"><img class="icon-color"
 								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>

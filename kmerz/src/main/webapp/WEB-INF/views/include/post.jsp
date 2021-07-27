@@ -8,7 +8,6 @@
 	List<PostsVo> postList = (List<PostsVo>) request.getAttribute("postList");
 	List<CommunityVo> commList = (List<CommunityVo>) request.getAttribute("commList");
 %>
-
 <!-- 포스트 DEFAULT 시작 -->
 
 <%
@@ -45,7 +44,7 @@
 		</div>
 		<div class="rightbar">
 			<div class="contentTop">
-				<div class="postTitle" onclick="openModal(<%=postList.get(i).getPost_no()%>)"><h4 class="icon-color"><%=postList.get(i).getPost_title()%></h4></div>
+				<div class="postTitle" onclick="openModal(<%=postList.get(i).getPost_no()%>)"><h3 class="icon-color"><%=postList.get(i).getPost_title()%></h3></div>
 				<div class="communityAdress">
 
 					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-14"><%for(int j = 0; j < commList.size(); j++){

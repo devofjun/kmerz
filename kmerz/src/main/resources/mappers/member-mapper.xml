@@ -12,9 +12,14 @@
 <select id="selectAll" resultType="MemberVo">
 	select * from tbl_member
 </select>
-
+<!-- id로 유저정보 찾기 -->
 <select id="selectID" resultType="MemberVo">
 	select * from tbl_member where user_id = #{user_id}
+</select>
+
+<!-- no로 유저정보 찾기 -->
+<select id="selectNO" resultType="MemberVo">
+	select * from tbl_member where user_no = #{user_no}
 </select>
 
 <!-- 로그인  -->
