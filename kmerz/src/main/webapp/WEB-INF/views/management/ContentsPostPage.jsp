@@ -2,8 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="./mngInclude/header.jsp"%>
+<script src="/resources/script/TimeFormat.js"></script>
 <script>
+
 	$(document).ready(function() {
+		// 날짜 수정
+		//console.log($(".trPost:first").children().eq(1).text());
+		
+		for(var i=0; i<$(".trPost").length; i++){
+			var tdDate = $(".trPost").eq(i).children().eq(1); 
+			tdDate.text(timeForToday(tdDate.text()));
+			console.log(timeForToday(tdDate.text()));
+		};
+		
 		// 게시글 선택했을때
 		$(".trPost").click(function(){
 			// 게시글 정보 가져오기
@@ -22,7 +33,7 @@
 				$("#cardPostRecommand").text(postInfo.post_recommand);
 				// 신고수?
 				
-				var lastupdate = new Date(postInfo.post_lastupdate);
+				var lastupdate = timePattern(postInfo.post_lastupdate);
 				$("#cardPostLastupdate").text(lastupdate);
 			});
 			// 게시글 내용 가져오기
@@ -93,7 +104,7 @@
 						
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tbdPost">
 					<c:forEach var="postsVo"  items="${postList }">
 					<tr class="trPost cspointer"> 
 						<td>${postsVo.post_no }</td>
@@ -141,7 +152,9 @@
 					</li>
 				</ul>
 				<div class="card-body">
-					<p id="cardPostContent" class="card-text">글내용</p>
+					<div style="height:400px;overflow-y: scroll;">
+						<p id="cardPostContent" class="card-text">글내용</p>
+					</div>
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">

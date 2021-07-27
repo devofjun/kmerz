@@ -33,7 +33,7 @@
 
 <insert id="postingDetail">
 insert into tbl_posts values(
-	seq_post_no.nextval,
+	#{post_no},	
 	#{user_no},
 	#{community_id},
 	#{category_no},
