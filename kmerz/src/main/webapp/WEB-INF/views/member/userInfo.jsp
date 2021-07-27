@@ -3,9 +3,10 @@
 <%@ include file="../include/userInfoHeader.jsp"%>
 <script>
 $(document).ready(function() {
+	var user_name = "";
 	$("#btnUserNameCheck").click(function() {
 //		console.log("click");
-		var user_name = $("#user_name").val();
+		user_name = $("#user_name").val();
 //		console.log("requestName: " + requestName);
 		var sendData = {
 				"user_name" : user_name
@@ -15,19 +16,18 @@ $(document).ready(function() {
 		
 		$.get(url, sendData, function(rData) {
 			if(rData == "Available") {
-				$("span").text("사용가능한 닉네임 입니다.");
+				$("#spanMessage").text("사용가능한 닉네임 입니다.");
 			} else if(rData == "unAvailable") {
-				$("span").text("이미 사용중인 닉네임 입니다.");
+				$("#spanMessage").text("이미 사용중인 닉네임 입니다.");
 			}
 		});
 	});
 	$("#btnChangeUserName").click(function() {
-		if($("span").val() == "") {
+		if($("#spanMessage").text() == "") {
 			console.log("중복 체크해주세요");
-		} else if($("span").val() == "이미 사용중인 닉네임 입니다.") {
-			console.log("사용할수 없는 닉네임 입니다.");
-		} else if($("span").val() == "사용가능한 닉네임 입니다.") {
-			console.log("사용 가능한 닉네임 입니다.");
+		}
+		if(user_name != $("#user_name").val()) {
+			console.log("중복체크를 다시 해주세요.");
 		}
 	});
 });
@@ -50,7 +50,7 @@ $(document).ready(function() {
 				for="user_name" class="form-label">닉네임</label>
 			<button style="float:left;" type="button" class="btn btn-primary btn-sm"
 					id="btnUserNameCheck">중복 확인</button>
-			<span style="float:left; margin-top:5px;"></span>
+			<span style="float:left; margin-top:5px;" id = "spanMessage"></span>
 			<input type="text" class="form-control" id="user_name" name="user_name"
 				value="${loginVo.user_name}">
 		</div>
