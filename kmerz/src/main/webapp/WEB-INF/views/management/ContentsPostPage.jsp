@@ -38,13 +38,26 @@
 			});
 			// 게시글 내용 가져오기
 			var post_content_file = $(this).find("input[name='post_content_file']").val();
-			var urlContent = "/admin/contents/getPostContent";
-			var dataContent = {
+// 			var urlContent = "/admin/contents/getPostContent";
+// 			var dataContent = {
+// 					"post_content_file" : post_content_file
+// 			};
+// 			$.get(urlContent, dataContent, function(rData){
+// 				console.log(rData);
+// 				$("#cardPostContent").html(rData);
+// 			});
+			$.ajax({
+				url				:"/admin/contents/getPostContent",
+				type			:"GET",
+				traditional		:true,
+				
+				data:{
 					"post_content_file" : post_content_file
-			};
-			$.get(urlContent, dataContent, function(rData){
-				console.log(rData);
-				$("#cardPostContent").html(rData);
+				},
+				success:function(rData){
+					console.log(rData);
+					$("#cardPostContent").html(rData);
+				}
 			});
 		});
 	});

@@ -103,7 +103,6 @@ $(document).ready(function() {
 			url				:url,
 			type			:"POST",
 			traditional		:true,
-			data			:"json",
 			data:{
 				"searchType":searchType,
 				"searchWord":searchWord

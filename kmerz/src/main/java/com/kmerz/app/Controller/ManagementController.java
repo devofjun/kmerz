@@ -130,7 +130,10 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value = "/contents/getPostContent", method = RequestMethod.GET)
 	public String getPostContent(String post_content_file) throws Exception {
-		return ContentReadAndWrite.ReadContent(post_content_file);
+		System.out.println("게시물 내용 가져오기: "+post_content_file);
+		String result = ContentReadAndWrite.ReadContent(post_content_file);
+		System.out.println(result);
+		return result;
 	}
 	
 	
