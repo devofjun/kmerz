@@ -19,7 +19,7 @@
 			<div class="reply-user-profile">
 				<img src="/resources/images/starcraft_small.jpg">
 				<div class="reply-user-status">
-					<span> <%=mentList.get(i).getUser_name()%>
+					<span> <%=mentList.get(i).getUser_no()%>
 					</span>
 				</div>
 			</div>

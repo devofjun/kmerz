@@ -24,7 +24,7 @@ public class CommentController {
 										@RequestParam int post_no) {
 		CommentVo commentVo = new CommentVo();
 		MemberVo memVo = (MemberVo) session.getAttribute("loginVo");
-		commentVo.setUser_name(memVo.getUser_name());
+		commentVo.setUser_no(memVo.getUser_no());
 		commentVo.setPost_no(post_no);
 		commentVo.setComment_content(commentContent);
 		commentService.insertComment(commentVo);
