@@ -33,4 +33,10 @@ public class CategoryDaoImpl implements CategoryDao {
 		sqlsession.insert(NAMESPACE + "insertCategory", categoryVo);
 	}
 
+	@Override
+	public CategoryVo selectNO(int category_no) {
+		// 카테로기 번호로 카테고리 정보 가져오기
+		return sqlsession.selectOne(NAMESPACE+"selectNO", category_no);
+	}
+
 }

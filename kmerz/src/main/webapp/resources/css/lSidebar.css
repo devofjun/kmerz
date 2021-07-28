@@ -23,7 +23,7 @@
 }
 .communityList
 {
-	margin:5%;
+	margin: 0 5%;
 }
 .communityList ul
 {
@@ -33,7 +33,7 @@
 }
 .communityList ul li
 {
-	font-size:20px;
+	font-size:18;
 	display: flex;
 	justify-content: center;
 }

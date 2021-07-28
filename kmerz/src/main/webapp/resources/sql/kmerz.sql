@@ -85,7 +85,8 @@ create table tbl_comment(
     post_no number references tbl_posts(post_no),
     user_no number references tbl_member(user_no),
     comment_content varchar2(200) not null,
-    comment_reply_count number default 0,
+    comment_regroup number,
+    comment_retag number references tbl_member(user_no),
     comment_regist_date timestamp default sysdate
 );
 -- 댓글 시퀀스 생성
@@ -93,20 +94,6 @@ drop sequence seq_comment_no;
 create sequence seq_comment_no
     start with 100;
 
---==================================================
--- 답글 테이블
---==================================================
-drop table tbl_reply CASCADE CONSTRAINTS;
-create table tbl_reply(
-    reply_no number primary key,
-    comment_no number references tbl_comment(comment_no),
-    user_no number references tbl_member(user_no),
-    reply_content varchar2(200) not null,
-    reply_regist_date timestamp default sysdate
-);
-drop sequence seq_reply_no;
-create sequence seq_reply_no
-    start  with 100;
 
 --==================================================
 -- 미디어 테이블

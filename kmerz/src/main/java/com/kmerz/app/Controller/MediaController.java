@@ -1,28 +1,30 @@
 package com.kmerz.app.Controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kmerz.app.service.CommentService;
+import com.kmerz.app.service.CommunityService;
+import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.service.SteamAppService;
 import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.util.SteamUtil;
+import com.kmerz.app.vo.CommentVo;
+import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 import com.kmerz.app.vo.SteamAppVo;
@@ -33,13 +35,18 @@ public class MediaController {
 	
 	@Inject
 	PostService pService;
+	@Inject
+	CommunityService commService;
+
+
 	
 	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
 	public String upload_media(@RequestParam("file") MultipartFile file,
 							   @RequestParam("community_id") String community_id,
 							   @RequestParam("category_no")  int category_no,
 							   @RequestParam("post_title")   String post_title,	
-							   HttpSession session
+							   HttpSession session,
+							   Model model
 							   ) throws IOException {
 		int seqPostNo = pService.getNewPostSeq();
 		
@@ -48,6 +55,8 @@ public class MediaController {
 		int user_no = memberVo.getUser_no();
 		PostsVo vo = new PostsVo();
 		vo.setPost_no(seqPostNo);
+		System.out.println("시퀸스"+seqPostNo);
+		System.out.println("시퀸스후"+vo.getPost_no());
 		vo.setCategory_no(category_no);
 		vo.setCommunity_id(community_id);
 		vo.setPost_title(post_title);
@@ -55,9 +64,10 @@ public class MediaController {
 		vo.setPost_content_file(fileName);
 		vo.setPost_lastupdate(new Timestamp(System.currentTimeMillis()));
 		vo.setPost_status("accept");
+		vo.setCommunity_name(commService.getOneCommunity(community_id).getCommunity_name());
 		System.out.println(vo);
 		pService.posting(vo);
-		return "include/upload_media";
+		return "redirect:/include/modal?post_no=" + vo.getPost_no();
 		}	
 	
 	@Inject

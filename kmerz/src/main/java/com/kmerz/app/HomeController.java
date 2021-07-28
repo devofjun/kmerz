@@ -62,7 +62,9 @@ public class HomeController {
 		return "MainPage";
 	}
 	@RequestMapping(value="posting")
-	public String posting() {
+	public String posting(Model model, HttpSession session) {
+		List<CommunityVo> commList = commService.getCommunityList();
+		model.addAttribute("commList", commList);
 		return "PostingPage";
 	}
 }

@@ -14,6 +14,10 @@ public class PostsVo {
 	private Timestamp post_lastupdate;
 	private String post_status;
 	
+	private String user_name;
+	private String community_name;
+	private String category_name;
+	
 	public PostsVo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -21,7 +25,7 @@ public class PostsVo {
 
 	public PostsVo(int post_no, int user_no, String community_id, int category_no, String post_title,
 			String post_content_file, int post_readcount, int post_recommand, Timestamp post_lastupdate,
-			String post_status) {
+			String post_status, String user_name, String community_name, String category_name) {
 		super();
 		this.post_no = post_no;
 		this.user_no = user_no;
@@ -33,6 +37,9 @@ public class PostsVo {
 		this.post_recommand = post_recommand;
 		this.post_lastupdate = post_lastupdate;
 		this.post_status = post_status;
+		this.user_name = user_name;
+		this.community_name = community_name;
+		this.category_name = category_name;
 	}
 
 	public int getPost_no() {
@@ -115,14 +122,38 @@ public class PostsVo {
 		this.post_status = post_status;
 	}
 
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public String getCommunity_name() {
+		return community_name;
+	}
+
+	public void setCommunity_name(String community_name) {
+		this.community_name = community_name;
+	}
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
 	@Override
 	public String toString() {
 		return "PostsVo [post_no=" + post_no + ", user_no=" + user_no + ", community_id=" + community_id
 				+ ", category_no=" + category_no + ", post_title=" + post_title + ", post_content_file="
 				+ post_content_file + ", post_readcount=" + post_readcount + ", post_recommand=" + post_recommand
-				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + "]";
+				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + ", user_name=" + user_name
+				+ ", community_name=" + community_name + ", category_name=" + category_name + "]";
 	}
 
-	
 	
 }

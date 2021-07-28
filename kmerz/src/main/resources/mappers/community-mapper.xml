@@ -9,6 +9,7 @@
 	select count(*) from tbl_community
 </select>
 
+<!-- 아이디로 커뮤니티 정보 가져오기 -->
 <select id="getOneCommunity" resultType="CommunityVo">
 	select * from tbl_community where community_id = #{community_id}
 </select>
@@ -29,5 +30,6 @@
 <select id="selectCommunityList" resultType="CommunityVo">
 	select * from tbl_community
 </select>
+
 
 </mapper>
