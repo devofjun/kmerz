@@ -13,11 +13,11 @@
 	select count(*) from tbl_comment where user_no = #{user_no}
 </select>
 <insert id="insertComment">
-	insert into tbl_comment(comment_no, post_no, user_name, comment_content, comment_reply_count, comment_regist_date)
+	insert into tbl_comment(comment_no, post_no, user_no, comment_content, comment_reply_count, comment_regist_date)
 	values(
 	SEQ_COMMENT_NO.nextval,
 	#{post_no},
-	#{user_name},
+	#{user_no},
 	#{comment_content},
 	0,
 	sysdate
