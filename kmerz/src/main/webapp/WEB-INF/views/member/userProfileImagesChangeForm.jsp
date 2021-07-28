@@ -13,7 +13,8 @@
 		<div>
 			<img src="/resources/images/default_Profile3.png" class="img-thumbnail" alt="...">
 		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<input type="file">
+		<button type="button" class="btn btn-primary">변경하기</button>
 	</form>
 </div>
 </div>
