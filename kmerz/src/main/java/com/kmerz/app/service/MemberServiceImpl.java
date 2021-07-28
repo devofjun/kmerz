@@ -51,4 +51,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updateUserName(user_no, user_name);
 	}
 
+	@Override
+	public void changeUserPw(int user_no, String newPw) {
+		memberDao.updateUserPw(user_no, newPw);
+	}
+
 }

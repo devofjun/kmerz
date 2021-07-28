@@ -5,7 +5,6 @@
 $(document).ready(function() {
 	var user_name = "";
 	$("#user_name").keyup(function() {
-//		console.log("click");
 		user_name = $("#user_name").val();
 //		console.log("requestName: " + requestName);
 		var sendData = {
@@ -61,7 +60,7 @@ $(document).ready(function() {
 		<div>
 			<button type="button" class="btn btn-primary btn-sm" id="btnChangeUserName"
 					style="float:left; margin-top:5px; margin-right:5px;">변경</button>
-			<span style="float:left; margin-top:5px; color:red;" id="span" value=""></span>
+			<span style="float:left; margin-top:5px; color:red;" id="span"></span>
 		</div>
 	</form>
 </div>

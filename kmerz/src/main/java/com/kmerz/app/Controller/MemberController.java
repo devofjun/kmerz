@@ -136,6 +136,7 @@ public class MemberController {
 		return userNameCheckResult;
 	}
 	
+	// 유저 닉네임 변경
 	@RequestMapping(value = "/changeUserName", method = RequestMethod.GET)
 	public String changeUserName(String user_name, HttpSession session) {
 		// System.out.println("user_name :" + user_name);
@@ -147,6 +148,50 @@ public class MemberController {
 		session.removeAttribute("loginVo");
 		MemberVo membervo = memberService.login(user_id, user_pw);
 		session.setAttribute("loginVo", membervo);
+		return "redirect:/m/userInfo";
+	}
+	
+	// 유저비밀번호 체크
+	@ResponseBody
+	@RequestMapping(value = "/userNewPwCheck", method = RequestMethod.GET)
+	public String userNewPwCheck(String newPw, String newPwCheck) {
+		String strComparison = "";
+		if(newPw == null || newPw.isEmpty()) {
+			strComparison = "nullNewPw";
+		} else if(newPwCheck == null || newPwCheck.isEmpty()) {
+			strComparison = "nullNewPwCheck";
+		} else if(newPw.equals(newPwCheck)) {
+			strComparison = "same";
+		} else {
+			strComparison = "different";
+		}
+		return strComparison;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/userNowPwCheck", method = RequestMethod.GET)
+	public String userNowPwCheck(String nowPw, HttpSession session) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		String user_pw = memberVo.getUser_pw();
+		String nowPwResult = "";
+		if(user_pw.equals(nowPw)) {
+			nowPwResult = "same";
+		} else {
+			nowPwResult = "different";
+		}
+		return nowPwResult;
+	}
+	
+	// 유저 비밀번호 변경
+	@RequestMapping(value = "/changeUserPw", method = RequestMethod.POST)
+	public String changeUserPw(String newPw, HttpSession session) {
+		MemberVo getMemberVo = (MemberVo)session.getAttribute("loginVo");
+		int user_no = getMemberVo.getUser_no();
+		String user_id = getMemberVo.getUser_id();
+		memberService.changeUserPw(user_no, newPw);
+		session.removeAttribute("loginVo");
+		MemberVo memberVo = memberService.login(user_id, newPw);
+		session.setAttribute("loginVo", memberVo);
 		return "redirect:/m/userInfo";
 	}
 }
