@@ -18,9 +18,17 @@ public class PostsVo {
 	private String community_name;
 	private String category_name;
 	
+	private int declared_count;
+	
 	public PostsVo() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public PostsVo(int post_no, String post_status) {
+		super();
+		this.post_no = post_no;
+		this.post_status = post_status;
 	}
 
 	public PostsVo(int post_no, int user_no, String community_id, int category_no, String post_title,
@@ -146,14 +154,22 @@ public class PostsVo {
 		this.category_name = category_name;
 	}
 
+	public int getDeclared_count() {
+		return declared_count;
+	}
+
+	public void setDeclared_count(int declared_count) {
+		this.declared_count = declared_count;
+	}
+
 	@Override
 	public String toString() {
 		return "PostsVo [post_no=" + post_no + ", user_no=" + user_no + ", community_id=" + community_id
 				+ ", category_no=" + category_no + ", post_title=" + post_title + ", post_content_file="
 				+ post_content_file + ", post_readcount=" + post_readcount + ", post_recommand=" + post_recommand
 				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + ", user_name=" + user_name
-				+ ", community_name=" + community_name + ", category_name=" + category_name + "]";
+				+ ", community_name=" + community_name + ", category_name=" + category_name + ", declared_count="
+				+ declared_count + "]";
 	}
-
 	
 }

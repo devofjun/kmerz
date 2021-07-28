@@ -319,6 +319,7 @@ $(document).ready(function() {
         		<tr>
         			<th>신고 시간</th>
         			<th>글 제목</th>
+        			<th>신고자</th>
         			<th>신고 내용</th>
         		</tr>
         	</thead>
@@ -327,6 +328,7 @@ $(document).ready(function() {
         		<tr>
         			<td>2021/07/18/10:12:33</td>
         			<td><a class="text-decoration-none" href="#">안녕하세요.</a></td>
+        			<td>tester2</td>
         			<td>게시물 신고</td>
         		</tr>
         	</c:forEach>

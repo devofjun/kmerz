@@ -128,15 +128,29 @@ public class ManagementController {
 	
 	// 게시물 내용 가져오기
 	@ResponseBody
-	@RequestMapping(value = "/contents/getPostContent", method = RequestMethod.GET)
+	@RequestMapping(value = "/contents/getPostContent", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
 	public String getPostContent(String post_content_file) throws Exception {
-		System.out.println("게시물 내용 가져오기: "+post_content_file);
+		//System.out.println("게시물 내용 가져오기: "+post_content_file);
 		String result = ContentReadAndWrite.ReadContent(post_content_file);
 		System.out.println(result);
 		return result;
 	}
 	
+	// 게시물 내리기
+	@ResponseBody
+	@RequestMapping(value = "/contents/setPostDeny", method=RequestMethod.GET)
+	public String setPostDeny(int postNo) throws Exception {
+		postService.denyPost(postNo);
+		return "success";
+	}
 	
+	// 게시물 다시 올리기
+	@ResponseBody
+	@RequestMapping(value = "/contents/setPostAdmit", method=RequestMethod.GET)
+	public String setPostAdmit(int postNo) throws Exception {
+		postService.admitPost(postNo);
+		return "success";
+	}
 	
 	
 	// 고객 주문 관리 페이지

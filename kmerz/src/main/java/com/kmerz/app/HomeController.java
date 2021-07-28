@@ -42,7 +42,7 @@ public class HomeController {
 	@RequestMapping
 	public String home(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
-		List<PostsVo> postList = postService.selectAllPosts();
+		List<PostsVo> postList = postService.selectAdmitPosts();
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
 		int userCommentCount = 0;

@@ -49,8 +49,8 @@ public class ContentReadAndWrite {
 			byte[] fileBytes = file.getBytes();
 			filePath = uploadDir.resolve(logicalFileName);
 			Files.write(filePath, fileBytes);
-			System.out.println(filePath);
-			System.out.println(logicalFileName);
+			//System.out.println(filePath);
+			//System.out.println(logicalFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
