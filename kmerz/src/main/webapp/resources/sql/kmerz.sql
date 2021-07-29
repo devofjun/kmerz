@@ -13,6 +13,7 @@ create table tbl_member (
     user_name varchar2(50) not null,
     user_currentlogin timestamp,
     user_status varchar2(15),
+    user_profileImage varchar2(500),
     constraint unique_user_id unique(user_id),
     constraint unique_user_name unique(user_name)
 );  
