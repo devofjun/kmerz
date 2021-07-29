@@ -78,6 +78,7 @@ FOR i IN 1..50 LOOP
 insert into tbl_posts values (seq_post_no.NEXTVAL, 1000, 'star', 100, 'test', 'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',0,0,sysdate,'accept');
 END LOOP;
 END;
+/
 --select * from tbl_posts;
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
