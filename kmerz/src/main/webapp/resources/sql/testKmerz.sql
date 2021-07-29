@@ -204,3 +204,4 @@ insert into tbl_banner values(4, 322330);
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
+

@@ -64,4 +64,10 @@ public class PostDaoImpl implements PostDao {
 		// 글번호 시퀀스 생성
 		return session.selectOne(NAMESPACE+"selectSeqPostno");
 	}
+
+	@Override
+	public PostsVo selectLoadPost(int init_post) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE + "selectLoadPost" , init_post);
+	}
 }

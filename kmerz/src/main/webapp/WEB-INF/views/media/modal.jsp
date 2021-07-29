@@ -11,8 +11,7 @@
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
-			<span class="modal-close" onclick="closeModal()"><ion-icon
-					size="large" name="close-sharp"></ion-icon></span>
+			<span class="modal-close" onclick="closeModal()">x</span>
 		</div>
 		<div class="modal-postContent">
 			<div class="modal-content-left">

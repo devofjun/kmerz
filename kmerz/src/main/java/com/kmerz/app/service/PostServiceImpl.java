@@ -93,4 +93,10 @@ public class PostServiceImpl implements PostService{
 		return postdao.selectSeqPostno();
 	}
 
+	@Override
+	public PostsVo selectLoadPost(int init_post){
+		// TODO Auto-generated method stub
+		return postdao.selectLoadPost(init_post);
+	}
+
 }
