@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kmerz.app.dao.CategoryDao;
 import com.kmerz.app.dao.CommunityDao;
+import com.kmerz.app.dao.DeclaredDao;
 import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dao.PostDao;
 import com.kmerz.app.vo.CategoryVo;
@@ -29,11 +30,13 @@ public class PostServiceImpl implements PostService{
 	CommunityDao communityDao;
 	@Inject
 	CategoryDao categoryDao;
+	@Inject
+	DeclaredDao declaredDao;
 	
 	@Transactional
 	@Override
 	public List<PostsVo> selectAllPosts() {
-		// 모든 게시글 
+		// 모든 게시글(관리자 페이지에서 필요함)
 		List<PostsVo> PostsList = postdao.selectAllPosts();
 		if(PostsList != null) {
 			for(PostsVo postVo : PostsList) {
@@ -46,6 +49,9 @@ public class PostServiceImpl implements PostService{
 				// 카테고리 이름
 				CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
 				postVo.setCategory_name(categoryVo.getCategory_name());
+				// 신고수
+				int declared_count = declaredDao.selectTargetIDCount(postVo.getPost_no(), DeclaredServiceImpl.TYPE_POST);
+				postVo.setDeclared_count(declared_count);
 			}
 		}
 		return PostsList;
@@ -54,7 +60,7 @@ public class PostServiceImpl implements PostService{
 	@Transactional
 	@Override
 	public List<PostsVo> selectAdmitPosts() {
-		// 모든 게시글 
+		// 승인된 모든 게시글 
 		List<PostsVo> PostsList = postdao.selectStatusPosts(POST_STATUS_ADMIT);
 		if(PostsList != null) {
 			for(PostsVo postVo : PostsList) {

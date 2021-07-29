@@ -105,7 +105,7 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value = "/contents/setBanner",  method = RequestMethod.POST)
 	public String setBanner(@RequestBody List<BannerVo> bannerList) throws Exception {
-		System.out.println("setBanner :" + bannerList);
+		//System.out.println("setBanner :" + bannerList);
 		bannerService.initBanner(bannerList);
 		return "success";
 	}
@@ -114,7 +114,7 @@ public class ManagementController {
 	@RequestMapping(value = "/contents/postSettingPage", method = RequestMethod.GET)
 	public String postSetting(Model model) throws Exception {
 		List<PostsVo> postsVo = postService.selectAllPosts();
-		System.out.println(postsVo);
+		//System.out.println(postsVo);
 		model.addAttribute("postList", postsVo);
 		return "management/ContentsPostPage";
 	}
@@ -132,23 +132,23 @@ public class ManagementController {
 	public String getPostContent(String post_content_file) throws Exception {
 		//System.out.println("게시물 내용 가져오기: "+post_content_file);
 		String result = ContentReadAndWrite.ReadContent(post_content_file);
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 	
 	// 게시물 내리기
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostDeny", method=RequestMethod.GET)
-	public String setPostDeny(int postNo) throws Exception {
-		postService.denyPost(postNo);
+	public String setPostDeny(int post_no) throws Exception {
+		postService.denyPost(post_no);
 		return "success";
 	}
 	
 	// 게시물 다시 올리기
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostAdmit", method=RequestMethod.GET)
-	public String setPostAdmit(int postNo) throws Exception {
-		postService.admitPost(postNo);
+	public String setPostAdmit(int post_no) throws Exception {
+		postService.admitPost(post_no);
 		return "success";
 	}
 	

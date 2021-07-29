@@ -114,8 +114,18 @@ create sequence seq_media_no
 --==================================================
 -- 신고 테이블
 --==================================================
-
-
+drop table tbl_declared;
+create table tbl_declared(
+    declared_id number primary key,
+    target_id number,
+    target_type number,
+    user_no number references tbl_member(user_no),
+    target_user_no number references tbl_member(user_no),
+    declared_datetime timestamp default sysdate
+);
+drop sequence seq_dcl_id;
+create sequence seq_dcl_id
+    start with 1;
 
 
 --==================================================

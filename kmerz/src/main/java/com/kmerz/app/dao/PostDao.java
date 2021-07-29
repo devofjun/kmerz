@@ -15,4 +15,5 @@ public interface PostDao {
 	public int selectSeqPostno();
 	// 게시글 상태 변경
 	public void updateStatus(int target, String status);
+	
 }

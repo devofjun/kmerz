@@ -11,6 +11,8 @@ public class CommentVo {
 	private int comment_retag;
 	private Timestamp comment_regist_date;
 	
+	private int declared_count;
+	
 	public CommentVo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -84,13 +86,22 @@ public class CommentVo {
 		this.comment_regist_date = comment_regist_date;
 	}
 
+	public int getDeclared_count() {
+		return declared_count;
+	}
+
+	public void setDeclared_count(int declared_count) {
+		this.declared_count = declared_count;
+	}
+
 	@Override
 	public String toString() {
 		return "CommentVo [comment_no=" + comment_no + ", post_no=" + post_no + ", user_no=" + user_no
 				+ ", comment_content=" + comment_content + ", comment_regroup=" + comment_regroup + ", comment_retag="
-				+ comment_retag + ", comment_regist_date=" + comment_regist_date + "]";
+				+ comment_retag + ", comment_regist_date=" + comment_regist_date + ", declared_count=" + declared_count
+				+ "]";
 	}
-	
+
 	
 	
 }

@@ -37,7 +37,7 @@ img[draggable='false']{
 				$("#cardPostRecommand").text(postInfo.post_recommand);
 				// 신고수?
 				
-				$("#btnPostStatus").attr("href","/admin/contents/setPostDeny?postNo="+postInfo.post_no);
+				$("#btnChangeStatus").attr("data-postno", postInfo.post_no);
 				var lastupdate = timePattern(postInfo.post_lastupdate);
 				$("#cardPostLastupdate").text(lastupdate);
 			});
@@ -65,6 +65,16 @@ img[draggable='false']{
 			});
 		});
 		
+		$("#btnChangeStatus").click(function(e){
+			e.preventDefault();
+			var url = "/admin/contents/setPostDeny";
+			var data = { 
+					"post_no" : $(this).attr("data-postno")
+					};
+			$.get(url, data, function(rData){
+				console.log(rData);
+			});
+		});
 	});
 </script>
 
@@ -129,8 +139,8 @@ img[draggable='false']{
 						<td><span>${postsVo.community_name }/${postsVo.category_name }</span></td>
 						<td>${postsVo.post_title }</td>
 						<td>${postsVo.user_name }</td>
-						<td>${postsVo.post_readcount }</td>
-						<td>${postsVo.post_recommand }</td>
+						<td>${postsVo.declared_count }</td>
+						<td>${postsVo.post_status }</td>
 						<td style="display:none"><input type="hidden" name="post_content_file" value="${postsVo.post_content_file }"/></td>
 					</tr>
 					</c:forEach>
@@ -191,10 +201,10 @@ img[draggable='false']{
 						</div>
 					</li>
 					<li class="list-group-item">
-						<a  href="" 
-						class="btn btn-sm btn-outline-secondary">글 이동</a>
-						<a id="btnPostStatus" href="/admin/contents/setPostDeny" 
-						class="btn btn-sm btn-outline-secondary">글 내리기</a>
+						<button 
+						class="btn btn-sm btn-outline-secondary">글 이동</button>
+						<button id="btnChangeStatus" data-postno="" 
+						class="btn btn-sm btn-outline-secondary">글 내리기</button>
 					</li>
 				</ul>
 				<div id="cardPostLastupdate" class="card-footer text-muted">2021-07-27 10:26:22.0</div>

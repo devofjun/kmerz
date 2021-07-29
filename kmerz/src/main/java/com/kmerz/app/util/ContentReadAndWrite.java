@@ -33,7 +33,7 @@ public class ContentReadAndWrite {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(file);
+		//System.out.println(file);
 
 		Path filePath = null;
 		try {
@@ -61,8 +61,8 @@ public class ContentReadAndWrite {
 	public static String ReadContent(String filePath) throws IOException {
 		byte[] content = null;
 		content = Files.readAllBytes(Paths.get(filePath));
-		System.out.println(new String(content));
-		System.out.println("파일경로 = " + filePath);
+		//System.out.println(new String(content));
+		//System.out.println("파일경로 = " + filePath);
 		return new String(content);
 	}
 }
