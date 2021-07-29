@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kmerz.app.service.CategoryService;
@@ -48,4 +49,12 @@ public class TestController {
 		file="한글";
 		return file;
 	}
+	
+	// 게시물 내용 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/g", method = RequestMethod.GET)
+	public String getPostContent(String post_content_file) throws Exception {
+		return ContentReadAndWrite.ReadContent(post_content_file);
+	}
+	
 }

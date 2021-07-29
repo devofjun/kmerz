@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kmerz.app.dao.CategoryDao;
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
 import com.kmerz.app.service.PostService;
+import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.CategoryVo;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
@@ -80,6 +82,13 @@ public class CommunityController {
 		model.addAttribute("userPostCount", userPostCount);
 		model.addAttribute("userCommentCount", userCommentCount);
 		return "community/CommunityPage";
+	}
+	
+	// 게시물 내용 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/contents/getPostContent", method = RequestMethod.GET)
+	public String getPostContent(String post_content_file) throws Exception {
+		return ContentReadAndWrite.ReadContent(post_content_file);
 	}
 	
 }

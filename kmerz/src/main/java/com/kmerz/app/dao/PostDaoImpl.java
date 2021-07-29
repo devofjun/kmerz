@@ -86,13 +86,13 @@ public class PostDaoImpl implements PostDao {
 	}
 
 	@Override
+	public PostsVo selectLoadPost(int init_post) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE + "selectLoadPost" , init_post);
+	}
 	public void updateStatus(int target, String status) {
 		// 게시글 상태 변경
 		PostsVo postsVo = new PostsVo(target, status);
 		session.update(NAMESPACE+"updateStatus", postsVo);
 	}
-
-	
-
-	
 }

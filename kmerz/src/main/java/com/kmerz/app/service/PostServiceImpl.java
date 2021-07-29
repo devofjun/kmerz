@@ -151,6 +151,10 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
+	public PostsVo selectLoadPost(int init_post){
+		// TODO Auto-generated method stub
+		return postdao.selectLoadPost(init_post);
+	}
 	public void denyPost(int postNo) {
 		// 포스트 삭제, 숨기기
 		postdao.updateStatus(postNo, POST_STATUS_DENY);
@@ -161,7 +165,4 @@ public class PostServiceImpl implements PostService{
 		// 포스트 다시 보이기, 승인하기
 		postdao.updateStatus(postNo, POST_STATUS_ADMIT);
 	}
-
-	
-
 }

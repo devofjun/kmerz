@@ -12,8 +12,7 @@
 <%
 	for (int i = 0; i < mentList.size(); i++) {
 %>
-<div id="<%=mentList.get(i).getComment_no()%>">
-	<input type="checkbox" id="reply-toggleBtn" style="display: none">
+<div>
 	<div class="replyContent">
 		<div class="reply-user">
 			<div class="reply-user-profile">
@@ -24,25 +23,14 @@
 				</div>
 			</div>
 			<div class="reply-user-content reply-margin-top"
-				onclick="replytoggle(<%=mentList.get(i).getComment_no()%>)">
+				onclick="appendCommentInput('<%=i%>','<%=mentList.get(i).getUser_no()%>','<%=mentList.get(i).getPost_no()%>')">
 				<span><%=mentList.get(i).getComment_content()%> </span>
 			</div>
 			<div class="currentTime reply-margin-top">
 				<span>3분전</span>
 			</div>
 		</div>
-		<div class="reply-section">
-			<div class="reply-content">
-				<div class="reply-form-input">
-					<textarea id="comment_content" cols="120" rows="10"></textarea>
-				</div>
-				<div class="reply-submit">
-					<button class="btn">CON</button>
-					<button class="btn"
-						onclick="addReply()">REPLY</button>
-				</div>
-			</div>
-		</div>
+		<div class="reply-section" id="reply-section-<%=i%>"></div>
 	</div>
 </div>
 <%

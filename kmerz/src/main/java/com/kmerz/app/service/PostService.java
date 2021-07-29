@@ -14,6 +14,7 @@ public interface PostService {
 	public List<PostsVo> getCategoryPostList(String community_id, int category_no);
 	public int getUserPostCount(int user_no);
 	public int getNewPostSeq();
+	public PostsVo selectLoadPost(int init_post);
 	public void denyPost(int postNo);
 	public void admitPost(int postNo);
 }

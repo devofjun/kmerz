@@ -32,25 +32,25 @@
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/format_bold_black_24dp.svg">
+										src="/resources/images/icons/postingNav/format_bold_black_24dp.svg"/>
 								</button></span>
 						</div>
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/format_italic_black_24dp.svg">
+										src="/resources/images/icons/postingNav/format_italic_black_24dp.svg"/>
 								</button></span>
 						</div>
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/add_link_black_24dp.svg">
+										src="/resources/images/icons/postingNav/add_link_black_24dp.svg"/>
 								</button></span>
 						</div>
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/format_size_black_24dp.svg">
+										src="/resources/images/icons/postingNav/format_size_black_24dp.svg"/>
 								</button></span>
 						</div>
 					</div>
@@ -58,19 +58,19 @@
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/format_list_bulleted_black_24dp.svg">
+										src="/resources/images/icons/postingNav/format_list_bulleted_black_24dp.svg"/>
 								</button></span>
 						</div>
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/format_list_numbered_black_24dp.svg">
+										src="/resources/images/icons/postingNav/format_list_numbered_black_24dp.svg"/>
 								</button></span>
 						</div>
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/format_quote_black_24dp.svg">
+										src="/resources/images/icons/postingNav/format_quote_black_24dp.svg"/>
 								</button></span>
 						</div>
 					</div>
@@ -78,19 +78,19 @@
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/window_black_24dp.svg">
+										src="/resources/images/icons/postingNav/window_black_24dp.svg"/>
 								</button></span>
 						</div>
 						<div>
 							<span><button onclick="openFILE_INSERT_Modal()">
 									<img
-										src="/resources/images/icons/postingNav/image_black_24dp.svg">
+										src="/resources/images/icons/postingNav/image_black_24dp.svg"/>
 								</button></span>
 						</div>
 						<div>
 							<span><button>
 									<img
-										src="/resources/images/icons/postingNav/smart_display_black_24dp.svg">
+										src="/resources/images/icons/postingNav/smart_display_black_24dp.svg"/>
 								</button></span>
 						</div>
 					</div>
