@@ -2,7 +2,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%List<CategoryVo> cateList =  (List<CategoryVo>)request.getAttribute("cateList");%>
 <div id="appended-category">
 <select id="category-input-val">
@@ -12,5 +11,4 @@
 	<option value="<%=cateList.get(i).getCategory_no()%>"><%=cateList.get(i).getCategory_name() %></option>
 	<%} %>
 </select>
-
 </div>

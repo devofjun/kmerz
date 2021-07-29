@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmerz.app.declared">
+
+<!-- 신고 추가하기 -->
+<insert id="insertDeclared">
+	insert into tbl_declared(declared_id, target_id, target_type, user_no, target_user_no)
+	values(
+		seq_dcl_id.nextval,
+		#{target_id},
+		#{target_type},
+		#{user_no},
+		#{target_user_no}
+	)
+</insert>
+
+
+<!-- 신고된 타겟의 ID와 타입으로 신고 정보 찾기  -->
+<select id="selectTargetID" resultType="DeclaredVo">
+	select * from tbl_declared
+	where target_id = #{target_id}
+	and target_type = #{target_type}
+</select>
+
+<!-- 글의 신고 개수 -->
+<select id="selectTargetIDCount" resultType="Integer">
+	select count(*) from tbl_declared
+	where target_id = #{target_id}
+	and target_type = #{target_type}
+</select>
+
+</mapper>

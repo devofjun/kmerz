@@ -1,14 +1,47 @@
 /**
  * 
- */
-function addComment(post_no){
+ */  
+window.addEventListener('scroll', () => {  
+  if (document.documentElement.offsetHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {  
+    console.log('scrolled to bottom');
+    appendPosts();  
+  }  
+});
+function checkCommunity(message){
+	console.log(message);
+}
+var init_post = 10;
+ window.addEventListener('load', function(){ appendPosts(); });
+function appendPosts(){
+	console.log("게시글 불러오기");
+	for(var i = init_post - 9; i < init_post; i++){
+	var newDiv = document.createElement("div");
+	var post_container = document.getElementById("post_container");
+	includeHTML(newDiv, '/include/post?init_post=' + i);
+	post_container.appendChild(newDiv);
+	console.log(newDiv);
+	}
+	init_post+=10;
+}
+function appendCommentInput(comment_no, comment_retag, post_no){
+	var replySection = document.getElementById("reply-section-"+comment_no);
+	if(replySection.hasChildNodes()){
+		replySection.innerHTML = null;
+		console.log("댓글인풋삭제");
+	}else{
+		includeHTML(replySection, '/include/reply_input?comment_retag=' + comment_retag + "&post_no=" + post_no);
+		console.log("댓글인풋열기");
+	}
+}
+function addComment(post_no,comment_retag){
 	console.log("댓글쓰기");
 	console.log(post_no);
-	var commentContent = document.getElementById("comment_content").value;
-	console.log(commentContent);
+	var commentContent = document.getElementById("comment_content_" + comment_retag).value;
+	console.log(comment_retag);
 	var data = new FormData();
 	data.append("commentContent", commentContent);
 	data.append("post_no", post_no);
+	data.append("comment_retag", comment_retag);
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "comment/addComment");
 	xhr.send(data);
@@ -33,7 +66,7 @@ function includeHTML(divContainer, urlHTML) {
         xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             if (this.status == 200) { divContainer.innerHTML = xhttp.responseText; }
-            if (this.status == 404) { divContainer.innerHTML = "Page not found."; }
+            if (this.status == 404) { return;; }
         }
     }
     console.log(urlHTML);

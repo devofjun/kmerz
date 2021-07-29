@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/header.css?ver6">
+<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">

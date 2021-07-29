@@ -9,7 +9,7 @@ insert into tbl_member values(
     sysdate,
     'OK'
 );
-insert into tbl_member values(
+insert into tbl_member   values(
     SEQ_USER_NO.nextval,
     'test2@naver.com',
     '1234',
@@ -73,34 +73,12 @@ insert into tbl_category values(
 ----------------------------------------------------
 -- 테스트 데이터 삽입(게시글 테이블)
 ----------------------------------------------------
-insert into tbl_posts values(
-    SEQ_POST_NO.nextval,
-    1000,
-    'star',
-    100,
-    '스타 첫번째 공략',
-    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0, 0, sysdate, 'accept'
-);
-insert into tbl_posts values(
-    SEQ_POST_NO.nextval,
-    1001,
-    'lol',
-    101,
-    '롤 첫번째 공략',
-    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0, 0, sysdate, 'accept'
-);
-insert into tbl_posts values(
-    SEQ_POST_NO.nextval,
-    1002,
-    'overwatch',
-    102,
-    '옵치 첫번째 공략',
-    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0, 0, sysdate, 'accept'
-);
-
+BEGIN
+FOR i IN 1..50 LOOP
+insert into tbl_posts values (seq_post_no.NEXTVAL, 1000, 'star', 100, 'test', 'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',0,0,sysdate,'accept');
+END LOOP;
+END;
+--select * from tbl_posts;
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
@@ -204,3 +182,4 @@ insert into tbl_banner values(4, 322330);
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
+

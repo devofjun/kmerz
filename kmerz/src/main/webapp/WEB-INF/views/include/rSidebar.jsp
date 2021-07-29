@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	var maxLength = 4;
+	var user_name = "${loginVo.user_name}"
+	if(user_name.length > maxLength) {
+		var fName = user_name.substr(0,3) + ".님";
+		$("#user_name").text(fName);
+	}
+});
+</script>
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v8">
 <div class="rSidebar sticky">
 	<div class="userinfo border sticky">
@@ -27,7 +37,14 @@
 						<div style="float: left; width: 50%;">
 							<div style="float: left; width: 100%;">
 								<div style="float: left; width: 50%;">
-									<strong>${loginVo.user_name}님</strong>
+								<%-- <c:choose>
+									<c:when test="${loginVo.user_name.length < 5}"> --%>
+										<strong id="user_name">${loginVo.user_name}님</strong>
+									<%-- </c:when>
+									<c:otherwise> --%>
+										<%-- <strong>${loginVo.user_name}님</strong>
+									</c:otherwise>
+								</c:choose> --%>
 								</div>
 								<!-- 메시지가 있을때 black 이미지 사용 -->
 								<div style="float: left; width: 25%;">

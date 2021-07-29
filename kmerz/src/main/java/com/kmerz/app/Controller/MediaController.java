@@ -22,6 +22,7 @@ import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.service.SteamAppService;
 import com.kmerz.app.util.ContentReadAndWrite;
+import com.kmerz.app.util.MyFileUploadUtil;
 import com.kmerz.app.util.SteamUtil;
 import com.kmerz.app.vo.CommentVo;
 import com.kmerz.app.vo.CommunityVo;
@@ -128,13 +129,18 @@ public class MediaController {
 	
 	
 	// profile 이미지 파일 업로드
-	@RequestMapping(value="uploadProfileImage", method=RequestMethod.POST)
-	public void uploadProfileImage() {
-		//String media_id = "profileimg_"+loginVo.getUser_no 
-		//String path = "/D:/upload/profileimage/" + loginVo.getUser_no() + "/" ;
-		//int user_no = ;
-		//파일이름
-		//MyFileUploadUtil.uploadFile(uploadPath, originalFilename, fileData);
-		// /D:/upload/profileimage/1000/파일이름+랜덤이름.jpg
+	@RequestMapping(value="/uploadProfileImage", method=RequestMethod.POST,
+			produces="application/text;charset=utf-8")
+	public String uploadAjax(MultipartFile file, HttpSession session) throws Exception {
+		MemberVo getMemberVo = (MemberVo)session.getAttribute("loginVo");
+		String strUser_no = String.valueOf(getMemberVo.getUser_no());
+		String uploadPath = "D:/kmerz/repository/profile/" + strUser_no;
+		System.out.println("uploadPath:" + uploadPath);
+		System.out.println("file:" + file);
+		String originalFilename = file.getOriginalFilename();
+		System.out.println("originalFilename:" + originalFilename);
+		String filePath = MyFileUploadUtil.uploadFile(uploadPath, originalFilename, file.getBytes());
+		System.out.println(filePath);
+		return "redirect:/m/userProfileImagesChangeForm";
 	}	
 }

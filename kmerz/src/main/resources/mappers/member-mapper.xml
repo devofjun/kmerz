@@ -40,4 +40,10 @@
 	where user_no = #{user_no}
 </update>
 
+<!-- 비밀번호 변경 -->
+<update id="updateUserPw">
+	update tbl_member set user_pw = #{user_pw}
+	where user_no = #{user_no}
+</update>
+
 </mapper>
