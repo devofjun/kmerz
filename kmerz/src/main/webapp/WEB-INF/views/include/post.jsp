@@ -11,6 +11,7 @@
 <!-- 포스트 DEFAULT 시작 -->
 
 <%
+	if(postList != null){
 	for (int i = 0; i < postList.size(); i++) {
 %>
 
@@ -70,6 +71,7 @@
 	</div>
 </div>
 <%
+	}
 	}
 %>
 

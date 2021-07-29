@@ -42,7 +42,7 @@ public class HomeController {
 	@RequestMapping
 	public String home(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
-		List<PostsVo> postList = postService.selectAllPosts();
+		List<PostsVo> postList = postService.selectAdmitPosts();
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
 		int userCommentCount = 0;
@@ -55,6 +55,7 @@ public class HomeController {
 			//유저의 댓글 갯수 구하기
 			userCommentCount = commentService.getUserCommentCount(user_no);
 		}
+		
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
 		model.addAttribute("userPostCount", userPostCount);

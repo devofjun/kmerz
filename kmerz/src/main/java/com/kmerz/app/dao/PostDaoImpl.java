@@ -21,11 +21,20 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public List<PostsVo> selectAllPosts() {
+		// 모든 게시글 가져오기
 		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectAllPosts");
 		// System.out.println(PostsList);
 		return PostsList;
 	}
+	
+	@Override
+	public List<PostsVo> selectStatusPosts(String status) {
+		// 허용된 모든 게시글 읽기
+		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectStatusPosts", status);
+		return null;
+	}
 
+	// test
 	@Override
 	public PostsVo selectPost(int post_no) {
 		PostsVo Post = session.selectOne(NAMESPACE + "selectPost", post_no);
@@ -34,21 +43,26 @@ public class PostDaoImpl implements PostDao {
 
 	// 커뮤니티 페이지 이동시 이동한 커뮤니티 포스트 리스트 가져오기
 	@Override
-	public List<PostsVo> selectCommunityPostList(String community_id) {
-		List<PostsVo> list = session.selectList(NAMESPACE + "selectCommunityPostList", community_id);
+	public List<PostsVo> selectCommunityPostList(String community_id, String status) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("community_id", community_id);
+		map.put("post_status", status);
+		List<PostsVo> list = session.selectList(NAMESPACE + "selectCommunityPostList", map);
 		return list;
 	}
 
 	@Override
 	public void posting(PostsVo vo) {
 		session.insert(NAMESPACE + "postingDetail", vo);
-		System.out.println("포스팅븨오"+vo);
+		//System.out.println("포스팅븨오"+vo);
 	}
 	
-	public List<PostsVo> selectCategoryPostList(String community_id, int category_no) {
+	@Override
+	public List<PostsVo> selectCategoryPostList(String community_id, int category_no, String status) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("community_id", community_id);
 		map.put("category_no", category_no);
+		map.put("post_status", status);
 		List<PostsVo> list = session.selectList(NAMESPACE + "selectCategoryPostList", map);
 		return list;
 	}
@@ -64,4 +78,13 @@ public class PostDaoImpl implements PostDao {
 		// 글번호 시퀀스 생성
 		return session.selectOne(NAMESPACE+"selectSeqPostno");
 	}
+
+	@Override
+	public void updateStatus(int target, String status) {
+		// 게시글 상태 변경
+		PostsVo postsVo = new PostsVo(target, status);
+		session.update(NAMESPACE+"updateStatus", postsVo);
+	}
+
+	
 }

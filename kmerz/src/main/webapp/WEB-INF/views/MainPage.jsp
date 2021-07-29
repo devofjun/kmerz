@@ -36,7 +36,6 @@
 	<div>
 		<%@ include file="./include/banner.jsp"%>
 	</div>
-
 	
 	<section class="postSection">
 		<div class="posts">

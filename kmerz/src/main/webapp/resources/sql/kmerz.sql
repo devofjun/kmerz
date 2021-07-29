@@ -110,22 +110,22 @@ drop sequence seq_media_no;
 create sequence seq_media_no
     start with 100;
 
--- 게시글변경 로그 테이블
-/*
-create table tbl_change_log(
-    post_no number reference tbl_posts(post_no),
-    -- 로그 코드 이름 해야합니다.
-    defore_content varchar2(500),
-    before_title varchar2(100),
-    before_media , -- 미디어 타입??
-    change_log_time timestamp default sysdate,
-    post_version number not null;
+
+--==================================================
+-- 신고 테이블
+--==================================================
+drop table tbl_declared;
+create table tbl_declared(
+    declared_id number primary key,
+    target_id number,
+    target_type number,
+    user_no number references tbl_member(user_no),
+    target_user_no number references tbl_member(user_no),
+    declared_datetime timestamp default sysdate
 );
--- 게시글변경 버전 시퀀스
-creat sequence seq_post_version
-increment by 1
-start with 1;
-*/
+drop sequence seq_dcl_id;
+create sequence seq_dcl_id
+    start with 1;
 
 
 --==================================================
