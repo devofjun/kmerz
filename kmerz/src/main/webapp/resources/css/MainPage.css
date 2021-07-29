@@ -393,7 +393,8 @@ labelBtn:hover {
 
 .modal-content {
 	background-color: #d9e0e6;
-    margin: auto;
+	margin: auto;
+    margin-top: 35px;
     padding: 0px 100px;
     border: 1px solid #718093;
     width: 75%;

@@ -60,7 +60,6 @@
 				<!-- 게시글 양식 -->
 				<div id="post_container">
 				</div>
-				<button onclick="appendPosts()">1234</button>
 			</div>
 			<!-- 오른쪽 사이드 바 -->
 			<%@ include file="./include/rSidebar.jsp"%>
