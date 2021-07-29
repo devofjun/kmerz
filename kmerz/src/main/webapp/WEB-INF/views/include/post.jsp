@@ -58,4 +58,5 @@ PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 		</div>
 	</div>
 </div>
+
 <!-- 포스트 DEFAULT 끝 -->

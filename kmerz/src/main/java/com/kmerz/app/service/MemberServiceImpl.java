@@ -56,5 +56,8 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.selectNO(user_no);
 	}
+	public void changeUserPw(int user_no, String newPw) {
+		memberDao.updateUserPw(user_no, newPw);
+	}
 
 }

@@ -8,14 +8,28 @@
 <select id="selectAllPosts" resultType="PostsVo">
 	select * from tbl_posts
 </select>
+
+<select id="selectStatusPosts" resultType="PostsVo">
+	select * from tbl_posts where post_status = #{status}
+</select>
+
+<!-- 글 조회 -->
 <select id="selectPost" resultType="PostsVo">
 	select * from tbl_posts where post_no = #{post_no}
 </select>
+
+<!-- 조회수 증가 -->
+<update id="updateReadCount">
+	update tbl_posts 
+	set post_readcount = post_readcount + 1
+	where post_no = #{post_no}
+</update>
 
 <!-- 커뮤니티 페이지 이동후 나오는 포스트 -->
 <select id="selectCommunityPostList" resultType="PostsVo">
 	select * from tbl_posts
 	where community_id = #{community_id}
+	and post_status = #{post_status}
 </select>
 
 <!-- 카테고리 선택시 나오는 포스트 -->
@@ -23,6 +37,7 @@
 	select * from tbl_posts
 	where community_id = #{community_id}
 	and category_no = #{category_no}
+	and post_status = #{post_status}
 </select>
 
 <!-- 글번호 시퀀스 조회 -->
@@ -42,8 +57,7 @@ insert into tbl_posts values(
 	0,
 	0,
 	sysdate,
-	'accept'
-	
+	'admit'
 	)
 </insert>
 
@@ -54,4 +68,9 @@ insert into tbl_posts values(
 <select id="selectLoadPost" resultType="PostsVo">
 	select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status='accept') posts where posts.rownumber = #{init_post}
 </select>
+
+<!-- 게시글 상태 변경 -->
+<update id="updateStatus">
+	update tbl_posts set post_status=#{post_status} where post_no=#{post_no}
+</update>
 </mapper>
