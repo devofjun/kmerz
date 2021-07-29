@@ -38,8 +38,6 @@ public class MediaController {
 	@Inject
 	CommunityService commService;
 
-
-	
 	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
 	public String upload_media(@RequestParam("file") MultipartFile file,
 							   @RequestParam("community_id") String community_id,
