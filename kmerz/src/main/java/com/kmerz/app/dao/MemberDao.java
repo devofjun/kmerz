@@ -12,4 +12,5 @@ public interface MemberDao {
 	public MemberVo selectNO(int user_no);
 	public int selectUserCount(String user_name);
 	public void updateUserName(int user_no, String user_name);
+	public void updateUserPw(int user_no, String newPw);
 }
