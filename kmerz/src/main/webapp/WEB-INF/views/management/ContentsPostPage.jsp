@@ -6,24 +6,20 @@
 <style>
 img[draggable='false']{
 	width:350px;
-	object-fit: cover";
+	object-fit: cover;
 }
 </style>
+
 <script>
 	$(document).ready(function() {
-		// 날짜 수정
-		//console.log($(".trPost:first").children().eq(1).text());
-		
 		for(var i=0; i<$(".trPost").length; i++){
 			var tdDate = $(".trPost").eq(i).children().eq(1); 
 			tdDate.text(timeForToday(tdDate.text()));
 		};
 		
-		// 게시글 선택했을때
-		$(".trPost").click(function(){
-			// 게시글 정보 가져오기
-			
-			
+		// 글 목록을 클릭했을때
+		$("#tbodyPost").on("click", ".trPost", function() {
+			// 게시글 카드 그리기
 			var post_no = $(this).children().first().text();
 			var urlInfo = "/admin/contents/getPostInfo";
 			var dataInfo = {
@@ -38,21 +34,22 @@ img[draggable='false']{
 				$("#cardPostReadCount").text(postInfo.post_readcount);
 				$("#cardPostRecommand").text(postInfo.post_recommand);
 				$("#cardPostDeclared").text(postInfo.declared_count);
-				
+				console.log(postInfo.post_status);
+				if(postInfo.post_status == "deny"){
+					$("#cardPostTitle").addClass("text-decoration-line-through");
+					$("#btnChangeStatus").text("글 잠금해제");
+					$("#cardUserInfo").children().removeClass("shadow");
+				} else {
+					$("#cardPostTitle").removeClass("text-decoration-line-through");
+					$("#btnChangeStatus").text("글 잠그기");
+					$("#cardUserInfo").children().addClass("shadow");
+				}
 				$("#btnChangeStatus").attr("data-postno", postInfo.post_no);
 				var lastupdate = timePattern(postInfo.post_lastupdate);
 				$("#cardPostLastupdate").text(lastupdate);
 			});
 			// 게시글 내용 가져오기
 			var post_content_file = $(this).find("input[name='post_content_file']").val();
-// 			var urlContent = "/admin/contents/getPostContent";
-// 			var dataContent = {
-// 					"post_content_file" : post_content_file
-// 			};
-// 			$.get(urlContent, dataContent, function(rData){
-// 				console.log(rData);
-// 				$("#cardPostContent").html(rData);
-// 			});
 			$.ajax({
 				url				:"/admin/contents/getPostContent",
 				type			:"GET",
@@ -66,26 +63,41 @@ img[draggable='false']{
 				}
 			});
 			
-			// 비활성글
-			var card = $("#cardUserInfo").children();
-			if($(this).find(".status").text() == "deny"){
-				$("#cardPostTitle").addClass("text-decoration-line-through");
-				card.removeClass("shadow");
-			} else {
-				$("#cardPostTitle").removeClass("text-decoration-line-through");
-				card.addClass("shadow");
-			}
 		});
 		
+		// 글 상태 바꾸기 버튼 눌렀을때
 		$("#btnChangeStatus").click(function(e){
 			e.preventDefault();
+			var that = this;
+			var card = $("#cardUserInfo").children();
+			var post_no = $(this).attr("data-postno");
 			var url = "/admin/contents/setPostDeny";
+			if($(this).text() == "글 잠금해제"){
+				url = "/admin/contents/setPostAdmit";
+			}
 			var data = { 
-					"post_no" : $(this).attr("data-postno")
+					"post_no" : post_no
 					};
 			$.get(url, data, function(rData){
+				// 버튼 바꾸기
 				console.log(rData);
+				if(rData == "success") {
+					console.log(url);
+					if(url == "/admin/contents/setPostDeny"){
+						console.log($(that).text());
+						$(that).text("글 잠금해제");
+						$("#cardPostTitle").addClass("text-decoration-line-through");
+						card.removeClass("shadow");
+					} else {
+						console.log($(that).text());
+						$(that).text("글 잠그기");
+						$("#cardPostTitle").removeClass("text-decoration-line-through");
+						card.addClass("shadow");
+					}
+				}
 			});
+			
+			
 		});
 	});
 </script>
@@ -143,7 +155,7 @@ img[draggable='false']{
 						<th>상태</th>
 					</tr>
 				</thead>
-				<tbody id="tbdPost">
+				<tbody id="tbodyPost">
 					<c:forEach var="postsVo"  items="${postList }">
 					<tr class="trPost cspointer"> 
 						<td class="postno">${postsVo.post_no }</td>
@@ -216,7 +228,7 @@ img[draggable='false']{
 						<button 
 						class="btn btn-sm btn-outline-secondary"></button>
 						<button id="btnChangeStatus" data-postno="" 
-						class="btn btn-sm btn-outline-secondary">글 내리기</button>
+						class="btn btn-sm btn-outline-secondary">글 잠그기</button>
 					</li>
 				</ul>
 				<div id="cardPostLastupdate" class="card-footer text-muted">2021-07-27 10:26:22.0</div>
