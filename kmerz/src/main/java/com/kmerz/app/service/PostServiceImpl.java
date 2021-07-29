@@ -74,6 +74,8 @@ public class PostServiceImpl implements PostService{
 				CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
 				postVo.setCategory_name(categoryVo.getCategory_name());
 			}
+		} else {
+			System.out.println("읽을 글이 없습니다.");
 		}
 		return PostsList;
 	}
