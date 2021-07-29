@@ -30,8 +30,8 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public List<PostsVo> selectStatusPosts(String status) {
 		// 허용된 모든 게시글 읽기
-		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectStatusPosts", status);
-		return null;
+		List<PostsVo> postsList = session.selectList(NAMESPACE + "selectStatusPosts", status);
+		return postsList;
 	}
 
 	// test
