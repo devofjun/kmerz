@@ -65,6 +65,7 @@ insert into tbl_posts values(
 <select id="selectUserPostCount" resultType="int">
 	select count(*) from tbl_posts where user_no = #{user_no}
 </select>
+
 <select id="selectLoadPost" resultType="PostsVo">
 	select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status='accept') posts where posts.rownumber = #{init_post}
 </select>
