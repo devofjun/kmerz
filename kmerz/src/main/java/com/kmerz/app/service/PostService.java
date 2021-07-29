@@ -8,6 +8,7 @@ public interface PostService {
 	public List<PostsVo> selectAllPosts();
 	public List<PostsVo> selectAdmitPosts();
 	public PostsVo selectPost(int post_no);
+	public PostsVo viewPost(int post_no);
 	public List<PostsVo> getCommunityPostList(String community_id);
 	public void posting(PostsVo vo);
 	public List<PostsVo> getCategoryPostList(String community_id, int category_no);

@@ -40,6 +40,12 @@ public class PostDaoImpl implements PostDao {
 		PostsVo Post = session.selectOne(NAMESPACE + "selectPost", post_no);
 		return Post;
 	}
+	
+	@Override
+	public void updateReadCount(int post_no) {
+		// 조회수 증가
+		session.update(NAMESPACE+"updateReadCount", post_no);
+	}
 
 	// 커뮤니티 페이지 이동시 이동한 커뮤니티 포스트 리스트 가져오기
 	@Override
@@ -85,6 +91,8 @@ public class PostDaoImpl implements PostDao {
 		PostsVo postsVo = new PostsVo(target, status);
 		session.update(NAMESPACE+"updateStatus", postsVo);
 	}
+
+	
 
 	
 }

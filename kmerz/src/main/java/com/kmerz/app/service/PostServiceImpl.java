@@ -78,13 +78,15 @@ public class PostServiceImpl implements PostService{
 		return PostsList;
 	}
 
+	
 	@Override
 	public PostsVo selectPost(int post_no) {
+		// 관리자용 게시글 보기 (조회수 증가 x)
 		PostsVo postVo = postdao.selectPost(post_no);
-		// 유저 이름
 		//System.out.println("포스트노:" + post_no);
-		//System.out.println("포스트븨오:" + postVo);
+		System.out.println("포스트븨오:" + postVo);
 		if(postVo != null) {
+			// 유저 이름
 			MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
 			postVo.setUser_name(memberVo.getUser_name());
 			// 커뮤니티 이름
@@ -94,6 +96,28 @@ public class PostServiceImpl implements PostService{
 			CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
 			postVo.setCategory_name(categoryVo.getCategory_name());	
 		}
+		return postVo;
+	}
+	
+	
+	@Transactional
+	@Override
+	public PostsVo viewPost(int post_no) {
+		PostsVo postVo = postdao.selectPost(post_no);
+		//System.out.println("포스트노:" + post_no);
+		//System.out.println("포스트븨오:" + postVo);
+		if(postVo != null) {
+			// 유저 이름
+			MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
+			postVo.setUser_name(memberVo.getUser_name());
+			// 커뮤니티 이름
+			CommunityVo commVo = communityDao.getOneCommunity(postVo.getCommunity_id());
+			postVo.setCommunity_name(commVo.getCommunity_name());
+			// 카테고리 이름
+			CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
+			postVo.setCategory_name(categoryVo.getCategory_name());	
+		}
+		postdao.updateReadCount(post_no);
 		return postVo;
 	}
 
@@ -137,5 +161,7 @@ public class PostServiceImpl implements PostService{
 		// 포스트 다시 보이기, 승인하기
 		postdao.updateStatus(postNo, POST_STATUS_ADMIT);
 	}
+
+	
 
 }
