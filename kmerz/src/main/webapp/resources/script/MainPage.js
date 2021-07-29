@@ -1,6 +1,12 @@
 /**
  * 
- */
+ */  
+window.addEventListener('scroll', () => {  
+  if (document.documentElement.offsetHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {  
+    console.log('scrolled to bottom');
+    appendPosts();  
+  }  
+});
 function checkCommunity(message){
 	console.log(message);
 }
