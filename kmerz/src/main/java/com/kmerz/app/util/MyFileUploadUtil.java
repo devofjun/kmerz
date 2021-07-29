@@ -18,11 +18,16 @@ public class MyFileUploadUtil {
 			byte[] fileData) 
 					throws Exception {
 		// uuid_noname01.png
-		String datePath = calcPath(uploadPath);
+		String mkPath = mkPath(uploadPath);
+		int point = originalFilename.indexOf(".");
+		String front = originalFilename.substring(0, (point));
+		// System.out.println("front: " + front);
+		String back = originalFilename.substring(point);
+		// System.out.println("back: " + back);
 		UUID uuid = UUID.randomUUID(); // 중복되지 않는 고유한 값
-		// D:/upload/2021/6/30/uuid_noname.png
-		String filePath = datePath + "/" + uuid + "_" + originalFilename;
-		System.out.println("filePath:" + filePath);
+		// D:/kmerz/repository/profile/user_no/noname_uuid.png
+		String filePath = mkPath + "/" + front + "_" + uuid + back;
+		// System.out.println("filePath:" + filePath);
 		File target = new File(filePath);
 		FileCopyUtils.copy(fileData, target);
 		boolean isImage = isImage(filePath);
@@ -32,23 +37,17 @@ public class MyFileUploadUtil {
 		return filePath;
 	}
 	
-	private static String calcPath(String uploadPath) {
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int date = cal.get(Calendar.DATE);
+	// 파일 없으면 만들기
+	private static String mkPath(String uploadPath) {
+		String mkPath = uploadPath;
+		// System.out.println("mkPath:" + mkPath);
 		
-		String dateString = year + "/" + month + "/" + date; // 2021/6/30
-		String datePath = uploadPath + "/" + dateString;
-		// -> D:/upload/2021/6/30
-		System.out.println("datePath:" + datePath);
-		
-		File f = new File(datePath);
+		File f = new File(mkPath);
 		if (!f.exists()) {
 			f.mkdirs();
 		}
 		
-		return datePath;
+		return mkPath;
 	}
 	
 	// 파일의 확장명 얻기
@@ -70,8 +69,8 @@ public class MyFileUploadUtil {
 	
 	// 썸네일 이미지 생성
 	public static String makeThumbnail(String filePath) {
-		// D:/upload/2021/6/30/uuid_noname.png
-		// D:/upload/2021/6/30/sm_uuid_noname.png
+		// D:/kmerz/repository/profile/user_no/noname_uuid.png
+		// D:/kmerz/repository/profile/user_no/sm_noname_uuid.png
 		int slashIndex = filePath.lastIndexOf("/");
 		String front = filePath.substring(0, slashIndex + 1);
 		// -> D:/upload/2021/6/30/
@@ -88,9 +87,10 @@ public class MyFileUploadUtil {
 			BufferedImage srcImage = ImageIO.read(orgFile);
 			BufferedImage destImage = Scalr.resize(
 					srcImage, // 원본 이미지 
-					Scalr.Method.AUTOMATIC, // 비율 맞추기
-					Scalr.Mode.FIT_TO_HEIGHT, // 높이에 맞추기
-					100); // 해당 높이
+					// Scalr.Method.AUTOMATIC, // 비율 맞추기
+					Scalr.Mode.FIT_EXACT,
+					// Scalr.Mode.FIT_TO_HEIGHT, // 높이에 맞추기
+					80); // 해당 높이
 			ImageIO.write(destImage, getExtName(thumbnailPath), thumbFile);
 			// -> 썸네일 이미지를 해당파일의 확장자 형식을 썸네일 파일로 저장
 		} catch (Exception e) {

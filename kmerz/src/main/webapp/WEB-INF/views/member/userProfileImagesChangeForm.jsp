@@ -36,7 +36,7 @@ $(document).ready(function() {
 		<div>
 			<img src="/resources/images/default_Profile3.png" class="img-thumbnail" alt="...">
 		</div>
-		<input type="file" id="file" name ="file" accept=".jpg, .jpeg, .png">
+		<input type="file" id="file" name ="file" accept=".jpg, .png, .gif">
 		<br>
 		<button type="submit" class="btn btn-primary" id="btnUpload">업로드</button>
 	</form>
