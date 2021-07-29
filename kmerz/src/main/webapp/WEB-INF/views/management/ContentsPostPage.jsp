@@ -202,7 +202,7 @@ img[draggable='false']{
 					</li>
 					<li class="list-group-item">
 						<button 
-						class="btn btn-sm btn-outline-secondary">글 이동</button>
+						class="btn btn-sm btn-outline-secondary"></button>
 						<button id="btnChangeStatus" data-postno="" 
 						class="btn btn-sm btn-outline-secondary">글 내리기</button>
 					</li>
