@@ -42,7 +42,7 @@ public class IncludeController {
 	@RequestMapping(value="/modal", method = RequestMethod.GET)
 	public String openModal(Model model,@RequestParam(value="post_no") int post_no) {
 		System.out.println(post_no);
-		PostsVo postVo = pService.selectPost(post_no);
+		PostsVo postVo = pService.viewPost(post_no);
 		System.out.println("postVo = " + postVo);
 		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
 		List<CommentVo> mentList = mentService.selectCommentOnPost(post_no);
@@ -54,7 +54,11 @@ public class IncludeController {
 		return "/include/modal";
 	}
 	@RequestMapping(value="/reply_input", method=RequestMethod.GET)
-	public String openReplyInput() {
+	public String openReplyInput(Model model,@RequestParam int comment_retag,@RequestParam int post_no) {
+		System.out.println("답글 입력창 붙음");
+		System.out.println("user_no = " + comment_retag);
+		model.addAttribute("comment_retag", comment_retag);
+		model.addAttribute("post_no", post_no);
 		return "/include/reply_input";
 	}
 	@RequestMapping(value="/FILE_INSERT_MODAL")
@@ -66,5 +70,19 @@ public class IncludeController {
 		List<CategoryVo> cateList = cateService.getCategoryList(communityid, "accept");
 		model.addAttribute("cateList", cateList);
 		return "include/Cate_select";
+	}
+	@RequestMapping(value="/post")
+	public String post(Model model, @RequestParam int init_post) {
+		System.out.println(init_post);
+		PostsVo postVo = pService.selectLoadPost(init_post);
+		if(postVo == null) {
+			return "end";
+		}
+		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
+		System.out.println(postVo + "postVo");
+		postVo.setCommunity_name(commVo.getCommunity_name());
+		postVo.setUser_name(memService.selectNO(postVo.getUser_no()).getUser_name());	
+		model.addAttribute("postVo", postVo);
+		return "/include/post";
 	}
 }

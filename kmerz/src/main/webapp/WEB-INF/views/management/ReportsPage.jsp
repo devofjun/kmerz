@@ -30,5 +30,27 @@
 			id="inputGroupFileAddon04">업로드</button>
 	</div>
 </div>
+
+
+<div>
+	<button id="testbtn">test</button>
+</div>
+<div style="width:500px; heigth:500px; background-color:red">
+	<span>file content</span>
+	<p id="content"></p>
+</div>
+<script>
+$(document).ready(function() {
+	$("#testbtn").click(function() {
+		var sData = {
+				"filepath" : "D:/kmerz/repository/post/2021/7/28/104_50041e7c-8f2b-4061-a948-1c0b1ec2b65f.txt"
+		};
+		$.get("/file", sData, function(rData){
+			console.log(rData);
+			$("#content").text(rData);
+		});
+	});
+});
+</script>
 </main>
 <%@ include file="./mngInclude/footer.jsp"%>

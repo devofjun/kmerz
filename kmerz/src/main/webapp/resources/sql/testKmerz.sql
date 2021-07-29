@@ -9,7 +9,7 @@ insert into tbl_member values(
     sysdate,
     'OK'
 );
-insert into tbl_member values(
+insert into tbl_member   values(
     SEQ_USER_NO.nextval,
     'test2@naver.com',
     '1234',
@@ -80,7 +80,7 @@ insert into tbl_posts values(
     100,
     '스타 첫번째 공략',
     'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0, 0, sysdate, 'accept'
+    0, 0, sysdate, 'admit'
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
@@ -89,7 +89,7 @@ insert into tbl_posts values(
     101,
     '롤 첫번째 공략',
     'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0, 0, sysdate, 'accept'
+    0, 0, sysdate, 'admit'
 );
 insert into tbl_posts values(
     SEQ_POST_NO.nextval,
@@ -98,9 +98,9 @@ insert into tbl_posts values(
     102,
     '옵치 첫번째 공략',
     'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0, 0, sysdate, 'accept'
+    0, 0, sysdate, 'admit'
 );
-
+--select * from tbl_posts;
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
@@ -204,3 +204,4 @@ insert into tbl_banner values(4, 322330);
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
+

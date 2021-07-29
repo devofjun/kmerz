@@ -1,9 +1,14 @@
+<%@page import="com.kmerz.app.vo.PostsVo"%>
 <%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	List<CommunityVo> commList = (List<CommunityVo>) request.getAttribute("commList");
+%>
+<!DOCTYPE html>
 <html>
-<head>
+<head lang="ko">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0 user-scale=no">
 <meta charset="UTF-8">
@@ -36,7 +41,6 @@
 	<div>
 		<%@ include file="./include/banner.jsp"%>
 	</div>
-
 	
 	<section class="postSection">
 		<div class="posts">
@@ -52,11 +56,11 @@
 					<div>
 						<%@ include file="./include/posting_bar.jsp"%>
 					</div>
-				</div>
-
-				
+				</div>	
 				<!-- 게시글 양식 -->
-				<%@ include file="./include/post.jsp"%>
+				<div id="post_container">
+				</div>
+				<button onclick="appendPosts()">1234</button>
 			</div>
 			<!-- 오른쪽 사이드 바 -->
 			<%@ include file="./include/rSidebar.jsp"%>

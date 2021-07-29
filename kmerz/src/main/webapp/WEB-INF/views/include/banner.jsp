@@ -6,25 +6,25 @@
 	<div class="slider" id="slider">
 		<figure>
 			<div class="align-center">
-				<img src="/resources/images/battlefield 2042.jpg">
+				<img src="/resources/images/battlefield 2042.jpg"/>
 			</div>
 			<div class="align-center">
-				<img src="/resources/images/civilization6.jpg">
+				<img src="/resources/images/civilization6.jpg"/>
 			</div>
 			<div class="align-center">
-				<img src="/resources/images/heros.jpg">
+				<img src="/resources/images/heros.jpg"/>
 			</div>
 			<div class="align-center">
-				<img src="/resources/images/Crusader-Kings-III.jpg">
+				<img src="/resources/images/Crusader-Kings-III.jpg"/>
 			</div>
 			<div class="align-center">
-				<img src="/resources/images/lol.jpg">
+				<img src="/resources/images/lol.jpg"/>
 			</div>
 			<div class="align-center">
-				<img src="/resources/images/overwatch.png">
+				<img src="/resources/images/overwatch.png"/>
 			</div>
 			<div class="align-center">
-				<img src="/resources/images/pubg.jpg">
+				<img src="/resources/images/pubg.jpg"/>
 			</div>
 		</figure>
 	</div>

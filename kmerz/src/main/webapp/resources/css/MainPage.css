@@ -167,7 +167,7 @@ p.icon-color {
 
 .stickyUnderInfo {
 	position: sticky;
-	top: 320px;
+	top: 250px;
 }
 
 .posts {
@@ -381,7 +381,7 @@ labelBtn:hover {
 .modal {
 	position: fixed; /* Stay in place */
 	z-index: 2000; /* Sit on top */
-	padding-top: 55px; /* Location of the box */
+	padding-top: 35; /* Location of the box */
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */
@@ -530,21 +530,33 @@ labelBtn:hover {
 {
 	display:flex;
 	justify-content: center;
-	/* padding: 10px; */
-	/* margin: 10; */
-	/* width: 100%; */
+	width: 100%;
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
 .reply-form-input > textarea
 {
 	resize: none;
+	width: 100%;
+}
+.reply-section{
+	margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+.reply_input{
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 .reply-content
 {
 	display:flex;
 	flex-direction: column;
-	margin: 0 60;
+	width: calc(100% - 120px)
 }
 .reply-submit
 {

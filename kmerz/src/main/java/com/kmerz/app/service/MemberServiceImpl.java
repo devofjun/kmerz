@@ -52,6 +52,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberVo selectNO(int user_no) {
+		// TODO Auto-generated method stub
+		return memberDao.selectNO(user_no);
+	}
 	public void changeUserPw(int user_no, String newPw) {
 		memberDao.updateUserPw(user_no, newPw);
 	}

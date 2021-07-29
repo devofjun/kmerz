@@ -4,6 +4,7 @@ function getCategoryInput(){
 	var appendedcategory = document.getElementById("appended-category");
 	includeHTML(categoryinput, 'include/setCategory?communityid=' + communityid);
 }
+
 function posting(){
 	var content = document.getElementById("editable").innerHTML;
 	var community_id = document.getElementById("community-input").value;
@@ -20,6 +21,7 @@ function posting(){
   };
       upload(makeTextFile(content), community_id, category_no, post_title);
 }
+
 function upload(file, community_id, category_no, post_title){
 		var data = new FormData();
 		data.append("file", file);

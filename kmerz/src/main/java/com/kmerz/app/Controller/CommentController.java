@@ -21,12 +21,14 @@ public class CommentController {
 	@RequestMapping(value="/addComment", method=RequestMethod.POST)
 	public void addComment(HttpSession session, 
 										@RequestParam String commentContent,
-										@RequestParam int post_no) {
+										@RequestParam int post_no,
+										@RequestParam int comment_retag) {
 		CommentVo commentVo = new CommentVo();
 		MemberVo memVo = (MemberVo) session.getAttribute("loginVo");
 		commentVo.setUser_no(memVo.getUser_no());
 		commentVo.setPost_no(post_no);
 		commentVo.setComment_content(commentContent);
+		commentVo.setComment_retag(comment_retag);
 		commentService.insertComment(commentVo);
 	}
 }
