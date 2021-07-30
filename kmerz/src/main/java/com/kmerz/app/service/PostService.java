@@ -6,15 +6,17 @@ import com.kmerz.app.vo.PostsVo;
 
 public interface PostService {
 	public List<PostsVo> selectAllPosts();
-	public List<PostsVo> selectAdmitPosts();
+	public List<PostsVo> selectAllowPosts();
 	public PostsVo selectPost(int post_no);
 	public PostsVo viewPost(int post_no);
 	public List<PostsVo> getCommunityPostList(String community_id);
-	public void posting(PostsVo vo);
 	public List<PostsVo> getCategoryPostList(String community_id, int category_no);
+	public void posting(PostsVo vo);
 	public int getUserPostCount(int user_no);
 	public int getNewPostSeq();
 	public PostsVo selectLoadPost(int init_post);
-	public void denyPost(int postNo);
-	public void admitPost(int postNo);
+	public void updatePost(PostsVo postsVo);
+	public void deletePost(int post_no);
+	public void lockPost(int post_no);
+	public void unlockPost(int post_no);
 }

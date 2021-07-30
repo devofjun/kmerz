@@ -19,8 +19,11 @@ import com.kmerz.app.vo.PostsVo;
 @Service
 public class PostServiceImpl implements PostService{
 
-	private static final String POST_STATUS_ADMIT = "admit";
-	private static final String POST_STATUS_DENY = "deny";
+	// 읽을수 있는 게시글 양수, 읽을 수 없는 게시글 음수
+	private static final int POST_LOCK = -2;
+	private static final int POST_DELETE = -1;
+	private static final int POST_CREATE = 0;
+	private static final int POST_UPDATE = 1;
 	
 	@Inject
 	PostDao postdao;
@@ -59,9 +62,9 @@ public class PostServiceImpl implements PostService{
 	
 	@Transactional
 	@Override
-	public List<PostsVo> selectAdmitPosts() {
+	public List<PostsVo> selectAllowPosts() {
 		// 승인된 모든 게시글 
-		List<PostsVo> PostsList = postdao.selectStatusPosts(POST_STATUS_ADMIT);
+		List<PostsVo> PostsList = postdao.selectAllowPosts(POST_CREATE);
 		if(PostsList != null) {
 			for(PostsVo postVo : PostsList) {
 				// 유저 이름
@@ -74,11 +77,13 @@ public class PostServiceImpl implements PostService{
 				CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
 				postVo.setCategory_name(categoryVo.getCategory_name());
 			}
+		} else {
+			System.out.println("읽을 글이 없습니다.");
 		}
 		return PostsList;
 	}
 
-	
+	@Transactional
 	@Override
 	public PostsVo selectPost(int post_no) {
 		// 관리자용 게시글 보기 (조회수 증가 x)
@@ -121,27 +126,35 @@ public class PostServiceImpl implements PostService{
 		return postVo;
 	}
 
+	
+	
+	
 	@Override
 	public List<PostsVo> getCommunityPostList(String community_id) {
-		List<PostsVo> list = postdao.selectCommunityPostList(community_id, POST_STATUS_ADMIT);
+		// 커뮤니티 전체글 보기
+		List<PostsVo> list = postdao.selectCommunityPostList(community_id, POST_CREATE);
 		return list;
 	}
 
 	@Override
-	public void posting(PostsVo vo) {
-		postdao.posting(vo);
-	}
-
 	public List<PostsVo> getCategoryPostList(String community_id, int category_no) {
-		List<PostsVo> list = postdao.selectCategoryPostList(community_id, category_no, POST_STATUS_ADMIT);
+		// 커뮤니티-카테고리 글 보기
+		List<PostsVo> list = postdao.selectCategoryPostList(community_id, category_no, POST_CREATE);
 		return list;
 	}
 	
 	@Override
+	public void posting(PostsVo vo) {
+		// 새로운 게시글 작성
+		postdao.posting(vo);
+	}
+
+	
+	@Override
 	public int getUserPostCount(int user_no) {
+		// 유저의 게시글 수 세기
 		int count = postdao.selectUserPostCount(user_no);
 		return count;
-
 	}
 
 	@Override
@@ -155,14 +168,32 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return postdao.selectLoadPost(init_post);
 	}
-	public void denyPost(int postNo) {
-		// 포스트 삭제, 숨기기
-		postdao.updateStatus(postNo, POST_STATUS_DENY);
+	
+	@Override
+	public void updatePost(PostsVo postsVo) {
+		// 게시글 수정하기
+		postdao.updatePost(postsVo);
 	}
 	
 	@Override
-	public void admitPost(int postNo) {
-		// 포스트 다시 보이기, 승인하기
-		postdao.updateStatus(postNo, POST_STATUS_ADMIT);
+	public void deletePost(int post_no) {
+		// 게시글 삭제하기
+		postdao.updateStatus(post_no, POST_DELETE);
 	}
+	
+	@Override
+	public void lockPost(int post_no) {
+		// 포스트 잠그기
+		postdao.updateStatus(post_no, POST_LOCK);
+	}
+	
+	@Override
+	public void unlockPost(int post_no) {
+		// 포스트 잠금 풀기 
+		postdao.updateStatus(post_no, POST_CREATE);
+	}
+
+	
+
+	
 }
