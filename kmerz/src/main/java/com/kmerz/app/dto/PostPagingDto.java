@@ -3,7 +3,7 @@ package com.kmerz.app.dto;
 public class PostPagingDto {
 	private int page = 1; // 페이지
 	private int startRow = 1; // 첫번째줄
-	private int endRow = 10; // 마지막줄
+	private int endRow = 15; // 마지막줄
 	private int count; // 검색결과
 	private int startPage; // 표시될 페이지 번호 첫번째
 	private int endPage; // 표시될 페이지 번호 마지막

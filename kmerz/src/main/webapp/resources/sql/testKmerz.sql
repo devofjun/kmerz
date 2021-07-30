@@ -81,7 +81,27 @@ END;
 /
 
 
-select * from tbl_posts where post_status >= 0;
+--select * from tbl_posts where post_status >= 0;
+
+/* 이게 맞는 쿼리지만 이게 되려면 두개의 테이블에서 겹치는 칼럼명이 없어야한다.
+select * from
+    (select rownum rnum, a.* from
+        (select * from tbl_posts, tbl_member
+            where tbl_member.user_name like '테스터1'
+            and tbl_member.user_no = tbl_posts.user_no
+        order by tbl_posts.post_no desc)a)
+    where rnum between 1 and 10;
+그래서 서브 쿼리로 대체함*/
+select * from
+    (select rownum rnum, a.* from
+        (select * from tbl_posts
+        where user_no in (select user_no from tbl_member
+                    where user_name like '%' || '테스터' || '%')
+        order by post_no desc)a)
+where rnum between 1 and 10;
+
+
+
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------

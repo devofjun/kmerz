@@ -39,8 +39,8 @@ public class PostServiceImpl implements PostService{
 	
 	
 	@Override
-	public int getCountAllPosts() {
-		return postdao.countAllPosts();
+	public int getCountPosts(PostPagingDto postPagingDto) {
+		return postdao.countPosts(postPagingDto);
 	}
 
 	

@@ -6,8 +6,9 @@
 <mapper namespace="com.kmerz.app.posts">
 
 <!-- 게시글 수 -->
-<select id="countAllPosts" resultType="Integer">
+<select id="countPosts" resultType="Integer">
 	select count(*) from tbl_posts
+	<include refid="search"></include>
 </select>
 
 <!-- 관리자 페이지용 조회쿼리 -->
@@ -15,9 +16,25 @@
 	select * from
 		(select rownum rnum, a.* from
 			(select * from tbl_posts
+			<include refid="search"></include>
 			order by post_no desc)a)
 	where rnum between #{startRow} and #{endRow}
 </select>
+
+<!-- 검색 -->
+<sql id="search">
+	<if test="searchType != null">
+		<choose>
+			<when test="searchType == 'post_title'">
+				where post_title like '%' || #{keyword} || '%'
+			</when>
+			<when test="searchType == 'user_name'">
+				where user_no in (select user_no from tbl_member
+					where user_name like '%' || #{keyword} || '%')
+			</when>
+		</choose>
+	</if>
+</sql>
 
 <!-- 허용된 게시글 가져오기 -->
 <select id="selectAllowPosts" resultType="PostsVo">

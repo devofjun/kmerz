@@ -1,6 +1,8 @@
 package com.kmerz.app.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -115,22 +117,28 @@ public class ManagementController {
 	@RequestMapping(value = "/contents/postSettingPage", method = RequestMethod.GET)
 	public String postSetting(PostPagingDto postPagingDto, Model model) throws Exception {
 		// 페이지
-		int count = postService.getCountAllPosts();
+		int count = postService.getCountPosts(postPagingDto);
 		postPagingDto.setCount(count);
 		List<PostsVo> postsVo = postService.selectAllPosts(postPagingDto);
 		model.addAttribute("postList", postsVo);
 		return "management/ContentsPostPage";
 	}
 	
-	// 게시물 관리 페이지 페이징 데이터 전송
+	// 게시물 페이징, 검색
 	@ResponseBody
 	@RequestMapping(value = "/contents/postPaging", method = RequestMethod.GET)
-	public List<PostsVo> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
-		int count = postService.getCountAllPosts();
+	public Map<String, Object> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
+		int count = postService.getCountPosts(postPagingDto);
 		postPagingDto.setCount(count);
-		List<PostsVo> postsVo = postService.selectAllPosts(postPagingDto);
+		System.out.println("IN: " + postPagingDto);
+		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
+		
 		model.addAttribute("postPagingDto", postPagingDto);
-		return postsVo;
+		System.out.println("OUT: " + postPagingDto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("postList", postList);
+		map.put("postPagingDto", postPagingDto);
+		return map;
 	}
 	
 	// 게시물 정보 가져오기

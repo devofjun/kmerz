@@ -11,42 +11,64 @@ img[draggable='false']{
 </style>
 
 <script>
+	function submitPaging() {
+		var url = "/admin/contents/postPaging";
+		var sData = {
+				"page" : $("#frmPaging > input[name='page']").val(),
+				"perPage" : $("#frmPaging > input[name='perPage']").val(),
+				"searchType" : $("#frmPaging > input[name='searchType']").val(),
+				"keyword" : $("#frmPaging > input[name='keyword']").val()
+		};
+		$.get(url, sData, function(rData){
+			$("#tbodyPost > tr:gt(0)").remove();
+			$.each(rData.postList, function(){
+				var cloneTr = $("#tbodyPost > tr:eq(0)").clone();
+				cloneTr.find(".postno").text(this.post_no);
+				cloneTr.find(".lastupdate").text(timeForToday(this.post_createtime));
+				cloneTr.find(".cname > span").text(this.community_name + "/" + this.category_name);
+				cloneTr.find(".title").text(this.post_title);
+				cloneTr.find(".userName").text(this.user_name);
+				cloneTr.find(".declared").text(this.declared_count);
+				cloneTr.find(".status").text(this.post_status);
+				cloneTr.find("input[name='post_content_file']").val(this.post_content_file);
+				$("#tbodyPost").append(cloneTr);
+				cloneTr.show();
+			});
+			// 페이지버튼 다시그리기
+			var pagingDto = rData.postPagingDto;
+			
+		});
+	}
+
 	$(document).ready(function() {
 		for(var i=0; i<$(".trPost").length; i++){
 			var tdDate = $(".trPost").eq(i).children().eq(1); 
 			tdDate.text(timeForToday(tdDate.text()));
 		};
 		
+		// 검색 타입 변경
+		$(".searchType").click(function() {
+			$("#btnSearchType").text($(this).text());
+			//$("#btnSearchType").attr("data-searchType", $(this).attr("data-searchType"));
+			$("#frmPaging").find("input[name='searchType']").val($(this).attr("data-searchType"));
+		});
+		
+		// 검색 버튼
+		$("#btnSearch").click(function() {
+			$("#frmPaging").find("input[name='keyword']").val($(this).prev().val());
+			$("#frmPaging").find("input[name='page']").val(1);
+			submitPaging();
+		});
+		
 		// 페이지 번호 클릭시
-		$(".pagination > li > a").click(function(e) {
+		$(".pagination").on("click", "li > a", function(e){
+		//$(".pagination > li > a").click(function(e) {
 			e.preventDefault();
 			$(".pagination > li").removeClass("active");
 			$(this).parent().addClass("active");
 			var page = $(this).attr("href");
 			$("#frmPaging > input[name='page']").val(page);
-			var url = "/admin/contents/postPaging";
-			var sData = {
-					"page" : $("#frmPaging > input[name='page']").val(),
-					"perPage" : $("#frmPaging > input[name='perPage']").val(),
-					"searchType" : $("#frmPaging > input[name='searchType']").val(),
-					"keyword" : $("#frmPaging > input[name='keyword']").val()
-			};
-			$.get(url, sData, function(rData){
-				$("#tbodyPost > tr:gt(0)").remove();
-				$.each(rData, function(){
-					var cloneTr = $("#tbodyPost > tr:eq(0)").clone();
-					cloneTr.find(".postno").text(this.post_no);
-					cloneTr.find(".lastupdate").text(timeForToday(this.post_createtime));
-					cloneTr.find(".cname > span").text(this.community_name + "/" + this.category_name);
-					cloneTr.find(".title").text(this.post_title);
-					cloneTr.find(".userName").text(this.user_name);
-					cloneTr.find(".declared").text(this.declared_count);
-					cloneTr.find(".status").text(this.post_status);
-					cloneTr.find(".post_content_file").val(this.post_content_file);
-					$("#tbodyPost").append(cloneTr);
-					cloneTr.show();
-				});
-			});
+			submitPaging();
 		});
 		
 		// 글 목록을 클릭했을때
@@ -88,6 +110,7 @@ img[draggable='false']{
 			});
 			// 게시글 내용 가져오기
 			var post_content_file = $(this).find("input[name='post_content_file']").val();
+			//console.log(post_content_file);
 			$.ajax({
 				url				:"/admin/contents/getPostContent",
 				type			:"GET",
@@ -168,11 +191,10 @@ img[draggable='false']{
 			<div class="input-group mb-1 ">
 				<button id="btnSearchType"
 					class="btn btn-outline-secondary dropdown-toggle" type="button"
-					data-bs-toggle="dropdown" aria-expanded="false"
-					data-searchType="/admin/searchName">제목</button>
+					data-bs-toggle="dropdown" aria-expanded="false">제목</button>
 				<ul id="ulSearchType" class="dropdown-menu">
-					<li><a class="dropdown-item" href="/admin/searchId">제목</a></li>
-					<li><a class="dropdown-item" href="/admin/searchName">작성자</a></li>
+					<li><span class="searchType dropdown-item" data-searchType="post_title">제목</span></li>
+					<li><span class="searchType dropdown-item" data-searchType="user_name">작성자</span></li>
 				</ul>
 				<input type="text" class="form-control"
 					aria-label="Text input with dropdown button">
@@ -219,13 +241,14 @@ img[draggable='false']{
 				</tbody>
 			</table>
 
-			<!-- 페이징 -->
+			<!-- 페이징dto -->
 			<form id="frmPaging" style="display:none">
 				<input type="hidden" name="page" value="${postPagingDto.page}" />
 				<input type="hidden" name="perPage" value="${postPagingDto.perPage}" />
 				<input type="hidden" name="searchType" value="${postPagingDto.searchType}"/>
 				<input type="hidden" name="keyword" value="${postPagingDto.keyword}" />
 			</form>
+			<!-- 페이징 네비 -->
 			<nav>
 				<ul class="pagination justify-content-center">
 					<c:if test="${postPagingDto.startPage != 1 }">
@@ -250,6 +273,17 @@ img[draggable='false']{
 					</c:if>
 				</ul>
 			</nav>
+
+			<div style="display:none">
+				<ul>
+					<li id="clonePageLeft" class="page-item"><a class="page-link"
+						href="${postPagingDto.startPage-1}">&laquo;</a></li>
+					<li id="clonePageNum" class="page-item"><a class="page-link" href="${p}">${p}</a></li>
+					<li id="clonePageRight" class="page-item"><a class="page-link"
+						href="${postPagingDto.endPage+1}">&raquo;</a></li>
+				</ul>
+			</div>
+
 		</div>
 
 		<!-- 게시글 정보 카드 -->

@@ -6,7 +6,7 @@ import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.PostsVo;
 
 public interface PostDao {
-	public int countAllPosts();
+	public int countPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllowPosts(int status);
 	public PostsVo selectPost(int post_no);

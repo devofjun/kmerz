@@ -22,9 +22,9 @@ public class PostDaoImpl implements PostDao {
 	
 	
 	@Override
-	public int countAllPosts() {
+	public int countPosts(PostPagingDto postPagingDto) {
 		// 게시글 수
-		return session.selectOne(NAMESPACE+"countAllPosts");
+		return session.selectOne(NAMESPACE+"countPosts", postPagingDto);
 	}
 
 	
