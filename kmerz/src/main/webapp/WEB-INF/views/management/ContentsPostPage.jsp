@@ -45,7 +45,13 @@ img[draggable='false']{
 					$("#cardUserInfo").children().addClass("shadow");
 				}
 				$("#btnChangeStatus").attr("data-postno", postInfo.post_no);
-				var lastupdate = timePattern(postInfo.post_lastupdate);
+				
+				var lastupdate
+				if(postInfo.post_updatetime == null){
+					lastupdate = timePattern(postInfo.post_createtime);
+				} else {
+					lastupdate = timePattern(postInfo.post_updatetime);
+				}
 				$("#cardPostLastupdate").text(lastupdate);
 			});
 			// 게시글 내용 가져오기
@@ -159,7 +165,7 @@ img[draggable='false']{
 					<c:forEach var="postsVo"  items="${postList }">
 					<tr class="trPost cspointer"> 
 						<td class="postno">${postsVo.post_no }</td>
-						<td class="lastupdate">${postsVo.post_lastupdate }</td>
+						<td class="lastupdate">${postsVo.post_createtime }</td>
 						<td class="cname"><span>${postsVo.community_name }/${postsVo.category_name }</span></td>
 						<td class="title">${postsVo.post_title }</td>
 						<td class="userName">${postsVo.user_name }</td>
