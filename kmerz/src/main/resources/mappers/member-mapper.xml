@@ -52,4 +52,10 @@
 	where user_no = #{user_no}
 </update>
 
+<!-- 회원 탈퇴 -->
+<update id="updateUserStatus">
+	update tbl_member set user_status = #{user__status}
+	where user_no = #{user_no}
+</update>
+
 </mapper>
