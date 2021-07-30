@@ -2,10 +2,12 @@ package com.kmerz.app.service;
 
 import java.util.List;
 
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.PostsVo;
 
 public interface PostService {
-	public List<PostsVo> selectAllPosts();
+	public int getCountAllPosts();
+	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllowPosts();
 	public PostsVo selectPost(int post_no);
 	public PostsVo viewPost(int post_no);

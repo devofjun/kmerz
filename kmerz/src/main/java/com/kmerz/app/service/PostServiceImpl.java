@@ -12,6 +12,7 @@ import com.kmerz.app.dao.CommunityDao;
 import com.kmerz.app.dao.DeclaredDao;
 import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dao.PostDao;
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.CategoryVo;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
@@ -36,11 +37,18 @@ public class PostServiceImpl implements PostService{
 	@Inject
 	DeclaredDao declaredDao;
 	
+	
+	@Override
+	public int getCountAllPosts() {
+		return postdao.countAllPosts();
+	}
+
+	
 	@Transactional
 	@Override
-	public List<PostsVo> selectAllPosts() {
+	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto) {
 		// 모든 게시글(관리자 페이지에서 필요함)
-		List<PostsVo> PostsList = postdao.selectAllPosts();
+		List<PostsVo> PostsList = postdao.selectAllPosts(postPagingDto);
 		if(PostsList != null) {
 			for(PostsVo postVo : PostsList) {
 				// 유저 이름
@@ -193,6 +201,7 @@ public class PostServiceImpl implements PostService{
 		postdao.updateStatus(post_no, POST_CREATE);
 	}
 
+	
 	
 
 	

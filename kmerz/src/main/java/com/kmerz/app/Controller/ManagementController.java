@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
 import com.kmerz.app.service.PostService;
@@ -112,11 +113,24 @@ public class ManagementController {
 	
 	// 게시물 관리 페이지
 	@RequestMapping(value = "/contents/postSettingPage", method = RequestMethod.GET)
-	public String postSetting(Model model) throws Exception {
-		List<PostsVo> postsVo = postService.selectAllPosts();
-		//System.out.println(postsVo);
+	public String postSetting(PostPagingDto postPagingDto, Model model) throws Exception {
+		// 페이지
+		int count = postService.getCountAllPosts();
+		postPagingDto.setCount(count);
+		List<PostsVo> postsVo = postService.selectAllPosts(postPagingDto);
 		model.addAttribute("postList", postsVo);
 		return "management/ContentsPostPage";
+	}
+	
+	// 게시물 관리 페이지 페이징 데이터 전송
+	@ResponseBody
+	@RequestMapping(value = "/contents/postPaging", method = RequestMethod.GET)
+	public List<PostsVo> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
+		int count = postService.getCountAllPosts();
+		postPagingDto.setCount(count);
+		List<PostsVo> postsVo = postService.selectAllPosts(postPagingDto);
+		model.addAttribute("postPagingDto", postPagingDto);
+		return postsVo;
 	}
 	
 	// 게시물 정보 가져오기

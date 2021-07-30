@@ -2,10 +2,12 @@ package com.kmerz.app.dao;
 
 import java.util.List;
 
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.PostsVo;
 
 public interface PostDao {
-	public List<PostsVo> selectAllPosts();
+	public int countAllPosts();
+	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllowPosts(int status);
 	public PostsVo selectPost(int post_no);
 	public void updateReadCount(int post_no);
