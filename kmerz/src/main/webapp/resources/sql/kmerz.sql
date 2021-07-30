@@ -68,8 +68,9 @@ create table tbl_posts(
     post_content_file varchar2(500),
     post_readcount number default 0,
     post_recommand number default 0,
-    post_lastupdate timestamp default sysdate,
-    post_status varchar2(15)
+    post_createtime timestamp default sysdate,
+    post_updatetime timestamp,
+    post_status number default 0
 );
 drop sequence seq_post_no;
 create sequence seq_post_no

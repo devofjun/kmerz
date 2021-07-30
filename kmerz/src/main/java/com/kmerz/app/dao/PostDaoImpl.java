@@ -28,9 +28,9 @@ public class PostDaoImpl implements PostDao {
 	}
 	
 	@Override
-	public List<PostsVo> selectStatusPosts(String status) {
+	public List<PostsVo> selectAllowPosts(int status) {
 		// 허용된 모든 게시글 읽기
-		List<PostsVo> postsList = session.selectList(NAMESPACE + "selectStatusPosts", status);
+		List<PostsVo> postsList = session.selectList(NAMESPACE + "selectAllowPosts", status);
 		return postsList;
 	}
 
@@ -49,7 +49,7 @@ public class PostDaoImpl implements PostDao {
 
 	// 커뮤니티 페이지 이동시 이동한 커뮤니티 포스트 리스트 가져오기
 	@Override
-	public List<PostsVo> selectCommunityPostList(String community_id, String status) {
+	public List<PostsVo> selectCommunityPostList(String community_id, int status) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("community_id", community_id);
 		map.put("post_status", status);
@@ -64,7 +64,7 @@ public class PostDaoImpl implements PostDao {
 	}
 	
 	@Override
-	public List<PostsVo> selectCategoryPostList(String community_id, int category_no, String status) {
+	public List<PostsVo> selectCategoryPostList(String community_id, int category_no, int status) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("community_id", community_id);
 		map.put("category_no", category_no);
@@ -90,9 +90,18 @@ public class PostDaoImpl implements PostDao {
 		// TODO Auto-generated method stub
 		return session.selectOne(NAMESPACE + "selectLoadPost" , init_post);
 	}
-	public void updateStatus(int target, String status) {
+	
+	@Override
+	public void updatePost(PostsVo postsVo) {
+		// 글 수정
+		session.update(NAMESPACE+"updatePost", postsVo);
+	}
+	
+	@Override
+	public void updateStatus(int target, int status) {
 		// 게시글 상태 변경
 		PostsVo postsVo = new PostsVo(target, status);
 		session.update(NAMESPACE+"updateStatus", postsVo);
 	}
+
 }

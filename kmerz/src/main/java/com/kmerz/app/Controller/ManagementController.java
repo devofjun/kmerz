@@ -140,7 +140,7 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostDeny", method=RequestMethod.GET)
 	public String setPostDeny(int post_no) throws Exception {
-		postService.denyPost(post_no);
+		postService.lockPost(post_no);
 		return "success";
 	}
 	
@@ -148,7 +148,7 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostAdmit", method=RequestMethod.GET)
 	public String setPostAdmit(int post_no) throws Exception {
-		postService.admitPost(post_no);
+		postService.unlockPost(post_no);
 		return "success";
 	}
 	

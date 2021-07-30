@@ -75,40 +75,17 @@ insert into tbl_category values(
 ----------------------------------------------------
 BEGIN
 FOR i IN 1..50 LOOP
-insert into tbl_posts values (seq_post_no.NEXTVAL, 1000, 'star', 100, 'test', 'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',0,0,sysdate,'accept');
+insert into tbl_posts values (seq_post_no.NEXTVAL, 1000, 'star', 100, 'test', 'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',0,0,sysdate,null,0);
 END LOOP;
 END;
---select * from tbl_posts;
+/
+
+
+select * from tbl_posts where post_status >= 0;
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
-insert into tbl_comment values(
-    SEQ_COMMENT_NO.nextval,
-    100,
-    1002,
-    '와.그.렇.군.요.',
-    null,
-    null,
-    sysdate
-);
-insert into tbl_comment values(
-    SEQ_COMMENT_NO.nextval,
-    101,
-    1000,
-    '정치질하려고 겜하냐?',
-    null,
-    null,
-    sysdate
-);
-insert into tbl_comment values(
-    SEQ_COMMENT_NO.nextval,
-    102,
-    1001,
-    '님 마이크 냄새남',
-    null,
-    null,
-    sysdate
-);
+
 
 
 ----------------------------------------------------
@@ -182,4 +159,5 @@ insert into tbl_banner values(4, 322330);
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
+
 
