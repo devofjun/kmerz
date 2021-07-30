@@ -62,7 +62,7 @@ public class PostServiceImpl implements PostService{
 	
 	@Transactional
 	@Override
-	public List<PostsVo> selectAdmitPosts() {
+	public List<PostsVo> selectAllowPosts() {
 		// 승인된 모든 게시글 
 		List<PostsVo> PostsList = postdao.selectAllowPosts(POST_CREATE);
 		if(PostsList != null) {
