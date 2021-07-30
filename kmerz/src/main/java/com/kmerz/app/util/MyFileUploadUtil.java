@@ -2,11 +2,13 @@ package com.kmerz.app.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.Calendar;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
 import org.springframework.util.FileCopyUtils;
 
@@ -127,5 +129,12 @@ public class MyFileUploadUtil {
 			File f2 = new File(orgFile);
 			deleteWhile(f2);
 		}
+	}
+	
+	public static byte[] displayImage(String fileName) throws Exception {
+		FileInputStream fis = new FileInputStream(fileName);
+		byte[] bytes = IOUtils.toByteArray(fis);
+		fis.close();
+		return bytes;
 	}
 }

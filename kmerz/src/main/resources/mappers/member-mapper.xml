@@ -46,4 +46,10 @@
 	where user_no = #{user_no}
 </update>
 
+<!-- 프로필 이미지 변경 -->
+<update id="updateUserProfileImage">
+	update tbl_member set user_profileImage = #{filePath}
+	where user_no = #{user_no}
+</update>
+
 </mapper>
