@@ -31,7 +31,7 @@ $(document).ready(function() {
 				<div>
 					<div>
 						<div style="float: left; width: 50%;">
-							<img style="margin-top:10px" src="/resources/images/default_Profile3.png"
+							<img style="margin-top:10px" src="http://localhost/media/displayImage?fileName=${loginVo.user_profileImage}"
 								class="img-thumbnail" alt="...">
 						</div>
 						<div style="float: left; width: 50%;">

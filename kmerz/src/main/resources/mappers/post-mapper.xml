@@ -5,12 +5,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kmerz.app.posts">
 
-<select id="selectAllPosts" resultType="PostsVo">
-	select * from tbl_posts
+<!-- 게시글 수 -->
+<select id="countPosts" resultType="Integer">
+	select count(*) from tbl_posts
+	<include refid="search"></include>
 </select>
 
-<select id="selectStatusPosts" resultType="PostsVo">
-	select * from tbl_posts where post_status = #{status}
+<!-- 관리자 페이지용 조회쿼리 -->
+<select id="selectAllPosts" resultType="PostsVo">
+	select * from
+		(select rownum rnum, a.* from
+			(select * from tbl_posts
+			<include refid="search"></include>
+			order by post_no desc)a)
+	where rnum between #{startRow} and #{endRow}
+</select>
+
+<!-- 검색 -->
+<sql id="search">
+	<if test="searchType != null">
+		<choose>
+			<when test="searchType == 'post_title'">
+				where post_title like '%' || #{keyword} || '%'
+			</when>
+			<when test="searchType == 'user_name'">
+				where user_no in (select user_no from tbl_member
+					where user_name like '%' || #{keyword} || '%')
+			</when>
+		</choose>
+	</if>
+</sql>
+
+<!-- 허용된 게시글 가져오기 -->
+<select id="selectAllowPosts" resultType="PostsVo">
+	select * from tbl_posts 
+	where post_status >= #{status} 
+	order by post_no desc
 </select>
 
 <!-- 글 조회 -->
@@ -25,11 +55,22 @@
 	where post_no = #{post_no}
 </update>
 
+<!-- 글 수정 -->
+<update id="updatePost">
+	update tbl_posts set
+		post_title = #{post_title},
+		post_content_file = #{post_content_file},
+		post_updatetime = sysdate
+		post_status = #{post_status}
+		where post_no = #{post_no}
+</update>
+
+
 <!-- 커뮤니티 페이지 이동후 나오는 포스트 -->
 <select id="selectCommunityPostList" resultType="PostsVo">
 	select * from tbl_posts
 	where community_id = #{community_id}
-	and post_status = #{post_status}
+	and post_status >= #{post_status}
 </select>
 
 <!-- 카테고리 선택시 나오는 포스트 -->
@@ -37,7 +78,7 @@
 	select * from tbl_posts
 	where community_id = #{community_id}
 	and category_no = #{category_no}
-	and post_status = #{post_status}
+	and post_status >= #{post_status}
 </select>
 
 <!-- 글번호 시퀀스 조회 -->
@@ -57,7 +98,8 @@ insert into tbl_posts values(
 	0,
 	0,
 	sysdate,
-	'admit'
+	null,
+	0
 	)
 </insert>
 <update id="updatePost">
@@ -79,8 +121,9 @@ insert into tbl_posts values(
 <select id="selectUserPostCount" resultType="int">
 	select count(*) from tbl_posts where user_no = #{user_no}
 </select>
+
 <select id="selectLoadPost" resultType="PostsVo">
-	select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status='accept') posts where posts.rownumber = #{init_post}
+	select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status>=0) posts where posts.rownumber = #{init_post}
 </select>
 
 <!-- 게시글 상태 변경 -->

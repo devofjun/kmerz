@@ -7,7 +7,8 @@ insert into tbl_member values(
     '1234',
     '테스터1',
     sysdate,
-    'OK'
+    'OK',
+    null
 );
 insert into tbl_member   values(
     SEQ_USER_NO.nextval,
@@ -15,7 +16,8 @@ insert into tbl_member   values(
     '1234',
     '테스터2',
     sysdate,
-    'OK'
+    'OK',
+    null
 );
 insert into tbl_member values(
     SEQ_USER_NO.nextval,
@@ -23,7 +25,8 @@ insert into tbl_member values(
     '1234',
     '테스터3',
     sysdate,
-    'OK'
+    'OK',
+    null
 );
 --select * from tbl_member;
 
@@ -75,40 +78,39 @@ insert into tbl_category values(
 ----------------------------------------------------
 BEGIN
 FOR i IN 1..50 LOOP
-insert into tbl_posts values (seq_post_no.NEXTVAL, 1000, 'star', 100, 'test', 'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',0,0,sysdate,'accept');
+insert into tbl_posts values (seq_post_no.NEXTVAL, 1000, 'star', 100, 'test', 'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',0,0,sysdate,null,0);
 END LOOP;
 END;
---select * from tbl_posts;
+/
+
+
+--select * from tbl_posts where post_status >= 0;
+
+/* 이게 맞는 쿼리지만 이게 되려면 두개의 테이블에서 겹치는 칼럼명이 없어야한다.
+select * from
+    (select rownum rnum, a.* from
+        (select * from tbl_posts, tbl_member
+            where tbl_member.user_name like '테스터1'
+            and tbl_member.user_no = tbl_posts.user_no
+        order by tbl_posts.post_no desc)a)
+    where rnum between 1 and 10;
+그래서 서브 쿼리로 대체함*/
+select * from
+    (select rownum rnum, a.* from
+        (select * from tbl_posts
+        where user_no in (select user_no from tbl_member
+                    where user_name like '%' || '테스터' || '%')
+        order by post_no desc)a)
+where rnum between 1 and 10;
+
+
+select * from tbl_posts where post_status >= 0;
+
+
 ----------------------------------------------------
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
-insert into tbl_comment values(
-    SEQ_COMMENT_NO.nextval,
-    100,
-    1002,
-    '와.그.렇.군.요.',
-    null,
-    null,
-    sysdate
-);
-insert into tbl_comment values(
-    SEQ_COMMENT_NO.nextval,
-    101,
-    1000,
-    '정치질하려고 겜하냐?',
-    null,
-    null,
-    sysdate
-);
-insert into tbl_comment values(
-    SEQ_COMMENT_NO.nextval,
-    102,
-    1001,
-    '님 마이크 냄새남',
-    null,
-    null,
-    sysdate
-);
+
 
 
 ----------------------------------------------------
@@ -182,4 +184,5 @@ insert into tbl_banner values(4, 322330);
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
+
 

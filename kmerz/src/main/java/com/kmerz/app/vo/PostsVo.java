@@ -11,12 +11,14 @@ public class PostsVo {
 	private String post_content_file;
 	private int post_readcount;
 	private int post_recommand;
-	private Timestamp post_lastupdate;
-	private String post_status;
+	private Timestamp post_createtime;
+	private Timestamp post_updatetime;
+	private int post_status;
 	
 	private String user_name;
 	private String community_name;
 	private String category_name;
+	private String str_post_status;
 	
 	private int declared_count;
 	
@@ -25,15 +27,16 @@ public class PostsVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostsVo(int post_no, String post_status) {
+	public PostsVo(int post_no, int post_status) {
 		super();
 		this.post_no = post_no;
 		this.post_status = post_status;
 	}
 
 	public PostsVo(int post_no, int user_no, String community_id, int category_no, String post_title,
-			String post_content_file, int post_readcount, int post_recommand, Timestamp post_lastupdate,
-			String post_status, String user_name, String community_name, String category_name) {
+			String post_content_file, int post_readcount, int post_recommand, Timestamp post_createtime,
+			Timestamp post_updatetime, int post_status, String user_name, String community_name, String category_name,
+			String str_post_status, int declared_count) {
 		super();
 		this.post_no = post_no;
 		this.user_no = user_no;
@@ -43,11 +46,14 @@ public class PostsVo {
 		this.post_content_file = post_content_file;
 		this.post_readcount = post_readcount;
 		this.post_recommand = post_recommand;
-		this.post_lastupdate = post_lastupdate;
+		this.post_createtime = post_createtime;
+		this.post_updatetime = post_updatetime;
 		this.post_status = post_status;
 		this.user_name = user_name;
 		this.community_name = community_name;
 		this.category_name = category_name;
+		this.str_post_status = str_post_status;
+		this.declared_count = declared_count;
 	}
 
 	public int getPost_no() {
@@ -114,19 +120,27 @@ public class PostsVo {
 		this.post_recommand = post_recommand;
 	}
 
-	public Timestamp getPost_lastupdate() {
-		return post_lastupdate;
+	public Timestamp getPost_createtime() {
+		return post_createtime;
 	}
 
-	public void setPost_lastupdate(Timestamp post_lastupdate) {
-		this.post_lastupdate = post_lastupdate;
+	public void setPost_createtime(Timestamp post_createtime) {
+		this.post_createtime = post_createtime;
 	}
 
-	public String getPost_status() {
+	public Timestamp getPost_updatetime() {
+		return post_updatetime;
+	}
+
+	public void setPost_updatetime(Timestamp post_updatetime) {
+		this.post_updatetime = post_updatetime;
+	}
+
+	public int getPost_status() {
 		return post_status;
 	}
 
-	public void setPost_status(String post_status) {
+	public void setPost_status(int post_status) {
 		this.post_status = post_status;
 	}
 
@@ -162,14 +176,22 @@ public class PostsVo {
 		this.declared_count = declared_count;
 	}
 
+	public String getStr_post_status() {
+		return str_post_status;
+	}
+
+	public void setStr_post_status(String str_post_status) {
+		this.str_post_status = str_post_status;
+	}
+
 	@Override
 	public String toString() {
 		return "PostsVo [post_no=" + post_no + ", user_no=" + user_no + ", community_id=" + community_id
 				+ ", category_no=" + category_no + ", post_title=" + post_title + ", post_content_file="
 				+ post_content_file + ", post_readcount=" + post_readcount + ", post_recommand=" + post_recommand
-				+ ", post_lastupdate=" + post_lastupdate + ", post_status=" + post_status + ", user_name=" + user_name
-				+ ", community_name=" + community_name + ", category_name=" + category_name + ", declared_count="
-				+ declared_count + "]";
+				+ ", post_createtime=" + post_createtime + ", post_updatetime=" + post_updatetime + ", post_status="
+				+ post_status + ", user_name=" + user_name + ", community_name=" + community_name + ", category_name="
+				+ category_name + ", str_post_status=" + str_post_status + ", declared_count=" + declared_count + "]";
 	}
 	
 }

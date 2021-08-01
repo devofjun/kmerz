@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.PostsVo;
 
 @Repository
@@ -18,25 +19,33 @@ public class PostDaoImpl implements PostDao {
 
 	@Inject
 	SqlSession session;
-
+	
+	
 	@Override
-	public List<PostsVo> selectAllPosts() {
+	public int countPosts(PostPagingDto postPagingDto) {
+		// 게시글 수
+		return session.selectOne(NAMESPACE+"countPosts", postPagingDto);
+	}
+
+	
+	@Override
+	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto) {
 		// 모든 게시글 가져오기
-		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectAllPosts");
+		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectAllPosts", postPagingDto);
 		// System.out.println(PostsList);
 		return PostsList;
 	}
 	
 	@Override
-	public List<PostsVo> selectStatusPosts(String status) {
+	public List<PostsVo> selectAllowPosts(int status) {
 		// 허용된 모든 게시글 읽기
-		List<PostsVo> postsList = session.selectList(NAMESPACE + "selectStatusPosts", status);
+		List<PostsVo> postsList = session.selectList(NAMESPACE + "selectAllowPosts", status);
 		return postsList;
 	}
 
-	// test
+	// 글번호로 게시글 가져오기
 	@Override
-	public PostsVo selectPost(int post_no) {
+	public PostsVo selectPostNo(int post_no) {
 		PostsVo Post = session.selectOne(NAMESPACE + "selectPost", post_no);
 		return Post;
 	}
@@ -49,7 +58,7 @@ public class PostDaoImpl implements PostDao {
 
 	// 커뮤니티 페이지 이동시 이동한 커뮤니티 포스트 리스트 가져오기
 	@Override
-	public List<PostsVo> selectCommunityPostList(String community_id, String status) {
+	public List<PostsVo> selectCommunityPostList(String community_id, int status) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("community_id", community_id);
 		map.put("post_status", status);
@@ -64,7 +73,7 @@ public class PostDaoImpl implements PostDao {
 	}
 	
 	@Override
-	public List<PostsVo> selectCategoryPostList(String community_id, int category_no, String status) {
+	public List<PostsVo> selectCategoryPostList(String community_id, int category_no, int status) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("community_id", community_id);
 		map.put("category_no", category_no);
@@ -90,9 +99,19 @@ public class PostDaoImpl implements PostDao {
 		// TODO Auto-generated method stub
 		return session.selectOne(NAMESPACE + "selectLoadPost" , init_post);
 	}
-	public void updateStatus(int target, String status) {
+	
+	@Override
+	public void updatePost(PostsVo postsVo) {
+		// 글 수정
+		session.update(NAMESPACE+"updatePost", postsVo);
+	}
+	
+	@Override
+	public void updateStatus(int target, int status) {
 		// 게시글 상태 변경
 		PostsVo postsVo = new PostsVo(target, status);
 		session.update(NAMESPACE+"updateStatus", postsVo);
 	}
+
+	
 }

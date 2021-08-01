@@ -1,5 +1,6 @@
 package com.kmerz.app.Controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,8 @@ public class MediaController {
 	PostService pService;
 	@Inject
 	CommunityService commService;
+	@Inject
+	MemberService memberService;
 
 	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
 	public String upload_media(@RequestParam("file") MultipartFile file,
@@ -54,17 +58,15 @@ public class MediaController {
 		int user_no = memberVo.getUser_no();
 		PostsVo vo = new PostsVo();
 		vo.setPost_no(seqPostNo);
-		System.out.println("시퀸스"+seqPostNo);
-		System.out.println("시퀸스후"+vo.getPost_no());
+		//System.out.println("시퀸스"+seqPostNo);
+		//System.out.println("시퀸스후"+vo.getPost_no());
 		vo.setCategory_no(category_no);
 		vo.setCommunity_id(community_id);
 		vo.setPost_title(post_title);
 		vo.setUser_no(user_no);
 		vo.setPost_content_file(fileName);
-		vo.setPost_lastupdate(new Timestamp(System.currentTimeMillis()));
-		vo.setPost_status("accept");
 		vo.setCommunity_name(commService.getOneCommunity(community_id).getCommunity_name());
-		System.out.println(vo);
+		//System.out.println(vo);
 		pService.posting(vo);
 		return "redirect:/include/modal?post_no=" + vo.getPost_no();
 		}	
@@ -99,7 +101,6 @@ public class MediaController {
 			}
 		}
 		
-		
 		List<SteamAppVo> appList = new ArrayList<>();
 		for(String appid : appidList) {
 			System.out.println("앱아이디 "+appid+"를 탐색합니다.");
@@ -133,14 +134,34 @@ public class MediaController {
 			produces="application/text;charset=utf-8")
 	public String uploadAjax(MultipartFile file, HttpSession session) throws Exception {
 		MemberVo getMemberVo = (MemberVo)session.getAttribute("loginVo");
-		String strUser_no = String.valueOf(getMemberVo.getUser_no());
+		int user_no = getMemberVo.getUser_no();
+		String user_id = getMemberVo.getUser_id();
+		String user_pw = getMemberVo.getUser_pw();
+		String strUser_no = String.valueOf(user_no);
 		String uploadPath = "D:/kmerz/repository/profile/" + strUser_no;
-		System.out.println("uploadPath:" + uploadPath);
-		System.out.println("file:" + file);
+		// System.out.println("uploadPath:" + uploadPath);
+		// System.out.println("file:" + file);
 		String originalFilename = file.getOriginalFilename();
-		System.out.println("originalFilename:" + originalFilename);
+		// System.out.println("originalFilename:" + originalFilename);
 		String filePath = MyFileUploadUtil.uploadFile(uploadPath, originalFilename, file.getBytes());
-		System.out.println(filePath);
+		// System.out.println("filePath: " + filePath);
+		
+		// memberService 사용해서 파일 경로를 tbl_member 업데이트 까지 하기
+		memberService.changeProfileImage(user_no, filePath);
+		
+		session.removeAttribute("loginVo");
+		MemberVo memberVo = memberService.login(user_id, user_pw);
+		session.setAttribute("loginVo", memberVo);
 		return "redirect:/m/userProfileImagesChangeForm";
-	}	
+	}
+	
+	// 썸네일 이미지 요청
+	@RequestMapping(value="/displayImage", method=RequestMethod.GET)
+	@ResponseBody
+	public static byte[] displayImage(String fileName) throws Exception {
+		FileInputStream fis = new FileInputStream(fileName);
+		byte[] bytes = IOUtils.toByteArray(fis);
+		fis.close();
+		return bytes;
+	}
 }
