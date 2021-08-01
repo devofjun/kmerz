@@ -36,7 +36,27 @@ img[draggable='false']{
 			});
 			// 페이지버튼 다시그리기
 			var pagingDto = rData.postPagingDto;
-			
+			$(".pagination").empty();
+			console.log(pagingDto);
+			if(pagingDto.startPage != 1){
+				var clone = $("#clonePageLeft").clone();
+				$(".pagination").append(clone);
+			}
+			for(var p = pagingDto.startPage; p <= pagingDto.endPage; p++){
+				var clone = $("#clonePageNum").clone();
+				clone.find("a").attr("href", p).text(p);
+				clone.removeClass("active");
+				console.log("p: "+p);
+				if(p == pagingDto.page){
+					console.log("pagingDto.page: "+pagingDto.page);
+					clone.addClass("active");
+				}
+				$(".pagination").append(clone);
+			}
+			if(pagingDto.endPage < pagingDto.totalPage){
+				var clone = $("#clonePageRight").clone();
+				$(".pagination").append(clone);
+			}
 		});
 	}
 
