@@ -130,11 +130,11 @@ public class ManagementController {
 	public Map<String, Object> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
 		int count = postService.getCountPosts(postPagingDto);
 		postPagingDto.setCount(count);
-		System.out.println("IN: " + postPagingDto);
+		//System.out.println("IN: " + postPagingDto);
 		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
 		
 		model.addAttribute("postPagingDto", postPagingDto);
-		System.out.println("OUT: " + postPagingDto);
+		//System.out.println("OUT: " + postPagingDto);
 		Map<String, Object> map = new HashMap<>();
 		map.put("postList", postList);
 		map.put("postPagingDto", postPagingDto);
