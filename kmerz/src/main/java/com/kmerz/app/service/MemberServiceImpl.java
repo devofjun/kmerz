@@ -60,4 +60,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updateUserPw(user_no, newPw);
 	}
 
+	@Override
+	public void changeProfileImage(int user_no, String filePath) {
+		memberDao.updateUserProfileImage(user_no, filePath);
+	}
+
 }
