@@ -17,7 +17,6 @@
 		<property name="username" value="kmerz" />
 		<property name="password" value="1234" />
 	</bean>
-
 	<!-- 커넥션 얻기 -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
 		id="sqlSessionFactory">

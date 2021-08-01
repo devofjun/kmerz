@@ -36,12 +36,20 @@ function appendCommentInput(comment_no, comment_retag, post_no){
 function addComment(post_no,comment_retag){
 	console.log("댓글쓰기");
 	console.log(post_no);
-	var commentContent = document.getElementById("comment_content_" + comment_retag).value;
-	console.log(comment_retag);
+	var commentContent;
 	var data = new FormData();
+	if(comment_retag != null){
+		console.log("널아님");
+		commentContent = document.getElementById("comment_content_" + comment_retag).value;
+		data.append("comment_retag", comment_retag);
+	}else{
+		console.log("널임");
+		commentContent = document.getElementById("comment_content_").value;
+	}
+	console.log(comment_retag);
+	console.log(commentContent);
 	data.append("commentContent", commentContent);
 	data.append("post_no", post_no);
-	data.append("comment_retag", comment_retag);
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "comment/addComment");
 	xhr.send(data);

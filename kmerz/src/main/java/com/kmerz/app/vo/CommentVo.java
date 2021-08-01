@@ -8,7 +8,7 @@ public class CommentVo {
 	private int user_no;
 	private String comment_content;
 	private int comment_regroup;
-	private int comment_retag;
+	private Integer comment_retag;
 	private Timestamp comment_regist_date;
 	
 	private int declared_count;
@@ -19,7 +19,7 @@ public class CommentVo {
 	}
 
 	public CommentVo(int comment_no, int post_no, int user_no, String comment_content, int comment_regroup,
-			int comment_retag, Timestamp comment_regist_date) {
+			Integer comment_retag, Timestamp comment_regist_date) {
 		super();
 		this.comment_no = comment_no;
 		this.post_no = post_no;
@@ -70,11 +70,11 @@ public class CommentVo {
 		this.comment_regroup = comment_regroup;
 	}
 
-	public int getComment_retag() {
+	public Integer getComment_retag() {
 		return comment_retag;
 	}
 
-	public void setComment_retag(int comment_retag) {
+	public void setComment_retag(Integer comment_retag) {
 		this.comment_retag = comment_retag;
 	}
 

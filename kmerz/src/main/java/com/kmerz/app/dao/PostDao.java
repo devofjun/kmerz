@@ -17,4 +17,6 @@ public interface PostDao {
 	public PostsVo selectLoadPost(int init_post);
 	// 게시글 상태 변경
 	public void updateStatus(int target, String status);
+	public void updatePost(PostsVo vo);
+	public void deletePost(int post_no);
 }

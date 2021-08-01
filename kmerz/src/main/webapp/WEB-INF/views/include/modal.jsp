@@ -6,13 +6,15 @@
 	pageEncoding="UTF-8"%>
 <%
 	PostsVo postVo = (PostsVo) request.getAttribute("postVo");
-	System.out.println(postVo);
+System.out.println(postVo);
 %>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet"
+	href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/header.css?ver6">
-<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
+<script
+	src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
@@ -63,11 +65,14 @@
 						<span>Comment This Post</span>
 						<div class="reply-content">
 							<div class="reply-form-input">
-								<textarea id="comment_content" cols="120" rows="10"></textarea>
+								<textarea
+									id="comment_content_"
+									cols="120" rows="10"></textarea>
 							</div>
 							<div class="reply-submit">
 								<button class="btn">CON</button>
-								<button class="btn" onclick="addComment('<%=postVo.getPost_no()%>')">COMMENT</button>
+								<button class="btn"
+									onclick="addComment('<%=postVo.getPost_no()%>', null)">REPLY</button>
 							</div>
 						</div>
 					</div>

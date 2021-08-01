@@ -60,7 +60,21 @@ insert into tbl_posts values(
 	'admit'
 	)
 </insert>
-
+<update id="updatePost">
+	update tbl_posts set
+	community_id = #{community_id},
+	category_no = #{category_no},
+	post_title = #{post_title},
+	post_content_file = #{post_content_file},
+	last_update = sysdate,
+	post_status = 'update'
+	where post_no = #{post_no}
+</update>
+<update id="deletePost">
+	update tbl_posts set
+	post_status = 'deny'
+	where post_no = #{post_no}
+</update>
 <!-- 로그인 유저가 작성한 개시글 갯수 구하기 -->
 <select id="selectUserPostCount" resultType="int">
 	select count(*) from tbl_posts where user_no = #{user_no}
