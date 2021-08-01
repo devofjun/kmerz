@@ -12,8 +12,9 @@ create table tbl_member (
     user_pw varchar2(50) not null,
     user_name varchar2(50) not null,
     user_currentlogin timestamp,
-    user_status varchar2(15),
+    user_status number default 0,
     user_profileImage varchar2(500),
+    user_point number default 0,
     constraint unique_user_id unique(user_id),
     constraint unique_user_name unique(user_name)
 );  
@@ -188,13 +189,28 @@ create table tbl_adminmessage(
 -- 유저 로그 테이블
 --==================================================
 drop table tbl_member_log CASCADE CONSTRAINTS;
---truncate table tbl_member_log;
 create table tbl_member_log (
-    user_log_code varchar2(20),
+    user_log_no number primary key,
+    user_log_code number not null,
     user_no number references tbl_member(user_no),
     user_request_ip varchar2(20),
     user_request_content varchar2(200),
     user_log_time timestamp default sysdate
 );
+
+--==================================================
+-- 포인트 로그 테이블
+--==================================================
+drop table tbl_point;
+create table tbl_point(
+    point_id number primary key,
+    user_no number references tbl_member(user_no),
+    point_content varchar2(100),
+    point_score number not null,
+    point_total number not null,
+    point_datetime timestamp default sysdate
+);
+
+
 
 commit;

@@ -42,6 +42,13 @@ public class MemberDaoImpl implements MemberDao{
 		return memberVo;
 	}
 
+	@Override
+	public void updateCurrentLogin(int user_no) {
+		// 최근 로그인 업데이트
+		sqlsession.update(NAMESPACE+"updateCurrentLogin", user_no);
+	}
+	
+	
 	// id로 유저 정보 찾기
 	@Override
 	public MemberVo selectID(String user_id) {
@@ -87,6 +94,17 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("filePath", filePath);
 		sqlsession.update(NAMESPACE + "updateUserProfileImage", map);
 	}
+
+	@Override
+	public void updateUserStatus(int user_no, int user_status) {
+		// 유저 상태 변경 
+		Map<String, Integer> map = new HashMap<>();
+		map.put("user_no", user_no);
+		map.put("user_status", user_status);
+		sqlsession.update(NAMESPACE, map);
+	}
+
+	
 	
 	
 

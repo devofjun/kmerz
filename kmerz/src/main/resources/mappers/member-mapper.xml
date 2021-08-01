@@ -9,9 +9,11 @@
 	values(seq_user_no.nextval, #{user_id}, #{user_pw}, #{user_name})
 </insert>
 
+<!-- 모든 유저 정보 -->
 <select id="selectAll" resultType="MemberVo">
-	select * from tbl_member
+	select * from tbl_member order by user_currentlogin desc
 </select>
+
 <!-- id로 유저정보 찾기 -->
 <select id="selectID" resultType="MemberVo">
 	select * from tbl_member where user_id = #{user_id}
@@ -26,6 +28,12 @@
 <select id="selectUser" resultType="MemberVo">
 	select * from tbl_member where user_id = #{user_id} and user_pw = #{user_pw}
 </select>
+
+<!-- 최근 로그인 업데이트 -->
+<update id="updateCurrentLogin">
+	update tbl_member set user_currentlogin = sysdate
+	where user_no = #{user_no}
+</update>
 
 <!-- 닉네임 사용가능 여부 체크 -->
 <select id="selectUserCount" resultType="int">
@@ -50,6 +58,12 @@
 <update id="updateUserProfileImage">
 	update tbl_member set user_profileImage = #{filePath}
 	where user_no = #{user_no}
+</update>
+
+<!-- 유저 상태 변경 -->
+<update id="updateUserStatus">
+	update tbl_memeber set user_status = #{user_status}
+	where user_no = #{user_no}e
 </update>
 
 </mapper>
