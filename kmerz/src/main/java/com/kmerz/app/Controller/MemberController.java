@@ -200,9 +200,9 @@ public class MemberController {
 	public String secession(HttpSession session) {
 		MemberVo getMemberVo = (MemberVo)session.getAttribute("loginVo");
 		int user_no = getMemberVo.getUser_no();
-		String status = "NO";
-		memberService.secession(user_no, status);
+		String user_status = "NO";
+		memberService.secession(user_no, user_status);
 		session.removeAttribute("loginVo");
-		return "/";
+		return "redirect:/";
 	}
 }

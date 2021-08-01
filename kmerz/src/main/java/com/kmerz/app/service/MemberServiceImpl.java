@@ -66,8 +66,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void secession(int user_no, String status) {
-		memberDao.updateUserStatus(user_no, status);
+	public void secession(int user_no, String user_status) {
+		memberDao.updateUserStatus(user_no, user_status);
 	}
 
 }

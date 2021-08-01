@@ -89,10 +89,10 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public void updateUserStatus(int user_no, String status) {
+	public void updateUserStatus(int user_no, String user_status) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("user_no", user_no);
-		map.put("status", status);
+		map.put("user_status", user_status);
 		sqlsession.update(NAMESPACE + "updateUserStatus", map);
 	}
 	

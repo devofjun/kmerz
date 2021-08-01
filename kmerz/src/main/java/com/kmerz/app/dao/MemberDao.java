@@ -14,5 +14,5 @@ public interface MemberDao {
 	public void updateUserName(int user_no, String user_name);
 	public void updateUserPw(int user_no, String newPw);
 	public void updateUserProfileImage(int user_no, String filePath);
-	public void updateUserStatus(int user_no, String status);
+	public void updateUserStatus(int user_no, String user_status);
 }
