@@ -65,4 +65,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updateUserProfileImage(user_no, filePath);
 	}
 
+	@Override
+	public void secession(int user_no, String status) {
+		memberDao.updateUserStatus(user_no, status);
+	}
+
 }

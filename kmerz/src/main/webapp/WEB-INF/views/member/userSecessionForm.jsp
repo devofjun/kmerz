@@ -6,7 +6,7 @@
 <hr>
 <div>
 	<!-- 여기가 폼 -->
-	<form>
+	<form action="/m/secession" method="post">
 		<div style="color:red">
 			<p>K-merz 회원 탈퇴를 하시면, 아이디와 개인정보는 즉시 삭제되고 복구가 불가능합니다.</p>
 			<p>회원 탈퇴 시 회원 아이디로 작성된 게시물과 댓글은 자동으로 삭제되지 않습니다.</p>

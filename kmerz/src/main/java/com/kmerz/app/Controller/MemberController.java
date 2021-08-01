@@ -194,4 +194,15 @@ public class MemberController {
 		session.setAttribute("loginVo", memberVo);
 		return "redirect:/m/userInfo";
 	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "/secession", method = RequestMethod.POST)
+	public String secession(HttpSession session) {
+		MemberVo getMemberVo = (MemberVo)session.getAttribute("loginVo");
+		int user_no = getMemberVo.getUser_no();
+		String status = "NO";
+		memberService.secession(user_no, status);
+		session.removeAttribute("loginVo");
+		return "/";
+	}
 }

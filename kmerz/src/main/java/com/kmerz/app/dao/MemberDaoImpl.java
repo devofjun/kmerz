@@ -87,6 +87,14 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("filePath", filePath);
 		sqlsession.update(NAMESPACE + "updateUserProfileImage", map);
 	}
+
+	@Override
+	public void updateUserStatus(int user_no, String status) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_no", user_no);
+		map.put("status", status);
+		sqlsession.update(NAMESPACE + "updateUserStatus", map);
+	}
 	
 	
 

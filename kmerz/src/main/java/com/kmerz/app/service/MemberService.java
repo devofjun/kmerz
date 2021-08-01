@@ -14,4 +14,5 @@ public interface MemberService {
 	public void changeUserName(int user_no, String user_name);
 	public void changeUserPw(int user_no, String newPw);
 	public void changeProfileImage(int user_no, String filePath);
+	public void secession(int user_no, String status);
 }

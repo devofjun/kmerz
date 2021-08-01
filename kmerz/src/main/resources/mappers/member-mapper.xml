@@ -54,7 +54,7 @@
 
 <!-- 회원 탈퇴 -->
 <update id="updateUserStatus">
-	update tbl_member set user_status = #{user__status}
+	update tbl_member set user_status = #{user_status}
 	where user_no = #{user_no}
 </update>
 
