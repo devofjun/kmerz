@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.PostsVo;
 
 @Repository
@@ -18,11 +19,19 @@ public class PostDaoImpl implements PostDao {
 
 	@Inject
 	SqlSession session;
-
+	
+	
 	@Override
-	public List<PostsVo> selectAllPosts() {
+	public int countPosts(PostPagingDto postPagingDto) {
+		// 게시글 수
+		return session.selectOne(NAMESPACE+"countPosts", postPagingDto);
+	}
+
+	
+	@Override
+	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto) {
 		// 모든 게시글 가져오기
-		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectAllPosts");
+		List<PostsVo> PostsList = session.selectList(NAMESPACE + "selectAllPosts", postPagingDto);
 		// System.out.println(PostsList);
 		return PostsList;
 	}
@@ -34,9 +43,9 @@ public class PostDaoImpl implements PostDao {
 		return postsList;
 	}
 
-	// test
+	// 글번호로 게시글 가져오기
 	@Override
-	public PostsVo selectPost(int post_no) {
+	public PostsVo selectPostNo(int post_no) {
 		PostsVo Post = session.selectOne(NAMESPACE + "selectPost", post_no);
 		return Post;
 	}
@@ -104,4 +113,5 @@ public class PostDaoImpl implements PostDao {
 		session.update(NAMESPACE+"updateStatus", postsVo);
 	}
 
+	
 }

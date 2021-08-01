@@ -43,7 +43,7 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
 		List<PostsVo> postList = postService.selectAllowPosts();
-		System.out.println("홈: "+postList);
+		//System.out.println("홈: "+postList);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
 		int userCommentCount = 0;

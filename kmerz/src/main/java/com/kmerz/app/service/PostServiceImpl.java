@@ -12,6 +12,7 @@ import com.kmerz.app.dao.CommunityDao;
 import com.kmerz.app.dao.DeclaredDao;
 import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dao.PostDao;
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.CategoryVo;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
@@ -36,11 +37,18 @@ public class PostServiceImpl implements PostService{
 	@Inject
 	DeclaredDao declaredDao;
 	
+	
+	@Override
+	public int getCountPosts(PostPagingDto postPagingDto) {
+		return postdao.countPosts(postPagingDto);
+	}
+
+	
 	@Transactional
 	@Override
-	public List<PostsVo> selectAllPosts() {
+	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto) {
 		// 모든 게시글(관리자 페이지에서 필요함)
-		List<PostsVo> PostsList = postdao.selectAllPosts();
+		List<PostsVo> PostsList = postdao.selectAllPosts(postPagingDto);
 		if(PostsList != null) {
 			for(PostsVo postVo : PostsList) {
 				// 유저 이름
@@ -55,6 +63,21 @@ public class PostServiceImpl implements PostService{
 				// 신고수
 				int declared_count = declaredDao.selectTargetIDCount(postVo.getPost_no(), DeclaredServiceImpl.TYPE_POST);
 				postVo.setDeclared_count(declared_count);
+				// 글 상태
+				switch(postVo.getPost_status()) {
+					case POST_LOCK:
+						postVo.setStr_post_status("잠김");
+						break;
+					case POST_DELETE:
+						postVo.setStr_post_status("삭제됨");
+						break;
+					case POST_CREATE:
+						postVo.setStr_post_status("작성됨");
+						break;
+					case POST_UPDATE:
+						postVo.setStr_post_status("수정됨");
+						break;
+				}
 			}
 		}
 		return PostsList;
@@ -87,9 +110,9 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public PostsVo selectPost(int post_no) {
 		// 관리자용 게시글 보기 (조회수 증가 x)
-		PostsVo postVo = postdao.selectPost(post_no);
+		PostsVo postVo = postdao.selectPostNo(post_no);
 		//System.out.println("포스트노:" + post_no);
-		System.out.println("포스트븨오:" + postVo);
+		//System.out.println("포스트븨오:" + postVo);
 		if(postVo != null) {
 			// 유저 이름
 			MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
@@ -108,7 +131,7 @@ public class PostServiceImpl implements PostService{
 	@Transactional
 	@Override
 	public PostsVo viewPost(int post_no) {
-		PostsVo postVo = postdao.selectPost(post_no);
+		PostsVo postVo = postdao.selectPostNo(post_no);
 		//System.out.println("포스트노:" + post_no);
 		//System.out.println("포스트븨오:" + postVo);
 		if(postVo != null) {
@@ -190,9 +213,15 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void unlockPost(int post_no) {
 		// 포스트 잠금 풀기 
-		postdao.updateStatus(post_no, POST_CREATE);
+		PostsVo postVo = postdao.selectPostNo(post_no);
+		if(postVo.getPost_updatetime() != null) {
+			postdao.updateStatus(post_no, POST_UPDATE);
+		} else {
+			postdao.updateStatus(post_no, POST_CREATE);	
+		}
 	}
 
+	
 	
 
 	

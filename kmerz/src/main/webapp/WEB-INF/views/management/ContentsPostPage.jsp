@@ -11,11 +11,85 @@ img[draggable='false']{
 </style>
 
 <script>
+	function submitPaging() {
+		var url = "/admin/contents/postPaging";
+		var sData = {
+				"page" : $("#frmPaging > input[name='page']").val(),
+				"perPage" : $("#frmPaging > input[name='perPage']").val(),
+				"searchType" : $("#frmPaging > input[name='searchType']").val(),
+				"keyword" : $("#frmPaging > input[name='keyword']").val()
+		};
+		$.get(url, sData, function(rData){
+			$("#tbodyPost > tr:gt(0)").remove();
+			$.each(rData.postList, function(){
+				var cloneTr = $("#tbodyPost > tr:eq(0)").clone();
+				cloneTr.find(".postno").text(this.post_no);
+				cloneTr.find(".lastupdate").text(timeForToday(this.post_createtime));
+				cloneTr.find(".cname > span").text(this.community_name + "/" + this.category_name);
+				cloneTr.find(".title").text(this.post_title);
+				cloneTr.find(".userName").text(this.user_name);
+				cloneTr.find(".declared").text(this.declared_count);
+				cloneTr.find(".status").text(this.str_post_status);
+				cloneTr.find("input[name='post_content_file']").val(this.post_content_file);
+				$("#tbodyPost").append(cloneTr);
+				cloneTr.show();
+			});
+			// 페이지버튼 다시그리기
+			var pagingDto = rData.postPagingDto;
+			$(".pagination").empty();
+			console.log(pagingDto);
+			if(pagingDto.startPage != 1){
+				var clone = $("#clonePageLeft").clone();
+				$(".pagination").append(clone);
+			}
+			for(var p = pagingDto.startPage; p <= pagingDto.endPage; p++){
+				var clone = $("#clonePageNum").clone();
+				clone.find("a").attr("href", p).text(p);
+				clone.removeClass("active");
+				console.log("p: "+p);
+				if(p == pagingDto.page){
+					console.log("pagingDto.page: "+pagingDto.page);
+					clone.addClass("active");
+				}
+				$(".pagination").append(clone);
+			}
+			if(pagingDto.endPage < pagingDto.totalPage){
+				var clone = $("#clonePageRight").clone();
+				$(".pagination").append(clone);
+			}
+		});
+	}
+
 	$(document).ready(function() {
 		for(var i=0; i<$(".trPost").length; i++){
 			var tdDate = $(".trPost").eq(i).children().eq(1); 
 			tdDate.text(timeForToday(tdDate.text()));
 		};
+		
+		// 검색 타입 변경
+		$(".searchType").click(function() {
+			$("#btnSearchType").text($(this).text());
+			//$("#btnSearchType").attr("data-searchType", $(this).attr("data-searchType"));
+			$("#frmPaging").find("input[name='searchType']").val($(this).attr("data-searchType"));
+		});
+		
+		// 검색 버튼
+		$("#btnSearch").click(function() {
+			$("#frmPaging").find("input[name='keyword']").val($(this).prev().val());
+			$("#frmPaging").find("input[name='page']").val(1);
+			submitPaging();
+		});
+		
+		// 페이지 번호 클릭시
+		$(".pagination").on("click", "li > a", function(e){
+		//$(".pagination > li > a").click(function(e) {
+			e.preventDefault();
+			$(".pagination > li").removeClass("active");
+			$(this).parent().addClass("active");
+			var page = $(this).attr("href");
+			$("#frmPaging > input[name='page']").val(page);
+			submitPaging();
+		});
 		
 		// 글 목록을 클릭했을때
 		$("#tbodyPost").on("click", ".trPost", function() {
@@ -35,11 +109,11 @@ img[draggable='false']{
 				$("#cardPostRecommand").text(postInfo.post_recommand);
 				$("#cardPostDeclared").text(postInfo.declared_count);
 				console.log(postInfo.post_status);
-				if(postInfo.post_status == "deny"){
+				if(postInfo.post_status == -2){
 					$("#cardPostTitle").addClass("text-decoration-line-through");
 					$("#btnChangeStatus").text("글 잠금해제");
 					$("#cardUserInfo").children().removeClass("shadow");
-				} else {
+				} else if(postInfo.post_status >= 0){
 					$("#cardPostTitle").removeClass("text-decoration-line-through");
 					$("#btnChangeStatus").text("글 잠그기");
 					$("#cardUserInfo").children().addClass("shadow");
@@ -56,6 +130,7 @@ img[draggable='false']{
 			});
 			// 게시글 내용 가져오기
 			var post_content_file = $(this).find("input[name='post_content_file']").val();
+			//console.log(post_content_file);
 			$.ajax({
 				url				:"/admin/contents/getPostContent",
 				type			:"GET",
@@ -101,6 +176,7 @@ img[draggable='false']{
 						card.addClass("shadow");
 					}
 				}
+				submitPaging();
 			});
 			
 			
@@ -136,11 +212,10 @@ img[draggable='false']{
 			<div class="input-group mb-1 ">
 				<button id="btnSearchType"
 					class="btn btn-outline-secondary dropdown-toggle" type="button"
-					data-bs-toggle="dropdown" aria-expanded="false"
-					data-searchType="/admin/searchName">제목</button>
+					data-bs-toggle="dropdown" aria-expanded="false">제목</button>
 				<ul id="ulSearchType" class="dropdown-menu">
-					<li><a class="dropdown-item" href="/admin/searchId">제목</a></li>
-					<li><a class="dropdown-item" href="/admin/searchName">작성자</a></li>
+					<li><span class="searchType dropdown-item" data-searchType="post_title">제목</span></li>
+					<li><span class="searchType dropdown-item" data-searchType="user_name">작성자</span></li>
 				</ul>
 				<input type="text" class="form-control"
 					aria-label="Text input with dropdown button">
@@ -162,6 +237,16 @@ img[draggable='false']{
 					</tr>
 				</thead>
 				<tbody id="tbodyPost">
+					<tr class="trPost cspointer" style="display:none">
+						<td class="postno"></td>
+						<td class="lastupdate"></td>
+						<td class="cname"><span></span></td>
+						<td class="title"></td>
+						<td class="userName"></td>
+						<td class="declared"></td>
+						<td class="status"></td>
+						<td style="display:none"><input type="hidden" name="post_content_file" value=""/></td>
+					</tr>
 					<c:forEach var="postsVo"  items="${postList }">
 					<tr class="trPost cspointer"> 
 						<td class="postno">${postsVo.post_no }</td>
@@ -170,27 +255,56 @@ img[draggable='false']{
 						<td class="title">${postsVo.post_title }</td>
 						<td class="userName">${postsVo.user_name }</td>
 						<td class="declared">${postsVo.declared_count }</td>
-						<td class="status">${postsVo.post_status }</td>
+						<td class="status">${postsVo.str_post_status }</td>
 						<td style="display:none"><input type="hidden" name="post_content_file" value="${postsVo.post_content_file }"/></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 
-			<!-- 페이징 -->
+			<!-- 페이징dto -->
+			<form id="frmPaging" style="display:none">
+				<input type="hidden" name="page" value="${postPagingDto.page}" />
+				<input type="hidden" name="perPage" value="${postPagingDto.perPage}" />
+				<input type="hidden" name="searchType" value="${postPagingDto.searchType}"/>
+				<input type="hidden" name="keyword" value="${postPagingDto.keyword}" />
+			</form>
+			<!-- 페이징 네비 -->
 			<nav>
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-					</a></li>
+					<c:if test="${postPagingDto.startPage != 1 }">
+						<li class="page-item"><a class="page-link"
+							href="${postPagingDto.startPage-1}">&laquo;</a></li>
+					</c:if>
+					<c:forEach var="p" begin="${postPagingDto.startPage}"
+						end="${postPagingDto.endPage}">
+						<c:choose>
+							<c:when test="${postPagingDto.page == p}">
+								<li class="page-item active"><a class="page-link"
+									href="${p}">${p}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="${p}">${p}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${postPagingDto.endPage < pagingDto.totalPage }">
+						<li class="page-item"><a class="page-link"
+							href="${postPagingDto.endPage+1}">&raquo;</a></li>
+					</c:if>
 				</ul>
 			</nav>
+
+			<div style="display:none">
+				<ul>
+					<li id="clonePageLeft" class="page-item"><a class="page-link"
+						href="${postPagingDto.startPage-1}">&laquo;</a></li>
+					<li id="clonePageNum" class="page-item"><a class="page-link" href="${p}">${p}</a></li>
+					<li id="clonePageRight" class="page-item"><a class="page-link"
+						href="${postPagingDto.endPage+1}">&raquo;</a></li>
+				</ul>
+			</div>
+
 		</div>
 
 		<!-- 게시글 정보 카드 -->

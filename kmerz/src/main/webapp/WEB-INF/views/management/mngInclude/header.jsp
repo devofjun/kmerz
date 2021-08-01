@@ -60,7 +60,6 @@
 		var path = "${requestScope['javax.servlet.forward.servlet_path']}";
 		var ulSize = $("#ulMenus > li > a").length;
 		console.log("${requestScope['javax.servlet.forward.servlet_path']}");
-		console.log($("#ulMenus > li > a").eq(0).attr("href"));
 		for (var i = 0; i < ulSize; i++) {
 			var href = $("#ulMenus > li > a").eq(i).attr("href");
 			if(path == "/admin"){
@@ -69,6 +68,9 @@
 			if(path == href) {
 				$("#ulMenus > li > a").eq(i).addClass("active");
 			}
+		}
+		if(path == "/admin/contents/postSettingPage") {
+			$("#ulMenus > li > a").eq(2).addClass("active");
 		}
 	});
 </script>
