@@ -7,7 +7,8 @@ insert into tbl_member values(
     '1234',
     '테스터1',
     sysdate,
-    'OK'
+    'OK',
+    null
 );
 insert into tbl_member   values(
     SEQ_USER_NO.nextval,
@@ -15,7 +16,8 @@ insert into tbl_member   values(
     '1234',
     '테스터2',
     sysdate,
-    'OK'
+    'OK',
+    null
 );
 insert into tbl_member values(
     SEQ_USER_NO.nextval,
@@ -23,7 +25,8 @@ insert into tbl_member values(
     '1234',
     '테스터3',
     sysdate,
-    'OK'
+    'OK',
+    null
 );
 --select * from tbl_member;
 
@@ -100,6 +103,8 @@ select * from
         order by post_no desc)a)
 where rnum between 1 and 10;
 
+
+select * from tbl_posts where post_status >= 0;
 
 
 ----------------------------------------------------

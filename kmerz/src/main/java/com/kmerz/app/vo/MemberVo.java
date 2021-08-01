@@ -9,6 +9,7 @@ public class MemberVo {
 	private String user_name;
 	private Timestamp user_currentlogin;
 	private String user_status;
+	private String user_profileImage;
 	
 	public MemberVo() {
 		super();
@@ -16,7 +17,7 @@ public class MemberVo {
 	}
 
 	public MemberVo(int user_no, String user_id, String user_pw, String user_name, Timestamp user_currentlogin,
-			String user_status) {
+			String user_status, String user_profileImage) {
 		super();
 		this.user_no = user_no;
 		this.user_id = user_id;
@@ -24,6 +25,7 @@ public class MemberVo {
 		this.user_name = user_name;
 		this.user_currentlogin = user_currentlogin;
 		this.user_status = user_status;
+		this.user_profileImage = user_profileImage;
 	}
 
 	public int getUser_no() {
@@ -74,11 +76,19 @@ public class MemberVo {
 		this.user_status = user_status;
 	}
 
+	public String getUser_profileImage() {
+		return user_profileImage;
+	}
+
+	public void setUser_profileImage(String user_profileImage) {
+		this.user_profileImage = user_profileImage;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVo [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
-				+ user_name + ", user_currentlogin=" + user_currentlogin + ", user_status=" + user_status + "]";
+				+ user_name + ", user_currentlogin=" + user_currentlogin + ", user_status=" + user_status
+				+ ", user_profileImage=" + user_profileImage + "]";
 	}
-
 	
 }
