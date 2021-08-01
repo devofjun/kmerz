@@ -1,6 +1,8 @@
 package com.kmerz.app.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
 import com.kmerz.app.service.PostService;
@@ -112,11 +115,30 @@ public class ManagementController {
 	
 	// 게시물 관리 페이지
 	@RequestMapping(value = "/contents/postSettingPage", method = RequestMethod.GET)
-	public String postSetting(Model model) throws Exception {
-		List<PostsVo> postsVo = postService.selectAllPosts();
-		//System.out.println(postsVo);
+	public String postSetting(PostPagingDto postPagingDto, Model model) throws Exception {
+		// 페이지
+		int count = postService.getCountPosts(postPagingDto);
+		postPagingDto.setCount(count);
+		List<PostsVo> postsVo = postService.selectAllPosts(postPagingDto);
 		model.addAttribute("postList", postsVo);
 		return "management/ContentsPostPage";
+	}
+	
+	// 게시물 페이징, 검색
+	@ResponseBody
+	@RequestMapping(value = "/contents/postPaging", method = RequestMethod.GET)
+	public Map<String, Object> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
+		int count = postService.getCountPosts(postPagingDto);
+		postPagingDto.setCount(count);
+		System.out.println("IN: " + postPagingDto);
+		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
+		
+		model.addAttribute("postPagingDto", postPagingDto);
+		System.out.println("OUT: " + postPagingDto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("postList", postList);
+		map.put("postPagingDto", postPagingDto);
+		return map;
 	}
 	
 	// 게시물 정보 가져오기
@@ -136,7 +158,7 @@ public class ManagementController {
 		return result;
 	}
 	
-	// 게시물 내리기
+	// 게시물 잠금
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostDeny", method=RequestMethod.GET)
 	public String setPostDeny(int post_no) throws Exception {
@@ -144,7 +166,7 @@ public class ManagementController {
 		return "success";
 	}
 	
-	// 게시물 다시 올리기
+	// 게시물 잠금 해제
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostAdmit", method=RequestMethod.GET)
 	public String setPostAdmit(int post_no) throws Exception {

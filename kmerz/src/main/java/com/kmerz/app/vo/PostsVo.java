@@ -18,6 +18,7 @@ public class PostsVo {
 	private String user_name;
 	private String community_name;
 	private String category_name;
+	private String str_post_status;
 	
 	private int declared_count;
 	
@@ -35,7 +36,7 @@ public class PostsVo {
 	public PostsVo(int post_no, int user_no, String community_id, int category_no, String post_title,
 			String post_content_file, int post_readcount, int post_recommand, Timestamp post_createtime,
 			Timestamp post_updatetime, int post_status, String user_name, String community_name, String category_name,
-			int declared_count) {
+			String str_post_status, int declared_count) {
 		super();
 		this.post_no = post_no;
 		this.user_no = user_no;
@@ -51,6 +52,7 @@ public class PostsVo {
 		this.user_name = user_name;
 		this.community_name = community_name;
 		this.category_name = category_name;
+		this.str_post_status = str_post_status;
 		this.declared_count = declared_count;
 	}
 
@@ -174,6 +176,14 @@ public class PostsVo {
 		this.declared_count = declared_count;
 	}
 
+	public String getStr_post_status() {
+		return str_post_status;
+	}
+
+	public void setStr_post_status(String str_post_status) {
+		this.str_post_status = str_post_status;
+	}
+
 	@Override
 	public String toString() {
 		return "PostsVo [post_no=" + post_no + ", user_no=" + user_no + ", community_id=" + community_id
@@ -181,9 +191,7 @@ public class PostsVo {
 				+ post_content_file + ", post_readcount=" + post_readcount + ", post_recommand=" + post_recommand
 				+ ", post_createtime=" + post_createtime + ", post_updatetime=" + post_updatetime + ", post_status="
 				+ post_status + ", user_name=" + user_name + ", community_name=" + community_name + ", category_name="
-				+ category_name + ", declared_count=" + declared_count + "]\n";
+				+ category_name + ", str_post_status=" + str_post_status + ", declared_count=" + declared_count + "]";
 	}
-
-	
 	
 }
