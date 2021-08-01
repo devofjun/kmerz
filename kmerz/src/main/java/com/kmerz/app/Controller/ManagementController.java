@@ -158,7 +158,7 @@ public class ManagementController {
 		return result;
 	}
 	
-	// 게시물 내리기
+	// 게시물 잠금
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostDeny", method=RequestMethod.GET)
 	public String setPostDeny(int post_no) throws Exception {
@@ -166,7 +166,7 @@ public class ManagementController {
 		return "success";
 	}
 	
-	// 게시물 다시 올리기
+	// 게시물 잠금 해제
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostAdmit", method=RequestMethod.GET)
 	public String setPostAdmit(int post_no) throws Exception {

@@ -29,7 +29,7 @@ img[draggable='false']{
 				cloneTr.find(".title").text(this.post_title);
 				cloneTr.find(".userName").text(this.user_name);
 				cloneTr.find(".declared").text(this.declared_count);
-				cloneTr.find(".status").text(this.post_status);
+				cloneTr.find(".status").text(this.str_post_status);
 				cloneTr.find("input[name='post_content_file']").val(this.post_content_file);
 				$("#tbodyPost").append(cloneTr);
 				cloneTr.show();
@@ -176,6 +176,7 @@ img[draggable='false']{
 						card.addClass("shadow");
 					}
 				}
+				submitPaging();
 			});
 			
 			
@@ -254,7 +255,7 @@ img[draggable='false']{
 						<td class="title">${postsVo.post_title }</td>
 						<td class="userName">${postsVo.user_name }</td>
 						<td class="declared">${postsVo.declared_count }</td>
-						<td class="status">${postsVo.post_status }</td>
+						<td class="status">${postsVo.str_post_status }</td>
 						<td style="display:none"><input type="hidden" name="post_content_file" value="${postsVo.post_content_file }"/></td>
 					</tr>
 					</c:forEach>

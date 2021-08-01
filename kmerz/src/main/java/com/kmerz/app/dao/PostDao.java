@@ -9,7 +9,7 @@ public interface PostDao {
 	public int countPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllowPosts(int status);
-	public PostsVo selectPost(int post_no);
+	public PostsVo selectPostNo(int post_no);
 	public void updateReadCount(int post_no);
 	public List<PostsVo> selectCommunityPostList(String community_id, int status);
 	public void posting(PostsVo vo);

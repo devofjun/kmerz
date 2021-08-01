@@ -43,9 +43,9 @@ public class PostDaoImpl implements PostDao {
 		return postsList;
 	}
 
-	// test
+	// 글번호로 게시글 가져오기
 	@Override
-	public PostsVo selectPost(int post_no) {
+	public PostsVo selectPostNo(int post_no) {
 		PostsVo Post = session.selectOne(NAMESPACE + "selectPost", post_no);
 		return Post;
 	}
