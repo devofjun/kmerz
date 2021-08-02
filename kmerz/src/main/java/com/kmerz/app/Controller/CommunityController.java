@@ -81,6 +81,7 @@ public class CommunityController {
 		}
 		model.addAttribute("userPostCount", userPostCount);
 		model.addAttribute("userCommentCount", userCommentCount);
+		model.addAttribute("community_id", community_id);
 		return "community/CommunityPage";
 	}
 	
