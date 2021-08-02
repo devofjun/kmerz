@@ -188,7 +188,7 @@ create table tbl_adminmessage(
 --==================================================
 -- 유저 로그 테이블
 --==================================================
-drop table tbl_member_log CASCADE CONSTRAINTS;
+/*drop table tbl_member_log CASCADE CONSTRAINTS;
 create table tbl_member_log (
     member_log_id number primary key,
     member_log_code number not null,
@@ -201,7 +201,7 @@ create table tbl_member_log (
 drop sequence seq_memberlog_id;
 create sequence seq_memberlog_id
     start with 1;
-
+*/
 
 --==================================================
 -- 포인트 로그 테이블
