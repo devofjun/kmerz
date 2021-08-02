@@ -77,14 +77,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void secession(int user_no, String user_status) {
-		memberDao.updateUserStatus(user_no, user_status);
-	}
-
-	@Override
 	public void setStatusDeny(int user_no) {
 		// 사용자 차단
 		memberDao.updateUserStatus(user_no, STATUS_DENY);
+	}
+	
+	@Override
+	public void setStatusClose(int user_no) {
+		// 회원 탈퇴
+		memberDao.updateUserStatus(user_no, STATUS_CLOSE);
 	}
 
 	@Override
