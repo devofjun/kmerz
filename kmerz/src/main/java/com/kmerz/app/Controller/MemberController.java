@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmerz.app.service.MemberService;
+import com.kmerz.app.service.MemberServiceImpl;
 import com.kmerz.app.vo.MemberVo;
 
 @Controller
@@ -41,9 +42,27 @@ public class MemberController {
 		String page = "member/loginForm";
 		// 로그인 성공
 		if(memberVo != null) {
-			resultLogin = "success";
-			page = "redirect:/";
-			session.setAttribute("loginVo", memberVo);
+			
+			switch(memberVo.getUser_status()) {
+			case MemberServiceImpl.STATUS_DENY:
+				// 로그인 불가능
+				resultLogin = "deny";
+				page = "redirect:/";
+				break;
+			case MemberServiceImpl.STATUS_ALLOW:
+				// 로그인 가능
+				resultLogin = "success";
+				page = "redirect:/";
+				session.setAttribute("loginVo", memberVo);
+				break;
+			case MemberServiceImpl.STATUS_WRITE_LOCK:
+				// 로그인 가능하지만 글쓰기 안됨
+				resultLogin = "write_lock";
+				page = "redirect:/";
+				session.setAttribute("loginVo", memberVo);
+				break;
+			}
+			// 이전 페이지로 돌아가기
 			String requestPath = (String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");
 	 		if(requestPath != null) {
@@ -52,6 +71,7 @@ public class MemberController {
 		 			page = "community/createCommunityForm";
 		 		}
 	 		}
+			
 	 	// 로그인 실패
 		} else {
 			resultLogin = "fail";

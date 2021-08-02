@@ -7,8 +7,9 @@ insert into tbl_member values(
     '1234',
     '테스터1',
     sysdate,
-    'OK',
-    null
+    0,
+    null,
+    0
 );
 insert into tbl_member   values(
     SEQ_USER_NO.nextval,
@@ -16,8 +17,9 @@ insert into tbl_member   values(
     '1234',
     '테스터2',
     sysdate,
-    'OK',
-    null
+    0,
+    null,
+    0
 );
 insert into tbl_member values(
     SEQ_USER_NO.nextval,
@@ -25,11 +27,14 @@ insert into tbl_member values(
     '1234',
     '테스터3',
     sysdate,
-    'OK',
-    null
+    0,
+    null,
+    0
 );
---select * from tbl_member;
-
+select * from tbl_member order by user_currentlogin desc;
+update tbl_member set user_currentlogin = sysdate
+	where user_no = 1001;
+    commit;
 ----------------------------------------------------
 -- 테스트 데이터 삽입(커뮤니티 테이블)
 ----------------------------------------------------

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmerz.app.memberlog">
+
+<insert id="insertMemberLog">
+	insert into tbl_member_log
+	values (
+		seq_memberlog_id.nextval
+		#{member_log_code},
+		#{user_no},
+		#{request_id},
+		#{request_content},
+		#{response_content},
+		sysdate
+	)
+</insert>
+<update id="updateResponse">
+	update tbl_member_log
+	set response_content = #{response}
+</update>
+</mapper>

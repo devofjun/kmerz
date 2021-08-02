@@ -372,13 +372,15 @@ $(document).ready(function() {
 					</div>
 				</div>
 				<!-- 왼쪽 사이드바 미리보기 -->
-					<div id="preLeft" style="background-color:blue; height:300px; display:none">
-					</div>
-					
-					<!-- 오른쪽 사이드바 미리보기 -->
-					<div id="preRight" style="background-color:red; height:300px; display:none">
-					</div>
-				<div id="previewContent" class="card-body"></div>
+				<div id="preLeft" style="height:300px; display:none; text-align:center">
+					<img src="/resources/images/Under_Construction.png" style="height:100%; object-fit: cover"/>
+				</div>
+				
+				<!-- 오른쪽 사이드바 미리보기 -->
+				<div id="preRight" style="height:300px; display:none; text-align:center">
+					<img src="/resources/images/Under_Construction.png" style="height:100%; object-fit: cover"/>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -540,18 +542,6 @@ $(document).ready(function() {
 							<input id="rSidebarMenu1" type="checkbox">
 							<label for="rSidebarMenu1"><img class="img-thumbnail" src="/resources/images/testImg/commbar.jpg"></label>
 						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6">
-							<input id="rSidebarMenu2" type="checkbox">
-							<label for="rSidebarMenu2"><img class="img-thumbnail" src="/resources/images/testImg/commbar.jpg"></label>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6">
-							<input id="rSidebarMenu3" type="checkbox">
-							<label for="rSidebarMenu3"><img class="img-thumbnail" src="/resources/images/testImg/commbar.jpg"></label>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6">
-							<input id="rSidebarMenu4" type="checkbox">
-							<label for="rSidebarMenu4"><img class="img-thumbnail" src="/resources/images/testImg/commbar.jpg"></label>
-						</div>
 						
 					</div>
 				</div>
@@ -573,18 +563,6 @@ $(document).ready(function() {
 						<div class="col-xl-3 col-lg-4 col-md-6">
 							<input id="lSidebarMenu1" type="checkbox">
 							<label for="lSidebarMenu1"><img class="img-thumbnail" src="/resources/images/testImg/listSample.jpg"></label>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6">
-							<input id="lSidebarMenu2" type="checkbox">
-							<label for="lSidebarMenu2"><img class="img-thumbnail" src="/resources/images/testImg/listSample.jpg"></label>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6">
-							<input id="lSidebarMenu3" type="checkbox">
-							<label for="lSidebarMenu3"><img class="img-thumbnail" src="/resources/images/testImg/listSample.jpg"></label>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6">
-							<input id="lSidebarMenu4" type="checkbox">
-							<label for="lSidebarMenu4"><img class="img-thumbnail" src="/resources/images/testImg/listSample.jpg"></label>
 						</div>
 						
 					</div>

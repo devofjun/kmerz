@@ -3,33 +3,45 @@ package com.kmerz.app.vo;
 import java.sql.Timestamp;
 
 public class MemberLogVo {
-	private String user_log_code;
+	private int member_log_id;
+	private int member_log_code;
 	private int user_no;
-	private String user_request_ip;
-	private String user_request_content;
+	private String request_ip;
+	private String request_content;
+	private String response_content;
 	private Timestamp user_log_time;
 	
 	public MemberLogVo() {
 		super();
 		// TODO Auto-generated constructor stub
-	}	
+	}
 
-	public MemberLogVo(String user_log_code, int user_no, String user_request_ip, String user_request_content,
-			Timestamp user_log_time) {
+	public MemberLogVo(int member_log_id, int member_log_code, int user_no, String request_ip, String request_content,
+			String response_content, Timestamp user_log_time) {
 		super();
-		this.user_log_code = user_log_code;
+		this.member_log_id = member_log_id;
+		this.member_log_code = member_log_code;
 		this.user_no = user_no;
-		this.user_request_ip = user_request_ip;
-		this.user_request_content = user_request_content;
+		this.request_ip = request_ip;
+		this.request_content = request_content;
+		this.response_content = response_content;
 		this.user_log_time = user_log_time;
 	}
 
-	public String getUser_log_code() {
-		return user_log_code;
+	public int getMember_log_id() {
+		return member_log_id;
 	}
 
-	public void setUser_log_code(String user_log_code) {
-		this.user_log_code = user_log_code;
+	public void setMember_log_id(int member_log_id) {
+		this.member_log_id = member_log_id;
+	}
+
+	public int getMember_log_code() {
+		return member_log_code;
+	}
+
+	public void setMember_log_code(int member_log_code) {
+		this.member_log_code = member_log_code;
 	}
 
 	public int getUser_no() {
@@ -40,20 +52,28 @@ public class MemberLogVo {
 		this.user_no = user_no;
 	}
 
-	public String getUser_request_ip() {
-		return user_request_ip;
+	public String getRequest_ip() {
+		return request_ip;
 	}
 
-	public void setUser_request_ip(String user_request_ip) {
-		this.user_request_ip = user_request_ip;
+	public void setRequest_ip(String request_ip) {
+		this.request_ip = request_ip;
 	}
 
-	public String getUser_request_content() {
-		return user_request_content;
+	public String getRequest_content() {
+		return request_content;
 	}
 
-	public void setUser_request_content(String user_request_content) {
-		this.user_request_content = user_request_content;
+	public void setRequest_content(String request_content) {
+		this.request_content = request_content;
+	}
+
+	public String getResponse_content() {
+		return response_content;
+	}
+
+	public void setResponse_content(String response_content) {
+		this.response_content = response_content;
 	}
 
 	public Timestamp getUser_log_time() {
@@ -66,9 +86,9 @@ public class MemberLogVo {
 
 	@Override
 	public String toString() {
-		return "MemberLogVo [user_log_code=" + user_log_code + ", user_no=" + user_no + ", user_request_ip="
-				+ user_request_ip + ", user_request_content=" + user_request_content + ", user_log_time="
-				+ user_log_time + "]";
+		return "MemberLogVo [member_log_id=" + member_log_id + ", member_log_code=" + member_log_code + ", user_no="
+				+ user_no + ", request_ip=" + request_ip + ", request_content=" + request_content
+				+ ", response_content=" + response_content + ", user_log_time=" + user_log_time + "]";
 	}
 	
 	

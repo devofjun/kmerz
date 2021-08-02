@@ -32,6 +32,10 @@
 				where user_no in (select user_no from tbl_member
 					where user_name like '%' || #{keyword} || '%')
 			</when>
+			<when test="searchType == 'community_name'">
+				where community_id in (select community_id from tbl_community
+					where community_name like '%' || #{keyword} || '%')
+			</when>
 		</choose>
 	</if>
 </sql>

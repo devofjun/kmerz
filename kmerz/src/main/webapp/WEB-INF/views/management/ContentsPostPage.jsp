@@ -61,6 +61,7 @@ img[draggable='false']{
 	}
 
 	$(document).ready(function() {
+		$("#frmPaging").find("input[name='searchType']").val("post_title");
 		for(var i=0; i<$(".trPost").length; i++){
 			var tdDate = $(".trPost").eq(i).children().eq(1); 
 			tdDate.text(timeForToday(tdDate.text()));
@@ -215,6 +216,7 @@ img[draggable='false']{
 					data-bs-toggle="dropdown" aria-expanded="false">제목</button>
 				<ul id="ulSearchType" class="dropdown-menu">
 					<li><span class="searchType dropdown-item" data-searchType="post_title">제목</span></li>
+					<li><span class="searchType dropdown-item" data-searchType="community_name">커뮤니티</span></li>
 					<li><span class="searchType dropdown-item" data-searchType="user_name">작성자</span></li>
 				</ul>
 				<input type="text" class="form-control"

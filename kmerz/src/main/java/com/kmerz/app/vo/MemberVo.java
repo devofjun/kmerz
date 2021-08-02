@@ -8,8 +8,10 @@ public class MemberVo {
 	private String user_pw;
 	private String user_name;
 	private Timestamp user_currentlogin;
-	private String user_status;
+	private int user_status;
 	private String user_profileImage;
+	
+	private String str_user_status;
 	
 	public MemberVo() {
 		super();
@@ -17,7 +19,7 @@ public class MemberVo {
 	}
 
 	public MemberVo(int user_no, String user_id, String user_pw, String user_name, Timestamp user_currentlogin,
-			String user_status, String user_profileImage) {
+			int user_status, String user_profileImage, String str_user_status) {
 		super();
 		this.user_no = user_no;
 		this.user_id = user_id;
@@ -26,6 +28,7 @@ public class MemberVo {
 		this.user_currentlogin = user_currentlogin;
 		this.user_status = user_status;
 		this.user_profileImage = user_profileImage;
+		this.str_user_status = str_user_status;
 	}
 
 	public int getUser_no() {
@@ -68,11 +71,11 @@ public class MemberVo {
 		this.user_currentlogin = user_currentlogin;
 	}
 
-	public String getUser_status() {
+	public int getUser_status() {
 		return user_status;
 	}
 
-	public void setUser_status(String user_status) {
+	public void setUser_status(int user_status) {
 		this.user_status = user_status;
 	}
 
@@ -84,11 +87,19 @@ public class MemberVo {
 		this.user_profileImage = user_profileImage;
 	}
 
+	public String getStr_user_status() {
+		return str_user_status;
+	}
+
+	public void setStr_user_status(String str_user_status) {
+		this.str_user_status = str_user_status;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVo [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
 				+ user_name + ", user_currentlogin=" + user_currentlogin + ", user_status=" + user_status
-				+ ", user_profileImage=" + user_profileImage + "]";
+				+ ", user_profileImage=" + user_profileImage + ", str_user_status=" + str_user_status + "]";
 	}
 	
 }
