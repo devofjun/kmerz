@@ -81,6 +81,12 @@ public class MemberServiceImpl implements MemberService {
 		// 사용자 차단
 		memberDao.updateUserStatus(user_no, STATUS_DENY);
 	}
+	
+	@Override
+	public void setStatusClose(int user_no) {
+		// 회원 탈퇴
+		memberDao.updateUserStatus(user_no, STATUS_CLOSE);
+	}
 
 	@Override
 	public void setStatusAllow(int user_no) {
@@ -94,6 +100,4 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updateUserStatus(user_no, STATUS_WRITE_LOCK);
 	}
 
-	
-	
 }

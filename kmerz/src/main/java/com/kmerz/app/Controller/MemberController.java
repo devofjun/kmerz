@@ -49,6 +49,11 @@ public class MemberController {
 				resultLogin = "deny";
 				page = "redirect:/";
 				break;
+			case MemberServiceImpl.STATUS_CLOSE:
+				// 탈퇴한 회원
+				resultLogin = "close";
+				page = "redirect:/";
+				break;
 			case MemberServiceImpl.STATUS_ALLOW:
 				// 로그인 가능
 				resultLogin = "success";
@@ -213,5 +218,15 @@ public class MemberController {
 		MemberVo memberVo = memberService.login(user_id, newPw);
 		session.setAttribute("loginVo", memberVo);
 		return "redirect:/m/userInfo";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "/secession", method = RequestMethod.POST)
+	public String secession(HttpSession session) {
+		MemberVo getMemberVo = (MemberVo)session.getAttribute("loginVo");
+		int user_no = getMemberVo.getUser_no();
+		memberService.setStatusClose(user_no);
+		session.removeAttribute("loginVo");
+		return "redirect:/";
 	}
 }

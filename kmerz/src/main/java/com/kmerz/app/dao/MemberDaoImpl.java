@@ -101,9 +101,8 @@ public class MemberDaoImpl implements MemberDao{
 		Map<String, Integer> map = new HashMap<>();
 		map.put("user_no", user_no);
 		map.put("user_status", user_status);
-		sqlsession.update(NAMESPACE, map);
+		sqlsession.update(NAMESPACE + "updateUserStatus", map);
 	}
-
 	
 	
 	

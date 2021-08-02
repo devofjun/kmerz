@@ -30,11 +30,19 @@ $(document).ready(function() {
 			<c:otherwise>
 				<div>
 					<div>
-						<div style="float: left; width: 50%;">
-							<img style="margin-top:10px" src="http://localhost/media/displayImage?fileName=${loginVo.user_profileImage}"
+						<div style="float: left; width: 40%;">
+						<c:choose>
+							<c:when test="${empty loginVo.user_profileImage}">
+								<img style="margin-top:10px" src="/resources/images/default_Profile3.png"
 								class="img-thumbnail" alt="...">
+							</c:when>
+							<c:otherwise>
+								<img style="margin-top:10px" src="http://localhost/media/displayImage?fileName=${loginVo.user_profileImage}"
+								class="img-thumbnail" alt="...">
+							</c:otherwise>
+						</c:choose>
 						</div>
-						<div style="float: left; width: 50%;">
+						<div style="float: left; width: 60%;">
 							<div style="float: left; width: 100%;">
 								<div style="float: left; width: 50%;">
 								<%-- <c:choose>
