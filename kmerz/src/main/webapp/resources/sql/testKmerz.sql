@@ -88,7 +88,6 @@ END LOOP;
 END;
 /
 
-
 --select * from tbl_posts where post_status >= 0;
 
 /* 이게 맞는 쿼리지만 이게 되려면 두개의 테이블에서 겹치는 칼럼명이 없어야한다.
@@ -100,6 +99,7 @@ select * from
         order by tbl_posts.post_no desc)a)
     where rnum between 1 and 10;
 그래서 서브 쿼리로 대체함*/
+/*
 select * from
     (select rownum rnum, a.* from
         (select * from tbl_posts
@@ -107,7 +107,7 @@ select * from
                     where user_name like '%' || '테스터' || '%')
         order by post_no desc)a)
 where rnum between 1 and 10;
-
+*/
 
 select * from tbl_posts where post_status >= 0;
 
@@ -184,10 +184,19 @@ insert into tbl_banner values(4, 322330);
 
 --select * from tbl_banner;
 
+/*
+insert into tbl_point_log values(
+    seq_pointlog_id.nextval,
+	1000,
+	'매일 첫로그인 포인트 지급',
+	10,
+	,
+	sysdate
+);
+*/
+
 
 --------------------
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
-
-

@@ -1,5 +1,8 @@
 package com.kmerz.app.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,7 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kmerz.app.dao.MemberDao;
+import com.kmerz.app.dao.PointLogDao;
 import com.kmerz.app.vo.MemberVo;
+import com.kmerz.app.vo.PointLogVo;
+
+import oracle.sql.TIMESTAMP;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -21,6 +28,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Inject
 	MemberDao memberDao;
+	
+	@Inject
+	PointLogDao pointlogDao;
 	
 	// 회원 추가
 	@Override
@@ -39,8 +49,24 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public MemberVo login(String user_id, String user_pw) {
+		// 로그인 체크
 		MemberVo memberVo = memberDao.selectUser(user_id, user_pw);
+		
 		if(memberVo != null) {
+			Timestamp today = Timestamp.valueOf(LocalDateTime.now().with(LocalTime.NOON));
+			System.out.println(today);
+			// 오늘 최초 로그인
+			if(memberVo.getUser_currentlogin().after(today)) {
+				// 매일 첫 로그인 포인트
+				final int DAILYPT = 10; 
+				PointLogVo logVo = new PointLogVo();
+				logVo.setUser_no(memberVo.getUser_no());
+				logVo.setPoint_content("매일 첫 로그인 포인트");
+				logVo.setPoint_score(DAILYPT);
+				int preTotal = pointlogDao.selectPreTotal(memberVo.getUser_no());
+				logVo.setPoint_total(preTotal+DAILYPT);
+			}
+			// 로그인 시간 업데이트
 			memberDao.updateCurrentLogin(memberVo.getUser_no());
 		}
 		return memberVo;

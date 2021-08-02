@@ -62,6 +62,7 @@ public class MemberController {
 				session.setAttribute("loginVo", memberVo);
 				break;
 			}
+			
 			// 이전 페이지로 돌아가기
 			String requestPath = (String)session.getAttribute("requestPath");
 	 		session.removeAttribute("requestPath");

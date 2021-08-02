@@ -23,11 +23,19 @@ public class PointLogDaoImpl implements PointLogDao {
 		// 새로운 포인트 변경사항 입력
 		session.insert(NAMESPACE+"insertPointLog", pointLogVo);
 	}
+	
+	@Override
+	public int selectPreTotal(int user_no) {
+		// 가장 최근 누적 포인트 가져오기
+		return session.selectOne(NAMESPACE+"selectPreTotal", user_no);
+	}
 
 	@Override
 	public List<PointLogVo> selectUserNo(int user_no) {
 		// 유저 포인트 로그 조회
 		return session.selectList(NAMESPACE, user_no);
 	}
+
+	
 
 }
