@@ -90,4 +90,17 @@ public class HomeController {
 		System.out.println("delete");
 		return "redirect:/";
 	}
+	@RequestMapping(value="/editPost", method=RequestMethod.POST)
+	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
+									@RequestParam int category_no, @RequestParam String post_title,
+									@RequestParam String post_content_file) {
+		PostsVo postVo = new PostsVo();
+		postVo.setPost_no(post_no);
+		postVo.setCategory_no(category_no);
+		postVo.setCommunity_id(community_id);
+		postVo.setPost_title(post_title);
+		postVo.setPost_content_file(post_content_file);
+		postService.updatePost(postVo);
+		return "";
+	}
 }

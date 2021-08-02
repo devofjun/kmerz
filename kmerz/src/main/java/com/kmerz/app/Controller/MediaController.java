@@ -58,15 +58,12 @@ public class MediaController {
 		int user_no = memberVo.getUser_no();
 		PostsVo vo = new PostsVo();
 		vo.setPost_no(seqPostNo);
-		//System.out.println("시퀸스"+seqPostNo);
-		//System.out.println("시퀸스후"+vo.getPost_no());
 		vo.setCategory_no(category_no);
 		vo.setCommunity_id(community_id);
 		vo.setPost_title(post_title);
 		vo.setUser_no(user_no);
 		vo.setPost_content_file(fileName);
 		vo.setCommunity_name(commService.getOneCommunity(community_id).getCommunity_name());
-		//System.out.println(vo);
 		pService.posting(vo);
 		return "redirect:/include/modal?post_no=" + vo.getPost_no();
 		}	

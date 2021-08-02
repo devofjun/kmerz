@@ -62,7 +62,7 @@ System.out.println(postVo);
 					</div>
 					<%if(loginVo!=null){ %>
 					<%if(postVo.getUser_no() == loginVo.getUser_no()) {%>
-					<div class="button-nav-btn">
+					<div class="button-nav-btn" onclick="editPost(<%=postVo.getPost_no()%>)">
 						<a href="#"><img class="icon-color"
 							src="resources/images/icons/edit_black_36dp.svg">Edit</a>
 					</div>

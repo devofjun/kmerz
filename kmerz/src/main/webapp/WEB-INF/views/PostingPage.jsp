@@ -106,8 +106,9 @@
 
 					</div>
 				</div>
-				<textarea id="post_title" maxlength="300" placeholder="Title"></textarea>
-				<div id="editable" class="editable" contenteditable="true"></div>
+				<div id="editfield">
+						<%@ include file="./include/editor.jsp"%>
+				</div>
 				<button class="posting" onclick="posting()">Post</button>
 			</div>
 			<div class="right-menu">

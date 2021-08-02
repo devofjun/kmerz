@@ -4,6 +4,10 @@
  var init_post = 10; 
  var count;
  var end_check = true;
+ function editPost(post_no){
+ 	console.log("글수정");
+ 	includeHTML(replySection, '/include/editPost?post_no=' + post_no);
+ }
  function deletePost(post_no){
  	var xhr = new XMLHttpRequest();
  	var data = new FormData();
@@ -17,15 +21,20 @@ window.addEventListener('scroll', () => {
   if (document.documentElement.offsetHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {  
     console.log('scrolled to bottom');
     if(end_check==true){
-    	appendPosts(init_post);
+    	appendPosts();
     }  
   }  
 });
-
+window.addEventListener('load',function (){
+	init_posts();
+}, false);
 function init_posts(){
 	console.log("init");
- 	var posts = document.querySelector("#post_container div");
- 	posts.remove();
+	var post = document.querySelector("#post_container");
+	if(post.contains("div")){
+ 		post.removeChild();
+ 	}
+ 	appendPosts();
 }
 function countReturn(callback){
 	var xhr = new XMLHttpRequest();
@@ -67,7 +76,7 @@ function appendPosts(){
 		includeHTML(newDiv, '/include/post?init_post=' + i);
 		post_container.appendChild(newDiv);
 		console.log(newDiv);
-		end_check=false;
+		end_check=false;	
 		}
 		return;
 	}

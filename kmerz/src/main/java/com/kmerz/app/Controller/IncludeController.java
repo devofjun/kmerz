@@ -82,4 +82,10 @@ public class IncludeController {
 		model.addAttribute("postVo", postVo);
 		return "/include/post";
 	}
+	@RequestMapping(value="/editPost")
+	public String editPost(Model model, @RequestParam int post_no) {
+		PostsVo postVo = pService.selectPost(post_no);
+		model.addAttribute("postVo", postVo);
+		return "/include/editor";
+	}
 }
