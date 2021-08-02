@@ -181,10 +181,6 @@ $(document).ready(function() {
 	</div>
 </div>
 
-
-
-</main>
-
 <!-- 포인트 내역 모달 -->
 <div id="modalUserPoint" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
@@ -401,6 +397,10 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+
+</main>
+
+
 
 
 <%@ include file="./mngInclude/footer.jsp"%>
