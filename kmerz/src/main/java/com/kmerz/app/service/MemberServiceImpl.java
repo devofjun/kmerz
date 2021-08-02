@@ -70,18 +70,21 @@ public class MemberServiceImpl implements MemberService {
 			int user_no = memberVo.getUser_no();
 			// 오늘 최초 로그인
 			//if(memberVo.getUser_currentlogin().after(today)) { // test
-			if(memberVo.getUser_currentlogin().before(today)) {
-				// 매일 첫 로그인 포인트
-				final int DAILYPT = 10; 
-				PointLogVo logVo = new PointLogVo();
-				logVo.setUser_no(memberVo.getUser_no());
-				logVo.setPoint_content("매일 첫 로그인 포인트");
-				logVo.setPoint_score(DAILYPT);
-				int preTotal = pointlogDao.selectPreTotal(user_no);
-				logVo.setPoint_total(preTotal+DAILYPT);
-				pointlogDao.insertPointLog(logVo);
-				memberDao.updateUserPoint(user_no, DAILYPT);
+			if(memberVo.getUser_currentlogin() != null) {
+				if(memberVo.getUser_currentlogin().before(today)) {
+					// 매일 첫 로그인 포인트
+					final int DAILYPT = 10; 
+					PointLogVo logVo = new PointLogVo();
+					logVo.setUser_no(memberVo.getUser_no());
+					logVo.setPoint_content("매일 첫 로그인 포인트");
+					logVo.setPoint_score(DAILYPT);
+					int preTotal = pointlogDao.selectPreTotal(user_no);
+					logVo.setPoint_total(preTotal+DAILYPT);
+					pointlogDao.insertPointLog(logVo);
+					memberDao.updateUserPoint(user_no, DAILYPT);
+				}
 			}
+			
 			// 로그인 시간 업데이트
 			memberDao.updateCurrentLogin(memberVo.getUser_no());
 		}
