@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmerz.app.pointlog">
+
+<!-- 새로운 포인트 변경사항 입력 -->
+<insert id="insertPointLog">
+	insert into tbl_point_log values(
+		seq_pointlog_id.nextval,
+		#{user_no},
+		#{point_content},
+		#{point_score},
+		#{point_total},
+		sysdate
+	)
+</insert>
+
+<!-- 가장 최근 누적 포인트 가져오기 -->
+<select id="selectPreTotal" resultType="Integer">
+	select point_total from tbl_point_log
+	where user_no = #{user_no} and rownum = 1
+	order by point_datetime desc
+</select>
+
+<!-- 유저 포인트 로그 조회 -->
+<select id="selectUserNo" resultType="PointLogVo">
+	select * from tbl_point_log
+	where user_no = #{user_no}
+	order by point_datetime desc
+</select>
+
+</mapper>

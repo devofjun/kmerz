@@ -73,10 +73,10 @@ public class IncludeController {
 	}
 	@RequestMapping(value="/post")
 	public String post(Model model, @RequestParam int init_post) {
-		System.out.println(init_post);
+		//System.out.println(init_post);
 		PostsVo postVo = pService.selectLoadPost(init_post);
 		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
-		System.out.println(postVo + "postVo");
+		//System.out.println(postVo + "postVo");
 		postVo.setCommunity_name(commVo.getCommunity_name());
 		postVo.setUser_name(memService.selectNO(postVo.getUser_no()).getUser_name());	
 		model.addAttribute("postVo", postVo);

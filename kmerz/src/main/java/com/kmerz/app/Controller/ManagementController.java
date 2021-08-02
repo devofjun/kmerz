@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
+import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.service.SteamAppService;
 import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.AdminVo;
 import com.kmerz.app.vo.BannerVo;
+import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 import com.kmerz.app.vo.SteamAppVo;
 
@@ -37,6 +39,8 @@ public class ManagementController {
 	SteamAppService steamAppService;
 	@Inject
 	PostService postService;
+	@Inject
+	MemberService memberService;
 
 	// uri 간편화 admin 입력하면 로그인 페이지나 대시보드 페이지로 넘어감
 	@RequestMapping
@@ -70,6 +74,7 @@ public class ManagementController {
 			System.out.println("로그인 세션발행:" + (AdminVo) session.getAttribute("loginAdminVo"));
 			result = "success";
 		}
+		
 		session.setAttribute("resultLogin", result);
 	}
 
@@ -90,10 +95,40 @@ public class ManagementController {
 	}
 
 	// 고객 관리 페이지
-	@RequestMapping(value = "/customers", method = RequestMethod.GET)
-	public String customers() throws Exception {
+	@RequestMapping(value = "/customers")
+	public String customers(Model model) throws Exception {
+		List<MemberVo> memberList = memberService.getAllMembers();
+		model.addAttribute("memberList", memberList);
 		return "management/CustomersPage";
 	}
+	
+	// 사용자 차단
+	@ResponseBody
+	@RequestMapping(value="/customers/deny", method=RequestMethod.PATCH)
+	public String customerDeny(int user_no) throws Exception {
+		memberService.setStatusDeny(user_no);
+		return "success";
+	}
+	
+	// 사용자 승인
+	@ResponseBody
+	@RequestMapping(value="/customers/allow", method=RequestMethod.PATCH)
+	public String customerAllow(int user_no) throws Exception {
+		memberService.setStatusAllow(user_no);
+		return "success";
+	}
+	
+	// 사용자 글쓰기 차단
+	@ResponseBody
+	@RequestMapping(value="/customers/writeLock", method=RequestMethod.PATCH)
+	public String customersWriteLock(int user_no) throws Exception {
+		memberService.setStatusWriteLock(user_no);
+		return "success";
+	}
+	
+	
+	
+	
 	
 	// 배너/사이드바 관리 페이지
 	@RequestMapping(value = "/contents/bsSettingPage", method = RequestMethod.GET)
@@ -130,11 +165,11 @@ public class ManagementController {
 	public Map<String, Object> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
 		int count = postService.getCountPosts(postPagingDto);
 		postPagingDto.setCount(count);
-		System.out.println("IN: " + postPagingDto);
+		//System.out.println("IN: " + postPagingDto);
 		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
 		
 		model.addAttribute("postPagingDto", postPagingDto);
-		System.out.println("OUT: " + postPagingDto);
+		//System.out.println("OUT: " + postPagingDto);
 		Map<String, Object> map = new HashMap<>();
 		map.put("postList", postList);
 		map.put("postPagingDto", postPagingDto);

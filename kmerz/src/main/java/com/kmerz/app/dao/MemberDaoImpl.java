@@ -19,6 +19,12 @@ public class MemberDaoImpl implements MemberDao{
 	@Inject
 	SqlSession sqlsession;
 	
+	@Override
+	public int selectSeqUserNO() {
+		// 회원가입 user_no 시퀀스
+		return sqlsession.selectOne(NAMESPACE+"selectSeqUserNO");
+	}
+	
 	// 회원 추가
 	@Override
 	public void insertMember(MemberVo memberVo) {
@@ -42,6 +48,13 @@ public class MemberDaoImpl implements MemberDao{
 		return memberVo;
 	}
 
+	@Override
+	public void updateCurrentLogin(int user_no) {
+		// 최근 로그인 업데이트
+		sqlsession.update(NAMESPACE+"updateCurrentLogin", user_no);
+	}
+	
+	
 	// id로 유저 정보 찾기
 	@Override
 	public MemberVo selectID(String user_id) {
@@ -87,6 +100,27 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("filePath", filePath);
 		sqlsession.update(NAMESPACE + "updateUserProfileImage", map);
 	}
+
+	@Override
+	public void updateUserStatus(int user_no, int user_status) {
+		// 유저 상태 변경 
+		Map<String, Integer> map = new HashMap<>();
+		map.put("user_no", user_no);
+		map.put("user_status", user_status);
+		sqlsession.update(NAMESPACE + "updateUserStatus", map);
+	}
+
+	@Override
+	public void updateUserPoint(int user_no, int user_point) {
+		// 유저 포인트 변경
+		Map<String, Integer> map = new HashMap<>();
+		map.put("user_no", user_no);
+		map.put("user_point", user_point);
+		sqlsession.update(NAMESPACE+"updateUserPoint", map);
+	}
+
+	
+	
 	
 	
 
