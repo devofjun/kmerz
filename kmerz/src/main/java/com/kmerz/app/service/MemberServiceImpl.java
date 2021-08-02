@@ -32,10 +32,23 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	PointLogDao pointlogDao;
 	
-	// 회원 추가
+	// 회원 가입
+	@Transactional
 	@Override
 	public void joinMember(MemberVo memberVo) {
+		final int point = 100;
+		int user_no = memberDao.selectSeqUserNO();
+		memberVo.setUser_no(user_no);
+		memberVo.setUser_point(point);
 		memberDao.insertMember(memberVo);
+		
+		PointLogVo logVo = new PointLogVo();
+		logVo.setUser_no(user_no);
+		logVo.setPoint_content("회원가입");
+		logVo.setPoint_score(point);
+		logVo.setPoint_total(point);
+		
+		pointlogDao.insertPointLog(logVo);
 	}
 
 	// 모든 회원 검색
@@ -53,18 +66,21 @@ public class MemberServiceImpl implements MemberService {
 		MemberVo memberVo = memberDao.selectUser(user_id, user_pw);
 		
 		if(memberVo != null) {
-			Timestamp today = Timestamp.valueOf(LocalDateTime.now().with(LocalTime.NOON));
-			System.out.println(today);
+			Timestamp today = Timestamp.valueOf(LocalDateTime.now().with(LocalTime.MIDNIGHT));
+			int user_no = memberVo.getUser_no();
 			// 오늘 최초 로그인
-			if(memberVo.getUser_currentlogin().after(today)) {
+			//if(memberVo.getUser_currentlogin().after(today)) { // test
+			if(memberVo.getUser_currentlogin().before(today)) {
 				// 매일 첫 로그인 포인트
 				final int DAILYPT = 10; 
 				PointLogVo logVo = new PointLogVo();
 				logVo.setUser_no(memberVo.getUser_no());
 				logVo.setPoint_content("매일 첫 로그인 포인트");
 				logVo.setPoint_score(DAILYPT);
-				int preTotal = pointlogDao.selectPreTotal(memberVo.getUser_no());
+				int preTotal = pointlogDao.selectPreTotal(user_no);
 				logVo.setPoint_total(preTotal+DAILYPT);
+				pointlogDao.insertPointLog(logVo);
+				memberDao.updateUserPoint(user_no, DAILYPT);
 			}
 			// 로그인 시간 업데이트
 			memberDao.updateCurrentLogin(memberVo.getUser_no());

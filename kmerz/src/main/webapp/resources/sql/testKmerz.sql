@@ -109,7 +109,7 @@ select * from
 where rnum between 1 and 10;
 */
 
-select * from tbl_posts where post_status >= 0;
+--select * from tbl_posts where post_status >= 0;
 
 
 ----------------------------------------------------
@@ -122,7 +122,8 @@ select * from tbl_posts where post_status >= 0;
 -- 테스트 데이터 삽입(답글 테이블)
 ----------------------------------------------------
 
-
+--select user_point from tbl_member;
+--select * from tbl_point_log;
 
 
 ----------------------------------------------------

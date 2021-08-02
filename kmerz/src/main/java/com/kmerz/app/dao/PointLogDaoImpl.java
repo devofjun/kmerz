@@ -27,7 +27,12 @@ public class PointLogDaoImpl implements PointLogDao {
 	@Override
 	public int selectPreTotal(int user_no) {
 		// 가장 최근 누적 포인트 가져오기
-		return session.selectOne(NAMESPACE+"selectPreTotal", user_no);
+		int total = 0;
+		Integer tmp = session.selectOne(NAMESPACE+"selectPreTotal", user_no);
+		if(tmp != null) {
+			total = tmp; 
+		}
+		return total; 
 	}
 
 	@Override
