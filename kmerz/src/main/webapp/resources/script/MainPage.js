@@ -1,27 +1,76 @@
 /**
  * 
- */  
+ */
+ var init_post = 10; 
+ var count;
+ var end_check = true;
+ function deletePost(post_no){
+ 	var xhr = new XMLHttpRequest();
+ 	var data = new FormData();
+ 	data.append("post_no", post_no);
+ 	xhr.open("POST", "/deletePost");
+ 	xhr.send(data);
+ 	closeModal();
+ 	init_posts()
+ }  
 window.addEventListener('scroll', () => {  
   if (document.documentElement.offsetHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {  
     console.log('scrolled to bottom');
-    appendPosts();  
+    if(end_check==true){
+    	appendPosts(init_post);
+    }  
   }  
 });
-function checkCommunity(message){
-	console.log(message);
+
+function init_posts(){
+	console.log("init");
+ 	var posts = document.querySelector("#post_container div");
+ 	posts.remove();
 }
-var init_post = 10;
- window.addEventListener('load', function(){ appendPosts(); });
+function countReturn(callback){
+	var xhr = new XMLHttpRequest();
+ 	xhr.open("POST", "/count");
+ 	 xhr.onreadystatechange = function(){
+ 	 	callback(xhr.responseText);
+ 	 };
+ 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+ 	xhr.send();
+ 	return xhr.responseText;
+}
+
+countReturn(function(data){
+	count = data;
+});
 function appendPosts(){
 	console.log("게시글 불러오기");
-	for(var i = init_post - 9; i < init_post; i++){
-	var newDiv = document.createElement("div");
-	var post_container = document.getElementById("post_container");
-	includeHTML(newDiv, '/include/post?init_post=' + i);
-	post_container.appendChild(newDiv);
-	console.log(newDiv);
+ 	console.log("count = " + count);
+ 	var page = count/init_post;
+ 	var left = count%10;
+ 	console.log(page);
+ 	console.log(init_post);
+ 	if(page > 1){
+ 		console.log("1");
+		for(var i = init_post-9; i < init_post+1; i++){
+		var newDiv = document.createElement("div");
+		var post_container = document.getElementById("post_container");
+		includeHTML(newDiv, '/include/post?init_post=' + i);
+		post_container.appendChild(newDiv);
+		console.log(newDiv);
+		}
+		init_post+=10;
 	}
-	init_post+=10;
+	else if(page <= 1){
+	    console.log("2");
+		for(var i = init_post-9; i <= count; i++){
+		var newDiv = document.createElement("div");
+		var post_container = document.getElementById("post_container");
+		includeHTML(newDiv, '/include/post?init_post=' + i);
+		post_container.appendChild(newDiv);
+		console.log(newDiv);
+		end_check=false;
+		}
+		return;
+	}
 }
 function appendCommentInput(comment_no, comment_retag, post_no){
 	var replySection = document.getElementById("reply-section-"+comment_no);

@@ -15,7 +15,7 @@ import com.kmerz.app.service.PostService;
 import com.kmerz.app.vo.CategoryVo;
 
 @Controller
-@RequestMapping(value="/include")
+@RequestMapping(value="/post")
 public class PostController {
 	@Inject
 	PostService pService;
@@ -26,4 +26,5 @@ public class PostController {
 	public String posting() {
 		return "";
 	}
+	
 }

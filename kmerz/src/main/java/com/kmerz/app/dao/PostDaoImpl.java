@@ -113,5 +113,11 @@ public class PostDaoImpl implements PostDao {
 		session.update(NAMESPACE+"updateStatus", postsVo);
 	}
 
+
+	@Override
+	public int countPosts() {
+		return session.selectOne(NAMESPACE + "countPosts");
+	}
+
 	
 }

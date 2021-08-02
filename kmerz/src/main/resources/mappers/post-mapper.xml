@@ -7,7 +7,7 @@
 
 <!-- 게시글 수 -->
 <select id="countPosts" resultType="Integer">
-	select count(*) from tbl_posts
+	select count(*) from tbl_posts where post_status>=0
 	<include refid="search"></include>
 </select>
 
@@ -53,16 +53,6 @@
 	update tbl_posts 
 	set post_readcount = post_readcount + 1
 	where post_no = #{post_no}
-</update>
-
-<!-- 글 수정 -->
-<update id="updatePost">
-	update tbl_posts set
-		post_title = #{post_title},
-		post_content_file = #{post_content_file},
-		post_updatetime = sysdate
-		post_status = #{post_status}
-		where post_no = #{post_no}
 </update>
 
 

@@ -1,13 +1,18 @@
 package com.kmerz.app;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
@@ -57,16 +62,32 @@ public class HomeController {
 			userCommentCount = commentService.getUserCommentCount(user_no);
 		}
 		
+		System.out.println("메인페이지 시작");
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
 		model.addAttribute("userPostCount", userPostCount);
 		model.addAttribute("userCommentCount", userCommentCount);
 		return "MainPage";
 	}
+	@RequestMapping(value="/count")
+	public void count(HttpServletResponse res) throws Exception {
+		int post_count = postService.countPosts();
+		res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		System.out.println("카운트 "+post_count);
+		out.print("" + post_count);
+		out.close();
+	}
 	@RequestMapping(value="posting")
 	public String posting(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
 		model.addAttribute("commList", commList);
 		return "PostingPage";
+	}
+	@RequestMapping(value="/deletePost", method=RequestMethod.POST)
+	public String deletePost(@RequestParam int post_no) {
+		postService.updateStatus(post_no, -1);
+		System.out.println("delete");
+		return "redirect:/";
 	}
 }

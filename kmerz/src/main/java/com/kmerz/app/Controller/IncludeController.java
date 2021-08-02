@@ -75,9 +75,6 @@ public class IncludeController {
 	public String post(Model model, @RequestParam int init_post) {
 		System.out.println(init_post);
 		PostsVo postVo = pService.selectLoadPost(init_post);
-		if(postVo == null) {
-			return "end";
-		}
 		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
 		System.out.println(postVo + "postVo");
 		postVo.setCommunity_name(commVo.getCommunity_name());
