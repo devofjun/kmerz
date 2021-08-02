@@ -63,8 +63,8 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public int selectUserCount(String user_name) {
-		String user_status = "OK";
-		Map<String, String> map = new HashMap<>();
+		int user_status = 1;
+		Map<String, Object> map = new HashMap<>();
 		map.put("user_name", user_name);
 		map.put("user_status", user_status);
 		int count = sqlsession.selectOne(NAMESPACE + "selectUserCount", map);

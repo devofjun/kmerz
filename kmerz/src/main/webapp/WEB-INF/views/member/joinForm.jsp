@@ -22,24 +22,34 @@
 				console.log(rData);
 			});
 		});
-
-		$("#btnUserNameCheck").click(function() {
-			//		console.log("click");
-			var user_name = $("#user_name").val();
-			//		console.log("requestName: " + requestName);
+		var user_name = "";
+		$("#user_name").keyup(function() {
+			user_name = $("#user_name").val();
+//			console.log("requestName: " + requestName);
 			var sendData = {
-				"user_name" : user_name
+					"user_name" : user_name
 			}
-			//		console.log("sendData:" + sendData);
+//			console.log("sendData:" + sendData);
 			var url = "/m/userNameCheck";
-
+			
 			$.get(url, sendData, function(rData) {
-				if (rData == "Available") {
-					$("span").text("사용가능한 닉네임 입니다.");
-				} else if (rData == "unAvailable") {
-					$("span").text("이미 사용중인 닉네임 입니다.");
+				if(rData == "Available") {
+					$("#spanMessage").text("사용가능한 닉네임 입니다.");
+				} else if(rData == "unAvailable") {
+					$("#spanMessage").text("이미 사용중인 닉네임 입니다.");
 				}
 			});
+		});
+		$("#btnJoin").click(function() {
+			if($("#spanMessage").text() == "") {
+				$("span").text("닉네임을 작성해주세요");
+			} else if($("#spanMessage").text() == "이미 사용중인 닉네임 입니다.") {
+				console.log("사용할 수 없는 닉네임 입니다.");
+			} else if(user_name != $("#user_name").val()) {
+				console.log("중복체크를 다시 해주세요.");
+			} else if ($("#spanMessage").text() == "사용가능한 닉네임 입니다.") {
+				$("#JoinForm").submit();
+			}
 		});
 	});
 </script>
@@ -57,7 +67,7 @@
 							<h4 class="card-title">회원가입</h4>
 						</div>
 						<div class="card-body">
-							<form action="/m/joinRun" method="post">
+							<form id="JoinForm" action="/m/joinRun" method="post">
 								<div class="form-group">
 									<label for="user_id">이메일</label> <label style="color: gray">
 										ex)K-Merz@example.com</label> <input type="email" class="form-control"
@@ -65,9 +75,7 @@
 								</div>
 								<div class="form-group">
 									<label for="user_name"> 닉네임 </label>
-									<button type="button" class="btn btn-primary btn-sm"
-										id="btnUserNameCheck">중복 확인</button>
-									<span></span>
+									<span style="color:red;" id="spanMessage"></span>
 									<input type="text"
 										class="form-control" id="user_name" name="user_name"
 										placeholder="닉네임" required>
@@ -83,7 +91,8 @@
 										placeholder="비밀번호 확인">
 								</div>
 
-								<button class="btn btn-primary" type="submit">가입완료</button>
+								<button class="btn btn-primary" type="button" id="btnJoin">가입완료</button>
+								<span id="span" style = "color:red;"></span>
 							</form>
 						</div>
 					</div>

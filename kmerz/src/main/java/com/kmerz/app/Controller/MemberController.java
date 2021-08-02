@@ -193,6 +193,7 @@ public class MemberController {
 		return strComparison;
 	}
 	
+	// 비밀번호 확인
 	@ResponseBody
 	@RequestMapping(value = "/userNowPwCheck", method = RequestMethod.GET)
 	public String userNowPwCheck(String nowPw, HttpSession session) {
