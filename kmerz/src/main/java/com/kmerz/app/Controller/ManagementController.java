@@ -74,6 +74,7 @@ public class ManagementController {
 			System.out.println("로그인 세션발행:" + (AdminVo) session.getAttribute("loginAdminVo"));
 			result = "success";
 		}
+		
 		session.setAttribute("resultLogin", result);
 	}
 

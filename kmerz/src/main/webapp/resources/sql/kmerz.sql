@@ -190,19 +190,24 @@ create table tbl_adminmessage(
 --==================================================
 drop table tbl_member_log CASCADE CONSTRAINTS;
 create table tbl_member_log (
-    user_log_no number primary key,
-    user_log_code number not null,
+    member_log_id number primary key,
+    member_log_code number not null,
     user_no number references tbl_member(user_no),
-    user_request_ip varchar2(20),
-    user_request_content varchar2(200),
+    request_ip varchar2(20),
+    request_content varchar2(200),
+    response_content varchar2(200),
     user_log_time timestamp default sysdate
 );
+drop sequence seq_memberlog_id;
+create sequence seq_memberlog_id
+    start with 1;
+
 
 --==================================================
 -- 포인트 로그 테이블
 --==================================================
-drop table tbl_point;
-create table tbl_point(
+drop table tbl_point_log;
+create table tbl_point_log(
     point_id number primary key,
     user_no number references tbl_member(user_no),
     point_content varchar2(100),
@@ -210,7 +215,9 @@ create table tbl_point(
     point_total number not null,
     point_datetime timestamp default sysdate
 );
-
+drop sequence seq_pointlog_id;
+create sequence seq_pointlog_id
+    start with 1;
 
 
 commit;
