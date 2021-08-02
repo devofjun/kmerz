@@ -8,11 +8,12 @@ public interface MemberDao {
 	public void insertMember(MemberVo memberVo);
 	public List<MemberVo> selectAll();
 	public MemberVo selectUser(String user_id, String user_pw);
+	public void updateCurrentLogin(int user_no);
 	public MemberVo selectID(String user_id);
 	public MemberVo selectNO(int user_no);
 	public int selectUserCount(String user_name);
 	public void updateUserName(int user_no, String user_name);
 	public void updateUserPw(int user_no, String newPw);
 	public void updateUserProfileImage(int user_no, String filePath);
-	public void updateUserStatus(int user_no, String user_status);
+	public void updateUserStatus(int user_no, int user_status);
 }

@@ -43,14 +43,10 @@ public class PostServiceImpl implements PostService{
 		return postdao.countPosts(postPagingDto);
 	}
 
-	
-	@Transactional
-	@Override
-	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto) {
-		// 모든 게시글(관리자 페이지에서 필요함)
-		List<PostsVo> PostsList = postdao.selectAllPosts(postPagingDto);
-		if(PostsList != null) {
-			for(PostsVo postVo : PostsList) {
+	// 게시글Vo에 추가적으로 필요한 데이터들
+	private void settingPostsVo(List<PostsVo> postsList) {
+		if(postsList != null) {
+			for(PostsVo postVo : postsList) {
 				// 유저 이름
 				MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
 				postVo.setUser_name(memberVo.getUser_name());
@@ -80,30 +76,24 @@ public class PostServiceImpl implements PostService{
 				}
 			}
 		}
-		return PostsList;
+	}
+	
+	@Transactional
+	@Override
+	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto) {
+		// 모든 게시글(관리자 페이지에서 필요함)
+		List<PostsVo> postsList = postdao.selectAllPosts(postPagingDto);
+		settingPostsVo(postsList);
+		return postsList;
 	}
 	
 	@Transactional
 	@Override
 	public List<PostsVo> selectAllowPosts() {
 		// 승인된 모든 게시글 
-		List<PostsVo> PostsList = postdao.selectAllowPosts(POST_CREATE);
-		if(PostsList != null) {
-			for(PostsVo postVo : PostsList) {
-				// 유저 이름
-				MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
-				postVo.setUser_name(memberVo.getUser_name());
-				// 커뮤니티 이름
-				CommunityVo commVo = communityDao.getOneCommunity(postVo.getCommunity_id());
-				postVo.setCommunity_name(commVo.getCommunity_name());
-				// 카테고리 이름
-				CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
-				postVo.setCategory_name(categoryVo.getCategory_name());
-			}
-		} else {
-			System.out.println("읽을 글이 없습니다.");
-		}
-		return PostsList;
+		List<PostsVo> postsList = postdao.selectAllowPosts(POST_CREATE);
+		settingPostsVo(postsList);
+		return postsList;
 	}
 
 	@Transactional

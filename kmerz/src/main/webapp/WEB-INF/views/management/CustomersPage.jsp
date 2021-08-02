@@ -74,6 +74,7 @@ $(document).ready(function() {
 	})
 });
 </script>
+
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 <div
 	class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -162,7 +163,7 @@ $(document).ready(function() {
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">현재 포인트: 10</li>
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: 5</li>
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">즐겨찾기 리스트</li>
-					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserReport">신고 내역</li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserReport">신고 내역 / 차단</li>
 				</ul>
 				<div class="card-body">
 					<span id="spSendMessage" class="mx-1 text-primary cspointer" 

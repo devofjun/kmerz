@@ -15,4 +15,7 @@ public interface MemberService {
 	public void changeUserPw(int user_no, String newPw);
 	public void changeProfileImage(int user_no, String filePath);
 	public void secession(int user_no, String user_status);
+	public void setStatusDeny(int user_no);
+	public void setStatusAllow(int user_no);
+	public void setStatusWriteLock(int user_no);
 }

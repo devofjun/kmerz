@@ -4,7 +4,7 @@
 <%@ include file="./mngInclude/header.jsp"%>
 <script>
 	$(document).ready(function() {
-		// 카드 색 변환
+		// 카드 테두리 색 변환
 		$(".card").mouseenter(function() {
 			$(this).removeClass("border-light");
 			$(this).addClass("border-secondary");
