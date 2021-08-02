@@ -47,8 +47,6 @@
 						<%@ include file="../include/posting_bar.jsp"%>
 					</div>
 				</div>
-
-
 				<!-- 게시글 양식 -->
 				<%@ include file="../include/community_post.jsp"%>
 			</div>

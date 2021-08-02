@@ -103,7 +103,6 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("user_status", user_status);
 		sqlsession.update(NAMESPACE + "updateUserStatus", map);
 	}
-
 	
 	
 	
