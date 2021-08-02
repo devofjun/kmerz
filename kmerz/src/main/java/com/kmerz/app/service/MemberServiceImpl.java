@@ -13,7 +13,8 @@ import com.kmerz.app.vo.MemberVo;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	public static final int STATUS_DENY = -1; // 로그인 불가능
+	public static final int STATUS_DENY = -2; // 로그인 불가능
+	public static final int STATUS_CLOSE = -1; // 탈퇴
 	public static final int STATUS_ALLOW = 0; // 로그인 가능
 	public static final int STATUS_WRITE_LOCK = 1; // 로그인 가능, 게시글 쓰기 불가능
 	
