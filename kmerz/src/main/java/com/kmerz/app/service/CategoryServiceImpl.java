@@ -22,9 +22,8 @@ public class CategoryServiceImpl implements CategoryService {
 	private static final String COMM_STATUS_STOP = "stop";				// 운영정지
 	
 	@Override
-	public List<CategoryVo> getCategoryList(String community_id, String category_status) {
-		category_status = COMM_STATUS_ACCEPT;
-		List<CategoryVo> list = categoryDao.selectCategoryList(community_id, category_status);
+	public List<CategoryVo> getCategoryList(String community_id) {
+		List<CategoryVo> list = categoryDao.selectCategoryList(community_id, COMM_STATUS_ACCEPT);
 		return list;
 	}
 

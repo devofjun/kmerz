@@ -58,7 +58,7 @@ public class CategoryController {
 		/*System.out.println("community_id: " + community_id);
 		System.out.println("category_no: " + category_no);*/
 		String category_status = null; // 서비스 임플에서 넣어주는 값
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
+		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
 		model.addAttribute("categoryList", categoryList);
 		// System.out.println("categoryList: " + categoryList);
 		
