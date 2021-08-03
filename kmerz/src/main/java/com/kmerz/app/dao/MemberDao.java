@@ -12,7 +12,8 @@ public interface MemberDao {
 	public void updateCurrentLogin(int user_no);
 	public MemberVo selectID(String user_id);
 	public MemberVo selectNO(int user_no);
-	public int selectUserCount(String user_name);
+	public int selectUserIdCount(String user_id);
+	public int selectUserNameCount(String user_name);
 	public void updateUserName(int user_no, String user_name);
 	public void updateUserPw(int user_no, String newPw);
 	public void updateUserProfileImage(int user_no, String filePath);

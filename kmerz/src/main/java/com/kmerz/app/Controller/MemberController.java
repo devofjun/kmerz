@@ -147,6 +147,21 @@ public class MemberController {
 		return "member/userSecessionForm";
 	}
 	
+	// 이메이 중복 체크
+	@RequestMapping(value = "/userIdCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String userIdCheck(String user_id) {
+		int count = memberService.getUserIdCheckResult(user_id);
+		// System.out.println("user_id: " + user_id);
+		String userIdCheckResult = "";
+		if(count == 0) {
+			userIdCheckResult = "Available";
+		} else if(count == 1) {
+			userIdCheckResult = "unAvailable";
+		}
+		return userIdCheckResult;
+	}
+	
 	// 유저 닉네임 변경 가능 여부 체크(사용가능 여부)
 	@RequestMapping(value = "/userNameCheck", method = RequestMethod.GET)
 	@ResponseBody

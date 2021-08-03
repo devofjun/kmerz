@@ -11,6 +11,7 @@ public interface MemberService {
 	public MemberVo selectID(String user_id);
 	public MemberVo selectNO(int user_no);
 	public int getUserNameCheckResult(String user_name);
+	public int getUserIdCheckResult(String user_id);
 	public void changeUserName(int user_no, String user_name);
 	public void changeUserPw(int user_no, String newPw);
 	public void changeProfileImage(int user_no, String filePath);
