@@ -70,6 +70,7 @@ public class CategoryController {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
 		int userCommentCount = 0;
+		int user_point = 0;
 		// 로그인이 되어 있을때
 		if(memberVo != null) {
 			// 유저의 게시글 갯수 구하기
@@ -78,9 +79,12 @@ public class CategoryController {
 			
 			//유저의 댓글 갯수 구하기
 			userCommentCount = commentService.getUserCommentCount(user_no);
+			// 유저 포인트 
+			user_point = memberVo.getUser_point();
 		}
 		model.addAttribute("userPostCount", userPostCount);
 		model.addAttribute("userCommentCount", userCommentCount);
+		model.addAttribute("user_point", user_point);
 		return "category/CategoryPage";
 	}
 }

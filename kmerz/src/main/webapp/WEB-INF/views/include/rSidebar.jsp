@@ -66,7 +66,7 @@ $(document).ready(function() {
 								</div>
 							</div>
 							<div style="float: left; width: 100%;">
-								<div style="float: left; width: 50%;">개시글:</div>
+								<div style="float: left; width: 50%;">게시글:</div>
 								<div style="float: left; width: 50%;">
 									<a href="#">${userPostCount}개</a>
 								</div>
@@ -78,9 +78,9 @@ $(document).ready(function() {
 								</div>
 							</div>
 							<div style="float: left; width: 100%;">
-								<div style="float: left; width: 50%;">골드:</div>
+								<div style="float: left; width: 50%;">포인트:</div>
 								<div style="float: left; width: 50%;">
-									<a href="#">0G</a>
+									<a href="#">${user_point}P</a>
 								</div>
 							</div>
 						</div>

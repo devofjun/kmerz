@@ -51,6 +51,14 @@ public class CommunityController {
 		return "redirect:/";
 	}
 	
+	// 커뮤니티 목록 페이지 이동
+	@RequestMapping(value = "/communityList", method = RequestMethod.GET)
+	public String communityList(Model model) {
+		List<CommunityVo> list = commService.getCommunityList();
+		model.addAttribute("CommunityList", list);
+		return "community/CommunityListPage";
+	}
+	
 	// 커뮤니티 페이지 이동
 	@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
 	public String testCommunityForm(@PathVariable("community_id") String community_id, String community_name,
@@ -61,6 +69,7 @@ public class CommunityController {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
 		int userCommentCount = 0;
+		int user_point = 0;
 		// 로그인이 되어 있을때
 		if(memberVo != null) {
 			// 유저의 게시글 갯수 구하기
@@ -68,18 +77,16 @@ public class CommunityController {
 			userPostCount = postService.getUserPostCount(user_no);
 			//유저의 댓글 갯수 구하기
 			userCommentCount = commentService.getUserCommentCount(user_no);
+			// 유저 포인트 
+			user_point = memberVo.getUser_point();
 		}
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("postList", postList);
 		model.addAttribute("userPostCount", userPostCount);
 		model.addAttribute("userCommentCount", userCommentCount);
 		model.addAttribute("community_id", community_id);
+		model.addAttribute("user_point", user_point);
 		return "community/CommunityPage";
 	}
-	/*@RequestMapping(value="posting")
-	public String posting(Model model, HttpSession session, String community_id) {
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
-		model.addAttribute("categoryList", categoryList);
-		return "PostingPage";
-	}*/
+	
 }
