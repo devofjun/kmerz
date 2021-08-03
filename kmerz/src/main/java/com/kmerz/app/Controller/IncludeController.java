@@ -46,11 +46,11 @@ public class IncludeController {
 		System.out.println("postVo = " + postVo);
 		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
 		List<CommentVo> mentList = mentService.selectCommentOnPost(post_no);
-		List<MemberVo> memList = memService.getAllMembers();
+		//List<MemberVo> memList = memService.getAllMembers();
 		model.addAttribute("postVo", postVo);
 		model.addAttribute("commVo", commVo);
 		model.addAttribute("mentList", mentList);
-		model.addAttribute("memList", memList);
+		//model.addAttribute("memList", memList);
 		return "/include/modal";
 	}
 	@RequestMapping(value="/reply_input", method=RequestMethod.GET)
@@ -67,7 +67,7 @@ public class IncludeController {
 	}
 	@RequestMapping(value="/setCategory", method=RequestMethod.GET)
 	public String setCategory(Model model, @RequestParam String communityid) {
-		List<CategoryVo> cateList = cateService.getCategoryList(communityid, "accept");
+		List<CategoryVo> cateList = cateService.getCategoryList(communityid);
 		model.addAttribute("cateList", cateList);
 		return "include/Cate_select";
 	}

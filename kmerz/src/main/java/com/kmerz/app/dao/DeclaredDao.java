@@ -8,4 +8,6 @@ public interface DeclaredDao {
 	public void insertDeclared(DeclaredVo declaredVo);
 	public List<DeclaredVo> selectTargetID(int target_id, int target_type);
 	public int selectTargetIDCount(int target_id, int target_type);
+	public int selectTargetUserCount(int target_user_no);
+	public List<DeclaredVo> selectTargetUser(int target_user_no);
 }

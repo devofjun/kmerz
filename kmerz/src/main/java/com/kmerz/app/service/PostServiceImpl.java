@@ -145,15 +145,17 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<PostsVo> getCommunityPostList(String community_id) {
 		// 커뮤니티 전체글 보기
-		List<PostsVo> list = postdao.selectCommunityPostList(community_id, POST_CREATE);
-		return list;
+		List<PostsVo> postsList = postdao.selectCommunityPostList(community_id, POST_CREATE);
+		settingPostsVo(postsList);
+		return postsList;
 	}
 
 	@Override
 	public List<PostsVo> getCategoryPostList(String community_id, int category_no) {
 		// 커뮤니티-카테고리 글 보기
-		List<PostsVo> list = postdao.selectCategoryPostList(community_id, category_no, POST_CREATE);
-		return list;
+		List<PostsVo> postsList = postdao.selectCategoryPostList(community_id, category_no, POST_CREATE);
+		settingPostsVo(postsList);
+		return postsList;
 	}
 	
 	@Override
@@ -162,6 +164,11 @@ public class PostServiceImpl implements PostService{
 		postdao.posting(vo);
 	}
 
+	@Override
+	public List<PostsVo> getUserPostList(int user_no) {
+		// 유저의 게시글 가져오기
+		return postdao.selectUserNoList(user_no);
+	}
 	
 	@Override
 	public int getUserPostCount(int user_no) {
@@ -205,6 +212,10 @@ public class PostServiceImpl implements PostService{
 		}
 	}
 
+	
+
+	
+	
 
 	@Override
 	public void updateStatus(int target, int status) {

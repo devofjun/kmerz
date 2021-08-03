@@ -10,12 +10,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kmerz.app.dao.DeclaredDao;
 import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dao.PointLogDao;
+import com.kmerz.app.dto.MemberPagingDto;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PointLogVo;
-
-import oracle.sql.TIMESTAMP;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -32,6 +32,9 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	PointLogDao pointlogDao;
 	
+	@Inject
+	DeclaredDao declaredDao;
+	
 	// 회원 가입
 	@Transactional
 	@Override
@@ -40,51 +43,76 @@ public class MemberServiceImpl implements MemberService {
 		int user_no = memberDao.selectSeqUserNO();
 		memberVo.setUser_no(user_no);
 		memberVo.setUser_point(point);
+		memberVo.setUser_totalpoint(point);
 		memberDao.insertMember(memberVo);
 		
-		PointLogVo logVo = new PointLogVo();
-		logVo.setUser_no(user_no);
-		logVo.setPoint_content("회원가입");
-		logVo.setPoint_score(point);
-		logVo.setPoint_total(point);
+		// 포인트 로그
+		pointlogDao.insertPointLog(user_no, "회원가입", point);
 		
-		pointlogDao.insertPointLog(logVo);
 	}
 
 	// 모든 회원 검색
+	@Transactional
 	@Override
-	public List<MemberVo> getAllMembers() {
-		List<MemberVo> list = memberDao.selectAll();
+	public List<MemberVo> getAllMembers(MemberPagingDto memberPagingDto) {
+		List<MemberVo> list = memberDao.selectAll(memberPagingDto);
+		for(MemberVo vo : list) {
+			// 유저 신고수
+			int deCount = declaredDao.selectTargetUserCount(vo.getUser_no());
+			vo.setUser_declared_count(deCount);
+			// 유저 상태정보
+			switch(vo.getUser_status()) {
+			case STATUS_DENY:
+				vo.setStr_user_status("이용 정지");
+				break;
+			case STATUS_CLOSE:
+				vo.setStr_user_status("탈퇴");
+				break;
+			case STATUS_ALLOW:
+				vo.setStr_user_status("승인");
+				break;
+			case STATUS_WRITE_LOCK:
+				vo.setStr_user_status("글쓰기 정지");
+				break;
+			}
+		}
 		return list;
 	}
 
+	@Override
+	public int getAllCount(MemberPagingDto memberPagingDto) {
+		// 모든 유저 카운트
+		return memberDao.selectAllCount(memberPagingDto);
+	}
+	
+	
 	// 로그인
 	@Transactional
 	@Override
 	public MemberVo login(String user_id, String user_pw) {
 		// 로그인 체크
 		MemberVo memberVo = memberDao.selectUser(user_id, user_pw);
-		
+		System.out.println("멤버서비스_로그인: "+memberVo);
 		if(memberVo != null) {
-			Timestamp today = Timestamp.valueOf(LocalDateTime.now().with(LocalTime.MIDNIGHT));
-			int user_no = memberVo.getUser_no();
-			// 오늘 최초 로그인
-			//if(memberVo.getUser_currentlogin().after(today)) { // test
-			if(memberVo.getUser_currentlogin() != null) {
-				if(memberVo.getUser_currentlogin().before(today)) {
-					// 매일 첫 로그인 포인트
-					final int DAILYPT = 10; 
-					PointLogVo logVo = new PointLogVo();
-					logVo.setUser_no(memberVo.getUser_no());
-					logVo.setPoint_content("매일 첫 로그인 포인트");
-					logVo.setPoint_score(DAILYPT);
-					int preTotal = pointlogDao.selectPreTotal(user_no);
-					logVo.setPoint_total(preTotal+DAILYPT);
-					pointlogDao.insertPointLog(logVo);
-					memberDao.updateUserPoint(user_no, DAILYPT);
+			// 출석체크 포인트 발급은 allow 상태에만 줌
+			if(memberVo.getUser_status() == STATUS_ALLOW) {
+				System.out.println("승인된상태임");
+				Timestamp today = Timestamp.valueOf(LocalDateTime.now().with(LocalTime.MIDNIGHT));
+				int user_no = memberVo.getUser_no();
+				// 오늘 최초 로그인, null이라면 회원가입후 첫 로그인
+				if(memberVo.getUser_currentlogin() != null) {
+					System.out.println("오늘 최초 로그인임");
+					//if(memberVo.getUser_currentlogin().after(today)) { // test
+					if(memberVo.getUser_currentlogin().before(today)) {
+						// 매일 첫 로그인 포인트
+						System.out.println("포인트 발급됨");
+						pointlogDao.insertPointLog(user_no, "출석체크 포인트 지급", 10);
+						PointLogVo prePointLogVo = pointlogDao.selectPreUserNo(user_no);
+						System.out.println("이전포인트vo: "+prePointLogVo);
+						memberDao.updateUserPoint(user_no, prePointLogVo.getPoint_now(), prePointLogVo.getPoint_total());
+					}
 				}
 			}
-			
 			// 로그인 시간 업데이트
 			memberDao.updateCurrentLogin(memberVo.getUser_no());
 		}
@@ -97,8 +125,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int getUserIdCheckResult(String user_id) {
+		int count = memberDao.selectUserIdCount(user_id);
+		return count;
+	}
+	
+	@Override
 	public int getUserNameCheckResult(String user_name) {
-		int count = memberDao.selectUserCount(user_name);
+		int count = memberDao.selectUserNameCount(user_name);
 		return count;
 	}
 
@@ -109,7 +143,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVo selectNO(int user_no) {
-		// TODO Auto-generated method stub
+		// 유저 번호로 유저 정보 가져오기
 		return memberDao.selectNO(user_no);
 	}
 	public void changeUserPw(int user_no, String newPw) {
@@ -144,5 +178,7 @@ public class MemberServiceImpl implements MemberService {
 		// 사용자 쓰기 차단
 		memberDao.updateUserStatus(user_no, STATUS_WRITE_LOCK);
 	}
+
+	
 
 }

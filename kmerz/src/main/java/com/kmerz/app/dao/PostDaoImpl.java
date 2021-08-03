@@ -81,6 +81,13 @@ public class PostDaoImpl implements PostDao {
 		return list;
 	}
 
+	
+	@Override
+	public List<PostsVo> selectUserNoList(int user_no) {
+		// 유저의 게시글
+		return session.selectList(NAMESPACE+"selectUserNoList", user_no);
+	}
+	
 	@Override
 	public int selectUserPostCount(int user_no) {
 		int count = session.selectOne(NAMESPACE + "selectUserPostCount", user_no);
@@ -117,6 +124,7 @@ public class PostDaoImpl implements PostDao {
 	public int countPosts() {
 		return session.selectOne(NAMESPACE + "countPosts");
 	}
+	
 
 	
 }

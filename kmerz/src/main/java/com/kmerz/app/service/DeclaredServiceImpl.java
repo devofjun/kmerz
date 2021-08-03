@@ -48,6 +48,12 @@ public class DeclaredServiceImpl implements DeclaredService {
 		return declaredDao.selectTargetIDCount(target_id, target_type);
 	}
 
+	@Override
+	public List<DeclaredVo> getTargetUserNOList(int target_user_no) {
+		// 유저의 신고당한 건들
+		return declaredDao.selectTargetUser(target_user_no);
+	}
+
 	
 	
 	

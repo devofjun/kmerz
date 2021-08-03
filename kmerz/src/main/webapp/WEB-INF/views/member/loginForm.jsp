@@ -14,7 +14,7 @@
 
 <script>
 $(document).ready(function(){
-	console.log("loginVo:${loginVo}");
+	
 });
 </script>	
 

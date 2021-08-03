@@ -9,4 +9,5 @@ public interface DeclaredService {
 	public void addCommentDeclared(DeclaredVo declaredVo);
 	public List<DeclaredVo> getDeclared(int target_id, int target_type);
 	public int getDeclaredCount(int target_id, int target_type);
+	public List<DeclaredVo> getTargetUserNOList(int target_user_no);
 }
