@@ -1,24 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="./mngInclude/header.jsp"%>
+<script src="/resources/script/TimeFormat.js"></script>
 <style>
 
 </style>
 
 <script>
+function submitPaging() {
+	var url = "/admin/customers/list";
+	var sData = {
+			"page" : $("#frmPaging > input[name='page']").val(),
+			"perPage" : $("#frmPaging > input[name='perPage']").val(),
+			"searchType" : $("#frmPaging > input[name='searchType']").val(),
+			"keyword" : $("#frmPaging > input[name='keyword']").val()
+	};
+	$.get(url, sData, function(rData){
+		// 리스트
+		$("#tbodyCustomer > tr:gt(0)").remove();
+		$.each(rData.memberList, function(){
+			var cloneTr = $("#tbodyCustomer > tr:eq(0)").clone();
+			cloneTr.find(".userno").text(this.user_no);
+			cloneTr.find(".currentLogin").text(timeForToday(this.user_currentlogin));
+			cloneTr.find(".userid").text(this.user_id);
+			cloneTr.find(".userName").text(this.user_name);
+			cloneTr.find(".totalPoint").text(this.user_totalpoint);
+			cloneTr.find(".userPoint").text(this.user_point);
+			cloneTr.find(".declaredCount").text(this.user_declared_count);
+			cloneTr.find(".userStatus").text(this.str_user_status);
+			$("#tbodyCustomer").append(cloneTr);
+			cloneTr.show();
+		});
+		// 페이지버튼
+		var pagingDto = rData.memberPagingDto;
+		$(".pagination").empty();
+		console.log(pagingDto);
+		if(pagingDto.startPage != 1){
+			var clone = $("#clonePageLeft").clone();
+			clone.children().attr("href", pagingDto.startPage-1);
+			$(".pagination").append(clone);
+		}
+		for(var p = pagingDto.startPage; p <= pagingDto.endPage; p++){
+			var clone = $("#clonePageNum").clone();
+			clone.find("a").attr("href", p).text(p);
+			clone.removeClass("active");
+			console.log("p: "+p);
+			if(p == pagingDto.page){
+				console.log("pagingDto.page: "+pagingDto.page);
+				clone.addClass("active");
+			}
+			$(".pagination").append(clone);
+		}
+		if(pagingDto.endPage < pagingDto.totalPage){
+			var clone = $("#clonePageRight").clone();
+			clone.children().attr("href", pagingDto.endPage+1);
+			$(".pagination").append(clone);
+		}
+	});
+}
+
 $(document).ready(function() {
+	$("input[name='searchType']").val("user_name");
+	for(var i=0; i<$(".currentLogin").length; i++){
+		var tdDate = $(".currentLogin").eq(i); 
+		tdDate.text(timeForToday(tdDate.text()));
+	};
 
 	// 메세지 모달 스크립트
 	var modalSendMessage = document.getElementById('modalSendMessage')
 	modalSendMessage.addEventListener('show.bs.modal', function(event) {
-		// Button that triggered the modal
+
 		var button = event.relatedTarget
-		// Extract info from data-bs-* attributes
+
 		var recipient = button.getAttribute('data-bs-whatever')
-		// If necessary, you could initiate an AJAX request here
-		// and then do the updating in a callback.
-		//
-		// Update the modal's content.
+
 		var modalTitle = modalSendMessage.querySelector('.modal-title')
 		var modalBodyInput = modalSendMessage
 				.querySelector('.modal-body input')
@@ -30,14 +85,11 @@ $(document).ready(function() {
 	// 포인트 변경 모달 스크립트
 	var modalUpdatePoint = document.getElementById('modalUpdatePoint')
 	modalUpdatePoint.addEventListener('show.bs.modal', function(event) {
-		// Button that triggered the modal
+
 		var button = event.relatedTarget
-		// Extract info from data-bs-* attributes
+
 		var recipient = button.getAttribute('data-bs-whatever')
-		// If necessary, you could initiate an AJAX request here
-		// and then do the updating in a callback.
-		//
-		// Update the modal's content.
+
 		var modalTitle = modalUpdatePoint.querySelector('.modal-title')
 		var modalBodyInput = modalUpdatePoint
 				.querySelector('.modal-body input')
@@ -50,17 +102,29 @@ $(document).ready(function() {
 	});
 
 	// 검색 타입 변경
-	$("#ulSearchType > li > a").click(
-			function(e) {
-				e.preventDefault();
-				$("#btnSearchType").attr("data-SearchType",
-						$(this).attr("href"));
-				$("#btnSearchType").text($(this).text());
-
-			});
-
-	// 테이블 유저 tr 클릭시 카드 보이기
+	$(".searchType").click(function(e) {
+		
+	});
+	
+	
+	// 페이지 번호 클릭시
+	$(".pagination").on("click", "li > a", function(e){
+	//$(".pagination > li > a").click(function(e) {
+		e.preventDefault();
+		$(".pagination > li").removeClass("active");
+		$(this).parent().addClass("active");
+		var page = $(this).attr("href");
+		$("#frmPaging > input[name='page']").val(page);
+		submitPaging();
+	});
+	
+	
+	// 유저 목록 클릭시 카드 보이기
 	$(".trUserInfo").click(function() {
+		var userno = $(this).find(".userno").text();
+		
+		
+		
 		$("#cardUserInfo").show();
 	});
 
@@ -99,8 +163,8 @@ $(document).ready(function() {
 				data-bs-toggle="dropdown" aria-expanded="false"
 				data-searchType="/admin/searchName">이름</button>
 			<ul id="ulSearchType" class="dropdown-menu">
-				<li><a class="dropdown-item" href="/admin/searchId">ID</a></li>
-				<li><a class="dropdown-item" href="/admin/searchName">이름</a></li>
+				<li><span class="searchType dropdown-item" data-searchType="user_id">아이디</span></li>
+				<li><span class="searchType dropdown-item" data-searchType="user_name">이름</span></li>
 			</ul>
 			<input type="text" class="form-control"
 				aria-label="Text input with dropdown button">
@@ -112,42 +176,83 @@ $(document).ready(function() {
 		<table class="table table-hover">
 			<thead>
 				<tr>
+					<th style="display:none">유저번호</th>
 					<th>최근 접속</th>
 					<th>유저ID</th>
 					<th>유저이름</th>
 					<th>누적 포인트</th>
 					<th>현재 포인트</th>
+					<th>신고수</th>
 					<th>상태</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="i" begin="0" end="15" >
+			<tbody id="tbodyCustomer">
+				<tr class="trUserInfo" style="display:none">
+					<td style="display:none" class="userno"></td>
+					<td class="currentLogin"></td>
+					<td class="userid"></td>
+					<td class="userName"></td>
+					<td class="totalPoint"></td>
+					<td class="userPoint"></td>
+					<td class="declaredCount"></td>
+					<td class="userStatus"></td>
+				</tr>
+				<c:forEach var="memberVo" items="${memberList }">
 				<tr class="trUserInfo">
-					<td>21/07/18/19:20</td>
-					<td><a class="text-decoration-none" href="#">test@naver.com</a></td>
-					<td>테스터</td>
-					<td>110</td>
-					<td>10</td>
-					<td>승인</td>
+					<td style="display:none" class="userno">${memberVo.user_no }</td>
+					<td class="currentLogin">${memberVo.user_currentlogin}</td>
+					<td class="userid">${memberVo.user_id }</td>
+					<td class="userName">${memberVo.user_name}</td>
+					<td class="totalPoint">${memberVo.user_totalpoint }</td>
+					<td class="userPoint">${memberVo.user_point }</td>
+					<td class="declaredCount">${memberVo.user_declared_count }</td>
+					<td class="userStatus">${memberVo.str_user_status }</td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		
-		<!-- 페이징 -->
-		<nav>
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
+		<!-- 페이징dto -->
+			<form id="frmPaging" style="display:none">
+				<input type="hidden" name="page" value="${memberPagingDto.page}" />
+				<input type="hidden" name="perPage" value="${memberPagingDto.perPage}" />
+				<input type="hidden" name="searchType" value="${memberPagingDto.searchType}"/>
+				<input type="hidden" name="keyword" value="${memberPagingDto.keyword}" />
+			</form>
+			<!-- 페이징 네비 -->
+			<nav>
+				<ul class="pagination justify-content-center">
+					<c:if test="${memberPagingDto.startPage != 1 }">
+						<li class="page-item"><a class="page-link"
+							href="${memberPagingDto.startPage-1}">&laquo;</a></li>
+					</c:if>
+					<c:forEach var="p" begin="${memberPagingDto.startPage}"
+						end="${memberPagingDto.endPage}">
+						<c:choose>
+							<c:when test="${memberPagingDto.page == p}">
+								<li class="page-item active"><a class="page-link"
+									href="${p}">${p}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="${p}">${p}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${memberPagingDto.endPage < memberPagingDto.totalPage }">
+						<li class="page-item"><a class="page-link"
+							href="${memberPagingDto.endPage+1}">&raquo;</a></li>
+					</c:if>
+				</ul>
+			</nav>
+			<div style="display:none">
+				<ul>
+					<li id="clonePageLeft" class="page-item"><a class="page-link"
+						href="${postPagingDto.startPage-1}">&laquo;</a></li>
+					<li id="clonePageNum" class="page-item"><a class="page-link" href="${p}">${p}</a></li>
+					<li id="clonePageRight" class="page-item"><a class="page-link"
+						href="${postPagingDto.endPage+1}">&raquo;</a></li>
+				</ul>
+			</div>
 	</div>
 	
 	<!-- 유저 정보 카드 -->
@@ -156,6 +261,7 @@ $(document).ready(function() {
 			<div class="card text-center h-auto shadow">
 				<img src="/resources/images/default_Profile.png" class="card-img-top" alt="프로필 사진">
 				<div class="card-body">
+					<p id="cardUserNo" style="display:none">유저번호</p>
 					<h5 class="card-title">테스터</h5>
 					<p id="cardUserEmail" class="card-text">test@naver.com</p>
 				</div>
@@ -354,8 +460,8 @@ $(document).ready(function() {
             <input type="text" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">메시지 내용:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="message-content" class="col-form-label">메시지 내용:</label>
+            <textarea class="form-control" id="message-content"></textarea>
           </div>
         </form>
       </div>
@@ -378,15 +484,15 @@ $(document).ready(function() {
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <input type="hidden" class="form-control" id="recipient-name">
+            <input type="hidden" class="form-control" id="point-user-name">
           </div>
           <div class="mb-3">
           	<label for="recipient-name" class="col-form-label">변경할 포인트:</label>
           	<input type="number" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">내용:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="point-content" class="col-form-label">내용:</label>
+            <textarea class="form-control" id="point-content"></textarea>
           </div>
         </form>
       </div>
