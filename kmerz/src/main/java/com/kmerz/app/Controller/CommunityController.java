@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kmerz.app.dao.CategoryDao;
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
@@ -57,16 +56,8 @@ public class CommunityController {
 	public String testCommunityForm(@PathVariable("community_id") String community_id, String community_name,
 			Model model, HttpSession session) {
 		/*System.out.println("community_id: " + community_id);*/
-		String category_status = null; // 서비스 임플에서 넣어주는 값
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
-		model.addAttribute("categoryList", categoryList);
-		// System.out.println("categoryList: " + categoryList);
-		
-		// 커뮤니티 이동시 고것에 맞는 포스트만 리스트 가져오기
+		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
 		List<PostsVo> postList = postService.getCommunityPostList(community_id);
-		// System.out.println("postList: " + postList);
-		model.addAttribute("postList", postList);
-		
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
 		int userCommentCount = 0;
@@ -75,21 +66,20 @@ public class CommunityController {
 			// 유저의 게시글 갯수 구하기
 			int user_no = memberVo.getUser_no();
 			userPostCount = postService.getUserPostCount(user_no);
-			
 			//유저의 댓글 갯수 구하기
 			userCommentCount = commentService.getUserCommentCount(user_no);
 		}
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("postList", postList);
 		model.addAttribute("userPostCount", userPostCount);
 		model.addAttribute("userCommentCount", userCommentCount);
 		model.addAttribute("community_id", community_id);
 		return "community/CommunityPage";
 	}
-	
-	// 게시물 내용 가져오기
-	@ResponseBody
-	@RequestMapping(value = "/contents/getPostContent", method = RequestMethod.GET)
-	public String getPostContent(String post_content_file) throws Exception {
-		return ContentReadAndWrite.ReadContent(post_content_file);
-	}
-	
+	/*@RequestMapping(value="posting")
+	public String posting(Model model, HttpSession session, String community_id) {
+		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
+		model.addAttribute("categoryList", categoryList);
+		return "PostingPage";
+	}*/
 }
