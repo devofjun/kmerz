@@ -121,13 +121,73 @@ $(document).ready(function() {
 	
 	// 유저 목록 클릭시 카드 보이기
 	$(".trUserInfo").click(function() {
-		var userno = $(this).find(".userno").text();
-		
-		
-		
-		$("#cardUserInfo").show();
+		var user_no = $(this).find(".userno").text();
+		var url = "/admin/customers/userInfo?user_no="+user_no;
+		$.get(url,function(rData){
+			console.log(rData);
+			var info = rData.cardDto;
+			$("#cardUserNO").text(info.user_no);
+			$("#cardUserName").text(info.user_name);
+			$("#cardUserID").text(info.user_id);
+			$("#cardUserPoint").text(info.user_point);
+			$("#cardUserPostCount").text(info.user_post_count);
+			$("#cardUserInfo").show();
+			// 포인트 모달
+			var pointList = rData.pointList;
+			$(".pointModalTr:gt(0)").remove();
+			$.each(pointList, function(){
+				var clone = $(".pointModalTr").eq(0).clone();
+				clone.find("td[data-name='time']").text(timePattern(this.point_datetime));
+				clone.find("td[data-name='total']").text(this.point_total);
+				clone.find("td[data-name='now']").text(this.point_now);
+				clone.find("td[data-name='score']").text(this.point_score);
+				clone.find("td[data-name='content']").text(this.point_content);
+				clone.show();
+				$(".pointModalTr").parent().append(clone);
+			})
+			// 작성글 모달
+			var postList = rData.postList;
+			$(".postModalTr:gt(0)").remove();
+			$.each(postList, function(){
+				var clone = $(".postModalTr").eq(0).clone();
+				clone.find("[data-name='no']").text(this.post_no);
+				clone.find("[data-name='datetime']").text(timePattern(this.post_createtime));
+				clone.find("[data-name='title']").text(this.post_title);
+				//clone.find("[data-name='title']").attr("href","");
+				clone.find("[data-name='readcount']").text(this.post_readcount);
+				clone.find("[data-name='recommand']").text(this.post_recommand);
+				clone.find("[data-name='declared']").text(this.declared_count);
+				clone.find("[data-name='status']").text(this.post_status);
+				clone.show();
+				$(".postModalTr").parent().append(clone);
+			})
+			// 커뮤니티 모달
+			var commList = rData.communityList;
+			$(".commModalTr:gt(0)").remove();
+			$.each(commList, function() {
+				var clone = $(".commModalTr").eq(0).clone();
+				clone.find("[data-name='id']").text(this.community_id);
+				clone.find("[data-name='name']").text(this.community_name);
+				clone.find("[data-name='description']").text(this.community_description);
+				clone.show();
+				$(".commModalTr").parent().append(clone);
+			})
+			// 신고 모달
+			var declaredList = rData.declaredList;
+			$(".declaredModalTr:gt(0)").remove();
+			$.each(declaredList, function(){
+				var clone = $(".declaredModalTr").eq(0).clone();
+				clone.find("[data-name='id']").text(this.declared.id);
+				clone.find("[data-name='datetime']").text(timePattern(this.declared_datetime));
+				clone.find("[data-name='title']").text(this.post_title);
+				clone.find("[data-name='username']").text(this.user_name);
+				clone.find("[data-name='type']").text(this.target_type);
+			})
+			
+		});
 	});
 
+	
 	// 유저 정보 카드 목록 하이라이트
 	$(".liUserInfo").mouseenter(function() {
 		//bg-primary text-white
@@ -261,15 +321,15 @@ $(document).ready(function() {
 			<div class="card text-center h-auto shadow">
 				<img src="/resources/images/default_Profile.png" class="card-img-top" alt="프로필 사진">
 				<div class="card-body">
-					<p id="cardUserNo" style="display:none">유저번호</p>
-					<h5 class="card-title">테스터</h5>
-					<p id="cardUserEmail" class="card-text">test@naver.com</p>
+					<p id="cardUserNO" style="display:none">유저번호</p>
+					<h5 id="cardUserName" class="card-title">테스터</h5>
+					<p id="cardUserID" class="card-text">test@naver.com</p>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">현재 포인트: 10</li>
-					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: 5</li>
-					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">즐겨찾기 리스트</li>
-					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserReport">신고 내역 / 차단</li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPoint">현재 포인트: <span id="cardUserPoint" >10</span></li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: <span id="cardUserPostCount">5</span></li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">생성 커뮤니티</li>
+					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserDeclared">신고 내역 / 차단</li>
 				</ul>
 				<div class="card-body">
 					<span id="spSendMessage" class="mx-1 text-primary cspointer" 
@@ -311,22 +371,13 @@ $(document).ready(function() {
         		</tr>
         	</thead>
         	<tbody>
-        		<tr>
-        			<td>2021/07/18/10:12:33</td>
-        			<td>110</td>
-        			<td>10</td>
-        			<td class="text-danger">-100</td>
-        			<td>이모티콘 구입</td>
+        		<tr class="pointModalTr" style="display:none">
+        			<td data-name="time">2021/07/18/10:12:33</td>
+        			<td data-name="total">110</td>
+        			<td data-name="now">10</td>
+        			<td data-name="score">-100</td>
+        			<td data-name="content">이모티콘 구입</td>
         		</tr>
-        		<c:forEach var="i" begin="10" end="110" step="10">
-        		<tr>
-        			<td>2021/07/18/10:12:33</td>
-        			<td>${120-i}</td>
-        			<td>${120-i}</td>
-        			<td class="text-success">+10</td>
-        			<td>출석포인트 지급</td>
-        		</tr>
-        		</c:forEach>
         	</tbody>
         </table>
       </div>
@@ -346,64 +397,61 @@ $(document).ready(function() {
         <table class="table table-striped table-sm">
         	<thead>
         		<tr>
+        			<th style="display:none">글번호</th>
         			<th>시간</th>
-        			<th>글제목</th>
-        			<th>조회수</th>
-        			<th>추천수</th>
-        			<th>신고수</th>
-        			<th>현재 상태</th>
+        			<th >글제목</th>
+        			<th >조회수</th>
+        			<th >추천수</th>
+        			<th >신고수</th>
+        			<th >현재 상태</th>
         			<th><input type="checkbox"/></th>
         		</tr>
         	</thead>
         	<tbody>
-        	<c:forEach var="i" begin="1" end="5" step="1">
-        		<tr>
-        			<td>2021/07/18/10:12:33</td>
-        			<td><a class="text-decoration-none" href="#">안녕하세요.</a></td>
-        			<td>47</td>
-        			<td>12</td>
-        			<td>0</td>
-        			<td>open</td>
+        		<tr class="postModalTr" style="display:none">
+        			<td data-name="no" style="display:none"></td>
+        			<td data-name="datetime">2021/07/18/10:12:33</td>
+        			<td ><a data-name="title" class="text-decoration-none" href="#">안녕하세요.</a></td>
+        			<td data-name="readcount">47</td>
+        			<td data-name="recommand">12</td>
+        			<td data-name="declared">0</td>
+        			<td data-name="status">open</td>
         			<td><input type="checkbox"/></td>
         		</tr>
-        	</c:forEach>
         	</tbody>
         </table>
       </div>
       <div class="modal-footer">
-      	<button class="btn btn-primary">선택 열람 가능</button>
-        <button class="btn btn-danger">선택 열람 불가능</button>
+      	<button class="btn btn-primary">선택 잠금 해제</button>
+        <button class="btn btn-danger">선택 잠금</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 즐겨찾기 리스트 모달 -->
+<!-- 생성 커뮤니티 모달 -->
 <div id="modalUserFavorite" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">즐겨찾기 리스트</h5>
+        <h5 class="modal-title">커뮤니티 리스트</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <table class="table table-striped table-sm text-center">
         	<thead>
         		<tr>
+        			<th>커뮤니티 id</th>
         			<th>커뮤니티 이름</th>
+        			<th>커뮤니티 설명</th>
         		</tr>
         	</thead>
         	<tbody>
-        		<tr>
-        			<td>스타크래프트</td>
+        		<tr class="commModalTr" style="display:none">
+        			<td data-name="id"></td>
+        			<td data-name="name"></td>
+        			<td data-name="description"></td>
         		</tr>
-        		<tr>
-        			<td>리그오브레전드</td>
-        		</tr>
-        		<tr>
-        			<td>오버워치</td>
-        		</tr>
-        		
         	</tbody>
         </table>
       </div>
@@ -412,7 +460,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 신고 내역 모달 -->
-<div id="modalUserReport" data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div id="modalUserDeclared" data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -427,16 +475,17 @@ $(document).ready(function() {
         			<th>신고 시간</th>
         			<th>글 제목</th>
         			<th>신고자</th>
-        			<th>신고 내용</th>
+        			<th>신고 타입</th>
         		</tr>
         	</thead>
         	<tbody>
         	<c:forEach var="i" begin="1" end="5" step="1">
-        		<tr>
-        			<td>2021/07/18/10:12:33</td>
-        			<td><a class="text-decoration-none" href="#">안녕하세요.</a></td>
-        			<td>tester2</td>
-        			<td>게시물 신고</td>
+        		<tr class="declaredModalTr" style="display:none">
+        			<td data-name="id" style="display:none">신고번호</td>
+        			<td data-name="datetime">2021/07/18/10:12:33</td>
+        			<td data-name="title"><a class="text-decoration-none" href="#">안녕하세요.</a></td>
+        			<td data-name="username">tester2</td>
+        			<td data-name="type">글/댓글</td>
         		</tr>
         	</c:forEach>
         	</tbody>

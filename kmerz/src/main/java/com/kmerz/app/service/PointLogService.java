@@ -5,7 +5,6 @@ import java.util.List;
 import com.kmerz.app.vo.PointLogVo;
 
 public interface PointLogService {
-	public void dailyPoint(int user_no);
-	public void addPointLog(PointLogVo pointlogVo);
+	public void addPointLog(int user_no, String point_content, int point_score);
 	public List<PointLogVo> getPointLogList(int user_no);
 }

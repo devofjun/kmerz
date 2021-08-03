@@ -31,5 +31,9 @@
 	select * from tbl_community
 </select>
 
+<!-- 유저가 만든 커뮤니티 리스트 -->
+<select id="selectUserNOCommunityList" resultType="CommunityVo">
+	select * from tbl_community where user_no = #{user_no}
+</select>
 
 </mapper>

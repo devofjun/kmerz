@@ -41,4 +41,10 @@ public class CommunityDaoImpl implements CommunityDao {
 		return vo;
 	}
 
+	@Override
+	public List<CommunityVo> selectUserNOCommunityList(int user_no) {
+		// 유저가 만든 커뮤니티 리스트
+		return sqlsession.selectList(NAMESPACE+"selectUserNOCommunityList", user_no);
+	}
+
 }

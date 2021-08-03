@@ -47,12 +47,7 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.insertMember(memberVo);
 		
 		// 포인트 로그
-		PointLogVo logVo = new PointLogVo();
-		logVo.setUser_no(user_no);
-		logVo.setPoint_content("회원가입");
-		logVo.setPoint_score(point);
-		logVo.setPoint_total(point);
-		pointlogDao.insertPointLog(logVo);
+		pointlogDao.insertPointLog(user_no, "회원가입", point);
 		
 	}
 
@@ -97,27 +92,27 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVo login(String user_id, String user_pw) {
 		// 로그인 체크
 		MemberVo memberVo = memberDao.selectUser(user_id, user_pw);
-		
+		System.out.println("멤버서비스_로그인: "+memberVo);
 		if(memberVo != null) {
-			Timestamp today = Timestamp.valueOf(LocalDateTime.now().with(LocalTime.MIDNIGHT));
-			int user_no = memberVo.getUser_no();
-			// 오늘 최초 로그인
-			if(memberVo.getUser_currentlogin() != null) {
-				//if(memberVo.getUser_currentlogin().after(today)) { // test
-				if(memberVo.getUser_currentlogin().before(today)) {
-					// 매일 첫 로그인 포인트
-					final int DAILYPT = 10; 
-					PointLogVo logVo = new PointLogVo();
-					logVo.setUser_no(memberVo.getUser_no());
-					logVo.setPoint_content("매일 첫 로그인 포인트");
-					logVo.setPoint_score(DAILYPT);
-					int preTotal = pointlogDao.selectPreTotal(user_no);
-					logVo.setPoint_total(preTotal+DAILYPT);
-					pointlogDao.insertPointLog(logVo);
-					memberDao.updateUserPoint(user_no, DAILYPT);
+			// 출석체크 포인트 발급은 allow 상태에만 줌
+			if(memberVo.getUser_status() == STATUS_ALLOW) {
+				System.out.println("승인된상태임");
+				Timestamp today = Timestamp.valueOf(LocalDateTime.now().with(LocalTime.MIDNIGHT));
+				int user_no = memberVo.getUser_no();
+				// 오늘 최초 로그인, null이라면 회원가입후 첫 로그인
+				if(memberVo.getUser_currentlogin() != null) {
+					System.out.println("오늘 최초 로그인임");
+					//if(memberVo.getUser_currentlogin().after(today)) { // test
+					if(memberVo.getUser_currentlogin().before(today)) {
+						// 매일 첫 로그인 포인트
+						System.out.println("포인트 발급됨");
+						pointlogDao.insertPointLog(user_no, "출석체크 포인트 지급", 10);
+						PointLogVo prePointLogVo = pointlogDao.selectPreUserNo(user_no);
+						System.out.println("이전포인트vo: "+prePointLogVo);
+						memberDao.updateUserPoint(user_no, prePointLogVo.getPoint_now(), prePointLogVo.getPoint_total());
+					}
 				}
 			}
-			
 			// 로그인 시간 업데이트
 			memberDao.updateCurrentLogin(memberVo.getUser_no());
 		}

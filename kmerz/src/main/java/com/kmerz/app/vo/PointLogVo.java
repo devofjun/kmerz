@@ -6,6 +6,7 @@ public class PointLogVo {
 	private int point_id;
 	private int user_no;
 	private String point_content;
+	private int point_now;
 	private int point_score;
 	private int point_total;
 	private Timestamp point_datetime;
@@ -14,13 +15,23 @@ public class PointLogVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public PointLogVo(int user_no, String point_content, int point_now, int point_score, int point_total) {
+		super();
+		this.user_no = user_no;
+		this.point_content = point_content;
+		this.point_now = point_now;
+		this.point_score = point_score;
+		this.point_total = point_total;
+	}
 
-	public PointLogVo(int point_id, int user_no, String point_content, int point_score, int point_total,
+	public PointLogVo(int point_id, int user_no, String point_content, int point_now, int point_score, int point_total,
 			Timestamp point_datetime) {
 		super();
 		this.point_id = point_id;
 		this.user_no = user_no;
 		this.point_content = point_content;
+		this.point_now = point_now;
 		this.point_score = point_score;
 		this.point_total = point_total;
 		this.point_datetime = point_datetime;
@@ -50,6 +61,14 @@ public class PointLogVo {
 		this.point_content = point_content;
 	}
 
+	public int getPoint_now() {
+		return point_now;
+	}
+
+	public void setPoint_now(int point_now) {
+		this.point_now = point_now;
+	}
+
 	public int getPoint_score() {
 		return point_score;
 	}
@@ -77,9 +96,10 @@ public class PointLogVo {
 	@Override
 	public String toString() {
 		return "PointLogVo [point_id=" + point_id + ", user_no=" + user_no + ", point_content=" + point_content
-				+ ", point_score=" + point_score + ", point_total=" + point_total + ", point_datetime=" + point_datetime
-				+ "]";
+				+ ", point_now=" + point_now + ", point_score=" + point_score + ", point_total=" + point_total
+				+ ", point_datetime=" + point_datetime + "]";
 	}
+
 	
 	
 }

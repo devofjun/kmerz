@@ -16,6 +16,11 @@
 	)
 </insert>
 
+<!-- 신고당한 건 -->
+<select id="selectTargetUser" resultType="DeclaredVo">
+	select * from tbl_declared where target_user_no = #{target_user_no}
+</select>
+
 <!-- 유저의 신고당한 수 -->
 <select id="selectTargetUserCount" resultType="Integer">
 	select count(*) from tbl_declared

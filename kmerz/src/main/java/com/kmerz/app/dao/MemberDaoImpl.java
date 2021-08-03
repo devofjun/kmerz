@@ -129,15 +129,11 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public void updateUserPoint(int user_no, int user_point) {
+	public void updateUserPoint(int user_no, int user_point, int user_totalpoint) {
 		// 유저 포인트 변경
 		Map<String, Integer> map = new HashMap<>();
 		map.put("user_no", user_no);
 		map.put("user_point", user_point);
-		int user_totalpoint = 0;
-		if(user_point > 0) {
-			user_totalpoint = user_point;
-		}
 		map.put("user_totalpoint", user_totalpoint);
 		sqlsession.update(NAMESPACE+"updateUserPoint", map);
 	}

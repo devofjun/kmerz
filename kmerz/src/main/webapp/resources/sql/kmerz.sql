@@ -31,6 +31,7 @@ create table tbl_point_log(
     point_id number primary key,
     user_no number references tbl_member(user_no),
     point_content varchar2(100),
+    point_now number not null,
     point_score number not null,
     point_total number not null,
     point_datetime timestamp default sysdate
