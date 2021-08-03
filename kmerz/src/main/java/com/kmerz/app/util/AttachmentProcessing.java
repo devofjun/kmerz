@@ -102,7 +102,7 @@ public class AttachmentProcessing {
 		    audio.setChannels(new Integer(2));
 		    audio.setBitRate(new Integer(192000));
 		    video.setCodec("libvpx");
-		    video.setBitRate(new Integer(4000000));
+		    video.setBitRate(new Integer(640000));
 		    video.setFrameRate(new Integer(60));
 		    attrs.setOutputFormat("webm");
 		    Encoder instance = new Encoder();
