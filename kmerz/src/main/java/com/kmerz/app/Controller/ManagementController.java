@@ -14,17 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kmerz.app.dto.MemberInfoCardDto;
 import com.kmerz.app.dto.MemberPagingDto;
 import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
+import com.kmerz.app.service.CommunityService;
+import com.kmerz.app.service.DeclaredService;
 import com.kmerz.app.service.MemberService;
+import com.kmerz.app.service.PointLogService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.service.SteamAppService;
 import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.AdminVo;
 import com.kmerz.app.vo.BannerVo;
+import com.kmerz.app.vo.CommunityVo;
+import com.kmerz.app.vo.DeclaredVo;
 import com.kmerz.app.vo.MemberVo;
+import com.kmerz.app.vo.PointLogVo;
 import com.kmerz.app.vo.PostsVo;
 import com.kmerz.app.vo.SteamAppVo;
 
@@ -42,7 +49,13 @@ public class ManagementController {
 	PostService postService;
 	@Inject
 	MemberService memberService;
-
+	@Inject
+	PointLogService pointLogService;
+	@Inject
+	DeclaredService declaredService;
+	@Inject
+	CommunityService communityService;
+	
 	// uri 간편화 admin 입력하면 로그인 페이지나 대시보드 페이지로 넘어감
 	@RequestMapping
 	public String admin(HttpSession session) throws Exception {
@@ -124,12 +137,40 @@ public class ManagementController {
 		return map;
 	}
 	
+	// 유저 정보
 	@ResponseBody
-	@RequestMapping(value="/customers/info", method=RequestMethod.GET)
-	public MemberVo getCustomerInfo(int user_no) throws Exception{
+	@RequestMapping(value="/customers/userInfo", method=RequestMethod.GET)
+	public Map<String, Object> getCustomerInfo(int user_no) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		// 카드 정보
 		MemberVo memberVo = memberService.selectNO(user_no);
-		return memberVo;
+		MemberInfoCardDto cardDto = new MemberInfoCardDto();
+		if(memberVo != null) {
+			cardDto.setUser_no(memberVo.getUser_no());
+			cardDto.setUser_name(memberVo.getUser_name());
+			cardDto.setUser_id(memberVo.getUser_id());
+			cardDto.setUser_profileimage(memberVo.getUser_profileImage());
+			cardDto.setUser_point(memberVo.getUser_point());
+			cardDto.setUser_post_count(postService.getUserPostCount(memberVo.getUser_no()));
+		}
+		map.put("cardDto", cardDto);
+		
+		// 현재 포인트 모달 정보
+		List<PointLogVo> pointList = pointLogService.getPointLogList(user_no);
+		map.put("pointList", pointList);
+		// 유저 게시글 모달 정보
+		List<PostsVo> postList = postService.getUserPostList(user_no);
+		map.put("postList", postList);
+		// 유저생성 커뮤니티 모달 정보
+		List<CommunityVo> communityList = communityService.getUserCommunityList(user_no);
+		map.put("communityList", communityList);
+		// 신고 리스트 모달 정보
+		List<DeclaredVo> declaredList = declaredService.getTargetUserNOList(user_no);
+		map.put("declaredList", declaredList);
+		
+		return map;
 	}
+	
 	
 	
 	// 사용자 차단

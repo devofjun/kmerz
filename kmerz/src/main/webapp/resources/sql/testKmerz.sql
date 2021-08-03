@@ -10,10 +10,25 @@ FOR i IN 1..200 LOOP
         '테스터'||i,
         sysdate-2, 0, null, 100, 100
     );
+    insert into tbl_point_log values(
+        SEQ_POINTLOG_ID.nextval,
+        1000+i,
+        '회원가입',
+        100,
+        100,
+        100,
+        sysdate
+    );
 END LOOP;
 END;
 /
---select * from tbl_point_log;
+
+select * from tbl_point_log where user_no = 1005 order by point_datetime desc;
+select * from
+	(select * from tbl_point_log
+	where user_no = 1005
+	order by point_datetime desc)
+	where rownum = 1;
 
 
 --select * from tbl_member;

@@ -164,6 +164,11 @@ public class PostServiceImpl implements PostService{
 		postdao.posting(vo);
 	}
 
+	@Override
+	public List<PostsVo> getUserPostList(int user_no) {
+		// 유저의 게시글 가져오기
+		return postdao.selectUserNoList(user_no);
+	}
 	
 	@Override
 	public int getUserPostCount(int user_no) {
@@ -212,6 +217,8 @@ public class PostServiceImpl implements PostService{
 			postdao.updateStatus(post_no, POST_CREATE);	
 		}
 	}
+
+	
 
 	
 	

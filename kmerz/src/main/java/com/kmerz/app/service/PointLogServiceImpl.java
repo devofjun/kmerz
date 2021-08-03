@@ -5,7 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dao.PointLogDao;
 import com.kmerz.app.vo.PointLogVo;
 
@@ -13,31 +15,18 @@ import com.kmerz.app.vo.PointLogVo;
 public class PointLogServiceImpl implements PointLogService {
 
 	@Inject
+	MemberDao memberDao;
+	@Inject
 	PointLogDao pointlogDao;
 	
+	@Transactional
 	@Override
-	public void dailyPoint(int user_no) {
-		// 매일 첫 로그인 포인트
-		final int DAILYPT = 10; 
-		PointLogVo logVo = new PointLogVo();
-		logVo.setUser_no(user_no);
-		logVo.setPoint_content("매일 첫 로그인 포인트");
-		logVo.setPoint_score(DAILYPT);
-		int preTotal = pointlogDao.selectPreTotal(user_no);
-		logVo.setPoint_total(preTotal+DAILYPT);
-	}
-	
-	@Override
-	public void addPointLog(PointLogVo pointlogVo) {
+	public void addPointLog(int user_no, String point_content, int point_score) {
 		// 새로운 포인트 변경사항 입력
-		int preTotal = pointlogDao.selectPreTotal(pointlogVo.getUser_no());
-		int pt = pointlogVo.getPoint_score();
-		if(pt > 0) {
-			pointlogVo.setPoint_total(preTotal + pt);
-		} else {
-			pointlogVo.setPoint_total(preTotal);
-		}
-		pointlogDao.insertPointLog(pointlogVo);
+		pointlogDao.insertPointLog(user_no, point_content, point_score);
+		// 유저 포인트 적용
+		PointLogVo pointLogVo = pointlogDao.selectPreUserNo(user_no);
+		memberDao.updateUserPoint(user_no, pointLogVo.getPoint_now(), pointLogVo.getPoint_total());
 	}
 
 	@Override
