@@ -68,12 +68,22 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int selectUserCount(String user_name) {
-		String user_status = "OK";
-		Map<String, String> map = new HashMap<>();
+	public int selectUserIdCount(String user_id) {
+		int user_status = 0;
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("user_status", user_status);
+		int count = sqlsession.selectOne(NAMESPACE + "selectUserIdCount", map);
+		return count;
+	}
+	
+	@Override
+	public int selectUserNameCount(String user_name) {
+		int user_status = 0;
+		Map<String, Object> map = new HashMap<>();
 		map.put("user_name", user_name);
 		map.put("user_status", user_status);
-		int count = sqlsession.selectOne(NAMESPACE + "selectUserCount", map);
+		int count = sqlsession.selectOne(NAMESPACE + "selectUserNameCount", map);
 		return count;
 	}
 
@@ -118,10 +128,5 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("user_point", user_point);
 		sqlsession.update(NAMESPACE+"updateUserPoint", map);
 	}
-
-	
-	
-	
-	
 
 }

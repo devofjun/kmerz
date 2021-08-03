@@ -32,18 +32,22 @@ public class CategoryController {
 	CommentService commentService;
 	
 	// 카테고리 생성 페이지로 이동
-	@RequestMapping(value="/createCategoryForm", method = RequestMethod.GET)
-	public String createCategoryForm() {
+	@RequestMapping(value="/{community_id}/createCategoryForm", method = RequestMethod.GET)
+	public String createCategoryForm(@PathVariable("community_id") String community_id,
+			Model model) {
+		model.addAttribute("community_id", community_id);
 		return "category/createCategoryForm";
 	}
 	
 	// 카테고리 생성
 	@RequestMapping(value = "/createCategoryRun", method=RequestMethod.POST)
 	public String createCategoryRun(CategoryVo categoryVo) {
-			categoryVo.setCommunity_id("star");
-			categoryService.createCategory(categoryVo);
-			System.out.println(categoryVo);
-			return "redirect:/c";
+		System.out.println("categoryVo: " + categoryVo);
+		categoryService.createCategory(categoryVo);
+		String community_id = categoryVo.getCommunity_id();
+		String page = "redirect:/c/" + community_id;
+		// categoryVo 에서 커뮤니티아이디 가져와서 리다이렉트하기
+		return page;
 	}
 	
 	// 카테고리 페이지 이동
