@@ -5,6 +5,7 @@ import java.util.List;
 import com.kmerz.app.vo.MemberVo;
 
 public interface MemberDao {
+	public int selectSeqUserNO();
 	public void insertMember(MemberVo memberVo);
 	public List<MemberVo> selectAll();
 	public MemberVo selectUser(String user_id, String user_pw);
@@ -16,4 +17,5 @@ public interface MemberDao {
 	public void updateUserPw(int user_no, String newPw);
 	public void updateUserProfileImage(int user_no, String filePath);
 	public void updateUserStatus(int user_no, int user_status);
+	public void updateUserPoint(int user_no, int user_point);
 }

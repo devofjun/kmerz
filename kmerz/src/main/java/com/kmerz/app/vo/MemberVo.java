@@ -10,6 +10,8 @@ public class MemberVo {
 	private Timestamp user_currentlogin;
 	private int user_status;
 	private String user_profileImage;
+	private int user_point;
+	
 	
 	private String str_user_status;
 	
@@ -18,8 +20,10 @@ public class MemberVo {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public MemberVo(int user_no, String user_id, String user_pw, String user_name, Timestamp user_currentlogin,
-			int user_status, String user_profileImage, String str_user_status) {
+			int user_status, String user_profileImage, int user_point, String str_user_status) {
 		super();
 		this.user_no = user_no;
 		this.user_id = user_id;
@@ -28,8 +32,11 @@ public class MemberVo {
 		this.user_currentlogin = user_currentlogin;
 		this.user_status = user_status;
 		this.user_profileImage = user_profileImage;
+		this.user_point = user_point;
 		this.str_user_status = str_user_status;
 	}
+
+
 
 	public int getUser_no() {
 		return user_no;
@@ -93,6 +100,14 @@ public class MemberVo {
 
 	public void setStr_user_status(String str_user_status) {
 		this.str_user_status = str_user_status;
+	}
+
+	public int getUser_point() {
+		return user_point;
+	}
+
+	public void setUser_point(int user_point) {
+		this.user_point = user_point;
 	}
 
 	@Override
