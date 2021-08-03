@@ -1,46 +1,35 @@
 ----------------------------------------------------
 -- 테스트 데이터 삽입(유저 테이블)
 ----------------------------------------------------
-insert into tbl_member values(
-    seq_user_no.nextval,
-    'test1@naver.com',
-    '1234',
-    '테스터1',
-    sysdate,
-    0,
-    null,
-    0
-);
-insert into tbl_member   values(
-    SEQ_USER_NO.nextval,
-    'test2@naver.com',
-    '1234',
-    '테스터2',
-    sysdate,
-    0,
-    null,
-    0
-);
-insert into tbl_member values(
-    SEQ_USER_NO.nextval,
-    'test3@naver.com',
-    '1234',
-    '테스터3',
-    sysdate,
-    0,
-    null,
-    0
-);
-select * from tbl_member order by user_currentlogin desc;
+BEGIN
+FOR i IN 1..200 LOOP
+    insert into tbl_member values(
+        seq_user_no.nextval,
+        'test'||i||'@naver.com',
+        '1234',
+        '테스터'||i,
+        sysdate-2, 0, null, 100, 100
+    );
+END LOOP;
+END;
+/
+--select * from tbl_point_log;
+
+
+--select * from tbl_member;
+/*
 update tbl_member set user_currentlogin = sysdate
 	where user_no = 1001;
     commit;
+    */
+
+
 ----------------------------------------------------
 -- 테스트 데이터 삽입(커뮤니티 테이블)
 ----------------------------------------------------
 insert into tbl_community values(
     'star',
-    1000,
+    1001,
     '스타크래프트',
     'starcraft',
     '스타크래프트 임시 커뮤니티입니다.',
@@ -48,7 +37,7 @@ insert into tbl_community values(
 );
 insert into tbl_community values(
     'lol',
-    1001,
+    1002,
     '리그오브레전드',
     'League of Legends',
     '롤 임시 커뮤니티입니다.',
@@ -56,7 +45,7 @@ insert into tbl_community values(
 );
 insert into tbl_community values(
     'overwatch',
-    1002,
+    1003,
     '오버워치',
     'overwatch',
     '오버워치 임시 커뮤니티입니다.',
@@ -82,8 +71,12 @@ insert into tbl_category values(
 -- 테스트 데이터 삽입(게시글 테이블)
 ----------------------------------------------------
 BEGIN
-FOR i IN 1..50 LOOP
-insert into tbl_posts values (seq_post_no.NEXTVAL, 1000, 'star', 100, 'test', 'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',0,0,sysdate,null,0);
+FOR i IN 1..200 LOOP
+    insert into tbl_posts values(
+    seq_post_no.NEXTVAL, 1000+i, 'star', 100, 'test', 
+    'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',
+    0,0,sysdate,null,0
+    );
 END LOOP;
 END;
 /

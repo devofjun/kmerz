@@ -14,13 +14,30 @@ create table tbl_member (
     user_currentlogin timestamp,
     user_status number default 0,
     user_profileImage varchar2(500),
-    user_point number default 0,
+    user_point number default 100,
+    user_totalpoint number default 100,
     constraint unique_user_id unique(user_id),
     constraint unique_user_name unique(user_name)
 );  
 drop sequence seq_user_no;
 create sequence seq_user_no
-    start with 1000;
+    start with 1001;
+
+--==================================================
+-- 포인트 로그 테이블
+--==================================================
+drop table tbl_point_log;
+create table tbl_point_log(
+    point_id number primary key,
+    user_no number references tbl_member(user_no),
+    point_content varchar2(100),
+    point_score number not null,
+    point_total number not null,
+    point_datetime timestamp default sysdate
+);
+drop sequence seq_pointlog_id;
+create sequence seq_pointlog_id
+    start with 1;
 
 
 --==================================================
@@ -203,21 +220,6 @@ create sequence seq_memberlog_id
     start with 1;
 */
 
---==================================================
--- 포인트 로그 테이블
---==================================================
-drop table tbl_point_log;
-create table tbl_point_log(
-    point_id number primary key,
-    user_no number references tbl_member(user_no),
-    point_content varchar2(100),
-    point_score number not null,
-    point_total number not null,
-    point_datetime timestamp default sysdate
-);
-drop sequence seq_pointlog_id;
-create sequence seq_pointlog_id
-    start with 1;
 
 
 commit;

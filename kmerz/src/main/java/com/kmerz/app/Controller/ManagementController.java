@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kmerz.app.dto.MemberPagingDto;
 import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
@@ -94,13 +95,42 @@ public class ManagementController {
 		return "management/DashBoardPage";
 	}
 
+	
+	
 	// 고객 관리 페이지
 	@RequestMapping(value = "/customers")
-	public String customers(Model model) throws Exception {
-		List<MemberVo> memberList = memberService.getAllMembers();
+	public String customers(MemberPagingDto memberPagingDto, Model model) throws Exception {
+		// 페이지
+		memberPagingDto.setCount(memberService.getAllCount(memberPagingDto));
+		// 회원 리스트
+		List<MemberVo> memberList = memberService.getAllMembers(memberPagingDto);
 		model.addAttribute("memberList", memberList);
+		System.out.println(memberList);
 		return "management/CustomersPage";
 	}
+	
+	// 유저 페이징, 검색
+	@ResponseBody
+	@RequestMapping(value="/customers/list", method=RequestMethod.GET)
+	public Map<String, Object> customerPaging(MemberPagingDto memberPagingDto, Model model) throws Exception{
+		int count = memberService.getAllCount(memberPagingDto);
+		memberPagingDto.setCount(count);
+		List<MemberVo> memberList = memberService.getAllMembers(memberPagingDto);
+		
+		model.addAttribute("memberPagingDto", memberPagingDto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberList", memberList);
+		map.put("memberPagingDto", memberPagingDto);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/customers/info", method=RequestMethod.GET)
+	public MemberVo getCustomerInfo(int user_no) throws Exception{
+		MemberVo memberVo = memberService.selectNO(user_no);
+		return memberVo;
+	}
+	
 	
 	// 사용자 차단
 	@ResponseBody
@@ -162,13 +192,13 @@ public class ManagementController {
 	// 게시물 페이징, 검색
 	@ResponseBody
 	@RequestMapping(value = "/contents/postPaging", method = RequestMethod.GET)
-	public Map<String, Object> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
+	public Map<String, Object> postPaging(PostPagingDto postPagingDto) throws Exception {
 		int count = postService.getCountPosts(postPagingDto);
 		postPagingDto.setCount(count);
 		//System.out.println("IN: " + postPagingDto);
 		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
 		
-		model.addAttribute("postPagingDto", postPagingDto);
+		//model.addAttribute("postPagingDto", postPagingDto);
 		//System.out.println("OUT: " + postPagingDto);
 		Map<String, Object> map = new HashMap<>();
 		map.put("postList", postList);

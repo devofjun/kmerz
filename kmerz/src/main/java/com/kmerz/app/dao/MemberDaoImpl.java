@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kmerz.app.dto.MemberPagingDto;
 import com.kmerz.app.vo.MemberVo;
 
 @Repository
@@ -33,10 +34,17 @@ public class MemberDaoImpl implements MemberDao{
 
 	// 모든 회원 검색
 	@Override
-	public List<MemberVo> selectAll() {
-		List<MemberVo> list = sqlsession.selectList(NAMESPACE+"selectAll");
+	public List<MemberVo> selectAll(MemberPagingDto memberPagingDto) {
+		List<MemberVo> list = sqlsession.selectList(NAMESPACE+"selectAll", memberPagingDto);
 		return list;
 	}
+	
+	@Override
+	public int selectAllCount(MemberPagingDto memberPagingDto) {
+		// 모든 회원 카운트
+		return sqlsession.selectOne(NAMESPACE+"selectAllCount", memberPagingDto);
+	}
+
 
 	// 로그인
 	@Override
@@ -116,9 +124,15 @@ public class MemberDaoImpl implements MemberDao{
 		Map<String, Integer> map = new HashMap<>();
 		map.put("user_no", user_no);
 		map.put("user_point", user_point);
+		int user_totalpoint = 0;
+		if(user_point > 0) {
+			user_totalpoint = user_point;
+		}
+		map.put("user_totalpoint", user_totalpoint);
 		sqlsession.update(NAMESPACE+"updateUserPoint", map);
 	}
 
+	
 	
 	
 	
