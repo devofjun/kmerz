@@ -65,8 +65,15 @@
 	where user_no = #{user_no}
 </update>
 
+<!-- 아이디 사용가능 여부 체크 -->
+<select id="selectUserIdCount" resultType="int">
+	select count(*) from tbl_member
+	where user_id = #{user_id}
+	and user_status = #{user_status}
+</select>
+
 <!-- 닉네임 사용가능 여부 체크 -->
-<select id="selectUserCount" resultType="int">
+<select id="selectUserNameCount" resultType="int">
 	select count(*) from tbl_member
 	where user_name = #{user_name}
 	and user_status = #{user_status}

@@ -67,7 +67,7 @@ public class IncludeController {
 	}
 	@RequestMapping(value="/setCategory", method=RequestMethod.GET)
 	public String setCategory(Model model, @RequestParam String communityid) {
-		List<CategoryVo> cateList = cateService.getCategoryList(communityid, "accept");
+		List<CategoryVo> cateList = cateService.getCategoryList(communityid);
 		model.addAttribute("cateList", cateList);
 		return "include/Cate_select";
 	}

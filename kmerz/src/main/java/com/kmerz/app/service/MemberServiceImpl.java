@@ -130,8 +130,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int getUserIdCheckResult(String user_id) {
+		int count = memberDao.selectUserIdCount(user_id);
+		return count;
+	}
+	
+	@Override
 	public int getUserNameCheckResult(String user_name) {
-		int count = memberDao.selectUserCount(user_name);
+		int count = memberDao.selectUserNameCount(user_name);
 		return count;
 	}
 

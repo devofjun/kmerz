@@ -26,7 +26,7 @@
 						</div>
 						<div class="card-body">
 							<form action="/c/createCategoryRun" method="post">
-								<input type="hidden" id="community_id" name="community_id">
+								<input type="hidden" id="community_id" name="community_id" value="${community_id}">
 								<div class="form-group">
 									<label for="category_name">카테고리 이름</label> <input type="text"
 										class="form-control" id="category_name"

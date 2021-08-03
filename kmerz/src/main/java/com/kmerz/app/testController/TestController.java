@@ -25,16 +25,6 @@ public class TestController {
 	@Inject
 	CategoryService categoryService;
 	
-	@RequestMapping(value="/c")
-	public String headerTest(Model model, CategoryVo categoryVo) {
-		String community_id = "star";
-		String category_status = null;
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id, category_status);
-		System.out.println("categoryList: " + categoryList);
-		model.addAttribute("categoryList", categoryList);
-		return "community/CommunityPage";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/file", produces = "text/html; charset=utf-8")
 	public String fileContent(String filepath) {
