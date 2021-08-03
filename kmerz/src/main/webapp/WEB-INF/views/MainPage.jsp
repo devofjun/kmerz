@@ -58,8 +58,7 @@
 					</div>
 				</div>	
 				<!-- 게시글 양식 -->
-				<div id="post_container">
-				</div>
+				<div id="post_container"></div>
 			</div>
 			<!-- 오른쪽 사이드 바 -->
 			<%@ include file="./include/rSidebar.jsp"%>

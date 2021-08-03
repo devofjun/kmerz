@@ -1,14 +1,14 @@
+<%@page import="com.kmerz.app.util.ContentReadAndWrite"%>
+<%@page import="com.kmerz.app.vo.PostsVo"%>
 <%@page import="com.kmerz.app.vo.CategoryVo"%>
 <%@page import="com.kmerz.app.vo.CommunityVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-		<%List<CommunityVo> commList = (List<CommunityVo>)request.getAttribute("commList"); %>
-	<%List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList"); %>
+<%List<CommunityVo> commList = (List<CommunityVo>)request.getAttribute("commList"); %>
+<%List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList"); %>
+<%PostsVo postVo = (PostsVo)request.getAttribute("postVo"); %>
 <div class="posting-input">
-	<div class="page-title">
-		<span>Create Post</span>
-	</div>
 	<div class="posting-nav">
 		<div class="insert-text">
 			<div>
@@ -90,8 +90,7 @@
 		<div id="category-input"></div>
 	</div>
 	<div id="editfield">
-		<textarea id="post_title" maxlength="300" placeholder="Title">1234</textarea>
-		<div id="editable" class="editable" contenteditable="true"></div>
+		<textarea id="post_title" maxlength="300" placeholder="Title"><%if(postVo != null){%><%=postVo.getPost_title()%><%} %></textarea>
+		<div id="editable" class="editable" contenteditable="true"><%if(postVo != null){%><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%><%} %></div>
 	</div>
-	<button class="posting" onclick="posting()">Post</button>
 </div>

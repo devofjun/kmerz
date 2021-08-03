@@ -6,7 +6,10 @@
  var end_check = true;
  function editPost(post_no){
  	console.log("글수정");
- 	includeHTML(replySection, '/include/editPost?post_no=' + post_no);
+ 	var modalBody = document.querySelector(".modal-body");
+ 	var postTitle = document.querySelector(".modal-postTitle");
+ 	modalBody.innerHTML = '';
+ 	includeHTML(modalBody, '/include/editPost?post_no=' + post_no);
  }
  function deletePost(post_no){
  	var xhr = new XMLHttpRequest();
@@ -15,7 +18,7 @@
  	xhr.open("POST", "/deletePost");
  	xhr.send(data);
  	closeModal();
- 	init_posts()
+ 	init_posts();
  }  
 window.addEventListener('scroll', () => {  
   if (document.documentElement.offsetHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {  
@@ -30,10 +33,11 @@ window.addEventListener('load',function (){
 }, false);
 function init_posts(){
 	console.log("init");
-	var post = document.querySelector("#post_container");
-	if(post.contains("div")){
- 		post.removeChild();
- 	}
+	init_post = 10; 
+	var post_container = document.getElementById("post_container");
+	if(post_container.hasChildNodes()){
+		post_container.innerHTML = '';
+	}
  	appendPosts();
 }
 function countReturn(callback){

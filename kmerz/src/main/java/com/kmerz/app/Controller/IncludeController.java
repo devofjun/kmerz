@@ -85,6 +85,8 @@ public class IncludeController {
 	@RequestMapping(value="/editPost")
 	public String editPost(Model model, @RequestParam int post_no) {
 		PostsVo postVo = pService.selectPost(post_no);
+		List<CommunityVo> commList = cService.getCommunityList();
+		model.addAttribute("commList", commList);
 		model.addAttribute("postVo", postVo);
 		return "/include/editor";
 	}

@@ -13,12 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
+import com.kmerz.app.util.AttachmentProcessing;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
@@ -89,6 +91,14 @@ public class HomeController {
 		postService.updateStatus(post_no, -1);
 		System.out.println("delete");
 		return "redirect:/";
+	}
+	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
+	public String uploadFile(@RequestParam MultipartFile[] files) {
+		for(int i = 0; i < files.length; i++) {
+			System.out.println(files[i].getOriginalFilename());
+		}
+		AttachmentProcessing.EncodingWebm("C:\\Users\\vip\\Videos\\OPENNING.mp4","C:\\Users\\vip\\Videos\\OPENNING.webm");
+		return "";
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
