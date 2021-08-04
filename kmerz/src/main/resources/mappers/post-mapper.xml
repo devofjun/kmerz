@@ -86,7 +86,9 @@
 <select id="selectSeqPostno" resultType="Integer">
 	select seq_post_no.nextval from dual
 </select>
-
+<select id="selectCurrentSeq" resultType="Integer">
+	select seq_post_no.currval from dual
+</select>
 
 <insert id="postingDetail">
 insert into tbl_posts values(

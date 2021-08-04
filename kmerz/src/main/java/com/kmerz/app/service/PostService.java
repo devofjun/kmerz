@@ -23,4 +23,5 @@ public interface PostService {
 	public void lockPost(int post_no);
 	public void unlockPost(int post_no);
 	public int countPosts();
+	public int selectCurrentSeq();
 }

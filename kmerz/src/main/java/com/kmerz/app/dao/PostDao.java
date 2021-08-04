@@ -22,4 +22,5 @@ public interface PostDao {
 	public void updateStatus(int target, int status);
 	public void updatePost(PostsVo vo);
 	public int countPosts();
+	public int selectCurrentSeq();
 }

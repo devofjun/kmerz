@@ -227,4 +227,9 @@ public class PostServiceImpl implements PostService{
 	public int countPosts() {
 		return postdao.countPosts();
 	}
+
+	@Override
+	public int selectCurrentSeq() {
+		return postdao.selectCurrentSeq();
+	}
 }

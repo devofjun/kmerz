@@ -124,6 +124,12 @@ public class PostDaoImpl implements PostDao {
 	public int countPosts() {
 		return session.selectOne(NAMESPACE + "countPosts");
 	}
+
+
+	@Override
+	public int selectCurrentSeq() {
+		return session.selectOne(NAMESPACE + "selectCurrentSeq");
+	}
 	
 
 	

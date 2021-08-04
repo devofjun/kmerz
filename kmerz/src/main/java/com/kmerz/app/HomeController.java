@@ -93,10 +93,11 @@ public class HomeController {
 	}
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
 	public String uploadFile(@RequestParam MultipartFile[] files) {
+		int seqPostNo = postService.selectCurrentSeq() + 1;
 		for(int i = 0; i < files.length; i++) {
 			System.out.println(files[i].getOriginalFilename());
+			AttachmentProcessing.EncodingWebm(files[i],AttachmentProcessing.MediaFileNameProcessing(seqPostNo));
 		}
-		AttachmentProcessing.EncodingWebm("C:\\Users\\vip\\Videos\\OPENNING.mp4","C:\\Users\\vip\\Videos\\OPENNING.webm");
 		return "";
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)

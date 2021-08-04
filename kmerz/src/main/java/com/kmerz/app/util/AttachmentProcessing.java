@@ -45,14 +45,20 @@ public class AttachmentProcessing {
 			}
 		}
 	}
+	public static String MediaFileNameProcessing(int seqPostNo) {
+		String logicalFileName = null;
+		UUID tempFileName = UUID.randomUUID();
+		logicalFileName = seqPostNo + "_" + tempFileName.toString() + ".webm";
+		return logicalFileName;
+	}
 	public static String FileProcessing(String path, MultipartFile file, int seqPostNo) {
 		Path uploadDir = PathProcessing(path);
 		String logicalFileName = null;
 		Path filePath = null;
 		try {
-			UUID tempFileName = UUID.randomUUID();
 			String originalFileName = file.getOriginalFilename();
 			String fileExt = FilenameUtils.getExtension(originalFileName);
+			UUID tempFileName = UUID.randomUUID();
 			//fileExt = ExtensionProcessing(originalFileName);
 			logicalFileName = seqPostNo + "_" + tempFileName.toString() + "." + fileExt;
 			byte[] fileBytes = file.getBytes();
@@ -87,9 +93,9 @@ public class AttachmentProcessing {
 		}
 		return null;
 	}
-	public static void EncodingWebm(String s,String t) {
-		  System.out.println("encode WEBM");
-		    File source = new File(s);
+	public static void EncodingWebm(MultipartFile files,String t) {
+		  	System.out.println("encode WEBM");
+		    File source = multipartToFile(files);
 		    File target = new File(t);
 		    AudioAttributes audio = new AudioAttributes();
 		    VideoAttributes video = new VideoAttributes();
@@ -118,5 +124,18 @@ public class AttachmentProcessing {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	}
+	public static File multipartToFile(MultipartFile mfile) {
+		File file = new File(mfile.getOriginalFilename());
+		try {
+			mfile.transferTo(file);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return file;
 	}
 }
