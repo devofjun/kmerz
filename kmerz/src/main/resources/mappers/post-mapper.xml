@@ -87,7 +87,7 @@
 	select seq_post_no.nextval from dual
 </select>
 <select id="selectCurrentSeq" resultType="Integer">
-	select seq_post_no.currval from dual
+	SELECT LAST_NUMBER FROM USER_SEQUENCES  WHERE SEQUENCE_NAME = 'SEQ_POST_NO'
 </select>
 
 <insert id="postingDetail">

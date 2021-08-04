@@ -92,13 +92,16 @@ public class HomeController {
 		return "redirect:/";
 	}
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
-	public String uploadFile(@RequestParam MultipartFile[] files) {
+	public String uploadFile(@RequestParam MultipartFile[] files,Model model) {
 		int seqPostNo = postService.selectCurrentSeq() + 1;
+		model.addAttribute("index", files.length);
 		for(int i = 0; i < files.length; i++) {
 			System.out.println(files[i].getOriginalFilename());
-			AttachmentProcessing.EncodingWebm(files[i],AttachmentProcessing.MediaFileNameProcessing(seqPostNo));
+			String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
+			AttachmentProcessing.EncodingWebm(files[i],path);
+			model.addAttribute("path_" + i,path);
 		}
-		return "";
+		return "include/video";
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,

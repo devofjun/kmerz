@@ -15,6 +15,12 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>3.4.8</version>
+		</dependency>
 
 		<!-- jackson-databind -->
 		<dependency>
@@ -234,13 +240,13 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>ws.schild</groupId>
 			<artifactId>jave-all-deps</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-		
+
 	</dependencies>
 	<build>
 		<plugins>

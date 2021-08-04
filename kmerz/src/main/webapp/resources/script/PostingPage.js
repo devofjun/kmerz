@@ -10,6 +10,14 @@ function dropHandler(ev) {
   }
   xhr.open("POST", "/uploadFile");
   xhr.send(data);
+  var videozone = document.getElementById("video_zone");
+  xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+        console.log(xhr.responseText);
+            if (this.status == 200) { videozone.innerHTML += xhr.responseText; }
+            if (this.status == 404) { videozone.innerHTML = "Page not found."; }
+        }
+  }
 }
 function dragOverHandler(ev) {
   ev.stopPropagation();

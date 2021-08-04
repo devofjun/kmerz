@@ -46,10 +46,14 @@ public class AttachmentProcessing {
 		}
 	}
 	public static String MediaFileNameProcessing(int seqPostNo) {
+		String path = "D:/kmerz/repository/media/";
+		Path uploadDir = PathProcessing(path);
+		Path filePath = null;
 		String logicalFileName = null;
 		UUID tempFileName = UUID.randomUUID();
 		logicalFileName = seqPostNo + "_" + tempFileName.toString() + ".webm";
-		return logicalFileName;
+		filePath = uploadDir.resolve(logicalFileName);
+		return filePath.toString();
 	}
 	public static String FileProcessing(String path, MultipartFile file, int seqPostNo) {
 		Path uploadDir = PathProcessing(path);
@@ -108,7 +112,7 @@ public class AttachmentProcessing {
 		    audio.setChannels(new Integer(2));
 		    audio.setBitRate(new Integer(192000));
 		    video.setCodec("libvpx");
-		    video.setBitRate(new Integer(640000));
+		    video.setBitRate(new Integer(64000));
 		    video.setFrameRate(new Integer(60));
 		    attrs.setOutputFormat("webm");
 		    Encoder instance = new Encoder();
