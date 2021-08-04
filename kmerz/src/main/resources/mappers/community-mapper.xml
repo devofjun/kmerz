@@ -17,11 +17,11 @@
 <!-- 커뮤니티 생성 -->
 <insert id="insertCommunity">
 	insert into tbl_community(
-		community_id, community_name,
+		community_id, user_no, community_name,
 		community_topic, community_description, community_status
 	)
 	values(
-		#{community_id}, #{community_name},
+		#{community_id}, #{user_no}, #{community_name},
 		#{community_topic}, #{community_description}, #{community_status}
 	)
 </insert>
@@ -35,5 +35,45 @@
 <select id="selectUserNOCommunityList" resultType="CommunityVo">
 	select * from tbl_community where user_no = #{user_no}
 </select>
+
+<!-- 커뮤니티 갯수 -->
+<select id="selectCommunityCount" resultType="int">
+	select count(*) from tbl_community
+	<include refid="search"></include>
+</select>
+
+<!-- 커뮤니티 목록페이지에서 쓰이는 리스트(검색) -->
+<select id="selectSearchCommunityList" resultType="CommunityVo">
+	select * from
+			(select rownum rnum, c.* from tbl_community c
+				 <include refid="search"></include>
+				 )
+		where rnum between #{startRow} and #{endRow}
+</select>
+
+<sql id="search">
+	<if test="searchType != null">
+		<choose>
+			<when test='searchType == "t"'>
+				where community_name like '%' || #{keyword} || '%'
+			</when>
+			<when test='searchType == "c"'>
+				where b_content like '%' || #{keyword} || '%'
+			</when>
+			<when test='searchType == "u"'>
+				where user_id like '%' || #{keyword} || '%'
+			</when>
+			<when test='searchType == "tc"'>
+				where b_title like '%' || #{keyword} || '%'
+				or b_content like '%' || #{keyword} || '%'
+			</when>
+			<when test='searchType == "tcu"'>
+				where b_title like '%' || #{keyword} || '%'
+				or b_content like '%' || #{keyword} || '%'
+				or user_id like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+	</if>
+</sql>
 
 </mapper>

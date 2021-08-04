@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kmerz.app.dto.CommunityPagingDto;
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
@@ -46,16 +47,23 @@ public class CommunityController {
 	
 	// 커뮤니티 생성
 	@RequestMapping(value = "/createRun", method=RequestMethod.POST)
-	public String createCommunityRun(CommunityVo communityVo) {
+	public String createCommunityRun(CommunityVo communityVo, HttpSession session) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		int user_no = memberVo.getUser_no();
+		communityVo.setUser_no(user_no);
 		commService.createCommunity(communityVo);
 		return "redirect:/";
 	}
 	
 	// 커뮤니티 목록 페이지 이동
 	@RequestMapping(value = "/communityList", method = RequestMethod.GET)
-	public String communityList(Model model) {
-		List<CommunityVo> list = commService.getCommunityList();
+	public String communityList(Model model, CommunityPagingDto communitypagingDto) throws Exception {
+		int count = commService.getCommunityCount(communitypagingDto);
+		communitypagingDto.setCount(count);
+		System.out.println("communitypagingDto: " + communitypagingDto);
+		List<CommunityVo> list = commService.getSearchCommunityList(communitypagingDto);
 		model.addAttribute("CommunityList", list);
+		model.addAttribute("pagingDto", communitypagingDto);
 		return "community/CommunityListPage";
 	}
 	

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kmerz.app.dao.CommunityDao;
+import com.kmerz.app.dto.CommunityPagingDto;
 import com.kmerz.app.vo.CommunityVo;
 
 @Service
@@ -37,6 +38,12 @@ public class CommunityServiceImpl implements CommunityService {
 		List<CommunityVo> list = commDao.selectCommunityList();
 		return list;
 	}
+	
+	@Override
+	public List<CommunityVo> getSearchCommunityList(CommunityPagingDto communitypagingDto) {
+		List<CommunityVo> list = commDao.selectSearchCommunityList(communitypagingDto);
+		return list;
+	}
 
 
 	@Override
@@ -50,6 +57,12 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<CommunityVo> getUserCommunityList(int user_no) {
 		// 유저가 만든 커뮤니티 리스트
 		return commDao.selectUserNOCommunityList(user_no);
+	}
+
+
+	@Override
+	public int getCommunityCount(CommunityPagingDto communitypagingDto) {
+		return commDao.selectCommunityCount(communitypagingDto);
 	}
 	
 	
