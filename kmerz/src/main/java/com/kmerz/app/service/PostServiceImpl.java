@@ -215,12 +215,6 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	@Override
-	public void deletePost(int post_no) {
-		// 게시글 삭제하기
-		postdao.updateStatus(post_no, POST_DELETE);
-	}
-	
-	@Override
 	public void lockPost(int post_no) {
 		// 포스트 잠그기
 		postdao.updateStatus(post_no, POST_LOCK);
@@ -254,5 +248,19 @@ public class PostServiceImpl implements PostService{
 	
 	
 
-	
+	@Override
+	public void updateStatus(int target, int status) {
+		postdao.updateStatus(target, status);
+	}
+
+
+	@Override
+	public int countPosts() {
+		return postdao.countPosts();
+	}
+
+	@Override
+	public int selectCurrentSeq() {
+		return postdao.selectCurrentSeq();
+	}
 }

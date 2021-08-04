@@ -69,7 +69,6 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public void posting(PostsVo vo) {
 		session.insert(NAMESPACE + "postingDetail", vo);
-		//System.out.println("포스팅븨오"+vo);
 	}
 	
 	@Override
@@ -130,6 +129,15 @@ public class PostDaoImpl implements PostDao {
 	}
 
 
+	public int countPosts() {
+		return session.selectOne(NAMESPACE + "countPosts");
+	}
+
+
+	@Override
+	public int selectCurrentSeq() {
+		return session.selectOne(NAMESPACE + "selectCurrentSeq");
+	}
 	
 
 	

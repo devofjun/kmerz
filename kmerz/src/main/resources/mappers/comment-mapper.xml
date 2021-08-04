@@ -22,7 +22,7 @@
 	#{user_no},
 	#{comment_content},
 	#{comment_regroup},
-	#{comment_retag},
+	#{comment_retag, jdbcType = INTEGER},
 	sysdate
 	)
 </insert>

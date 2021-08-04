@@ -12,7 +12,7 @@
 
 <!-- 게시글 수 -->
 <select id="countPosts" resultType="Integer">
-	select count(*) from tbl_posts
+	select count(*) from tbl_posts where post_status>=0
 	<include refid="search"></include>
 </select>
 
@@ -64,16 +64,6 @@
 	where post_no = #{post_no}
 </update>
 
-<!-- 글 수정 -->
-<update id="updatePost">
-	update tbl_posts set
-		post_title = #{post_title},
-		post_content_file = #{post_content_file},
-		post_updatetime = sysdate
-		post_status = #{post_status}
-		where post_no = #{post_no}
-</update>
-
 
 <!-- 커뮤니티 페이지 이동후 나오는 포스트 -->
 <select id="selectCommunityPostList" resultType="PostsVo">
@@ -96,7 +86,9 @@
 <select id="selectSeqPostno" resultType="Integer">
 	select seq_post_no.nextval from dual
 </select>
-
+<select id="selectCurrentSeq" resultType="Integer">
+	SELECT LAST_NUMBER FROM USER_SEQUENCES  WHERE SEQUENCE_NAME = 'SEQ_POST_NO'
+</select>
 
 <insert id="postingDetail">
 insert into tbl_posts values(
@@ -113,7 +105,21 @@ insert into tbl_posts values(
 	0
 	)
 </insert>
-
+<update id="updatePost">
+	update tbl_posts set
+	community_id = #{community_id},
+	category_no = #{category_no},
+	post_title = #{post_title},
+	post_content_file = #{post_content_file},
+	last_update = sysdate,
+	post_status = 'update'
+	where post_no = #{post_no}
+</update>
+<update id="deletePost">
+	update tbl_posts set
+	post_status = 'deny'
+	where post_no = #{post_no}
+</update>
 <!-- 로그인 유저가 작성한 개시글 갯수 구하기 -->
 <select id="selectUserPostCount" resultType="int">
 	select count(*) from tbl_posts where user_no = #{user_no}

@@ -1,3 +1,29 @@
+function dropHandler(ev) {
+  console.log('File(s) dropped');
+  ev.stopPropagation();
+  ev.preventDefault();
+  var xhr = new XMLHttpRequest();
+  var data = new FormData();
+  var files = ev.dataTransfer.files;
+  for(var i = 0; i < files.length; i++){
+  data.append("files", files[i]);
+  }
+  xhr.open("POST", "/uploadFile");
+  xhr.send(data);
+  var videozone = document.getElementById("video_zone");
+  xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+        console.log(xhr.responseText);
+            if (this.status == 200) { videozone.innerHTML += xhr.responseText; }
+            if (this.status == 404) { videozone.innerHTML = "Page not found."; }
+        }
+  }
+}
+function dragOverHandler(ev) {
+  ev.stopPropagation();
+  ev.preventDefault();
+}
+
 function getCategoryInput(){
 	var communityid = document.getElementById("community-input").value;
 	var categoryinput = document.getElementById("category-input");
