@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kmerz.app.dto.CommunityPagingDto;
 import com.kmerz.app.vo.CommunityVo;
 
 @Repository
@@ -34,6 +35,12 @@ public class CommunityDaoImpl implements CommunityDao {
 		List<CommunityVo> list = sqlsession.selectList(NAMESPACE + "selectCommunityList");
 		return list;
 	}
+	
+	@Override
+	public List<CommunityVo> selectSearchCommunityList(CommunityPagingDto communityPagingDto) {
+		List<CommunityVo> list = sqlsession.selectList(NAMESPACE + "selectSearchCommunityList", communityPagingDto);
+		return list;
+	}
 
 	@Override
 	public CommunityVo getOneCommunity(String community_id) {
@@ -45,6 +52,11 @@ public class CommunityDaoImpl implements CommunityDao {
 	public List<CommunityVo> selectUserNOCommunityList(int user_no) {
 		// 유저가 만든 커뮤니티 리스트
 		return sqlsession.selectList(NAMESPACE+"selectUserNOCommunityList", user_no);
+	}
+
+	@Override
+	public int selectCommunityCount(CommunityPagingDto communityPagingDto) {
+		return sqlsession.selectOne(NAMESPACE + "selectCommunityCount", communityPagingDto);
 	}
 
 }

@@ -137,7 +137,7 @@
 							<form id="JoinForm" action="/m/joinRun" method="post">
 								<div class="form-group">
 									<label for="user_id">이메일</label> <span style="color:red;" id="spanId"></span>
-									<input type="email" class="form-control" id="user_id" name="user_id" placeholder="이메일" required>
+									<input type="email" class="form-control" id="user_id" name="user_id" placeholder="이메일을 입력해주세요" required>
 								</div>
 								<div class="form-group">
 									<label for="user_name"> 닉네임 </label>
@@ -159,7 +159,7 @@
 										placeholder="비밀번호 확인">
 								</div>
 
-								<button class="btn btn-primary" type="button" id="btnJoin">가입완료</button>
+								<button class="btn btn-primary" type="submit" id="btnJoin">가입완료</button>
 								<span id="spanResult" style = "color:red;"></span>
 							</form>
 						</div>
