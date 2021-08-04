@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService{
 	}
 
 	// 게시글Vo에 추가적으로 필요한 데이터들
-	private void settingPostsVo(List<PostsVo> postsList) {
+	private List<PostsVo> settingPostsVo(List<PostsVo> postsList) {
 		if(postsList != null) {
 			for(PostsVo postVo : postsList) {
 				// 유저 이름
@@ -76,6 +76,7 @@ public class PostServiceImpl implements PostService{
 				}
 			}
 		}
+		return postsList;
 	}
 	
 	@Transactional
@@ -112,7 +113,25 @@ public class PostServiceImpl implements PostService{
 			postVo.setCommunity_name(commVo.getCommunity_name());
 			// 카테고리 이름
 			CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
-			postVo.setCategory_name(categoryVo.getCategory_name());	
+			postVo.setCategory_name(categoryVo.getCategory_name());
+			// 신고수
+			int declared_count = declaredDao.selectTargetIDCount(postVo.getPost_no(), DeclaredServiceImpl.TYPE_POST);
+			postVo.setDeclared_count(declared_count);
+			// 글 상태
+			switch(postVo.getPost_status()) {
+				case POST_LOCK:
+					postVo.setStr_post_status("잠김");
+					break;
+				case POST_DELETE:
+					postVo.setStr_post_status("삭제됨");
+					break;
+				case POST_CREATE:
+					postVo.setStr_post_status("작성됨");
+					break;
+				case POST_UPDATE:
+					postVo.setStr_post_status("수정됨");
+					break;
+			}
 		}
 		return postVo;
 	}
@@ -167,7 +186,7 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<PostsVo> getUserPostList(int user_no) {
 		// 유저의 게시글 가져오기
-		return postdao.selectUserNoList(user_no);
+		return settingPostsVo(postdao.selectUserNoList(user_no));
 	}
 	
 	@Override
@@ -216,6 +235,18 @@ public class PostServiceImpl implements PostService{
 		} else {
 			postdao.updateStatus(post_no, POST_CREATE);	
 		}
+	}
+
+	@Override
+	public void lockPostList(List<Integer> postnoList) {
+		// 여러개 포스트 잠그기
+		postdao.updateListStatus(postnoList, POST_LOCK);
+	}
+
+	@Override
+	public void uplockPostList(List<Integer> postnoList) {
+		// 여러개 포스트 잠금풀기
+		postdao.updateListStatus(postnoList, POST_CREATE);
 	}
 
 	

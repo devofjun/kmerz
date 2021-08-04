@@ -95,7 +95,7 @@ create table tbl_posts(
 drop sequence seq_post_no;
 create sequence seq_post_no
     start with 100;
-
+commit;
 
 --==================================================
 -- 댓글 테이블

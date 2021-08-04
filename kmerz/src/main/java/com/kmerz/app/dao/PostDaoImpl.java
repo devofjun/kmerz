@@ -121,6 +121,15 @@ public class PostDaoImpl implements PostDao {
 	}
 
 
+	@Override
+	public void updateListStatus(List<Integer> list, int status) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("post_status", status);
+		session.update(NAMESPACE+"updateListStatus", map);
+	}
+
+
 	
 
 	

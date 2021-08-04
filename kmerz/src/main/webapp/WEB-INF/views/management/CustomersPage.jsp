@@ -59,6 +59,74 @@ function submitPaging() {
 	});
 }
 
+function showUserInfoCard(userno){
+	var user_no = userno
+	var url = "/admin/customers/userInfo?user_no="+user_no;
+	$.get(url,function(rData){
+		console.log(rData);
+		var info = rData.cardDto;
+		$("#cardUserNO").text(info.user_no);
+		$("#cardUserName").text(info.user_name);
+		$("#cardUserID").text(info.user_id);
+		$("#cardUserPoint").text(info.user_point);
+		$("#cardUserPostCount").text(info.user_post_count);
+		$("#cardUserInfo").show();
+		// 포인트 모달
+		var pointList = rData.pointList;
+		$(".pointModalTr:gt(0)").remove();
+		$.each(pointList, function(){
+			var clone = $(".pointModalTr").eq(0).clone();
+			clone.find("td[data-name='time']").text(timePattern(this.point_datetime));
+			clone.find("td[data-name='total']").text(this.point_total);
+			clone.find("td[data-name='now']").text(this.point_now);
+			clone.find("td[data-name='score']").text(this.point_score);
+			clone.find("td[data-name='content']").text(this.point_content);
+			clone.show();
+			$(".pointModalTr").parent().append(clone);
+		})
+		// 작성글 모달
+		var postList = rData.postList;
+		$(".postModalTr:gt(0)").remove();
+		$.each(postList, function(){
+			var clone = $(".postModalTr").eq(0).clone();
+			clone.find("[data-name='postSelect']").attr("data-value", this.post_no);
+			clone.find("[data-name='datetime']").text(timePattern(this.post_createtime));
+			clone.find("[data-name='title']").text(this.post_title);
+			//clone.find("[data-name='title']").attr("href","");
+			clone.find("[data-name='readcount']").text(this.post_readcount);
+			clone.find("[data-name='recommand']").text(this.post_recommand);
+			clone.find("[data-name='declared']").text(this.declared_count);
+			clone.find("[data-name='status']").text(this.str_post_status);
+			clone.show();
+			$(".postModalTr").parent().append(clone);
+		})
+		// 커뮤니티 모달
+		var commList = rData.communityList;
+		$(".commModalTr:gt(0)").remove();
+		$.each(commList, function() {
+			var clone = $(".commModalTr").eq(0).clone();
+			clone.find("[data-name='id']").text(this.community_id);
+			clone.find("[data-name='name']").text(this.community_name);
+			clone.find("[data-name='description']").text(this.community_description);
+			clone.show();
+			$(".commModalTr").parent().append(clone);
+		})
+		// 신고 모달
+		var declaredList = rData.declaredList;
+		$(".declaredModalTr:gt(0)").remove();
+		$.each(declaredList, function(){
+			var clone = $(".declaredModalTr").eq(0).clone();
+			clone.find("[data-name='id']").text(this.declared.id);
+			clone.find("[data-name='datetime']").text(timePattern(this.declared_datetime));
+			clone.find("[data-name='title']").text(this.post_title);
+			clone.find("[data-name='username']").text(this.user_name);
+			clone.find("[data-name='type']").text(this.target_type);
+		})
+		console.log(declaredList.length);
+		$("#totalDeclared").text("누적 신고수: "+declaredList.length);
+	});
+}
+
 $(document).ready(function() {
 	$("input[name='searchType']").val("user_name");
 	for(var i=0; i<$(".currentLogin").length; i++){
@@ -103,8 +171,19 @@ $(document).ready(function() {
 
 	// 검색 타입 변경
 	$(".searchType").click(function(e) {
-		
+		console.log($(this).attr("data-searchType"));
+		console.log($(this).text());
+		$("#btnSearchType").text($(this).text());
+		$("input[name='searchType']").val($(this).attr("data-searchType"));
 	});
+	
+	// 검색 버튼 클릭
+	$("#btnSearch").click(function(){
+		var keyword = $("#searchKeyword").val();
+		$("input[name='keyword']").val(keyword);
+		submitPaging();
+	})
+	
 	
 	
 	// 페이지 번호 클릭시
@@ -120,74 +199,11 @@ $(document).ready(function() {
 	
 	
 	// 유저 목록 클릭시 카드 보이기
-	$(".trUserInfo").click(function() {
+	$("#tbodyCustomer").on("click",".trUserInfo", function(){
 		var user_no = $(this).find(".userno").text();
-		var url = "/admin/customers/userInfo?user_no="+user_no;
-		$.get(url,function(rData){
-			console.log(rData);
-			var info = rData.cardDto;
-			$("#cardUserNO").text(info.user_no);
-			$("#cardUserName").text(info.user_name);
-			$("#cardUserID").text(info.user_id);
-			$("#cardUserPoint").text(info.user_point);
-			$("#cardUserPostCount").text(info.user_post_count);
-			$("#cardUserInfo").show();
-			// 포인트 모달
-			var pointList = rData.pointList;
-			$(".pointModalTr:gt(0)").remove();
-			$.each(pointList, function(){
-				var clone = $(".pointModalTr").eq(0).clone();
-				clone.find("td[data-name='time']").text(timePattern(this.point_datetime));
-				clone.find("td[data-name='total']").text(this.point_total);
-				clone.find("td[data-name='now']").text(this.point_now);
-				clone.find("td[data-name='score']").text(this.point_score);
-				clone.find("td[data-name='content']").text(this.point_content);
-				clone.show();
-				$(".pointModalTr").parent().append(clone);
-			})
-			// 작성글 모달
-			var postList = rData.postList;
-			$(".postModalTr:gt(0)").remove();
-			$.each(postList, function(){
-				var clone = $(".postModalTr").eq(0).clone();
-				clone.find("[data-name='no']").text(this.post_no);
-				clone.find("[data-name='datetime']").text(timePattern(this.post_createtime));
-				clone.find("[data-name='title']").text(this.post_title);
-				//clone.find("[data-name='title']").attr("href","");
-				clone.find("[data-name='readcount']").text(this.post_readcount);
-				clone.find("[data-name='recommand']").text(this.post_recommand);
-				clone.find("[data-name='declared']").text(this.declared_count);
-				clone.find("[data-name='status']").text(this.post_status);
-				clone.show();
-				$(".postModalTr").parent().append(clone);
-			})
-			// 커뮤니티 모달
-			var commList = rData.communityList;
-			$(".commModalTr:gt(0)").remove();
-			$.each(commList, function() {
-				var clone = $(".commModalTr").eq(0).clone();
-				clone.find("[data-name='id']").text(this.community_id);
-				clone.find("[data-name='name']").text(this.community_name);
-				clone.find("[data-name='description']").text(this.community_description);
-				clone.show();
-				$(".commModalTr").parent().append(clone);
-			})
-			// 신고 모달
-			var declaredList = rData.declaredList;
-			$(".declaredModalTr:gt(0)").remove();
-			$.each(declaredList, function(){
-				var clone = $(".declaredModalTr").eq(0).clone();
-				clone.find("[data-name='id']").text(this.declared.id);
-				clone.find("[data-name='datetime']").text(timePattern(this.declared_datetime));
-				clone.find("[data-name='title']").text(this.post_title);
-				clone.find("[data-name='username']").text(this.user_name);
-				clone.find("[data-name='type']").text(this.target_type);
-			})
-			
-		});
+		showUserInfoCard(user_no);
 	});
 
-	
 	// 유저 정보 카드 목록 하이라이트
 	$(".liUserInfo").mouseenter(function() {
 		//bg-primary text-white
@@ -196,6 +212,55 @@ $(document).ready(function() {
 	$(".liUserInfo").mouseleave(function() {
 		$(this).removeClass("bg-primary text-white");
 	})
+	
+	// 게시글 모달 전체 체크
+	$("#checkboxPost").click(function(){
+		var chk = $(this).is(":checked");
+		if(chk){
+			$("input[data-name='postSelect']:gt(0)").prop("checked", true);
+		} else {
+			$("input[data-name='postSelect']:gt(0)").prop("checked", false);
+		}
+	})
+	
+	
+	// 게시글 잠금 버튼 클릭
+	$("#btnPostLock").click(function() {
+		var checked = $("input[data-name='postSelect']:checked");
+		var arrPostno = [checked.length];
+		for(var i=0; i<checked.length; i++){
+			arrPostno[i]=checked.eq(i).attr("data-value");
+		}
+		$.ajax({
+			type: 'POST',
+			url: "/admin/contents/setPostsLock",
+			data: JSON.stringify(arrPostno),
+			contentType: "application/json; charset=UTF-8",
+			success: function(rData){
+				console.log(rData);
+			}
+		});
+		
+	})
+	
+	// 게시글 잠금 해제 버튼 클릭
+	$("#btnPostUnlock").click(function() {
+		var checked = $("input[data-name='postSelect']:checked");
+		var arrPostno = [checked.length];
+		for(var i=0; i<checked.length; i++){
+			arrPostno[i]=checked.eq(i).attr("data-value");
+		}
+		$.ajax({
+			type: 'POST',
+			url: "/admin/contents/setPostsUnlock",
+			data: JSON.stringify(arrPostno),
+			contentType: "application/json; charset=UTF-8",
+			success: function(rData){
+				console.log(rData);
+			}
+		});
+	})
+	
 });
 </script>
 
@@ -220,13 +285,12 @@ $(document).ready(function() {
 		<div class="input-group mb-1 ">
 			<button id="btnSearchType"
 				class="btn btn-outline-secondary dropdown-toggle" type="button"
-				data-bs-toggle="dropdown" aria-expanded="false"
-				data-searchType="/admin/searchName">이름</button>
+				data-bs-toggle="dropdown" aria-expanded="false">이름</button>
 			<ul id="ulSearchType" class="dropdown-menu">
 				<li><span class="searchType dropdown-item" data-searchType="user_id">아이디</span></li>
 				<li><span class="searchType dropdown-item" data-searchType="user_name">이름</span></li>
 			</ul>
-			<input type="text" class="form-control"
+			<input id="searchKeyword" type="text" class="form-control"
 				aria-label="Text input with dropdown button">
 			<button class="btn btn-outline-secondary" type="button"
 				id="btnSearch">검색</button>
@@ -278,7 +342,7 @@ $(document).ready(function() {
 				<input type="hidden" name="perPage" value="${memberPagingDto.perPage}" />
 				<input type="hidden" name="searchType" value="${memberPagingDto.searchType}"/>
 				<input type="hidden" name="keyword" value="${memberPagingDto.keyword}" />
-			</form>
+			</form>	
 			<!-- 페이징 네비 -->
 			<nav>
 				<ul class="pagination justify-content-center">
@@ -397,33 +461,31 @@ $(document).ready(function() {
         <table class="table table-striped table-sm">
         	<thead>
         		<tr>
-        			<th style="display:none">글번호</th>
         			<th>시간</th>
         			<th >글제목</th>
         			<th >조회수</th>
         			<th >추천수</th>
         			<th >신고수</th>
         			<th >현재 상태</th>
-        			<th><input type="checkbox"/></th>
+        			<th><input id="checkboxPost" type="checkbox"/></th>
         		</tr>
         	</thead>
         	<tbody>
         		<tr class="postModalTr" style="display:none">
-        			<td data-name="no" style="display:none"></td>
         			<td data-name="datetime">2021/07/18/10:12:33</td>
         			<td ><a data-name="title" class="text-decoration-none" href="#">안녕하세요.</a></td>
         			<td data-name="readcount">47</td>
         			<td data-name="recommand">12</td>
         			<td data-name="declared">0</td>
         			<td data-name="status">open</td>
-        			<td><input type="checkbox"/></td>
+        			<td><input data-name="postSelect" data-value="" type="checkbox"/></td>
         		</tr>
         	</tbody>
         </table>
       </div>
       <div class="modal-footer">
-      	<button class="btn btn-primary">선택 잠금 해제</button>
-        <button class="btn btn-danger">선택 잠금</button>
+      	<button id="btnPostUnlock" class="btn btn-primary">잠금 해제</button>
+        <button id="btnPostLock" class="btn btn-danger">잠금</button>
       </div>
     </div>
   </div>
@@ -468,7 +530,7 @@ $(document).ready(function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      	<h5>누적 신고수: 5</h5>
+      	<h5 id="totalDeclared">누적 신고수: </h5>
         <table class="table table-striped table-sm">
         	<thead>
         		<tr>

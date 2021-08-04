@@ -8,13 +8,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
+import com.kmerz.app.service.DeclaredService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.vo.CommunityVo;
+import com.kmerz.app.vo.DeclaredVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 
@@ -38,6 +41,9 @@ public class HomeController {
 	
 	@Inject
 	CommentService commentService;
+	
+	@Inject
+	DeclaredService declaredService;
 	
 	@RequestMapping
 	public String home(Model model, HttpSession session) {
@@ -71,5 +77,12 @@ public class HomeController {
 		List<CommunityVo> commList = commService.getCommunityList();
 		model.addAttribute("commList", commList);
 		return "PostingPage";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="postDeclaring")
+	public String postDeclaring(DeclaredVo declaredVo) {
+		declaredService.addPostDeclared(declaredVo);
+		return "success";
 	}
 }

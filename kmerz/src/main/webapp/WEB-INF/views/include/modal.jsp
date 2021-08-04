@@ -43,20 +43,27 @@
 				<div class="button-nav">
 					<div class="button-nav-btn">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/chat_bubble_outline_black_36dp.svg">Comments</a>
+							src="resources/images/icons/chat_bubble_outline_black_36dp.svg">댓글</a>
 					</div>
 					<div class="button-nav-btn">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/bookmark_border_black_36dp.svg">BookMark</a>
+							src="resources/images/icons/bookmark_border_black_36dp.svg">즐겨찾기</a>
 					</div>
 					<div class="button-nav-btn">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/ios_share_black_36dp.svg">Share</a>
+							src="resources/images/icons/ios_share_black_36dp.svg">공유</a>
 					</div>
 					<div class="button-nav-btn">
-						<a href="#"><img class="icon-color"
-							src="resources/images/icons/outlined_flag_black_36dp.svg">Report</a>
+						<a id="postDeclared" href="#"><img class="icon-color"
+							src="resources/images/icons/outlined_flag_black_36dp.svg">신고</a>
 					</div>
+					<div style="display:none">
+						<span class="target_id"><%=postVo.getPost_no() %></span>
+						<span class="target_type">1</span>
+						<span class="user_no"><%=((MemberVo)session.getAttribute("loginVo")).getUser_no() %></span>
+						<span class="target_user_no"><%=postVo.getUser_no() %></span>
+					</div>
+					
 				</div>
 				<div class="replySection">
 					<div class="reply_input">

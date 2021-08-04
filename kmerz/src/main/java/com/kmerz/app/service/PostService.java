@@ -21,5 +21,7 @@ public interface PostService {
 	public void updatePost(PostsVo postsVo);
 	public void deletePost(int post_no);
 	public void lockPost(int post_no);
+	public void lockPostList(List<Integer> postnoList);
 	public void unlockPost(int post_no);
+	public void uplockPostList(List<Integer> postnoList);
 }

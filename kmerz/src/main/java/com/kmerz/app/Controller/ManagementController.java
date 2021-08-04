@@ -1,5 +1,6 @@
 package com.kmerz.app.Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,6 +172,8 @@ public class ManagementController {
 		return map;
 	}
 	
+	// 게시글 잠금
+	
 	
 	
 	// 사용자 차단
@@ -196,9 +199,6 @@ public class ManagementController {
 		memberService.setStatusWriteLock(user_no);
 		return "success";
 	}
-	
-	
-	
 	
 	
 	// 배너/사이드바 관리 페이지
@@ -266,20 +266,45 @@ public class ManagementController {
 	
 	// 게시물 잠금
 	@ResponseBody
-	@RequestMapping(value = "/contents/setPostDeny", method=RequestMethod.GET)
-	public String setPostDeny(int post_no) throws Exception {
+	@RequestMapping(value = "/contents/setPostLock", method=RequestMethod.GET)
+	public String setPostLock(int post_no) throws Exception {
 		postService.lockPost(post_no);
 		return "success";
 	}
 	
 	// 게시물 잠금 해제
 	@ResponseBody
-	@RequestMapping(value = "/contents/setPostAdmit", method=RequestMethod.GET)
-	public String setPostAdmit(int post_no) throws Exception {
+	@RequestMapping(value = "/contents/setPostUnlock", method=RequestMethod.GET)
+	public String setPostUnlock(int post_no) throws Exception {
 		postService.unlockPost(post_no);
 		return "success";
 	}
 	
+	// 게시물 여러개 잠금
+	@ResponseBody
+	@RequestMapping(value = "/contents/setPostsLock", method=RequestMethod.POST)
+	public String setPostsLock(@RequestBody List<String> post_no) throws Exception {
+		List<Integer> postnoList = new ArrayList<>();
+		for(int i=0; i<post_no.size(); i++) {
+			postnoList.add(Integer.parseInt(post_no.get(i)));
+		}
+		System.out.println(postnoList);
+		postService.lockPostList(postnoList);
+		return "success";
+	}
+	
+	// 게시물 여러개 잠금 풀기
+	@ResponseBody
+	@RequestMapping(value = "/contents/setPostsUnlock")
+	public String setPostsUnlock(@RequestBody List<String> post_no) throws Exception {
+		List<Integer> postnoList = new ArrayList<>();
+		for(int i=0; i<post_no.size(); i++) {
+			postnoList.add(Integer.parseInt(post_no.get(i)));
+		}
+		System.out.println(postnoList);
+		postService.uplockPostList(postnoList);
+		return "success";
+	}
 	
 	// 고객 주문 관리 페이지
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)

@@ -21,4 +21,5 @@ public interface PostDao {
 	public void updatePost(PostsVo postsVo);
 	// 게시글 상태 변경
 	public void updateStatus(int target, int status);
+	public void updateListStatus(List<Integer> list, int status);
 }

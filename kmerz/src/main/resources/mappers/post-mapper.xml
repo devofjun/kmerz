@@ -127,4 +127,13 @@ insert into tbl_posts values(
 <update id="updateStatus">
 	update tbl_posts set post_status=#{post_status} where post_no=#{post_no}
 </update>
+
+<!-- 게시글 상태 변경 -->
+<update id="updateListStatus">
+	update tbl_posts set post_status=#{post_status} where post_no IN
+	<foreach item="item" collection="list" open="(" close=")" separator=",">
+			${item}
+	</foreach>
+</update>
+
 </mapper>
