@@ -38,9 +38,9 @@
 		<%@ include file="../include/community_top_menu_bar.jsp"%>
 	</div>
 	<!-- 배너 -->
-	<div>
+	<%-- <div>
 		<%@ include file="../include/banner.jsp"%>
-	</div>
+	</div> --%>
 	
 	<section class="postSection">
 		<div class="posts">
