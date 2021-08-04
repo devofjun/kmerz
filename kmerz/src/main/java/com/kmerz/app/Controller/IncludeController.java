@@ -46,11 +46,11 @@ public class IncludeController {
 		System.out.println("postVo = " + postVo);
 		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
 		List<CommentVo> mentList = mentService.selectCommentOnPost(post_no);
-		List<MemberVo> memList = memService.getAllMembers();
+		//List<MemberVo> memList = memService.getAllMembers();
 		model.addAttribute("postVo", postVo);
 		model.addAttribute("commVo", commVo);
 		model.addAttribute("mentList", mentList);
-		model.addAttribute("memList", memList);
+		//model.addAttribute("memList", memList);
 		return "/include/modal";
 	}
 	@RequestMapping(value="/reply_input", method=RequestMethod.GET)

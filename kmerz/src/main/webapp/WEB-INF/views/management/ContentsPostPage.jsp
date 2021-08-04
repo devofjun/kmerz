@@ -40,6 +40,7 @@ img[draggable='false']{
 			console.log(pagingDto);
 			if(pagingDto.startPage != 1){
 				var clone = $("#clonePageLeft").clone();
+				clone.children().attr("href", pagingDto.startPage-1);
 				$(".pagination").append(clone);
 			}
 			for(var p = pagingDto.startPage; p <= pagingDto.endPage; p++){
@@ -55,6 +56,7 @@ img[draggable='false']{
 			}
 			if(pagingDto.endPage < pagingDto.totalPage){
 				var clone = $("#clonePageRight").clone();
+				clone.children().attr("href", pagingDto.endPage+1);
 				$(".pagination").append(clone);
 			}
 		});
@@ -290,7 +292,7 @@ img[draggable='false']{
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<c:if test="${postPagingDto.endPage < pagingDto.totalPage }">
+					<c:if test="${postPagingDto.endPage < postPagingDto.totalPage }">
 						<li class="page-item"><a class="page-link"
 							href="${postPagingDto.endPage+1}">&raquo;</a></li>
 					</c:if>

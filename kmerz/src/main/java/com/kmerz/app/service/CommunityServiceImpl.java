@@ -44,6 +44,13 @@ public class CommunityServiceImpl implements CommunityService {
 		CommunityVo vo = commDao.getOneCommunity(community_id);
 		return vo;
 	}
+
+
+	@Override
+	public List<CommunityVo> getUserCommunityList(int user_no) {
+		// 유저가 만든 커뮤니티 리스트
+		return commDao.selectUserNOCommunityList(user_no);
+	}
 	
 	
 

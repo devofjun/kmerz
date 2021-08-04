@@ -14,16 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kmerz.app.dto.MemberInfoCardDto;
+import com.kmerz.app.dto.MemberPagingDto;
 import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
+import com.kmerz.app.service.CommunityService;
+import com.kmerz.app.service.DeclaredService;
 import com.kmerz.app.service.MemberService;
+import com.kmerz.app.service.PointLogService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.service.SteamAppService;
 import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.AdminVo;
 import com.kmerz.app.vo.BannerVo;
+import com.kmerz.app.vo.CommunityVo;
+import com.kmerz.app.vo.DeclaredVo;
 import com.kmerz.app.vo.MemberVo;
+import com.kmerz.app.vo.PointLogVo;
 import com.kmerz.app.vo.PostsVo;
 import com.kmerz.app.vo.SteamAppVo;
 
@@ -41,7 +49,13 @@ public class ManagementController {
 	PostService postService;
 	@Inject
 	MemberService memberService;
-
+	@Inject
+	PointLogService pointLogService;
+	@Inject
+	DeclaredService declaredService;
+	@Inject
+	CommunityService communityService;
+	
 	// uri 간편화 admin 입력하면 로그인 페이지나 대시보드 페이지로 넘어감
 	@RequestMapping
 	public String admin(HttpSession session) throws Exception {
@@ -94,13 +108,70 @@ public class ManagementController {
 		return "management/DashBoardPage";
 	}
 
+	
+	
 	// 고객 관리 페이지
 	@RequestMapping(value = "/customers")
-	public String customers(Model model) throws Exception {
-		List<MemberVo> memberList = memberService.getAllMembers();
+	public String customers(MemberPagingDto memberPagingDto, Model model) throws Exception {
+		// 페이지
+		memberPagingDto.setCount(memberService.getAllCount(memberPagingDto));
+		// 회원 리스트
+		List<MemberVo> memberList = memberService.getAllMembers(memberPagingDto);
 		model.addAttribute("memberList", memberList);
+		System.out.println(memberList);
 		return "management/CustomersPage";
 	}
+	
+	// 유저 페이징, 검색
+	@ResponseBody
+	@RequestMapping(value="/customers/list", method=RequestMethod.GET)
+	public Map<String, Object> customerPaging(MemberPagingDto memberPagingDto, Model model) throws Exception{
+		int count = memberService.getAllCount(memberPagingDto);
+		memberPagingDto.setCount(count);
+		List<MemberVo> memberList = memberService.getAllMembers(memberPagingDto);
+		
+		model.addAttribute("memberPagingDto", memberPagingDto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberList", memberList);
+		map.put("memberPagingDto", memberPagingDto);
+		return map;
+	}
+	
+	// 유저 정보
+	@ResponseBody
+	@RequestMapping(value="/customers/userInfo", method=RequestMethod.GET)
+	public Map<String, Object> getCustomerInfo(int user_no) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		// 카드 정보
+		MemberVo memberVo = memberService.selectNO(user_no);
+		MemberInfoCardDto cardDto = new MemberInfoCardDto();
+		if(memberVo != null) {
+			cardDto.setUser_no(memberVo.getUser_no());
+			cardDto.setUser_name(memberVo.getUser_name());
+			cardDto.setUser_id(memberVo.getUser_id());
+			cardDto.setUser_profileimage(memberVo.getUser_profileImage());
+			cardDto.setUser_point(memberVo.getUser_point());
+			cardDto.setUser_post_count(postService.getUserPostCount(memberVo.getUser_no()));
+		}
+		map.put("cardDto", cardDto);
+		
+		// 현재 포인트 모달 정보
+		List<PointLogVo> pointList = pointLogService.getPointLogList(user_no);
+		map.put("pointList", pointList);
+		// 유저 게시글 모달 정보
+		List<PostsVo> postList = postService.getUserPostList(user_no);
+		map.put("postList", postList);
+		// 유저생성 커뮤니티 모달 정보
+		List<CommunityVo> communityList = communityService.getUserCommunityList(user_no);
+		map.put("communityList", communityList);
+		// 신고 리스트 모달 정보
+		List<DeclaredVo> declaredList = declaredService.getTargetUserNOList(user_no);
+		map.put("declaredList", declaredList);
+		
+		return map;
+	}
+	
+	
 	
 	// 사용자 차단
 	@ResponseBody
@@ -162,13 +233,13 @@ public class ManagementController {
 	// 게시물 페이징, 검색
 	@ResponseBody
 	@RequestMapping(value = "/contents/postPaging", method = RequestMethod.GET)
-	public Map<String, Object> postPaging(PostPagingDto postPagingDto, Model model) throws Exception {
+	public Map<String, Object> postPaging(PostPagingDto postPagingDto) throws Exception {
 		int count = postService.getCountPosts(postPagingDto);
 		postPagingDto.setCount(count);
 		//System.out.println("IN: " + postPagingDto);
 		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
 		
-		model.addAttribute("postPagingDto", postPagingDto);
+		//model.addAttribute("postPagingDto", postPagingDto);
 		//System.out.println("OUT: " + postPagingDto);
 		Map<String, Object> map = new HashMap<>();
 		map.put("postList", postList);

@@ -47,4 +47,16 @@ public class DeclaredDaoImpl implements DeclaredDao {
 		return 0;
 	}
 
+	@Override
+	public int selectTargetUserCount(int target_user_no) {
+		// 유저의 신고당한 수
+		return session.selectOne(NAMESPACE+"selectTargetUserCount", target_user_no);
+	}
+
+	@Override
+	public List<DeclaredVo> selectTargetUser(int target_user_no) {
+		// 유저의 신고당한 건들
+		return session.selectList(NAMESPACE+"selectTargetUser", target_user_no);
+	}
+
 }

@@ -110,12 +110,12 @@ public class MemberController {
 	}
 
 	// 모든 회원 정보
-	@ResponseBody
-	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
-	public List<MemberVo> getAllMember() {
-		List<MemberVo> list = memberService.getAllMembers();
-		return list;
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+//	public List<MemberVo> getAllMember() {
+//		List<MemberVo> list = memberService.getAllMembers();
+//		return list;
+//	}
 	
 	// 회원정보 보기 페이지
 	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
