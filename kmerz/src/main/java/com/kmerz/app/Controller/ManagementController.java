@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -139,6 +140,7 @@ public class ManagementController {
 	}
 	
 	// 유저 정보
+	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/customers/userInfo", method=RequestMethod.GET)
 	public Map<String, Object> getCustomerInfo(int user_no) throws Exception{
@@ -147,10 +149,20 @@ public class ManagementController {
 		MemberVo memberVo = memberService.selectNO(user_no);
 		MemberInfoCardDto cardDto = new MemberInfoCardDto();
 		if(memberVo != null) {
+			String profileImgPath = memberVo.getUser_profileImage(); 
+			if(profileImgPath != null) {
+				int index = profileImgPath.indexOf("/sm_");
+				if(index > -1) {
+					String a = profileImgPath.substring(0, index+1);
+					String b = profileImgPath.substring(index+4);
+					cardDto.setUser_profileimage(a+b);
+				} else {
+					cardDto.setUser_profileimage(profileImgPath);					
+				}
+			}
 			cardDto.setUser_no(memberVo.getUser_no());
 			cardDto.setUser_name(memberVo.getUser_name());
 			cardDto.setUser_id(memberVo.getUser_id());
-			cardDto.setUser_profileimage(memberVo.getUser_profileImage());
 			cardDto.setUser_point(memberVo.getUser_point());
 			cardDto.setUser_post_count(postService.getUserPostCount(memberVo.getUser_no()));
 		}
@@ -223,7 +235,7 @@ public class ManagementController {
 	@RequestMapping(value = "/contents/postSettingPage", method = RequestMethod.GET)
 	public String postSetting(PostPagingDto postPagingDto, Model model) throws Exception {
 		// 페이지
-		int count = postService.getCountPosts(postPagingDto);
+		int count = postService.getCountAllPosts(postPagingDto);
 		postPagingDto.setCount(count);
 		List<PostsVo> postsVo = postService.selectAllPosts(postPagingDto);
 		model.addAttribute("postList", postsVo);
@@ -234,7 +246,7 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value = "/contents/postPaging", method = RequestMethod.GET)
 	public Map<String, Object> postPaging(PostPagingDto postPagingDto) throws Exception {
-		int count = postService.getCountPosts(postPagingDto);
+		int count = postService.getCountAllPosts(postPagingDto);
 		postPagingDto.setCount(count);
 		//System.out.println("IN: " + postPagingDto);
 		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
@@ -283,27 +295,27 @@ public class ManagementController {
 	// 게시물 여러개 잠금
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostsLock", method=RequestMethod.POST)
-	public String setPostsLock(@RequestBody List<String> post_no) throws Exception {
+	public List<PostsVo> setPostsLock(@RequestBody List<String> post_no) throws Exception {
 		List<Integer> postnoList = new ArrayList<>();
 		for(int i=0; i<post_no.size(); i++) {
 			postnoList.add(Integer.parseInt(post_no.get(i)));
 		}
 		System.out.println(postnoList);
-		postService.lockPostList(postnoList);
-		return "success";
+		List<PostsVo> list = postService.lockPostList(postnoList);
+		return list;
 	}
 	
 	// 게시물 여러개 잠금 풀기
 	@ResponseBody
 	@RequestMapping(value = "/contents/setPostsUnlock")
-	public String setPostsUnlock(@RequestBody List<String> post_no) throws Exception {
+	public List<PostsVo> setPostsUnlock(@RequestBody List<String> post_no) throws Exception {
 		List<Integer> postnoList = new ArrayList<>();
 		for(int i=0; i<post_no.size(); i++) {
 			postnoList.add(Integer.parseInt(post_no.get(i)));
 		}
 		System.out.println(postnoList);
-		postService.uplockPostList(postnoList);
-		return "success";
+		List<PostsVo> list = postService.unlockPostList(postnoList);
+		return list;
 	}
 	
 	// 고객 주문 관리 페이지

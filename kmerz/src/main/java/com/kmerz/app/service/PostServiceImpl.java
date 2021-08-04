@@ -39,23 +39,29 @@ public class PostServiceImpl implements PostService{
 	
 	
 	@Override
-	public int getCountPosts(PostPagingDto postPagingDto) {
-		return postdao.countPosts(postPagingDto);
+	public int getCountAllPosts(PostPagingDto postPagingDto) {
+		return postdao.countAllPosts(postPagingDto);
 	}
 
 	// 게시글Vo에 추가적으로 필요한 데이터들
 	private List<PostsVo> settingPostsVo(List<PostsVo> postsList) {
 		if(postsList != null) {
 			for(PostsVo postVo : postsList) {
-				// 유저 이름
-				MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
-				postVo.setUser_name(memberVo.getUser_name());
-				// 커뮤니티 이름
-				CommunityVo commVo = communityDao.getOneCommunity(postVo.getCommunity_id());
-				postVo.setCommunity_name(commVo.getCommunity_name());
-				// 카테고리 이름
-				CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
-				postVo.setCategory_name(categoryVo.getCategory_name());
+				if(postVo.getUser_no() != 0) {
+					// 유저 이름
+					MemberVo memberVo = memberDao.selectNO(postVo.getUser_no());
+					postVo.setUser_name(memberVo.getUser_name());
+				}
+				if(postVo.getCommunity_id() != null) {
+					// 커뮤니티 이름
+					CommunityVo commVo = communityDao.getOneCommunity(postVo.getCommunity_id());
+					postVo.setCommunity_name(commVo.getCommunity_name());
+				}
+				if(postVo.getCategory_no() != 0) {
+					// 카테고리 이름
+					CategoryVo categoryVo = categoryDao.selectNO(postVo.getCategory_no()); 
+					postVo.setCategory_name(categoryVo.getCategory_name());
+				}
 				// 신고수
 				int declared_count = declaredDao.selectTargetIDCount(postVo.getPost_no(), DeclaredServiceImpl.TYPE_POST);
 				postVo.setDeclared_count(declared_count);
@@ -212,6 +218,8 @@ public class PostServiceImpl implements PostService{
 	public void updatePost(PostsVo postsVo) {
 		// 게시글 수정하기
 		postdao.updatePost(postsVo);
+		// 게시글 상태 수정상태로 변경
+		postdao.updateStatus(postsVo.getPost_no(), POST_UPDATE);
 	}
 	
 	@Override
@@ -231,16 +239,34 @@ public class PostServiceImpl implements PostService{
 		}
 	}
 
+	@Transactional
 	@Override
-	public void lockPostList(List<Integer> postnoList) {
+	public List<PostsVo> lockPostList(List<Integer> postnoList) {
 		// 여러개 포스트 잠그기
 		postdao.updateListStatus(postnoList, POST_LOCK);
+		// 여러개 포스트 상태 조회
+		List<PostsVo> list = postdao.selectListStatus(postnoList);
+		System.out.println(list);
+		return settingPostsVo(list);
 	}
 
+	@Transactional
 	@Override
-	public void uplockPostList(List<Integer> postnoList) {
+	public List<PostsVo> unlockPostList(List<Integer> postnoList) {
 		// 여러개 포스트 잠금풀기
-		postdao.updateListStatus(postnoList, POST_CREATE);
+		// 업데이트 날짜 널이 아닐때는 update로 변경함
+		List<PostsVo> list = postdao.selectListStatus(postnoList);
+		for(PostsVo vo : list) {
+			if(vo.getPost_updatetime() == null) {
+				postdao.updateListStatus(postnoList, POST_CREATE);
+			} else {
+				postdao.updateListStatus(postnoList, POST_UPDATE);
+			}
+		}
+		// 여러개 포스트 상태 조회
+		list = postdao.selectListStatus(postnoList);
+		System.out.println(list);
+		return settingPostsVo(list);
 	}
 
 	

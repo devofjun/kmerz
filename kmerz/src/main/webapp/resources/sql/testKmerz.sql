@@ -2,7 +2,7 @@
 -- 테스트 데이터 삽입(유저 테이블)
 ----------------------------------------------------
 BEGIN
-FOR i IN 1..200 LOOP
+FOR i IN 1..10 LOOP
     insert into tbl_member values(
         seq_user_no.nextval,
         'test'||i||'@naver.com',

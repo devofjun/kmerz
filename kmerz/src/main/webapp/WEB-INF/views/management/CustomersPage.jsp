@@ -63,8 +63,14 @@ function showUserInfoCard(userno){
 	var user_no = userno
 	var url = "/admin/customers/userInfo?user_no="+user_no;
 	$.get(url,function(rData){
+		// 유저 정보 카드
 		console.log(rData);
 		var info = rData.cardDto;
+		if(info.user_profileimage != null){
+			$("#cardUserImage").attr("src", "/media/displayImage?fileName="+info.user_profileimage);
+		} else {
+			$("#cardUserImage").attr("src", "/resources/images/default_Profile.png");
+		}
 		$("#cardUserNO").text(info.user_no);
 		$("#cardUserName").text(info.user_name);
 		$("#cardUserID").text(info.user_id);
@@ -122,7 +128,6 @@ function showUserInfoCard(userno){
 			clone.find("[data-name='username']").text(this.user_name);
 			clone.find("[data-name='type']").text(this.target_type);
 		})
-		console.log(declaredList.length);
 		$("#totalDeclared").text("누적 신고수: "+declaredList.length);
 	});
 }
@@ -227,6 +232,8 @@ $(document).ready(function() {
 	// 게시글 잠금 버튼 클릭
 	$("#btnPostLock").click(function() {
 		var checked = $("input[data-name='postSelect']:checked");
+		//console.log(checked.parent().prev());
+		var tdStatus = checked.parent().prev();
 		var arrPostno = [checked.length];
 		for(var i=0; i<checked.length; i++){
 			arrPostno[i]=checked.eq(i).attr("data-value");
@@ -237,7 +244,18 @@ $(document).ready(function() {
 			data: JSON.stringify(arrPostno),
 			contentType: "application/json; charset=UTF-8",
 			success: function(rData){
-				console.log(rData);
+				$.each(rData, function(){
+					var input = $(".postModalTr > td > input");
+					for(var i=0; i<input.length; i++){
+						var post_no = input.eq(i).attr("data-value");
+						if(post_no == this.post_no){
+							console.log($(".postModalTr").eq(i).find("td[data-name='status']").text());
+							$(".postModalTr").eq(i).find("td[data-name='status']").text(this.str_post_status);
+						}
+					}
+					console.log(this.post_no);
+					console.log(this.str_post_status);
+				})
 			}
 		});
 		
@@ -246,6 +264,7 @@ $(document).ready(function() {
 	// 게시글 잠금 해제 버튼 클릭
 	$("#btnPostUnlock").click(function() {
 		var checked = $("input[data-name='postSelect']:checked");
+		var tdStatus = checked.parent().prev();
 		var arrPostno = [checked.length];
 		for(var i=0; i<checked.length; i++){
 			arrPostno[i]=checked.eq(i).attr("data-value");
@@ -256,7 +275,18 @@ $(document).ready(function() {
 			data: JSON.stringify(arrPostno),
 			contentType: "application/json; charset=UTF-8",
 			success: function(rData){
-				console.log(rData);
+				$.each(rData, function(){
+					var input = $(".postModalTr > td > input");
+					for(var i=0; i<input.length; i++){
+						var post_no = input.eq(i).attr("data-value");
+						if(post_no == this.post_no){
+							console.log($(".postModalTr").eq(i).find("td[data-name='status']").text());
+							$(".postModalTr").eq(i).find("td[data-name='status']").text(this.str_post_status);
+						}
+					}
+					console.log(this.post_no);
+					console.log(this.str_post_status);
+				})
 			}
 		});
 	})
@@ -383,7 +413,7 @@ $(document).ready(function() {
 	<div id="cardUserInfo" class="col-4" style="display:none">
 		<div class="container sticky-top">
 			<div class="card text-center h-auto shadow">
-				<img src="/resources/images/default_Profile.png" class="card-img-top" alt="프로필 사진">
+				<img id="cardUserImage" src="/resources/images/default_Profile.png" class="card-img-top" alt="프로필 사진">
 				<div class="card-body">
 					<p id="cardUserNO" style="display:none">유저번호</p>
 					<h5 id="cardUserName" class="card-title">테스터</h5>
@@ -470,7 +500,7 @@ $(document).ready(function() {
         			<th><input id="checkboxPost" type="checkbox"/></th>
         		</tr>
         	</thead>
-        	<tbody>
+        	<tbody >
         		<tr class="postModalTr" style="display:none">
         			<td data-name="datetime">2021/07/18/10:12:33</td>
         			<td ><a data-name="title" class="text-decoration-none" href="#">안녕하세요.</a></td>

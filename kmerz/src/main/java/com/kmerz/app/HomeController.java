@@ -101,6 +101,8 @@ public class HomeController {
 	public String postDeclaring(DeclaredVo declaredVo) {
 		declaredService.addPostDeclared(declaredVo);
 		return "success";
+	}
+	
 	@RequestMapping(value="/deletePost", method=RequestMethod.POST)
 	public String deletePost(@RequestParam int post_no) {
 		postService.updateStatus(post_no, -1);

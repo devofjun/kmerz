@@ -60,15 +60,16 @@ System.out.println(postVo);
 						<a id="postDeclared" href="#"><img class="icon-color"
 							src="resources/images/icons/outlined_flag_black_36dp.svg">신고</a>
 					</div>
+					
+					<%
+						if (loginVo != null) {
+					%>
 					<div style="display:none">
 						<span class="target_id"><%=postVo.getPost_no() %></span>
 						<span class="target_type">1</span>
 						<span class="user_no"><%=((MemberVo)session.getAttribute("loginVo")).getUser_no() %></span>
 						<span class="target_user_no"><%=postVo.getUser_no() %></span>
 					</div>
-					<%
-						if (loginVo != null) {
-					%>
 					<%
 						if (postVo.getUser_no() == loginVo.getUser_no()) {
 					%>

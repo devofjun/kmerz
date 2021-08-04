@@ -110,6 +110,7 @@ public class MemberServiceImpl implements MemberService {
 						PointLogVo prePointLogVo = pointlogDao.selectPreUserNo(user_no);
 						System.out.println("이전포인트vo: "+prePointLogVo);
 						memberDao.updateUserPoint(user_no, prePointLogVo.getPoint_now(), prePointLogVo.getPoint_total());
+						memberVo.setUser_point(prePointLogVo.getPoint_now());
 					}
 				}
 			}
@@ -141,11 +142,15 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updateUserName(user_no, user_name);
 	}
 
+	
 	@Override
 	public MemberVo selectNO(int user_no) {
 		// 유저 번호로 유저 정보 가져오기
 		return memberDao.selectNO(user_no);
 	}
+
+	
+	@Override
 	public void changeUserPw(int user_no, String newPw) {
 		memberDao.updateUserPw(user_no, newPw);
 	}
@@ -179,6 +184,7 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updateUserStatus(user_no, STATUS_WRITE_LOCK);
 	}
 
+	
 	
 
 }
