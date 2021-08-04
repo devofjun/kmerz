@@ -18,8 +18,10 @@ public interface PostService {
 	public int getUserPostCount(int user_no);
 	public int getNewPostSeq();
 	public PostsVo selectLoadPost(int init_post);
+	public void updateStatus(int target, int status);
 	public void updatePost(PostsVo postsVo);
-	public void deletePost(int post_no);
 	public void lockPost(int post_no);
 	public void unlockPost(int post_no);
+	public int countPosts();
+	public int selectCurrentSeq();
 }

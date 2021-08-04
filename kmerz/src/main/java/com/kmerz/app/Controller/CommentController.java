@@ -22,13 +22,15 @@ public class CommentController {
 	public void addComment(HttpSession session, 
 										@RequestParam String commentContent,
 										@RequestParam int post_no,
-										@RequestParam int comment_retag) {
+										@RequestParam(required = false, value = "comment_retag") Integer comment_retag) {
 		CommentVo commentVo = new CommentVo();
 		MemberVo memVo = (MemberVo) session.getAttribute("loginVo");
+		System.out.println(comment_retag + "retag");
 		commentVo.setUser_no(memVo.getUser_no());
 		commentVo.setPost_no(post_no);
 		commentVo.setComment_content(commentContent);
 		commentVo.setComment_retag(comment_retag);
+		System.out.println(commentVo);
 		commentService.insertComment(commentVo);
 	}
 }

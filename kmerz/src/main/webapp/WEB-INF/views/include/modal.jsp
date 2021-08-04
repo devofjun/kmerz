@@ -6,13 +6,16 @@
 	pageEncoding="UTF-8"%>
 <%
 	PostsVo postVo = (PostsVo) request.getAttribute("postVo");
-	System.out.println(postVo);
+MemberVo loginVo = (MemberVo) session.getAttribute("loginVo");
+System.out.println(postVo);
 %>
-<link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet"
+	href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/header.css?ver6">
-<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
+<script
+	src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<div class="modal-topbar">
@@ -34,8 +37,8 @@
 						</div>
 					</div>
 					<div class="modal-background border">
-						<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
 						<div class="modal-body">
+							<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
 							<p class="post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
 						</div>
 					</div>
@@ -57,17 +60,38 @@
 						<a href="#"><img class="icon-color"
 							src="resources/images/icons/outlined_flag_black_36dp.svg">Report</a>
 					</div>
+					<%
+						if (loginVo != null) {
+					%>
+					<%
+						if (postVo.getUser_no() == loginVo.getUser_no()) {
+					%>
+					<div class="button-nav-btn"
+						onclick="editPost(<%=postVo.getPost_no()%>)">
+						<a href="#"><img class="icon-color"
+							src="resources/images/icons/edit_black_36dp.svg">Edit</a>
+					</div>
+					<div class="button-nav-btn"
+						onclick="deletePost(<%=postVo.getPost_no()%>)">
+						<a href="#"><img class="icon-color"
+							src="resources/images/icons/delete_black_36dp.svg">Remove</a>
+					</div>
+					<%
+						}
+					}
+					%>
 				</div>
 				<div class="replySection">
 					<div class="reply_input">
 						<span>Comment This Post</span>
 						<div class="reply-content">
 							<div class="reply-form-input">
-								<textarea id="comment_content" cols="120" rows="10"></textarea>
+								<textarea id="comment_content_" cols="120" rows="10"></textarea>
 							</div>
 							<div class="reply-submit">
 								<button class="btn">CON</button>
-								<button class="btn" onclick="addComment('<%=postVo.getPost_no()%>')">COMMENT</button>
+								<button class="btn"
+									onclick="addComment('<%=postVo.getPost_no()%>', null)">REPLY</button>
 							</div>
 						</div>
 					</div>

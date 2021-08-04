@@ -18,7 +18,9 @@ public interface PostDao {
 	public int selectUserPostCount(int user_no);
 	public int selectSeqPostno();
 	public PostsVo selectLoadPost(int init_post);
-	public void updatePost(PostsVo postsVo);
 	// 게시글 상태 변경
 	public void updateStatus(int target, int status);
+	public void updatePost(PostsVo vo);
+	public int countPosts();
+	public int selectCurrentSeq();
 }

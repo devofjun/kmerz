@@ -1,6 +1,7 @@
 --create user kmerz identified by 1234;
 --grant connect, resource to kmerz;
-
+select SEQ_POST_NO.CURRVAL from dual;
+SELECT LAST_NUMBER FROM USER_SEQUENCES  WHERE SEQUENCE_NAME = 'SEQ_POST_NO';
 --==================================================
 -- 유저 정보 테이블
 --==================================================
@@ -94,7 +95,7 @@ create table tbl_posts(
 );
 drop sequence seq_post_no;
 create sequence seq_post_no
-    start with 100;
+    start with 100 nocache;
 
 
 --==================================================

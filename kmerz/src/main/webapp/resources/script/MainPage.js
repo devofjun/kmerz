@@ -1,27 +1,89 @@
 /**
  * 
- */  
+ */
+ var init_post = 10; 
+ var count;
+ var end_check = true;
+ function editPost(post_no){
+ 	console.log("글수정");
+ 	var modalBody = document.querySelector(".modal-body");
+ 	var postTitle = document.querySelector(".modal-postTitle");
+ 	modalBody.innerHTML = '';
+ 	includeHTML(modalBody, '/include/editPost?post_no=' + post_no);
+ }
+ function deletePost(post_no){
+ 	var xhr = new XMLHttpRequest();
+ 	var data = new FormData();
+ 	data.append("post_no", post_no);
+ 	xhr.open("POST", "/deletePost");
+ 	xhr.send(data);
+ 	closeModal();
+ 	init_posts();
+ }  
 window.addEventListener('scroll', () => {  
   if (document.documentElement.offsetHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {  
     console.log('scrolled to bottom');
-    appendPosts();  
+    if(end_check==true){
+    	appendPosts();
+    }  
   }  
 });
-function checkCommunity(message){
-	console.log(message);
+window.addEventListener('load',function (){
+	init_posts();
+}, false);
+function init_posts(){
+	console.log("init");
+	init_post = 10; 
+	var post_container = document.getElementById("post_container");
+	if(post_container.hasChildNodes()){
+		post_container.innerHTML = '';
+	}
+ 	appendPosts();
 }
-var init_post = 10;
- window.addEventListener('load', function(){ appendPosts(); });
+function countReturn(callback){
+	var xhr = new XMLHttpRequest();
+ 	xhr.open("POST", "/count");
+ 	 xhr.onreadystatechange = function(){
+ 	 	callback(xhr.responseText);
+ 	 };
+ 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+ 	xhr.send();
+ 	return xhr.responseText;
+}
+
+countReturn(function(data){
+	count = data;
+});
 function appendPosts(){
 	console.log("게시글 불러오기");
-	for(var i = init_post - 9; i < init_post; i++){
-	var newDiv = document.createElement("div");
-	var post_container = document.getElementById("post_container");
-	includeHTML(newDiv, '/include/post?init_post=' + i);
-	post_container.appendChild(newDiv);
-	console.log(newDiv);
+ 	console.log("count = " + count);
+ 	var page = count/init_post;
+ 	var left = count%10;
+ 	console.log(page);
+ 	console.log(init_post);
+ 	if(page > 1){
+ 		console.log("1");
+		for(var i = init_post-9; i < init_post+1; i++){
+		var newDiv = document.createElement("div");
+		var post_container = document.getElementById("post_container");
+		includeHTML(newDiv, '/include/post?init_post=' + i);
+		post_container.appendChild(newDiv);
+		console.log(newDiv);
+		}
+		init_post+=10;
 	}
-	init_post+=10;
+	else if(page <= 1){
+	    console.log("2");
+		for(var i = init_post-9; i <= count; i++){
+		var newDiv = document.createElement("div");
+		var post_container = document.getElementById("post_container");
+		includeHTML(newDiv, '/include/post?init_post=' + i);
+		post_container.appendChild(newDiv);
+		console.log(newDiv);
+		end_check=false;	
+		}
+		return;
+	}
 }
 function appendCommentInput(comment_no, comment_retag, post_no){
 	var replySection = document.getElementById("reply-section-"+comment_no);
@@ -36,12 +98,20 @@ function appendCommentInput(comment_no, comment_retag, post_no){
 function addComment(post_no,comment_retag){
 	console.log("댓글쓰기");
 	console.log(post_no);
-	var commentContent = document.getElementById("comment_content_" + comment_retag).value;
-	console.log(comment_retag);
+	var commentContent;
 	var data = new FormData();
+	if(comment_retag != null){
+		console.log("널아님");
+		commentContent = document.getElementById("comment_content_" + comment_retag).value;
+		data.append("comment_retag", comment_retag);
+	}else{
+		console.log("널임");
+		commentContent = document.getElementById("comment_content_").value;
+	}
+	console.log(comment_retag);
+	console.log(commentContent);
 	data.append("commentContent", commentContent);
 	data.append("post_no", post_no);
-	data.append("comment_retag", comment_retag);
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "comment/addComment");
 	xhr.send(data);
