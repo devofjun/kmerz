@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmerz.app.dto.MemberInfoCardDto;
 import com.kmerz.app.dto.MemberPagingDto;
@@ -26,6 +23,7 @@ import com.kmerz.app.service.AdminService;
 import com.kmerz.app.service.BannerService;
 import com.kmerz.app.service.CommunityService;
 import com.kmerz.app.service.DeclaredService;
+import com.kmerz.app.service.MemberLogService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PointLogService;
 import com.kmerz.app.service.PostService;
@@ -35,6 +33,7 @@ import com.kmerz.app.vo.AdminVo;
 import com.kmerz.app.vo.BannerVo;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.DeclaredVo;
+import com.kmerz.app.vo.MemberLogVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PointLogVo;
 import com.kmerz.app.vo.PostsVo;
@@ -60,6 +59,8 @@ public class ManagementController {
 	DeclaredService declaredService;
 	@Inject
 	CommunityService communityService;
+	@Inject
+	MemberLogService memberLogService;
 	
 	// uri 간편화 admin 입력하면 로그인 페이지나 대시보드 페이지로 넘어감
 	@RequestMapping
@@ -113,6 +114,28 @@ public class ManagementController {
 		return "management/DashBoardPage";
 	}
 
+	// 대시보드 데이터 요청
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value = "/dashBoardData", method = RequestMethod.GET)
+	public Map<String, Object> dashBoardCard() throws Exception {
+		// 오늘 로그인
+		List<MemberLogVo> loginList = memberLogService.dailyLoginList();
+		// 오늘 만들어진 게시글
+		List<PostsVo> postList = postService.selectDailyPost();
+		// 오늘 만들어진 커뮤니티
+		List<CommunityVo> commList = communityService.selectDailyComm();
+		// 오늘 회원가입
+		List<MemberLogVo> signupList = memberLogService.dailySignUpList();
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginList", loginList);
+		map.put("postList", postList);
+		map.put("commList", commList);
+		map.put("signupList", signupList);
+		return map;
+	}
+	
+	
 	
 	
 	// 고객 관리 페이지

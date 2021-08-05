@@ -76,4 +76,10 @@
 	</if>
 </sql>
 
+
+<!-- 오늘 만들어진 커뮤니티 -->
+<select id="selectDailyComm" resultType="CommunityVo">
+	select * from tbl_community
+	where to_char(community_createtime, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+</select>
 </mapper>

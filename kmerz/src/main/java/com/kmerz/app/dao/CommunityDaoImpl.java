@@ -59,4 +59,9 @@ public class CommunityDaoImpl implements CommunityDao {
 		return sqlsession.selectOne(NAMESPACE + "selectCommunityCount", communityPagingDto);
 	}
 
+	@Override
+	public List<CommunityVo> selectDailyComm() {
+		return sqlsession.selectList(NAMESPACE+"selectDailyComm");
+	}
+
 }

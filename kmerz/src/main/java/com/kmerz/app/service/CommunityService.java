@@ -12,4 +12,5 @@ public interface CommunityService {
 	public CommunityVo getOneCommunity(String community_id);
 	public List<CommunityVo> getUserCommunityList(int user_no);
 	public int getCommunityCount(CommunityPagingDto communitypagingDto);
+	public List<CommunityVo> selectDailyComm();
 }

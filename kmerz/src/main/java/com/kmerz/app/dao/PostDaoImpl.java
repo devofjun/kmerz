@@ -146,6 +146,13 @@ public class PostDaoImpl implements PostDao {
 	}
 
 
+	@Override
+	public List<PostsVo> selectDailyPost() {
+		// 오늘 만들어진 게시글 조회
+		return session.selectList(NAMESPACE+"selectDailyPost");
+	}
+
+
 	
 	
 

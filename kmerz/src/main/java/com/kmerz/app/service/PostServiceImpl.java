@@ -290,4 +290,10 @@ public class PostServiceImpl implements PostService{
 	public int selectCurrentSeq() {
 		return postdao.selectCurrentSeq();
 	}
+
+	@Override
+	public List<PostsVo> selectDailyPost() {
+		List<PostsVo> list = settingPostsVo(postdao.selectDailyPost());
+		return list;
+	}
 }
