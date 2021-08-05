@@ -6,6 +6,6 @@
 <%paths[i] = (String)request.getAttribute("path_" + i); %>
 <%System.out.println(paths[i]); %>
 <video width="320" height="240" controls>
-	<source src="http://localhost/media/loadVideo?path=<%=paths[i]%>" type=video/webm>
+	<source src="http://localhost:8001/media/loadVideo?path=<%=paths[i]%>" type=video/mp4>
 </video>
 <%}%>

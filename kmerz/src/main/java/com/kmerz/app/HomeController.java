@@ -2,6 +2,7 @@ package com.kmerz.app;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -101,11 +102,20 @@ public class HomeController {
 		model.addAttribute("index", files.length);
 		for(int i = 0; i < files.length; i++) {
 			System.out.println(files[i].getOriginalFilename());
-			String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
-			AttachmentProcessing.EncodingWebm(files[i],path);
-			model.addAttribute("path_" + i,path);
+			String type = files[i].getContentType();
+			System.out.println(type);
+			String filetype = type.substring(0, type.indexOf("/"));
+			if(filetype.equals("video")) {
+				String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
+				AttachmentProcessing.EncodingMpeg(files[i],path);			
+				model.addAttribute("path_" + i,path);
+				return "include/video";
+			}
+			if(filetype.equals("image")) {
+				System.out.println("이미지임");
+				return "include/image";
+			}
 		}
-		return "include/video";
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
