@@ -110,4 +110,5 @@
 		user_totalpoint = #{user_totalpoint}	
 	where user_no = #{user_no}
 </update>
+
 </mapper>

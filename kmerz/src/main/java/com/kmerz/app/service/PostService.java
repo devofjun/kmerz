@@ -6,7 +6,7 @@ import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.PostsVo;
 
 public interface PostService {
-	public int getCountPosts(PostPagingDto postPagingDto);
+	public int getCountAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllowPosts();
 	public PostsVo selectPost(int post_no);
@@ -21,7 +21,9 @@ public interface PostService {
 	public void updateStatus(int target, int status);
 	public void updatePost(PostsVo postsVo);
 	public void lockPost(int post_no);
+	public List<PostsVo>  lockPostList(List<Integer> postnoList);
 	public void unlockPost(int post_no);
+	public List<PostsVo>  unlockPostList(List<Integer> postnoList);
 	public int countPosts();
 	public int selectCurrentSeq();
 }

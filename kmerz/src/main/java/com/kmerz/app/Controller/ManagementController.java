@@ -1,18 +1,23 @@
 package com.kmerz.app.Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmerz.app.dto.MemberInfoCardDto;
 import com.kmerz.app.dto.MemberPagingDto;
@@ -138,6 +143,7 @@ public class ManagementController {
 	}
 	
 	// 유저 정보
+	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/customers/userInfo", method=RequestMethod.GET)
 	public Map<String, Object> getCustomerInfo(int user_no) throws Exception{
@@ -146,11 +152,22 @@ public class ManagementController {
 		MemberVo memberVo = memberService.selectNO(user_no);
 		MemberInfoCardDto cardDto = new MemberInfoCardDto();
 		if(memberVo != null) {
+			String profileImgPath = memberVo.getUser_profileImage(); 
+			if(profileImgPath != null) {
+				int index = profileImgPath.indexOf("/sm_");
+				if(index > -1) {
+					String a = profileImgPath.substring(0, index+1);
+					String b = profileImgPath.substring(index+4);
+					cardDto.setUser_profileimage(a+b);
+				} else {
+					cardDto.setUser_profileimage(profileImgPath);					
+				}
+			}
 			cardDto.setUser_no(memberVo.getUser_no());
 			cardDto.setUser_name(memberVo.getUser_name());
 			cardDto.setUser_id(memberVo.getUser_id());
-			cardDto.setUser_profileimage(memberVo.getUser_profileImage());
 			cardDto.setUser_point(memberVo.getUser_point());
+			cardDto.setUser_status(memberVo.getStr_user_status());
 			cardDto.setUser_post_count(postService.getUserPostCount(memberVo.getUser_no()));
 		}
 		map.put("cardDto", cardDto);
@@ -172,33 +189,39 @@ public class ManagementController {
 	}
 	
 	
-	
-	// 사용자 차단
+	// 사용자 상태 변경
 	@ResponseBody
-	@RequestMapping(value="/customers/deny", method=RequestMethod.PATCH)
-	public String customerDeny(int user_no) throws Exception {
-		memberService.setStatusDeny(user_no);
+	@RequestMapping(value="/customers/userStatus", method=RequestMethod.POST)
+	public String userStatus(String str_user_no, String str_user_status) throws Exception {
+		System.out.println(str_user_no + " " + str_user_status);
+		int user_no = Integer.parseInt(str_user_no);
+		int user_status = Integer.parseInt(str_user_status);
+		System.out.println(user_no + " " + user_status);
+		switch(user_status) {
+		case -2:
+			memberService.setStatusDeny(user_no);
+			break;
+		case 0:
+			memberService.setStatusAllow(user_no);
+			break;
+		case 1:
+			memberService.setStatusWriteLock(user_no);
+			break;
+		}
+		
 		return "success";
 	}
 	
-	// 사용자 승인
+	// 메일 보내기
+	
+	
+	// 사용자 포인트 변경
 	@ResponseBody
-	@RequestMapping(value="/customers/allow", method=RequestMethod.PATCH)
-	public String customerAllow(int user_no) throws Exception {
-		memberService.setStatusAllow(user_no);
+	@RequestMapping(value="/customers/userPoint", method=RequestMethod.POST)
+	public String userPoint(@RequestBody PointLogVo pointLogVo) throws Exception {
+		pointLogService.addPointLog(pointLogVo);
 		return "success";
 	}
-	
-	// 사용자 글쓰기 차단
-	@ResponseBody
-	@RequestMapping(value="/customers/writeLock", method=RequestMethod.PATCH)
-	public String customersWriteLock(int user_no) throws Exception {
-		memberService.setStatusWriteLock(user_no);
-		return "success";
-	}
-	
-	
-	
 	
 	
 	// 배너/사이드바 관리 페이지
@@ -223,7 +246,7 @@ public class ManagementController {
 	@RequestMapping(value = "/contents/postSettingPage", method = RequestMethod.GET)
 	public String postSetting(PostPagingDto postPagingDto, Model model) throws Exception {
 		// 페이지
-		int count = postService.getCountPosts(postPagingDto);
+		int count = postService.getCountAllPosts(postPagingDto);
 		postPagingDto.setCount(count);
 		List<PostsVo> postsVo = postService.selectAllPosts(postPagingDto);
 		model.addAttribute("postList", postsVo);
@@ -234,7 +257,7 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value = "/contents/postPaging", method = RequestMethod.GET)
 	public Map<String, Object> postPaging(PostPagingDto postPagingDto) throws Exception {
-		int count = postService.getCountPosts(postPagingDto);
+		int count = postService.getCountAllPosts(postPagingDto);
 		postPagingDto.setCount(count);
 		//System.out.println("IN: " + postPagingDto);
 		List<PostsVo> postList = postService.selectAllPosts(postPagingDto);
@@ -266,20 +289,45 @@ public class ManagementController {
 	
 	// 게시물 잠금
 	@ResponseBody
-	@RequestMapping(value = "/contents/setPostDeny", method=RequestMethod.GET)
-	public String setPostDeny(int post_no) throws Exception {
+	@RequestMapping(value = "/contents/setPostLock", method=RequestMethod.GET)
+	public String setPostLock(int post_no) throws Exception {
 		postService.lockPost(post_no);
 		return "success";
 	}
 	
 	// 게시물 잠금 해제
 	@ResponseBody
-	@RequestMapping(value = "/contents/setPostAdmit", method=RequestMethod.GET)
-	public String setPostAdmit(int post_no) throws Exception {
+	@RequestMapping(value = "/contents/setPostUnlock", method=RequestMethod.GET)
+	public String setPostUnlock(int post_no) throws Exception {
 		postService.unlockPost(post_no);
 		return "success";
 	}
 	
+	// 게시물 여러개 잠금
+	@ResponseBody
+	@RequestMapping(value = "/contents/setPostsLock", method=RequestMethod.POST)
+	public List<PostsVo> setPostsLock(@RequestBody List<String> post_no) throws Exception {
+		List<Integer> postnoList = new ArrayList<>();
+		for(int i=0; i<post_no.size(); i++) {
+			postnoList.add(Integer.parseInt(post_no.get(i)));
+		}
+		System.out.println(postnoList);
+		List<PostsVo> list = postService.lockPostList(postnoList);
+		return list;
+	}
+	
+	// 게시물 여러개 잠금 풀기
+	@ResponseBody
+	@RequestMapping(value = "/contents/setPostsUnlock")
+	public List<PostsVo> setPostsUnlock(@RequestBody List<String> post_no) throws Exception {
+		List<Integer> postnoList = new ArrayList<>();
+		for(int i=0; i<post_no.size(); i++) {
+			postnoList.add(Integer.parseInt(post_no.get(i)));
+		}
+		System.out.println(postnoList);
+		List<PostsVo> list = postService.unlockPostList(postnoList);
+		return list;
+	}
 	
 	// 고객 주문 관리 페이지
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)

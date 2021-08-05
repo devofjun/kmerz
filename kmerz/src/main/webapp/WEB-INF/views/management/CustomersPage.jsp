@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="./mngInclude/header.jsp"%>
 <script src="/resources/script/TimeFormat.js"></script>
-<style>
-
-</style>
-
 <script>
 function submitPaging() {
 	var url = "/admin/customers/list";
@@ -59,6 +55,101 @@ function submitPaging() {
 	});
 }
 
+function showUserInfoCard(userno){
+	var user_no = userno
+	var url = "/admin/customers/userInfo?user_no="+user_no;
+	$.get(url,function(rData){
+		// 유저 정보 카드
+		console.log(rData);
+		var info = rData.cardDto;
+		if(info.user_profileimage != null){
+			$("#cardUserImage").attr("src", "/media/displayImage?fileName="+info.user_profileimage);
+		} else {
+			$("#cardUserImage").attr("src", "/resources/images/default_Profile.png");
+		}
+		$("#cardUserNO").text(info.user_no);
+		$("#cardUserName").text(info.user_name);
+		$("#cardUserID").text(info.user_id);
+		$("#cardUserPoint").text(info.user_point);
+		$("#cardUserPostCount").text(info.user_post_count);
+		var user_status = info.user_status;
+		$("#btnUserStatusChange").removeClass("btn-danger");
+		$("#btnUserStatusChange").removeClass("btn-warning");
+		$("#btnUserStatusChange").removeClass("btn-success");
+		if(user_status == "승인"){
+			$("#btnUserStatusChange").text("사용자 승인");
+			$("#btnUserStatusChange").addClass("btn-success");
+			$("#btnUserStatusChange").attr("data-status", "1");
+		} else if(user_status == "글쓰기 정지"){
+			$("#btnUserStatusChange").text("글쓰기 정지");
+			$("#btnUserStatusChange").addClass("btn-warning");
+			$("#btnUserStatusChange").attr("data-status", "-2");
+		} else if(user_status == "이용 정지"){
+			$("#btnUserStatusChange").text("로그인 정지");
+			$("#btnUserStatusChange").addClass("btn-danger");
+			$("#btnUserStatusChange").attr("data-status", "0");
+		} else {
+			$("#btnUserStatusChange").text("뭐지");
+		}
+		$("#cardUserInfo").show();
+		// 포인트 모달
+		var pointList = rData.pointList;
+		$(".pointModalTr:gt(0)").remove();
+		$.each(pointList, function(){
+			var clone = $(".pointModalTr").eq(0).clone();
+			clone.find("td[data-name='time']").text(timePattern(this.point_datetime));
+			clone.find("td[data-name='total']").text(this.point_total);
+			clone.find("td[data-name='now']").text(this.point_now);
+			clone.find("td[data-name='score']").text(this.point_score);
+			clone.find("td[data-name='content']").text(this.point_content);
+			clone.show();
+			$(".pointModalTr").parent().append(clone);
+		})
+		// 작성글 모달
+		var postList = rData.postList;
+		$(".postModalTr:gt(0)").remove();
+		$.each(postList, function(){
+			var clone = $(".postModalTr").eq(0).clone();
+			clone.find("[data-name='postSelect']").attr("data-value", this.post_no);
+			clone.find("[data-name='datetime']").text(timePattern(this.post_createtime));
+			clone.find("[data-name='title']").text(this.post_title);
+			//clone.find("[data-name='title']").attr("href","");
+			clone.find("[data-name='readcount']").text(this.post_readcount);
+			clone.find("[data-name='recommand']").text(this.post_recommand);
+			clone.find("[data-name='declared']").text(this.declared_count);
+			clone.find("[data-name='status']").text(this.str_post_status);
+			clone.show();
+			$(".postModalTr").parent().append(clone);
+		})
+		// 커뮤니티 모달
+		var commList = rData.communityList;
+		$(".commModalTr:gt(0)").remove();
+		$.each(commList, function() {
+			var clone = $(".commModalTr").eq(0).clone();
+			clone.find("[data-name='id']").text(this.community_id);
+			clone.find("[data-name='name']").text(this.community_name);
+			clone.find("[data-name='description']").text(this.community_description);
+			clone.show();
+			$(".commModalTr").parent().append(clone);
+		})
+		// 신고 모달
+		var declaredList = rData.declaredList;
+		$(".declaredModalTr:gt(0)").remove();
+		$.each(declaredList, function(){
+			var clone = $(".declaredModalTr").eq(0).clone();
+			clone.find("[data-name='id']").text(this.declared_id);
+			clone.find("[data-name='datetime']").text(timePattern(this.declared_datetime));
+			clone.find("[data-name='title']").text(this.post_title);
+			clone.find("[data-name='username']").text(this.user_name);
+			clone.find("[data-name='type']").text(this.str_target_type);
+			clone.show();
+			console.log(clone);
+			$(".declaredModalTr").parent().append(clone);
+		})
+		$("#totalDeclared").text("누적 신고수: "+declaredList.length);
+	});
+}
+
 $(document).ready(function() {
 	$("input[name='searchType']").val("user_name");
 	for(var i=0; i<$(".currentLogin").length; i++){
@@ -103,8 +194,19 @@ $(document).ready(function() {
 
 	// 검색 타입 변경
 	$(".searchType").click(function(e) {
-		
+		console.log($(this).attr("data-searchType"));
+		console.log($(this).text());
+		$("#btnSearchType").text($(this).text());
+		$("input[name='searchType']").val($(this).attr("data-searchType"));
 	});
+	
+	// 검색 버튼 클릭
+	$("#btnSearch").click(function(){
+		var keyword = $("#searchKeyword").val();
+		$("input[name='keyword']").val(keyword);
+		submitPaging();
+	})
+	
 	
 	
 	// 페이지 번호 클릭시
@@ -120,74 +222,11 @@ $(document).ready(function() {
 	
 	
 	// 유저 목록 클릭시 카드 보이기
-	$(".trUserInfo").click(function() {
+	$("#tbodyCustomer").on("click",".trUserInfo", function(){
 		var user_no = $(this).find(".userno").text();
-		var url = "/admin/customers/userInfo?user_no="+user_no;
-		$.get(url,function(rData){
-			console.log(rData);
-			var info = rData.cardDto;
-			$("#cardUserNO").text(info.user_no);
-			$("#cardUserName").text(info.user_name);
-			$("#cardUserID").text(info.user_id);
-			$("#cardUserPoint").text(info.user_point);
-			$("#cardUserPostCount").text(info.user_post_count);
-			$("#cardUserInfo").show();
-			// 포인트 모달
-			var pointList = rData.pointList;
-			$(".pointModalTr:gt(0)").remove();
-			$.each(pointList, function(){
-				var clone = $(".pointModalTr").eq(0).clone();
-				clone.find("td[data-name='time']").text(timePattern(this.point_datetime));
-				clone.find("td[data-name='total']").text(this.point_total);
-				clone.find("td[data-name='now']").text(this.point_now);
-				clone.find("td[data-name='score']").text(this.point_score);
-				clone.find("td[data-name='content']").text(this.point_content);
-				clone.show();
-				$(".pointModalTr").parent().append(clone);
-			})
-			// 작성글 모달
-			var postList = rData.postList;
-			$(".postModalTr:gt(0)").remove();
-			$.each(postList, function(){
-				var clone = $(".postModalTr").eq(0).clone();
-				clone.find("[data-name='no']").text(this.post_no);
-				clone.find("[data-name='datetime']").text(timePattern(this.post_createtime));
-				clone.find("[data-name='title']").text(this.post_title);
-				//clone.find("[data-name='title']").attr("href","");
-				clone.find("[data-name='readcount']").text(this.post_readcount);
-				clone.find("[data-name='recommand']").text(this.post_recommand);
-				clone.find("[data-name='declared']").text(this.declared_count);
-				clone.find("[data-name='status']").text(this.post_status);
-				clone.show();
-				$(".postModalTr").parent().append(clone);
-			})
-			// 커뮤니티 모달
-			var commList = rData.communityList;
-			$(".commModalTr:gt(0)").remove();
-			$.each(commList, function() {
-				var clone = $(".commModalTr").eq(0).clone();
-				clone.find("[data-name='id']").text(this.community_id);
-				clone.find("[data-name='name']").text(this.community_name);
-				clone.find("[data-name='description']").text(this.community_description);
-				clone.show();
-				$(".commModalTr").parent().append(clone);
-			})
-			// 신고 모달
-			var declaredList = rData.declaredList;
-			$(".declaredModalTr:gt(0)").remove();
-			$.each(declaredList, function(){
-				var clone = $(".declaredModalTr").eq(0).clone();
-				clone.find("[data-name='id']").text(this.declared.id);
-				clone.find("[data-name='datetime']").text(timePattern(this.declared_datetime));
-				clone.find("[data-name='title']").text(this.post_title);
-				clone.find("[data-name='username']").text(this.user_name);
-				clone.find("[data-name='type']").text(this.target_type);
-			})
-			
-		});
+		showUserInfoCard(user_no);
 	});
 
-	
 	// 유저 정보 카드 목록 하이라이트
 	$(".liUserInfo").mouseenter(function() {
 		//bg-primary text-white
@@ -196,6 +235,154 @@ $(document).ready(function() {
 	$(".liUserInfo").mouseleave(function() {
 		$(this).removeClass("bg-primary text-white");
 	})
+	
+	// 게시글 모달 전체 체크
+	$("#checkboxPost").click(function(){
+		var chk = $(this).is(":checked");
+		if(chk){
+			$("input[data-name='postSelect']:gt(0)").prop("checked", true);
+		} else {
+			$("input[data-name='postSelect']:gt(0)").prop("checked", false);
+		}
+	})
+	
+	
+	// 게시글 잠금 버튼 클릭
+	$("#btnPostLock").click(function() {
+		var checked = $("input[data-name='postSelect']:checked");
+		//console.log(checked.parent().prev());
+		var tdStatus = checked.parent().prev();
+		var arrPostno = [checked.length];
+		for(var i=0; i<checked.length; i++){
+			arrPostno[i]=checked.eq(i).attr("data-value");
+		}
+		$.ajax({
+			type: 'POST',
+			url: "/admin/contents/setPostsLock",
+			data: JSON.stringify(arrPostno),
+			contentType: "application/json; charset=UTF-8",
+			success: function(rData){
+				$.each(rData, function(){
+					var input = $(".postModalTr > td > input");
+					for(var i=0; i<input.length; i++){
+						var post_no = input.eq(i).attr("data-value");
+						if(post_no == this.post_no){
+							console.log($(".postModalTr").eq(i).find("td[data-name='status']").text());
+							$(".postModalTr").eq(i).find("td[data-name='status']").text(this.str_post_status);
+						}
+					}
+					console.log(this.post_no);
+					console.log(this.str_post_status);
+				})
+			}
+		});
+		
+	})
+	
+	// 게시글 잠금 해제 버튼 클릭
+	$("#btnPostUnlock").click(function() {
+		var checked = $("input[data-name='postSelect']:checked");
+		var tdStatus = checked.parent().prev();
+		var arrPostno = [checked.length];
+		for(var i=0; i<checked.length; i++){
+			arrPostno[i]=checked.eq(i).attr("data-value");
+		}
+		$.ajax({
+			type: 'POST',
+			url: "/admin/contents/setPostsUnlock",
+			data: JSON.stringify(arrPostno),
+			contentType: "application/json; charset=UTF-8",
+			success: function(rData){
+				$.each(rData, function(){
+					var input = $(".postModalTr > td > input");
+					for(var i=0; i<input.length; i++){
+						var post_no = input.eq(i).attr("data-value");
+						if(post_no == this.post_no){
+							console.log($(".postModalTr").eq(i).find("td[data-name='status']").text());
+							$(".postModalTr").eq(i).find("td[data-name='status']").text(this.str_post_status);
+						}
+					}
+				})
+			}
+		});
+	});
+	
+	// 사용자 차단 버튼 클릭
+	$("#btnUserStatusChange").click(function(){
+		var user_no = $("#cardUserNO").text();
+		var user_status = $(this).attr("data-status");
+		$.ajax({
+			type: 'POST',
+			url: "/admin/customers/userStatus",
+			data: {
+				"str_user_no" : user_no,
+				"str_user_status" : user_status
+			},
+			success: function(){
+				var btn = $("#btnUserStatusChange");
+				var status = btn.attr("data-status");
+				console.log(status);
+				switch(status){
+				case "-2":
+					console.log(btn);
+					btn.text("로그인 정지");
+					btn.removeClass("btn-warning");
+					btn.addClass("btn-danger");
+					btn.attr("data-status", 0);
+					break;
+				case "0":
+					console.log(btn);
+					btn.text("사용자 승인");
+					btn.removeClass("btn-danger");
+					btn.addClass("btn-success");
+					btn.attr("data-status", 1);
+					break;
+				case "1":
+					console.log(btn);
+					btn.text("글쓰기 정지");
+					btn.removeClass("btn-success");
+					btn.addClass("btn-warning");
+					btn.attr("data-status", -2);
+					break;
+				}
+			}
+		});
+		submitPaging();
+	});
+	
+	
+	// 포인트 변경 모달 닫기
+	$("#btnPointClose").click(function(){
+		$("#pointScore").val(0);
+		$("#pointContent").val("");
+	});
+	
+	// 포인트 변경 보내기
+	$("#btnPointSubmit").click(function(){
+		var user_no = parseInt($("#cardUserNO").text());
+		var point_score = parseInt($("#pointScore").val());
+		var point_content = $("#pointContent").val();
+		if(point_score != 0 && point_content != ""){
+			console.log(user_no+":"+point_score+":"+point_content);
+			var url = "/admin/customers/userPoint";
+			var sData = {
+				"user_no":user_no,
+				"point_score":point_score,
+				"point_content":point_content
+			};
+			$.ajax({
+				type : "POST",
+				url : url,
+				contentType : "application/json; charset=UTR-8",
+				data : JSON.stringify(sData),
+				success : function(rData){
+					console.log(rData);
+					$("#btnPointClose").trigger("click");
+				}
+			})
+		}
+	});
+	
 });
 </script>
 
@@ -220,13 +407,12 @@ $(document).ready(function() {
 		<div class="input-group mb-1 ">
 			<button id="btnSearchType"
 				class="btn btn-outline-secondary dropdown-toggle" type="button"
-				data-bs-toggle="dropdown" aria-expanded="false"
-				data-searchType="/admin/searchName">이름</button>
+				data-bs-toggle="dropdown" aria-expanded="false">이름</button>
 			<ul id="ulSearchType" class="dropdown-menu">
 				<li><span class="searchType dropdown-item" data-searchType="user_id">아이디</span></li>
 				<li><span class="searchType dropdown-item" data-searchType="user_name">이름</span></li>
 			</ul>
-			<input type="text" class="form-control"
+			<input id="searchKeyword" type="text" class="form-control"
 				aria-label="Text input with dropdown button">
 			<button class="btn btn-outline-secondary" type="button"
 				id="btnSearch">검색</button>
@@ -278,7 +464,7 @@ $(document).ready(function() {
 				<input type="hidden" name="perPage" value="${memberPagingDto.perPage}" />
 				<input type="hidden" name="searchType" value="${memberPagingDto.searchType}"/>
 				<input type="hidden" name="keyword" value="${memberPagingDto.keyword}" />
-			</form>
+			</form>	
 			<!-- 페이징 네비 -->
 			<nav>
 				<ul class="pagination justify-content-center">
@@ -319,7 +505,7 @@ $(document).ready(function() {
 	<div id="cardUserInfo" class="col-4" style="display:none">
 		<div class="container sticky-top">
 			<div class="card text-center h-auto shadow">
-				<img src="/resources/images/default_Profile.png" class="card-img-top" alt="프로필 사진">
+				<img id="cardUserImage" src="/resources/images/default_Profile.png" class="card-img-top" alt="프로필 사진">
 				<div class="card-body">
 					<p id="cardUserNO" style="display:none">유저번호</p>
 					<h5 id="cardUserName" class="card-title">테스터</h5>
@@ -330,11 +516,12 @@ $(document).ready(function() {
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: <span id="cardUserPostCount">5</span></li>
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">생성 커뮤니티</li>
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserDeclared">신고 내역 / 차단</li>
+					<li class="liUserInfo cspointer list-group-item"><button id="btnUserStatusChange" class="btn btn-danger" data-status="">사용자 차단</button></li>
 				</ul>
 				<div class="card-body">
 					<span id="spSendMessage" class="mx-1 text-primary cspointer" 
 					data-bs-toggle="modal" data-bs-target="#modalSendMessage" data-bs-whatever="test@naver.com"
-					>메시지 보내기</span>
+					>메일 보내기</span>
 					<span id="spUpdatePoint" class="mx-1 text-primary cspointer"
 					data-bs-toggle="modal" data-bs-target="#modalUpdatePoint" data-bs-whatever="test@naver.com"
 					>포인트 변경</span>
@@ -386,7 +573,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 작성글 내역 모달 -->
-<div id="modalUserPosts" data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div id="modalUserPosts" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -397,33 +584,31 @@ $(document).ready(function() {
         <table class="table table-striped table-sm">
         	<thead>
         		<tr>
-        			<th style="display:none">글번호</th>
         			<th>시간</th>
         			<th >글제목</th>
         			<th >조회수</th>
         			<th >추천수</th>
         			<th >신고수</th>
         			<th >현재 상태</th>
-        			<th><input type="checkbox"/></th>
+        			<th><input id="checkboxPost" type="checkbox"/></th>
         		</tr>
         	</thead>
-        	<tbody>
+        	<tbody >
         		<tr class="postModalTr" style="display:none">
-        			<td data-name="no" style="display:none"></td>
         			<td data-name="datetime">2021/07/18/10:12:33</td>
         			<td ><a data-name="title" class="text-decoration-none" href="#">안녕하세요.</a></td>
         			<td data-name="readcount">47</td>
         			<td data-name="recommand">12</td>
         			<td data-name="declared">0</td>
         			<td data-name="status">open</td>
-        			<td><input type="checkbox"/></td>
+        			<td><input data-name="postSelect" data-value="" type="checkbox"/></td>
         		</tr>
         	</tbody>
         </table>
       </div>
       <div class="modal-footer">
-      	<button class="btn btn-primary">선택 잠금 해제</button>
-        <button class="btn btn-danger">선택 잠금</button>
+      	<button id="btnPostUnlock" class="btn btn-primary">잠금 해제</button>
+        <button id="btnPostLock" class="btn btn-danger">잠금</button>
       </div>
     </div>
   </div>
@@ -460,7 +645,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 신고 내역 모달 -->
-<div id="modalUserDeclared" data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div id="modalUserDeclared" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -468,7 +653,7 @@ $(document).ready(function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      	<h5>누적 신고수: 5</h5>
+      	<h5 id="totalDeclared">누적 신고수: </h5>
         <table class="table table-striped table-sm">
         	<thead>
         		<tr>
@@ -479,7 +664,6 @@ $(document).ready(function() {
         		</tr>
         	</thead>
         	<tbody>
-        	<c:forEach var="i" begin="1" end="5" step="1">
         		<tr class="declaredModalTr" style="display:none">
         			<td data-name="id" style="display:none">신고번호</td>
         			<td data-name="datetime">2021/07/18/10:12:33</td>
@@ -487,19 +671,15 @@ $(document).ready(function() {
         			<td data-name="username">tester2</td>
         			<td data-name="type">글/댓글</td>
         		</tr>
-        	</c:forEach>
         	</tbody>
         </table>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-danger">사용자 차단</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 메시지 보내기 모달 -->
-<div id="modalSendMessage" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 메일 보내기 모달 -->
+<div id="modalSendMessage" data-bs-backdrop="static" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -527,7 +707,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 포인트 변경 모달 -->
-<div id="modalUpdatePoint" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="modalUpdatePoint" data-bs-backdrop="static" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -541,17 +721,17 @@ $(document).ready(function() {
           </div>
           <div class="mb-3">
           	<label for="recipient-name" class="col-form-label">변경할 포인트:</label>
-          	<input type="number" class="form-control">
+          	<input id="pointScore" type="number" class="form-control" value="0">
           </div>
           <div class="mb-3">
             <label for="point-content" class="col-form-label">내용:</label>
-            <textarea class="form-control" id="point-content"></textarea>
+            <textarea id="pointContent" class="form-control" ></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">보내기</button>
+        <button id="btnPointClose" type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button id="btnPointSubmit" type="button" class="btn btn-primary">보내기</button>
       </div>
     </div>
   </div>
