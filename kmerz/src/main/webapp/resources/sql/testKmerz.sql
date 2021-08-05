@@ -217,7 +217,13 @@ insert into tbl_point_log values(
 );
 */
 
-select * from tbl_member_log;
+select * from tbl_member_log
+where member_logtype = 3 and to_char(user_log_time, 'YYYYMMDD') =
+    to_char(sysdate,'YYYYMMDD');
+    
+    select * from tbl_member_log where member_logtype = 3 
+    and to_char(user_log_time, 'YYYYMMDD') 
+    = to_char(sysdate, 'YYYYMMDD'); 
 --------------------
 -- 테스트 데이터 삽입 끝
 --------------------
