@@ -5,7 +5,5 @@
 <%for(int i = 0; i < index; i++){ %>
 <%paths[i] = (String)request.getAttribute("path_" + i); %>
 <%System.out.println(paths[i]); %>
-<video width="320" height="240" controls>
-	<source src="http://localhost:8001/media/loadVideo?path=<%=paths[i]%>.mp4" type=video/mp4>
-</video>
+	<img src="http://localhost:8001/media/loadImage?path=<%=paths[i]%>.jpg">
 <%}%>

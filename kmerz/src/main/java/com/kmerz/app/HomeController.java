@@ -105,17 +105,20 @@ public class HomeController {
 			String type = files[i].getContentType();
 			System.out.println(type);
 			String filetype = type.substring(0, type.indexOf("/"));
+			String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
 			if(filetype.equals("video")) {
-				String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
-				AttachmentProcessing.EncodingMpeg(files[i],path);			
+				AttachmentProcessing.TranscodingMP4(files[i],path);			
 				model.addAttribute("path_" + i,path);
 				return "include/video";
 			}
 			if(filetype.equals("image")) {
 				System.out.println("이미지임");
+				AttachmentProcessing.TranscodingJpg(files[i],path);
+				model.addAttribute("path_" + i,path);
 				return "include/image";
 			}
 		}
+		return null;
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,

@@ -1,5 +1,6 @@
 package com.kmerz.app.util;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,7 +54,7 @@ public class AttachmentProcessing {
 		Path filePath = null;
 		String logicalFileName = null;
 		UUID tempFileName = UUID.randomUUID();
-		logicalFileName = seqPostNo + "_" + tempFileName.toString() + ".mp4";
+		logicalFileName = seqPostNo + "_" + tempFileName.toString();
 		filePath = uploadDir.resolve(logicalFileName);
 		return filePath.toString();
 	}
@@ -73,35 +76,22 @@ public class AttachmentProcessing {
 		}
 		return filePath.toString();
 	}
-	public static String ExtensionProcessing(String originalFileName) {
-		if (originalFileName.toLowerCase().endsWith(".txt")) {
-			return "txt";
+	public static void TranscodingJpg(MultipartFile files, String output) {
+		System.out.println("Transcoding jpg");
+		File source = multipartToFile(files);
+		File target = new File(output + ".jpg");
+		try {
+			BufferedImage output_img = ImageIO.read(source);
+			ImageIO.write(output_img, "jpg", target);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (originalFileName.toLowerCase().endsWith(".jpg")) {
-			return "jpg";
-		}
-		if (originalFileName.toLowerCase().endsWith(".png")) {
-			return "png";
-		}
-		if (originalFileName.toLowerCase().endsWith(".gif")) {
-			return "gif";
-		}
-		if (originalFileName.toLowerCase().endsWith(".mp4")) {
-			return "mp4";
-		}
-		if (originalFileName.toLowerCase().endsWith(".webm")) {
-			return "webm";
-		}
-		if (originalFileName.toLowerCase().endsWith(".avi")) {
-			return "avi";
-		}
-		return null;
 	}
-	
-	public static void EncodingMpeg(MultipartFile files,String t) {
+	public static void TranscodingMP4(MultipartFile files,String output) {
 		System.out.println("encode MP4");
 		File source = multipartToFile(files);
-		File target = new File(t);
+		File target = new File(output + ".mp4");
 		AudioAttributes audio = new AudioAttributes();
 		VideoAttributes video = new VideoAttributes();
 		EncodingAttributes attrs = new EncodingAttributes();

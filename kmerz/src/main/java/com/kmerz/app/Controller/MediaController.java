@@ -2,6 +2,7 @@ package com.kmerz.app.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,14 +114,24 @@ public class MediaController {
 	// post 업로드
 
 	// post 이미지 파일 업로드
-	@RequestMapping(value = "/uploadPostImage", method = RequestMethod.POST)
-	public void uploadPostImage() {
-
+	@RequestMapping(value = "/loadImage")
+	public void uploadPostImage(@RequestParam String path, HttpServletResponse response) throws IOException {
+		int fileSize = (int) new File(path).length();
+		response.setContentLength(fileSize);
+		response.setContentType("image");
+		FileInputStream inputStream = new FileInputStream(path);
+		ServletOutputStream outputStream = response.getOutputStream();
+		int value = IOUtils.copy(inputStream, outputStream);
+		System.out.println("File Size :: " + fileSize);
+		System.out.println("Copied Bytes :: " + value);
+		IOUtils.closeQuietly(inputStream);
+		IOUtils.closeQuietly(outputStream);
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
 	// post 동영상 로드
 	@RequestMapping("/loadVideo")
-	public void loadVideo(@RequestParam String path, HttpServletRequest request, HttpServletResponse response)
+	public void loadVideo(@RequestParam String path, HttpServletResponse response)
 			throws Exception {
 		int fileSize = (int) new File(path).length();
 		response.setContentLength(fileSize);
