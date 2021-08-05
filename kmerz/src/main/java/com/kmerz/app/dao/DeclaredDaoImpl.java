@@ -42,9 +42,7 @@ public class DeclaredDaoImpl implements DeclaredDao {
 		Map<String, Integer> map = new HashMap<>();
 		map.put("target_id", target_id);
 		map.put("target_type", target_type);
-		
-		List<DeclaredVo> declaredVo = session.selectList(NAMESPACE+"selectTargetIDCount", map);
-		return 0;
+		return session.selectOne(NAMESPACE+"selectTargetIDCount", map);
 	}
 
 	@Override
