@@ -37,7 +37,7 @@ update tbl_member set user_currentlogin = sysdate
 	where user_no = 1001;
     commit;
     */
---select * from tbl_point_log;
+select * from tbl_declared;
 
 ----------------------------------------------------
 -- 테스트 데이터 삽입(커뮤니티 테이블)
@@ -48,7 +48,8 @@ insert into tbl_community values(
     '스타크래프트',
     'starcraft',
     '스타크래프트 임시 커뮤니티입니다.',
-    'accept'
+    'accept',
+    sysdate
 );
 insert into tbl_community values(
     'lol',
@@ -56,7 +57,8 @@ insert into tbl_community values(
     '리그오브레전드',
     'League of Legends',
     '롤 임시 커뮤니티입니다.',
-    'accept'
+    'accept',
+    sysdate
 );
 insert into tbl_community values(
     'overwatch',
@@ -64,7 +66,8 @@ insert into tbl_community values(
     '오버워치',
     'overwatch',
     '오버워치 임시 커뮤니티입니다.',
-    'wait'
+    'accept',
+    sysdate
 );
 -- select * from tbl_community;
 
@@ -214,7 +217,7 @@ insert into tbl_point_log values(
 );
 */
 
-
+select * from tbl_member_log;
 --------------------
 -- 테스트 데이터 삽입 끝
 --------------------

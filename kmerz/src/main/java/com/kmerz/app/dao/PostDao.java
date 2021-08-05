@@ -25,4 +25,5 @@ public interface PostDao {
 	public void updatePost(PostsVo vo);
 	public int countPosts();
 	public int selectCurrentSeq();
+	public List<PostsVo> selectDailyPost();
 }

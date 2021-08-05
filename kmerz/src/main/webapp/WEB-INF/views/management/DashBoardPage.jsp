@@ -1,9 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="./mngInclude/header.jsp"%>
+<script src="/resources/script/TimeFormat.js"></script>
 <script>
 	$(document).ready(function() {
+		$.get("/admin/dashBoardData",function(rData){
+			$("#loginCount").text(rData.loginList.length);
+			$("#newPostCount").text(rData.postList.length);
+			$("#newCommCount").text(rData.commList.length);
+			$("#signupCount").text(rData.signupList.length);
+			
+			// 일일 접속자
+			$("#loginTr:gt(0)").remove();
+			$.each(rData.loginList, function() {
+				var clone = $("#loginTr:eq(0)").clone();
+				clone.find("td:eq(0)").text(timePattern(this.user_log_time));
+				clone.find("td:eq(1)").text(this.user_id);
+				clone.find("td:eq(2)").text(this.user_name);
+				clone.find("td:eq(3)").text(this.request_ip);
+				clone.show();
+				$("#loginTr").parent().append(clone);
+			});
+			
+			// 새로운 글
+			$("#newPostTr:gt(0)").remove();
+			$.each(rData.postList, function() {
+				var clone = $("#newPostTr:eq(0)").clone();
+				clone.find("td:eq(0)").text(timePattern(this.post_createtime));
+				clone.find("td:eq(1)").text(this.post_no);
+				clone.find("td:eq(2)").text(this.post_title);
+				clone.find("td:eq(3)").text(this.user_name);
+				clone.find("td:eq(4)").text(this.post_readcount);
+				clone.find("td:eq(5)").text(this.str_post_status);
+				clone.show();
+				$("#newPostTr").parent().append(clone);
+			});
+			
+			// 커뮤니티 신청
+			$("#newCommTr")
+			$.each(rData.commList, function() {
+				var clone = $("#newCommTr:eq(0)").clone();
+				clone.find("td:eq(0)").text(timePattern(this.community_createtime));
+				clone.find("td:eq(1)").text(this.community_id);
+				clone.find("td:eq(2)").text(this.user_id);
+				clone.find("td:eq(3)").text(this.community_name);
+				clone.find("td:eq(4)").text(this.community_topic);
+				clone.find("td:eq(5)").text(this.str_community_status);
+				clone.show();
+				$("#newCommTr").parent().append(clone);
+			});
+			
+			// 신규 회원가입
+			$("#signupTr")
+			$.each(rData.signupList, function() {
+				var clone = $("#signupTr:eq(0)").clone();
+				clone.find("td:eq(0)").text(timePattern(this.user_log_time));
+				clone.find("td:eq(1)").text(this.user_id);
+				clone.find("td:eq(2)").text(this.user_name);
+				clone.find("td:eq(3)").text(this.request_ip);
+				clone.show();
+				$("#signupTr").parent().append(clone);
+			});
+			
+		});
+		
+		
+		
 		// 카드 테두리 색 변환
 		$(".card").mouseenter(function() {
 			$(this).removeClass("border-light");
@@ -32,7 +94,7 @@
 					<h5>일일 접속자</h5>
 				</div>
 				<div class="card-body">
-					<a class="card-title fs-1 text-decoration-none" href="#">123</a>
+					<a id="loginCount" class="card-title fs-1 text-decoration-none" href="#">0</a>
 				</div>
 			</div>
 		</div>
@@ -44,7 +106,7 @@
 					<h5>새로운 글</h5>
 				</div>
 				<div class="card-body">
-					<a class="card-title fs-1 text-decoration-none" href="#">83</a>
+					<a id="newPostCount" class="card-title fs-1 text-decoration-none" href="#">0</a>
 				</div>
 			</div>
 		</div>
@@ -56,7 +118,7 @@
 					<h5>커뮤니티 신청</h5>
 				</div>
 				<div class="card-body">
-					<a class="card-title fs-1 text-decoration-none" href="#">7</a>
+					<a id="newCommCount" class="card-title fs-1 text-decoration-none" href="#">0</a>
 				</div>
 			</div>
 		</div>
@@ -68,7 +130,7 @@
 					<h5>신규 회원가입</h5>
 				</div>
 				<div class="card-body">
-					<a class="card-title fs-1 text-decoration-none" href="#">5</a>
+					<a id="signupCount" class="card-title fs-1 text-decoration-none" href="#">0</a>
 				</div>
 			</div>
 		</div>
@@ -94,27 +156,32 @@
 <!-- </div> -->
 <!-- 테이블 -->
 <div class="row">
+	<!-- 일일 로그인 -->
 	<div class="boardTables col-12" >
 		<a class="fs-1 text-decoration-none" href="#">일일 접속자</a>
 		<div class="table-responsive">
 			<table class="table table-striped table-sm">
 				<thead>
 					<tr>
-						<th scope="col">접속 시간</th>
-						<th scope="col">접속 ID</th>
+						<th scope="col">시간</th>
+						<th scope="col">ID</th>
+						<th scope="col">이름</th>
 						<th scope="col">IP</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>2021-7-15-12:10:49</td>
-						<td>test@naevr.com</td>
-						<td>192.168.1.1</td>
+					<tr id="loginTr" style="display:none">
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	
+	<!-- 새로운 글 -->
 	<div class="boardTables col-12" style="display: none">
 		<a class="fs-1 text-decoration-none" href="#">새로운 글</a>
 		<div class="table-responsive">
@@ -130,13 +197,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>2021-7-15-12:10:49</td>
-						<td>10</td>
-						<td>안녕하세요</td>
-						<td>정병준</td>
-						<td>12</td>
-						<td>ok</td>
+					<tr id="newPostTr" style="display:none">
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 					
 				</tbody>
@@ -144,6 +211,7 @@
 		</div>
 	</div>
 
+	<!-- 새로운 커뮤니티 생성 -->
 	<div class="boardTables col-12" style="display: none">
 		<a class="fs-1 text-decoration-none" href="#">커뮤니티 신청</a>
 		<div class="table-responsive">
@@ -159,19 +227,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>2021-7-15-12:10:49</td>
-						<td>lol</td>
-						<td>test1234@naver.com</td>
-						<td>롤 정보 공유</td>
-						<td>리그오브레전드</td>
-						<td><a class="text-decoration-none" href="#">신청됨</a></td>
+					<tr id="newCommTr" style="display:none">
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 					
 				</tbody>
 			</table>
 		</div>
 	</div>
+	
+	<!-- 신규 회원가입 -->
 	<div class="boardTables col-12" style="display: none">
 		<a class="fs-1 text-decoration-none" href="#">신규 회원가입</a>
 		<div class="table-responsive">
@@ -185,11 +255,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>2021-7-15-12:10:49</td>
-						<td>test1234@naver.com</td>
-						<td>테스터</td>
-						<td>127.0.0.1</td>
+					<tr id="signupTr" style="display:none">
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 				</tbody>
 			</table>

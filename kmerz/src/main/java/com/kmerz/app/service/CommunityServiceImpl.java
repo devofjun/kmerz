@@ -5,8 +5,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kmerz.app.dao.CommunityDao;
+import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dto.CommunityPagingDto;
 import com.kmerz.app.vo.CommunityVo;
 
@@ -16,6 +18,8 @@ public class CommunityServiceImpl implements CommunityService {
 	@Inject
 	CommunityDao commDao;
 
+	@Inject
+	MemberDao memberDao;
 	
 	private static final String COMM_STATUS_REQUEST = "request";		// 신청됨
 	private static final String COMM_STATUS_WAIT = "wait";				// 검수중
@@ -63,6 +67,33 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int getCommunityCount(CommunityPagingDto communitypagingDto) {
 		return commDao.selectCommunityCount(communitypagingDto);
+	}
+
+	@Transactional
+	@Override
+	public List<CommunityVo> selectDailyComm() {
+		List<CommunityVo> list = commDao.selectDailyComm();
+		for(CommunityVo vo : list) {
+			vo.setUser_id(memberDao.selectNO(vo.getUser_no()).getUser_id());
+			switch(vo.getCommunity_status()) {
+			case COMM_STATUS_REQUEST:
+				vo.setStr_community_status("신청됨");
+				break;
+			case COMM_STATUS_WAIT:
+				vo.setStr_community_status("검수중");
+				break;
+			case COMM_STATUS_ACCEPT:
+				vo.setStr_community_status("승인됨");
+				break;
+			case COMM_STATUS_DENY:
+				vo.setStr_community_status("반려됨");
+				break;
+			case COMM_STATUS_STOP:
+				vo.setStr_community_status("정지됨");
+				break;
+			}
+		}
+		return list;
 	}
 	
 	

@@ -26,4 +26,5 @@ public interface PostService {
 	public List<PostsVo>  unlockPostList(List<Integer> postnoList);
 	public int countPosts();
 	public int selectCurrentSeq();
+	public List<PostsVo> selectDailyPost();
 }
