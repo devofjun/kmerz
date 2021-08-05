@@ -122,6 +122,7 @@ public class PostServiceImpl implements PostService{
 			postVo.setCategory_name(categoryVo.getCategory_name());
 			// 신고수
 			int declared_count = declaredDao.selectTargetIDCount(postVo.getPost_no(), DeclaredServiceImpl.TYPE_POST);
+			System.out.println("신고수: "+declared_count);
 			postVo.setDeclared_count(declared_count);
 			// 글 상태
 			switch(postVo.getPost_status()) {
