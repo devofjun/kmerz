@@ -146,7 +146,23 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVo selectNO(int user_no) {
 		// 유저 번호로 유저 정보 가져오기
-		return memberDao.selectNO(user_no);
+		MemberVo vo = memberDao.selectNO(user_no);
+		// 유저 상태정보
+		switch(vo.getUser_status()) {
+		case STATUS_DENY:
+			vo.setStr_user_status("이용 정지");
+			break;
+		case STATUS_CLOSE:
+			vo.setStr_user_status("탈퇴");
+			break;
+		case STATUS_ALLOW:
+			vo.setStr_user_status("승인");
+			break;
+		case STATUS_WRITE_LOCK:
+			vo.setStr_user_status("글쓰기 정지");
+			break;
+		}
+		return vo;
 	}
 
 	

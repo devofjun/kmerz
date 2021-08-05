@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmerz.app.dto.MemberInfoCardDto;
 import com.kmerz.app.dto.MemberPagingDto;
@@ -164,6 +167,7 @@ public class ManagementController {
 			cardDto.setUser_name(memberVo.getUser_name());
 			cardDto.setUser_id(memberVo.getUser_id());
 			cardDto.setUser_point(memberVo.getUser_point());
+			cardDto.setUser_status(memberVo.getStr_user_status());
 			cardDto.setUser_post_count(postService.getUserPostCount(memberVo.getUser_no()));
 		}
 		map.put("cardDto", cardDto);
@@ -184,31 +188,38 @@ public class ManagementController {
 		return map;
 	}
 	
-	// 게시글 잠금
 	
-	
-	
-	// 사용자 차단
+	// 사용자 상태 변경
 	@ResponseBody
-	@RequestMapping(value="/customers/deny", method=RequestMethod.PATCH)
-	public String customerDeny(int user_no) throws Exception {
-		memberService.setStatusDeny(user_no);
+	@RequestMapping(value="/customers/userStatus", method=RequestMethod.POST)
+	public String userStatus(String str_user_no, String str_user_status) throws Exception {
+		System.out.println(str_user_no + " " + str_user_status);
+		int user_no = Integer.parseInt(str_user_no);
+		int user_status = Integer.parseInt(str_user_status);
+		System.out.println(user_no + " " + user_status);
+		switch(user_status) {
+		case -2:
+			memberService.setStatusDeny(user_no);
+			break;
+		case 0:
+			memberService.setStatusAllow(user_no);
+			break;
+		case 1:
+			memberService.setStatusWriteLock(user_no);
+			break;
+		}
+		
 		return "success";
 	}
 	
-	// 사용자 승인
-	@ResponseBody
-	@RequestMapping(value="/customers/allow", method=RequestMethod.PATCH)
-	public String customerAllow(int user_no) throws Exception {
-		memberService.setStatusAllow(user_no);
-		return "success";
-	}
+	// 메일 보내기
 	
-	// 사용자 글쓰기 차단
+	
+	// 사용자 포인트 변경
 	@ResponseBody
-	@RequestMapping(value="/customers/writeLock", method=RequestMethod.PATCH)
-	public String customersWriteLock(int user_no) throws Exception {
-		memberService.setStatusWriteLock(user_no);
+	@RequestMapping(value="/customers/userPoint", method=RequestMethod.POST)
+	public String userPoint(@RequestBody PointLogVo pointLogVo) throws Exception {
+		pointLogService.addPointLog(pointLogVo);
 		return "success";
 	}
 	

@@ -72,6 +72,25 @@ function showUserInfoCard(userno){
 		$("#cardUserID").text(info.user_id);
 		$("#cardUserPoint").text(info.user_point);
 		$("#cardUserPostCount").text(info.user_post_count);
+		var user_status = info.user_status;
+		$("#btnUserStatusChange").removeClass("btn-danger");
+		$("#btnUserStatusChange").removeClass("btn-warning");
+		$("#btnUserStatusChange").removeClass("btn-success");
+		if(user_status == "승인"){
+			$("#btnUserStatusChange").text("사용자 승인");
+			$("#btnUserStatusChange").addClass("btn-success");
+			$("#btnUserStatusChange").attr("data-status", "1");
+		} else if(user_status == "글쓰기 정지"){
+			$("#btnUserStatusChange").text("글쓰기 정지");
+			$("#btnUserStatusChange").addClass("btn-warning");
+			$("#btnUserStatusChange").attr("data-status", "-2");
+		} else if(user_status == "이용 정지"){
+			$("#btnUserStatusChange").text("로그인 정지");
+			$("#btnUserStatusChange").addClass("btn-danger");
+			$("#btnUserStatusChange").attr("data-status", "0");
+		} else {
+			$("#btnUserStatusChange").text("뭐지");
+		}
 		$("#cardUserInfo").show();
 		// 포인트 모달
 		var pointList = rData.pointList;
@@ -283,12 +302,87 @@ $(document).ready(function() {
 							$(".postModalTr").eq(i).find("td[data-name='status']").text(this.str_post_status);
 						}
 					}
-					console.log(this.post_no);
-					console.log(this.str_post_status);
 				})
 			}
 		});
-	})
+	});
+	
+	// 사용자 차단 버튼 클릭
+	$("#btnUserStatusChange").click(function(){
+		var user_no = $("#cardUserNO").text();
+		var user_status = $(this).attr("data-status");
+		$.ajax({
+			type: 'POST',
+			url: "/admin/customers/userStatus",
+			data: {
+				"str_user_no" : user_no,
+				"str_user_status" : user_status
+			},
+			success: function(){
+				var btn = $("#btnUserStatusChange");
+				var status = btn.attr("data-status");
+				console.log(status);
+				switch(status){
+				case "-2":
+					console.log(btn);
+					btn.text("로그인 정지");
+					btn.removeClass("btn-warning");
+					btn.addClass("btn-danger");
+					btn.attr("data-status", 0);
+					break;
+				case "0":
+					console.log(btn);
+					btn.text("사용자 승인");
+					btn.removeClass("btn-danger");
+					btn.addClass("btn-success");
+					btn.attr("data-status", 1);
+					break;
+				case "1":
+					console.log(btn);
+					btn.text("글쓰기 정지");
+					btn.removeClass("btn-success");
+					btn.addClass("btn-warning");
+					btn.attr("data-status", -2);
+					break;
+				}
+			}
+		});
+		submitPaging();
+	});
+	
+	
+	// 포인트 변경 모달 닫기
+	$("#btnPointClose").click(function(){
+		$("#pointScore").val(0);
+		$("#pointContent").val("");
+	});
+	
+	// 포인트 변경 보내기
+	$("#btnPointSubmit").click(function(){
+		var user_no = parseInt($("#cardUserNO").text());
+		var point_score = parseInt($("#pointScore").val());
+		var point_content = $("#pointContent").val();
+		if(point_score != 0 && point_content != ""){
+			console.log(user_no+":"+point_score+":"+point_content);
+			var url = "/admin/customers/userPoint";
+			var sData = {
+				"user_no":user_no,
+				"point_score":point_score,
+				"point_content":point_content
+			};
+			$.ajax({
+				type : "POST",
+				url : url,
+				contentType : "application/json; charset=UTR-8",
+				data : JSON.stringify(sData),
+				success : function(rData){
+					console.log(rData);
+					$("#btnPointClose").trigger("click");
+				}
+			})
+		}
+	});
+	
 });
 </script>
 
@@ -422,11 +516,12 @@ $(document).ready(function() {
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserPosts">작성글: <span id="cardUserPostCount">5</span></li>
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserFavorite">생성 커뮤니티</li>
 					<li class="liUserInfo cspointer list-group-item" data-bs-toggle="modal" data-bs-target="#modalUserDeclared">신고 내역 / 차단</li>
+					<li class="liUserInfo cspointer list-group-item"><button id="btnUserStatusChange" class="btn btn-danger" data-status="">사용자 차단</button></li>
 				</ul>
 				<div class="card-body">
 					<span id="spSendMessage" class="mx-1 text-primary cspointer" 
 					data-bs-toggle="modal" data-bs-target="#modalSendMessage" data-bs-whatever="test@naver.com"
-					>메시지 보내기</span>
+					>메일 보내기</span>
 					<span id="spUpdatePoint" class="mx-1 text-primary cspointer"
 					data-bs-toggle="modal" data-bs-target="#modalUpdatePoint" data-bs-whatever="test@naver.com"
 					>포인트 변경</span>
@@ -478,7 +573,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 작성글 내역 모달 -->
-<div id="modalUserPosts" data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div id="modalUserPosts" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -550,7 +645,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 신고 내역 모달 -->
-<div id="modalUserDeclared" data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div id="modalUserDeclared" data-bs-keyboard="false" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -579,15 +674,12 @@ $(document).ready(function() {
         	</tbody>
         </table>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-danger">사용자 차단</button>
-      </div>
     </div>
   </div>
 </div>
 
-<!-- 메시지 보내기 모달 -->
-<div id="modalSendMessage" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 메일 보내기 모달 -->
+<div id="modalSendMessage" data-bs-backdrop="static" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -615,7 +707,7 @@ $(document).ready(function() {
 </div>
 
 <!-- 포인트 변경 모달 -->
-<div id="modalUpdatePoint" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="modalUpdatePoint" data-bs-backdrop="static" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -629,17 +721,17 @@ $(document).ready(function() {
           </div>
           <div class="mb-3">
           	<label for="recipient-name" class="col-form-label">변경할 포인트:</label>
-          	<input type="number" class="form-control">
+          	<input id="pointScore" type="number" class="form-control" value="0">
           </div>
           <div class="mb-3">
             <label for="point-content" class="col-form-label">내용:</label>
-            <textarea class="form-control" id="point-content"></textarea>
+            <textarea id="pointContent" class="form-control" ></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">보내기</button>
+        <button id="btnPointClose" type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button id="btnPointSubmit" type="button" class="btn btn-primary">보내기</button>
       </div>
     </div>
   </div>
