@@ -3,7 +3,10 @@ package com.kmerz.app;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -100,25 +103,30 @@ public class HomeController {
 	public String uploadFile(@RequestParam MultipartFile[] files,Model model) {
 		int seqPostNo = postService.selectCurrentSeq() + 1;
 		model.addAttribute("index", files.length);
+		Map<Integer, String> mType = new HashMap<Integer, String>();
 		for(int i = 0; i < files.length; i++) {
 			System.out.println(files[i].getOriginalFilename());
 			String type = files[i].getContentType();
 			System.out.println(type);
 			String filetype = type.substring(0, type.indexOf("/"));
+			String file_ext = type.substring(type.indexOf("/"), type.length());
+			if(file_ext.equals("/gif")) {
+				filetype = "video";
+			}
+			System.out.println(file_ext);
+			mType.put(i, filetype);
 			String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
 			if(filetype.equals("video")) {
 				AttachmentProcessing.TranscodingMP4(files[i],path);			
 				model.addAttribute("path_" + i,path);
-				return "include/video";
 			}
 			if(filetype.equals("image")) {
-				System.out.println("이미지임");
 				AttachmentProcessing.TranscodingJpg(files[i],path);
 				model.addAttribute("path_" + i,path);
-				return "include/image";
 			}
 		}
-		return null;
+		model.addAttribute("mediaType",mType);
+		return "include/media";
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
