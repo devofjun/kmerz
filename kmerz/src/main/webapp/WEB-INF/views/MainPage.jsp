@@ -43,6 +43,9 @@
 				"target_user_no":$(".target_user_no").text()
 			};
 			console.log(sData);
+			$.post(url, sData, function(rData){
+				console.log(rData);
+			});
 		});
 	});
 </script>

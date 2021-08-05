@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="./mngInclude/header.jsp"%>
 <script src="/resources/script/TimeFormat.js"></script>
-<style>
-
-</style>
-
 <script>
 function submitPaging() {
 	var url = "/admin/customers/list";
@@ -122,11 +118,14 @@ function showUserInfoCard(userno){
 		$(".declaredModalTr:gt(0)").remove();
 		$.each(declaredList, function(){
 			var clone = $(".declaredModalTr").eq(0).clone();
-			clone.find("[data-name='id']").text(this.declared.id);
+			clone.find("[data-name='id']").text(this.declared_id);
 			clone.find("[data-name='datetime']").text(timePattern(this.declared_datetime));
 			clone.find("[data-name='title']").text(this.post_title);
 			clone.find("[data-name='username']").text(this.user_name);
-			clone.find("[data-name='type']").text(this.target_type);
+			clone.find("[data-name='type']").text(this.str_target_type);
+			clone.show();
+			console.log(clone);
+			$(".declaredModalTr").parent().append(clone);
 		})
 		$("#totalDeclared").text("누적 신고수: "+declaredList.length);
 	});
@@ -290,7 +289,6 @@ $(document).ready(function() {
 			}
 		});
 	})
-	
 });
 </script>
 
@@ -571,7 +569,6 @@ $(document).ready(function() {
         		</tr>
         	</thead>
         	<tbody>
-        	<c:forEach var="i" begin="1" end="5" step="1">
         		<tr class="declaredModalTr" style="display:none">
         			<td data-name="id" style="display:none">신고번호</td>
         			<td data-name="datetime">2021/07/18/10:12:33</td>
@@ -579,7 +576,6 @@ $(document).ready(function() {
         			<td data-name="username">tester2</td>
         			<td data-name="type">글/댓글</td>
         		</tr>
-        	</c:forEach>
         	</tbody>
         </table>
       </div>

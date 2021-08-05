@@ -96,9 +96,11 @@ public class HomeController {
 		return "PostingPage";
 	}
 	
+	// 게시글 신고하기
 	@ResponseBody
 	@RequestMapping(value="postDeclaring")
 	public String postDeclaring(DeclaredVo declaredVo) {
+		System.out.println("게시글 신고하기: "+declaredVo);
 		declaredService.addPostDeclared(declaredVo);
 		return "success";
 	}
@@ -134,4 +136,5 @@ public class HomeController {
 		postService.updatePost(postVo);
 		return "";
 	}
+	
 }

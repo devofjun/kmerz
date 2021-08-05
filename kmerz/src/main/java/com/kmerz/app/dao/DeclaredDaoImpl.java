@@ -56,7 +56,8 @@ public class DeclaredDaoImpl implements DeclaredDao {
 	@Override
 	public List<DeclaredVo> selectTargetUser(int target_user_no) {
 		// 유저의 신고당한 건들
-		return session.selectList(NAMESPACE+"selectTargetUser", target_user_no);
+		List<DeclaredVo> list = session.selectList(NAMESPACE+"selectTargetUser", target_user_no);
+		return list;
 	}
 
 }

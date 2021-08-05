@@ -37,7 +37,8 @@ update tbl_member set user_currentlogin = sysdate
 	where user_no = 1001;
     commit;
     */
-
+select d.*, p.* from tbl_declared d, (select post_title from tbl_posts where post_no=100) p
+	 where target_user_no = 1001
 
 ----------------------------------------------------
 -- 테스트 데이터 삽입(커뮤니티 테이블)
