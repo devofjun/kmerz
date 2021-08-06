@@ -115,6 +115,7 @@
 			} else if($("#spanPwCheck").text() == "비밀번호가일치하지 않습니다.") {
 				console.log("비밀번호 불일치");
 			} else if ($("#spanName").text() == "사용가능한 닉네임 입니다." && $("#spanId").text() == "사용가능한 아이디 입니다." && $("#spanPw").text() == "" && $("#spanPwCheck").text() == "비밀번호 일치") {
+				$("#JoinForm").attr("onSubmit", "return true");
 				$("#JoinForm").submit();
 			}
 		});
@@ -134,7 +135,7 @@
 							<h4 class="card-title">회원가입</h4>
 						</div>
 						<div class="card-body">
-							<form id="JoinForm" action="/m/joinRun" method="post">
+							<form id="JoinForm" action="/m/joinRun" method="post" onSubmit="return false;">
 								<div class="form-group">
 									<label for="user_id">이메일</label> <span style="color:red;" id="spanId"></span>
 									<input type="email" class="form-control" id="user_id" name="user_id" placeholder="이메일을 입력해주세요" required>
@@ -156,7 +157,7 @@
 									<label for="check_pw">비밀번호 확인</label> <span style="color:red;" id="spanPwCheck"></span>
 									<input type="password"
 										class="form-control" id="check_pw" name="check_pw"
-										placeholder="비밀번호 확인">
+										placeholder="비밀번호 확인" required>
 								</div>
 
 								<button class="btn btn-primary" type="submit" id="btnJoin">가입완료</button>
