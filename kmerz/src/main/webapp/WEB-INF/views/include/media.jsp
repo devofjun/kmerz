@@ -1,7 +1,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%int index = (int)request.getAttribute("index"); %>
 <%String[] paths = new String[index]; %>
 <%Map<Integer, String> mType = (HashMap<Integer, String>)request.getAttribute("mediaType"); %>
