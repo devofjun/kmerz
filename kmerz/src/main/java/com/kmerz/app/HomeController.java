@@ -1,9 +1,6 @@
 package com.kmerz.app;
 
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kmerz.app.service.BannerService;
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
@@ -28,6 +26,7 @@ import com.kmerz.app.util.AttachmentProcessing;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
+import com.kmerz.app.vo.SteamAppVo;
 
 
 
@@ -50,6 +49,9 @@ public class HomeController {
 	@Inject
 	CommentService commentService;
 	
+	@Inject
+	BannerService bannerService;
+	
 	@RequestMapping
 	public String home(Model model, HttpSession session) {
 		List<CommunityVo> commList = commService.getCommunityList();
@@ -69,7 +71,9 @@ public class HomeController {
 			// 유저 포인트 
 			user_point = memberVo.getUser_point();
 		}
-		
+		List<SteamAppVo> bannerList = bannerService.getBannerList();
+		System.out.println(bannerList);
+		model.addAttribute("bannerList", bannerList);
 		System.out.println("메인페이지 시작");
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
@@ -139,6 +143,11 @@ public class HomeController {
 		postVo.setPost_title(post_title);
 		postVo.setPost_content_file(post_content_file);
 		postService.updatePost(postVo);
+		return "";
+	}
+	@RequestMapping(value="/loadBanner")
+	public String loadBanner(Model model) {
+		
 		return "";
 	}
 }
