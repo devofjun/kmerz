@@ -84,3 +84,9 @@ function insertLink(){
 	var content = document.getElementById("editable");
 	content.innerHTML += "<div><img draggable='false' src='" + url.value + "'><div>"
 }
+function insertMedia(){
+	var source = document.getElementById("video_zone")
+	var media = source.querySelectorAll("div");
+	var content = document.getElementById("editable");
+	content.innerHTML += "<div>" + source.innerHTML.trim() + "<div>";
+}

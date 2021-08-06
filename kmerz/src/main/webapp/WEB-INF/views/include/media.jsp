@@ -10,11 +10,11 @@
 <%System.out.println(paths[i]); %>
 <%System.out.println(mType); %>
 	<%if(mType.get(i).equals("video")){ %>
-		<video width="320" height="240" controls>
-			<source src="http://localhost:8001/media/loadVideo?path=<%=paths[i]%>.mp4" type=video/mp4>
-		</video>
+	<div><video width="320" height="240" controls>
+			<source src="http://localhost/media/loadVideo?path=<%=paths[i]%>.mp4" type=video/mp4>
+		</video></div>
 	<%}%>
 	<%if(mType.get(i).equals("image")){ %>
-		<img src="http://localhost:8001/media/loadImage?path=<%=paths[i]%>.jpg">
+	<div><img src="http://localhost/media/loadImage?path=<%=paths[i]%>.jpg"></div>
 	<%}%>
 <%}%>

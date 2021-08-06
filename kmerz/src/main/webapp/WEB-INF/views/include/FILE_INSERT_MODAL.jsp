@@ -13,8 +13,8 @@
 				<p>Drag one or more files to this Drop Zone ...</p>
 			</div>
 			<button id="insertLink" onclick="insertLink()">추가</button>
-			<div id="video_zone">
-			</div>
+			<button id="insertMedia" onclick="insertMedia()">입력</button>
+			<div id="video_zone"></div>
 		</div>
 	</div>
 </div>
