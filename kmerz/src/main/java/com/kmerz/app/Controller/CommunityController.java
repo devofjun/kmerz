@@ -1,7 +1,9 @@
 package com.kmerz.app.Controller;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -145,13 +147,30 @@ public class CommunityController {
 	public String uploadFile(@RequestParam MultipartFile[] files,Model model) {
 		int seqPostNo = postService.selectCurrentSeq() + 1;
 		model.addAttribute("index", files.length);
+		Map<Integer, String> mType = new HashMap<Integer, String>();
 		for(int i = 0; i < files.length; i++) {
 			System.out.println(files[i].getOriginalFilename());
+			String type = files[i].getContentType();
+			System.out.println(type);
+			String filetype = type.substring(0, type.indexOf("/"));
+			String file_ext = type.substring(type.indexOf("/"), type.length());
+			if(file_ext.equals("/gif")) {
+				filetype = "video";
+			}
+			System.out.println(file_ext);
+			mType.put(i, filetype);
 			String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
-			AttachmentProcessing.EncodingWebm(files[i],path);
-			model.addAttribute("path_" + i,path);
+			if(filetype.equals("video")) {
+				AttachmentProcessing.TranscodingMP4(files[i],path);			
+				model.addAttribute("path_" + i,path);
+			}
+			if(filetype.equals("image")) {
+				AttachmentProcessing.TranscodingJpg(files[i],path);
+				model.addAttribute("path_" + i,path);
+			}
 		}
-		return "include/video";
+		model.addAttribute("mediaType",mType);
+		return "include/media";
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
@@ -164,6 +183,13 @@ public class CommunityController {
 		postVo.setPost_title(post_title);
 		postVo.setPost_content_file(post_content_file);
 		postService.updatePost(postVo);
+		return "";
+	}
+
+
+	@RequestMapping(value="/loadBanner")
+	public String loadBanner(Model model) {
+		
 		return "";
 	}
 }
