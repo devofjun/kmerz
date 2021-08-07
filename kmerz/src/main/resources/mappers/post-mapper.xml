@@ -126,8 +126,7 @@ insert into tbl_posts values(
 </select>
 
 <select id="selectLoadPost" resultType="PostsVo">
-	select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status>=0) posts where posts.rownumber = #{init_post}
-</select>
+	select * from (select rownum as row_num, po.* from (select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status>=0 ) posts order by rownum desc)po )where row_num = #{init_post} </select>
 
 <!-- 게시글 상태 변경 -->
 <update id="updateStatus">

@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ContentReadAndWrite {
 	public static String WriteContent(MultipartFile file, int seqPostNo) {
 		//Path uploadDir = Paths.get("G:\\workspace\\springmvc\\kmerz\\kmerz\\src\\main\\webapp\\resources\\post");
-		String path = "D:/kmerz/repository/post/";
+		String path = "E:/kmerz/repository/post/";
 		//System.out.println(file);
 		Path uploadDir = AttachmentProcessing.PathProcessing(path);
 		String logicalFileName = null;
