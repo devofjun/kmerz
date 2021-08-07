@@ -1,8 +1,9 @@
 package com.kmerz.app;
 
-import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kmerz.app.service.BannerService;
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
@@ -27,6 +29,7 @@ import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.DeclaredVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
+import com.kmerz.app.vo.SteamAppVo;
 
 
 
@@ -50,7 +53,11 @@ public class HomeController {
 	CommentService commentService;
 	
 	@Inject
+
 	DeclaredService declaredService;
+	@Inject
+	BannerService bannerService;
+
 	
 	@RequestMapping
 	public String home(Model model, HttpSession session) {
@@ -71,7 +78,9 @@ public class HomeController {
 			// 유저 포인트 
 			user_point = memberVo.getUser_point();
 		}
-		
+		List<SteamAppVo> bannerList = bannerService.getBannerList();
+		System.out.println(bannerList);
+		model.addAttribute("bannerList", bannerList);
 		System.out.println("메인페이지 시작");
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
@@ -115,13 +124,30 @@ public class HomeController {
 	public String uploadFile(@RequestParam MultipartFile[] files,Model model) {
 		int seqPostNo = postService.selectCurrentSeq() + 1;
 		model.addAttribute("index", files.length);
+		Map<Integer, String> mType = new HashMap<Integer, String>();
 		for(int i = 0; i < files.length; i++) {
 			System.out.println(files[i].getOriginalFilename());
+			String type = files[i].getContentType();
+			System.out.println(type);
+			String filetype = type.substring(0, type.indexOf("/"));
+			String file_ext = type.substring(type.indexOf("/"), type.length());
+			if(file_ext.equals("/gif")) {
+				filetype = "video";
+			}
+			System.out.println(file_ext);
+			mType.put(i, filetype);
 			String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
-			AttachmentProcessing.EncodingWebm(files[i],path);
-			model.addAttribute("path_" + i,path);
+			if(filetype.equals("video")) {
+				AttachmentProcessing.TranscodingMP4(files[i],path);			
+				model.addAttribute("path_" + i,path);
+			}
+			if(filetype.equals("image")) {
+				AttachmentProcessing.TranscodingJpg(files[i],path);
+				model.addAttribute("path_" + i,path);
+			}
 		}
-		return "include/video";
+		model.addAttribute("mediaType",mType);
+		return "include/media";
 	}
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
@@ -136,5 +162,12 @@ public class HomeController {
 		postService.updatePost(postVo);
 		return "";
 	}
-	
+
+
+	@RequestMapping(value="/loadBanner")
+	public String loadBanner(Model model) {
+		
+		return "";
+	}
+
 }

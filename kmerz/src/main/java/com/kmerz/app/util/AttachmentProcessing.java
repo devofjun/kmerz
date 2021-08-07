@@ -1,5 +1,6 @@
 package com.kmerz.app.util;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,12 +49,12 @@ public class AttachmentProcessing {
 		}
 	}
 	public static String MediaFileNameProcessing(int seqPostNo) {
-		String path = "D:/kmerz/repository/media/";
+		String path = "E:/kmerz/repository/media/";
 		Path uploadDir = PathProcessing(path);
 		Path filePath = null;
 		String logicalFileName = null;
 		UUID tempFileName = UUID.randomUUID();
-		logicalFileName = seqPostNo + "_" + tempFileName.toString() + ".webm";
+		logicalFileName = seqPostNo + "_" + tempFileName.toString();
 		filePath = uploadDir.resolve(logicalFileName);
 		return filePath.toString();
 	}
@@ -73,61 +76,49 @@ public class AttachmentProcessing {
 		}
 		return filePath.toString();
 	}
-	public static String ExtensionProcessing(String originalFileName) {
-		if (originalFileName.toLowerCase().endsWith(".txt")) {
-			return "txt";
+	public static void TranscodingJpg(MultipartFile files, String output) {
+		System.out.println("Transcoding jpg");
+		File source = multipartToFile(files);
+		File target = new File(output + ".jpg");
+		try {
+			BufferedImage output_img = ImageIO.read(source);
+			ImageIO.write(output_img, "jpg", target);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (originalFileName.toLowerCase().endsWith(".jpg")) {
-			return "jpg";
-		}
-		if (originalFileName.toLowerCase().endsWith(".png")) {
-			return "png";
-		}
-		if (originalFileName.toLowerCase().endsWith(".gif")) {
-			return "gif";
-		}
-		if (originalFileName.toLowerCase().endsWith(".mp4")) {
-			return "mp4";
-		}
-		if (originalFileName.toLowerCase().endsWith(".webm")) {
-			return "webm";
-		}
-		if (originalFileName.toLowerCase().endsWith(".avi")) {
-			return "avi";
-		}
-		return null;
 	}
-	public static void EncodingWebm(MultipartFile files,String t) {
-		  	System.out.println("encode WEBM");
-		    File source = multipartToFile(files);
-		    File target = new File(t);
-		    AudioAttributes audio = new AudioAttributes();
-		    VideoAttributes video = new VideoAttributes();
-		    EncodingAttributes attrs = new EncodingAttributes();
-		    attrs.setAudioAttributes(audio);
-		    attrs.setVideoAttributes(video);
-		    audio.setCodec("libvorbis");
-		    audio.setBitRate(new Integer(64000));
-		    audio.setSamplingRate(new Integer(44100));
-		    audio.setChannels(new Integer(2));
-		    audio.setBitRate(new Integer(192000));
-		    video.setCodec("libvpx");
-		    video.setBitRate(new Integer(64000));
-		    video.setFrameRate(new Integer(60));
-		    attrs.setOutputFormat("webm");
-		    Encoder instance = new Encoder();
-		    try {
-				instance.encode(new MultimediaObject(source), target, attrs, null);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InputFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (EncoderException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public static void TranscodingMP4(MultipartFile files,String output) {
+		System.out.println("encode MP4");
+		File source = multipartToFile(files);
+		File target = new File(output + ".mp4");
+		AudioAttributes audio = new AudioAttributes();
+		VideoAttributes video = new VideoAttributes();
+		EncodingAttributes attrs = new EncodingAttributes();
+		attrs.setAudioAttributes(audio);
+		attrs.setVideoAttributes(video);
+		audio.setCodec(AudioAttributes.DIRECT_STREAM_COPY);
+		audio.setBitRate(new Integer(64000));
+		audio.setSamplingRate(new Integer(44100));
+		audio.setChannels(new Integer(2));
+		audio.setBitRate(new Integer(192000));
+		video.setCodec("libx264");
+		video.setBitRate(new Integer(500000));
+		video.setFrameRate(new Integer(60));
+		attrs.setOutputFormat("mp4");
+		Encoder instance = new Encoder();
+		try {
+			instance.encode(new MultimediaObject(source), target, attrs, null);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InputFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EncoderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static File multipartToFile(MultipartFile mfile) {
 		File file = new File(mfile.getOriginalFilename());
