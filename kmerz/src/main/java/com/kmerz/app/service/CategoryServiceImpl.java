@@ -33,4 +33,9 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryDao.insertCategory(categoryVo);
 	}
 
+	@Override
+	public CategoryVo getCategoryName(int category_no) {
+		return categoryDao.selectNO(category_no);
+	}
+
 }

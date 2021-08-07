@@ -7,4 +7,5 @@ import com.kmerz.app.vo.CategoryVo;
 public interface CategoryService {
 	public List<CategoryVo> getCategoryList(String community_id);
 	public void createCategory(CategoryVo categoryVo);
+	public CategoryVo getCategoryName(int category_no);
 }
