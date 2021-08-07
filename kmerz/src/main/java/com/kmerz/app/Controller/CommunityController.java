@@ -1,8 +1,10 @@
 package com.kmerz.app.Controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,16 +12,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kmerz.app.dto.CommunityPagingDto;
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
+import com.kmerz.app.service.DeclaredService;
+import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
+import com.kmerz.app.util.AttachmentProcessing;
 import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.CategoryVo;
 import com.kmerz.app.vo.CommunityVo;
+import com.kmerz.app.vo.DeclaredVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 
@@ -31,13 +39,19 @@ public class CommunityController {
 	CommunityService commService;
 	
 	@Inject
-	CategoryService categoryService;
-	
-	@Inject
 	PostService postService;
 	
 	@Inject
+	MemberService memService;
+	
+	@Inject
+	CategoryService cateService;
+	
+	@Inject
 	CommentService commentService;
+	
+	@Inject
+	DeclaredService declaredService;
 	
 	// 커뮤니티 생성 신청 화면
 	@RequestMapping(value = "/createForm", method = RequestMethod.GET)
@@ -72,7 +86,7 @@ public class CommunityController {
 	public String testCommunityForm(@PathVariable("community_id") String community_id, String community_name,
 			Model model, HttpSession session) {
 		/*System.out.println("community_id: " + community_id);*/
-		List<CategoryVo> categoryList = categoryService.getCategoryList(community_id);
+		List<CategoryVo> categoryList = cateService.getCategoryList(community_id);
 		List<PostsVo> postList = postService.getCommunityPostList(community_id);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
@@ -96,5 +110,60 @@ public class CommunityController {
 		model.addAttribute("user_point", user_point);
 		return "community/CommunityPage";
 	}
+	@RequestMapping(value="/count")
+	public void count(HttpServletResponse res) throws Exception {
+		int post_count = postService.countPosts();
+		res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		System.out.println("카운트 "+post_count);
+		out.print("" + post_count);
+		out.close();
+	}
+	@RequestMapping(value="posting")
+	public String posting(Model model, HttpSession session) {
+		List<CommunityVo> commList = commService.getCommunityList();
+		model.addAttribute("commList", commList);
+		return "PostingPage";
+	}
 	
+	// 게시글 신고하기
+	@ResponseBody
+	@RequestMapping(value="postDeclaring")
+	public String postDeclaring(DeclaredVo declaredVo) {
+		System.out.println("게시글 신고하기: "+declaredVo);
+		declaredService.addPostDeclared(declaredVo);
+		return "success";
+	}
+	
+	@RequestMapping(value="/deletePost", method=RequestMethod.POST)
+	public String deletePost(@RequestParam int post_no) {
+		postService.updateStatus(post_no, -1);
+		System.out.println("delete");
+		return "redirect:/";
+	}
+	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
+	public String uploadFile(@RequestParam MultipartFile[] files,Model model) {
+		int seqPostNo = postService.selectCurrentSeq() + 1;
+		model.addAttribute("index", files.length);
+		for(int i = 0; i < files.length; i++) {
+			System.out.println(files[i].getOriginalFilename());
+			String path = AttachmentProcessing.MediaFileNameProcessing(seqPostNo);
+			AttachmentProcessing.EncodingWebm(files[i],path);
+			model.addAttribute("path_" + i,path);
+		}
+		return "include/video";
+	}
+	@RequestMapping(value="/editPost", method=RequestMethod.POST)
+	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
+									@RequestParam int category_no, @RequestParam String post_title,
+									@RequestParam String post_content_file) {
+		PostsVo postVo = new PostsVo();
+		postVo.setPost_no(post_no);
+		postVo.setCategory_no(category_no);
+		postVo.setCommunity_id(community_id);
+		postVo.setPost_title(post_title);
+		postVo.setPost_content_file(post_content_file);
+		postService.updatePost(postVo);
+		return "";
+	}
 }

@@ -28,12 +28,12 @@ System.out.println(postVo);
 					<div class="recommandation scale-8">
 						<div class="like">
 							<a href="#"><img class="icon-color rotate-180 "
-								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
+								src="/resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 						</div>
 						<span><%=postVo.getPost_recommand()%></span>
 						<div class="like">
 							<a href="#"><img class="icon-color"
-								src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
+								src="/resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 						</div>
 					</div>
 					<div class="modal-background border">
@@ -46,19 +46,19 @@ System.out.println(postVo);
 				<div class="button-nav">
 					<div class="button-nav-btn">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/chat_bubble_outline_black_36dp.svg">댓글</a>
+							src="/resources/images/icons/chat_bubble_outline_black_36dp.svg">댓글</a>
 					</div>
 					<div class="button-nav-btn">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/bookmark_border_black_36dp.svg">즐겨찾기</a>
+							src="/resources/images/icons/bookmark_border_black_36dp.svg">즐겨찾기</a>
 					</div>
 					<div class="button-nav-btn">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/ios_share_black_36dp.svg">공유</a>
+							src="/resources/images/icons/ios_share_black_36dp.svg">공유</a>
 					</div>
 					<div class="button-nav-btn">
 						<a id="postDeclared" href="#"><img class="icon-color"
-							src="resources/images/icons/outlined_flag_black_36dp.svg">신고</a>
+							src="/resources/images/icons/outlined_flag_black_36dp.svg">신고</a>
 					</div>
 					
 					<%
@@ -76,12 +76,12 @@ System.out.println(postVo);
 					<div class="button-nav-btn"
 						onclick="editPost(<%=postVo.getPost_no()%>)">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/edit_black_36dp.svg">Edit</a>
+							src="/resources/images/icons/edit_black_36dp.svg">Edit</a>
 					</div>
 					<div class="button-nav-btn"
 						onclick="deletePost(<%=postVo.getPost_no()%>)">
 						<a href="#"><img class="icon-color"
-							src="resources/images/icons/delete_black_36dp.svg">Remove</a>
+							src="/resources/images/icons/delete_black_36dp.svg">Remove</a>
 					</div>
 					<%
 						}

@@ -216,6 +216,12 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	@Override
+	public PostsVo selectLoadCommunityPost(int init_post, String community_id){
+		// TODO Auto-generated method stub
+		return postdao.selectLoadCommunityPost(init_post, community_id);
+	}
+	
+	@Override
 	public void updatePost(PostsVo postsVo) {
 		// 게시글 수정하기
 		postdao.updatePost(postsVo);
