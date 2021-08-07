@@ -34,9 +34,9 @@ window.addEventListener('load',function (){
 function init_posts(){
 	console.log("init");
 	init_post = 10; 
-	var post_container = document.getElementById("communityPost_container");
-	if(post_container.hasChildNodes()){
-		post_container.innerHTML = '';
+	var communityPost_container = document.getElementById("communityPost_container");
+	if(communityPost_container.hasChildNodes()){
+		communityPost_container.innerHTML = '';
 	}
  	appendPosts();
 }
@@ -54,10 +54,23 @@ function countReturn(callback){
 countReturn(function(data){
 	count = data;
 });
+function getPosts() {
+	var init_post = 10;
+	var page = 3;
+	/*var community_id = community_id;*/
+	for(var i = init_post-9; i < init_post+1; i++){
+		var newDiv = document.createElement("div");
+		var communityPost_container = document.getElementById("communityPost_container");
+		includeHTML(newDiv, '/include/commPost?init_post=' + i + "&community_id=" + community_id);
+		communityPost_container.appendChild(newDiv);
+		console.log(newDiv);
+		}
+		init_post+=10;
+}
 function appendPosts(){
 	console.log("게시글 불러오기");
  	console.log("count = " + count);
- 	var community_id = "star";
+ 	/*var community_id = community_id;*/
  	var page = count/init_post;
  	var left = count%10;
  	console.log(page);
@@ -66,9 +79,9 @@ function appendPosts(){
  		console.log("1");
 		for(var i = init_post-9; i < init_post+1; i++){
 		var newDiv = document.createElement("div");
-		var post_container = document.getElementById("post_container");
-		includeHTML(newDiv, '/include/post?init_post=' + i + "&?community_id=" + community_id);
-		post_container.appendChild(newDiv);
+		var communityPost_container = document.getElementById("communityPost_container");
+		includeHTML(newDiv, '/include/commPost?init_post=' + i + "&community_id=" + community_id);
+		communityPost_container.appendChild(newDiv);
 		console.log(newDiv);
 		}
 		init_post+=10;
@@ -77,9 +90,9 @@ function appendPosts(){
 	    console.log("2");
 		for(var i = init_post-9; i <= count; i++){
 		var newDiv = document.createElement("div");
-		var post_container = document.getElementById("post_container");
-		includeHTML(newDiv, '/include/post?init_post=' + i);
-		post_container.appendChild(newDiv);
+		var communityPost_container = document.getElementById("communityPost_container");
+		includeHTML(newDiv, '/include/commPost?init_post=' + i + "&community_id=" + community_id);
+		communityPost_container.appendChild(newDiv);
 		console.log(newDiv);
 		end_check=false;	
 		}

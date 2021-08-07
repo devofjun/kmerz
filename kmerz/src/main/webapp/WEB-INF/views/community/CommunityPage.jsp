@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	List<CategoryVo> categoryList = (List<CategoryVo>) request.getAttribute("categoryList");
+	String community_id = (String)request.getAttribute("community_id");
 %>
 <!DOCTYPE html>
 <html>
@@ -22,11 +23,35 @@
 <link rel="stylesheet" href="/resources/css/slider.css?4">
 <link rel="stylesheet" href="/resources/css/icon.css?5">
 <link rel="stylesheet" href="/resources/css/transform.css?6">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/resources/script/CommunityPage.js?ver<%=System.currentTimeMillis()%>">
-
 </script>
+
+<!-- JQeury CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	var community_id = "<%=community_id%>";
+	$(document).ready(function(){
+		console.log("test1");
+		$(".modal-section").on("click","#postDeclared",function(e){
+			console.log("test2");
+			e.preventDefault();
+			url = "/postDeclaring";
+			sData = {
+				"target_id":$(".target_id").text(),
+				"target_type":$(".target_type").text(),
+				"user_no":$(".user_no").text(),
+				"target_user_no":$(".target_user_no").text()
+			};
+			console.log(sData);
+			$.post(url, sData, function(rData){
+				console.log(rData);
+			});
+		});
+		getPosts();
+		getPosts();
+	});
+</script>
+
 </head>
 
 <body>
@@ -58,8 +83,7 @@
 					</div>
 				</div>	
 				<!-- 게시글 양식 -->
-				<div id="communityPost_container">
-				</div>
+				<div id="communityPost_container"></div>
 			</div>
 			<!-- 오른쪽 사이드 바 -->
 			<%@ include file="../include/rSidebar.jsp"%>
