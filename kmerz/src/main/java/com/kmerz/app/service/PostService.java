@@ -18,6 +18,7 @@ public interface PostService {
 	public int getUserPostCount(int user_no);
 	public int getNewPostSeq();
 	public PostsVo selectLoadPost(int init_post);
+	public PostsVo selectLoadCommunityPost(int init_post, String community_id);
 	public void updateStatus(int target, int status);
 	public void updatePost(PostsVo postsVo);
 	public void lockPost(int post_no);

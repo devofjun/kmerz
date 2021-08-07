@@ -70,6 +70,7 @@ $(document).ready(function() {
 							<input class="form-control" type="text"
 								id="txtSearch" placeholder="커뮤니티 이름">
 							<button class="btn btn-success" type="button" id="btnSearch">찾기</button>
+							<a class="btn btn-primary" href="/c/createForm">Community 생성</a>
 						</form>
 					</div>
 				</div>

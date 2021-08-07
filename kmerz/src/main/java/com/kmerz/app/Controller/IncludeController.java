@@ -82,6 +82,18 @@ public class IncludeController {
 		model.addAttribute("postVo", postVo);
 		return "/include/post";
 	}
+	@RequestMapping(value="/commPost")
+	public String commPost(Model model, @RequestParam int init_post, @RequestParam String community_id) {
+		//System.out.println(init_post);
+		PostsVo postVo = pService.selectLoadCommunityPost(init_post, community_id);
+		CommunityVo commVo = cService.getOneCommunity(postVo.getCommunity_id());
+		//System.out.println(postVo + "postVo");
+		postVo.setCommunity_name(commVo.getCommunity_name());
+		postVo.setUser_name(memService.selectNO(postVo.getUser_no()).getUser_name());	
+		model.addAttribute("postVo", postVo);
+		return "/include/commPost";
+	}
+	
 	@RequestMapping(value="/editPost")
 	public String editPost(Model model, @RequestParam int post_no) {
 		PostsVo postVo = pService.selectPost(post_no);

@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="/resources/css/transform.css?6">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>">
+<script src="/resources/script/CommunityPage.js?ver<%=System.currentTimeMillis()%>">
 
 </script>
 </head>
@@ -58,7 +58,7 @@
 					</div>
 				</div>	
 				<!-- 게시글 양식 -->
-				<div id="post_container">
+				<div id="communityPost_container">
 				</div>
 			</div>
 			<!-- 오른쪽 사이드 바 -->
