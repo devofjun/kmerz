@@ -10,13 +10,16 @@ public class DeclaredVo {
 	private int target_user_no;	// 신고 당한 유저고유번호
 	private Timestamp declared_datetime; // 신고일시
 	
+	private String str_target_type;
+	private String post_title;
+	
 	public DeclaredVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public DeclaredVo(int declared_id, int target_id, int target_type, int user_no, int target_user_no,
-			Timestamp declared_datetime) {
+			Timestamp declared_datetime, String str_target_type, String post_title) {
 		super();
 		this.declared_id = declared_id;
 		this.target_id = target_id;
@@ -24,6 +27,8 @@ public class DeclaredVo {
 		this.user_no = user_no;
 		this.target_user_no = target_user_no;
 		this.declared_datetime = declared_datetime;
+		this.str_target_type = str_target_type;
+		this.post_title = post_title;
 	}
 
 	public int getDeclared_id() {
@@ -74,12 +79,30 @@ public class DeclaredVo {
 		this.declared_datetime = declared_datetime;
 	}
 
+	public String getStr_target_type() {
+		return str_target_type;
+	}
+
+	public void setStr_target_type(String str_target_type) {
+		this.str_target_type = str_target_type;
+	}
+
+	public String getPost_title() {
+		return post_title;
+	}
+
+	public void setPost_title(String post_title) {
+		this.post_title = post_title;
+	}
+
 	@Override
 	public String toString() {
 		return "DeclaredVo [declared_id=" + declared_id + ", target_id=" + target_id + ", target_type=" + target_type
 				+ ", user_no=" + user_no + ", target_user_no=" + target_user_no + ", declared_datetime="
-				+ declared_datetime + "]";
+				+ declared_datetime + ", str_target_type=" + str_target_type + ", post_title=" + post_title + "]";
 	}
+
+	
 	
 	
 }

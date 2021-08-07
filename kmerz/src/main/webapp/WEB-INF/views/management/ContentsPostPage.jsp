@@ -4,7 +4,7 @@
 <%@ include file="./mngInclude/header.jsp"%>
 <script src="/resources/script/TimeFormat.js"></script>
 <style>
-img[draggable='false']{
+#contentbox img{
 	width:350px;
 	object-fit: cover;
 }
@@ -155,9 +155,9 @@ img[draggable='false']{
 			var that = this;
 			var card = $("#cardUserInfo").children();
 			var post_no = $(this).attr("data-postno");
-			var url = "/admin/contents/setPostDeny";
+			var url = "/admin/contents/setPostLock";
 			if($(this).text() == "글 잠금해제"){
-				url = "/admin/contents/setPostAdmit";
+				url = "/admin/contents/setPostUnlock";
 			}
 			var data = { 
 					"post_no" : post_no
@@ -167,7 +167,7 @@ img[draggable='false']{
 				console.log(rData);
 				if(rData == "success") {
 					console.log(url);
-					if(url == "/admin/contents/setPostDeny"){
+					if(url == "/admin/contents/setPostLock"){
 						console.log($(that).text());
 						$(that).text("글 잠금해제");
 						$("#cardPostTitle").addClass("text-decoration-line-through");
@@ -327,7 +327,7 @@ img[draggable='false']{
 					</li>
 				</ul>
 				<div class="card-body">
-					<div style="height:550px;overflow-y: scroll;">
+					<div id="contentbox" style="height:550px;overflow-y: scroll;">
 						<p id="cardPostContent" class="card-text">글내용</p>
 					</div>
 				</div>
@@ -349,8 +349,6 @@ img[draggable='false']{
 						</div>
 					</li>
 					<li class="list-group-item">
-						<button 
-						class="btn btn-sm btn-outline-secondary"></button>
 						<button id="btnChangeStatus" data-postno="" 
 						class="btn btn-sm btn-outline-secondary">글 잠그기</button>
 					</li>

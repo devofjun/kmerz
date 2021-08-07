@@ -2,7 +2,7 @@
 -- 테스트 데이터 삽입(유저 테이블)
 ----------------------------------------------------
 BEGIN
-FOR i IN 1..200 LOOP
+FOR i IN 1..10 LOOP
     insert into tbl_member values(
         seq_user_no.nextval,
         'test'||i||'@naver.com',
@@ -37,7 +37,7 @@ update tbl_member set user_currentlogin = sysdate
 	where user_no = 1001;
     commit;
     */
-
+select * from tbl_declared;
 
 ----------------------------------------------------
 -- 테스트 데이터 삽입(커뮤니티 테이블)
@@ -48,7 +48,8 @@ insert into tbl_community values(
     '스타크래프트',
     'starcraft',
     '스타크래프트 임시 커뮤니티입니다.',
-    'accept'
+    'accept',
+    sysdate
 );
 insert into tbl_community values(
     'lol',
@@ -56,7 +57,8 @@ insert into tbl_community values(
     '리그오브레전드',
     'League of Legends',
     '롤 임시 커뮤니티입니다.',
-    'accept'
+    'accept',
+    sysdate
 );
 insert into tbl_community values(
     'overwatch',
@@ -64,7 +66,8 @@ insert into tbl_community values(
     '오버워치',
     'overwatch',
     '오버워치 임시 커뮤니티입니다.',
-    'wait'
+    'accept',
+    sysdate
 );
 -- select * from tbl_community;
 
@@ -86,9 +89,19 @@ insert into tbl_category values(
 -- 테스트 데이터 삽입(게시글 테이블)
 ----------------------------------------------------
 BEGIN
-FOR i IN 1..200 LOOP
+FOR i IN 1..10 LOOP
     insert into tbl_posts values(
-    seq_post_no.NEXTVAL, 1000+i, 'star', 100, 'test', 
+    seq_post_no.NEXTVAL, 1000+i, 'star', 100, '스타크래프트', 
+    'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',
+    0,0,sysdate,null,0
+    );
+    insert into tbl_posts values(
+    seq_post_no.NEXTVAL, 1000+i, 'overwatch', 101, '오버워치', 
+    'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',
+    0,0,sysdate,null,0
+    );
+    insert into tbl_posts values(
+    seq_post_no.NEXTVAL, 1000+i, 'lol', 102, '리그오브레전드', 
     'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',
     0,0,sysdate,null,0
     );
@@ -204,7 +217,13 @@ insert into tbl_point_log values(
 );
 */
 
-
+select * from tbl_member_log
+where member_logtype = 3 and to_char(user_log_time, 'YYYYMMDD') =
+    to_char(sysdate,'YYYYMMDD');
+    
+    select * from tbl_member_log where member_logtype = 3 
+    and to_char(user_log_time, 'YYYYMMDD') 
+    = to_char(sysdate, 'YYYYMMDD'); 
 --------------------
 -- 테스트 데이터 삽입 끝
 --------------------

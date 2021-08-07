@@ -37,7 +37,7 @@ $(document).ready(function() {
 								class="img-thumbnail" alt="...">
 							</c:when>
 							<c:otherwise>
-								<img style="margin-top:10px" src="http://localhost/media/displayImage?fileName=${loginVo.user_profileImage}"
+								<img style="margin-top:10px" src="/media/displayImage?fileName=${loginVo.user_profileImage}"
 								class="img-thumbnail" alt="...">
 							</c:otherwise>
 						</c:choose>
