@@ -14,12 +14,13 @@
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
 <link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="/resources/css/banner.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/header.css?ver6">
 <link rel="stylesheet" href="/resources/css/font.css?4">
 <link rel="stylesheet" href="/resources/css/margin.css?4">
-<link rel="stylesheet" href="/resources/css/slider.css?4">
+<link rel="stylesheet" href="/resources/css/slider.css?<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/icon.css?5">
 <link rel="stylesheet" href="/resources/css/transform.css?6">
 <script
