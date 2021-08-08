@@ -78,6 +78,8 @@ System.out.println(postVo);
 						<a href="#"><img class="icon-color"
 							src="/resources/images/icons/edit_black_36dp.svg">Edit</a>
 					</div>
+					<div class="edit-submit" onclick="editSubmit(<%=postVo.getPost_no()%>)">
+					</div>
 					<div class="button-nav-btn"
 						onclick="deletePost(<%=postVo.getPost_no()%>)">
 						<a href="#"><img class="icon-color"

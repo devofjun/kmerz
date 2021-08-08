@@ -25,6 +25,7 @@ import com.kmerz.app.service.DeclaredService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.util.AttachmentProcessing;
+import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.CommunityVo;
 import com.kmerz.app.vo.DeclaredVo;
 import com.kmerz.app.vo.MemberVo;
@@ -152,13 +153,14 @@ public class HomeController {
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
 									@RequestParam int category_no, @RequestParam String post_title,
-									@RequestParam String post_content_file) {
+									@RequestParam MultipartFile file) {
+		String fileName = ContentReadAndWrite.WriteContent(file, post_no);
 		PostsVo postVo = new PostsVo();
 		postVo.setPost_no(post_no);
 		postVo.setCategory_no(category_no);
 		postVo.setCommunity_id(community_id);
 		postVo.setPost_title(post_title);
-		postVo.setPost_content_file(post_content_file);
+		postVo.setPost_content_file(fileName);
 		postService.updatePost(postVo);
 		return "";
 	}

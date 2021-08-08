@@ -17,7 +17,7 @@
 		<div id="bannerItem_container"
 			style="width:100%; height:100%; background:url('<%=bannerList.get(i).getApp_background()%>');">
 			<div id="video_container">
-				<video>
+				<video loop="loop" draggable="false" autoplay="autoplay" muted="muted">
 					<source src="<%=bannerList.get(i).getApp_movie()%>" />
 				</video>
 			</div>

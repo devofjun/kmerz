@@ -14,6 +14,7 @@
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
 <link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="/resources/css/PostingPage.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/banner.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
@@ -28,7 +29,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
 <script src="/resources/script/banner.js?ver<%=System.currentTimeMillis()%>"></script>
-<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>">
+<script src="/resources/script/PostingPage.js?ver<%=System.currentTimeMillis()%>">
 </script>
 
 <!-- JQeury CDN -->

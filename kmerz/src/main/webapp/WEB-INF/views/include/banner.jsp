@@ -61,18 +61,6 @@
 		<div class="slide_box">
 			<div class="slide_list clearfix">
 					<%@ include file="./bannerItem.jsp"%>
-<!-- 				<div class="slide_content slide02"> -->
-<!-- 					<p>2</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="slide_content slide03"> -->
-<!-- 					<p>3</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="slide_content slide04"> -->
-<!-- 					<p>4</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="slide_content slide05"> -->
-<!-- 					<p>5</p> -->
-<!-- 				</div> -->
 			</div>
 			<!-- // .slide_list -->
 		</div>

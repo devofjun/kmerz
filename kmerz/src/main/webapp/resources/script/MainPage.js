@@ -4,11 +4,43 @@
  var init_post = 10; 
  var count;
  var end_check = true;
+ function editSubmit(post_no){
+  	var content = document.getElementById("editable").innerHTML;
+	var community_id = document.getElementById("community-input").value;
+	console.log(community_id);
+	var categoryinput = document.getElementById("category-input-val");
+	console.log(categoryinput);
+	var category_no = categoryinput.value;
+	console.log(category_no);
+	var post_title = document.getElementById("post_title").value;
+	var textFile = null,
+	makeTextFile = function (content) {
+	    var data = new File([content], "1.txt",{type: "text/plain", lastModified: Date.now()});
+	return data;
+  };
+      edits(makeTextFile(content), community_id, category_no, post_title, post_no);
+ }
+ function edits(file, community_id, category_no, post_title, post_no){
+ var data = new FormData();
+		data.append("file", file);
+		data.append("community_id", community_id);
+		data.append("category_no", category_no);
+		data.append("post_title", post_title);
+		data.append("post_no", post_no);
+		console.log(data);
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "editPost", false);
+		xhr.send(data);
+		var page = document.querySelector('.modal-section');
+		page.innerHTML = xhr.responseText;
+ }
  function editPost(post_no){
  	console.log("글수정");
  	var modalBody = document.querySelector(".modal-body");
  	var postTitle = document.querySelector(".modal-postTitle");
+ 	var editsubmit = document.querySelector(".edit-submit"); 	
  	modalBody.innerHTML = '';
+ 	editsubmit.innerHTML = '<a href="#"><img class="icon-color" src="/resources/images/icons/edit_black_36dp.svg">Edit Submit</a>';
  	includeHTML(modalBody, '/include/editPost?post_no=' + post_no);
  }
  function deletePost(post_no){
