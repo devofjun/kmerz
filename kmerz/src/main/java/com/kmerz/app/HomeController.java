@@ -61,27 +61,24 @@ public class HomeController {
 	
 	@RequestMapping
 	public String home(Model model, HttpSession session) {
+		// 커뮤니티 리스트
 		List<CommunityVo> commList = commService.getCommunityList();
+		// 승인된 모든 게시글
 		List<PostsVo> postList = postService.selectAllowPosts();
-		//System.out.println("홈: "+postList);
+		// 로그인
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 		int userPostCount = 0;
 		int userCommentCount = 0;
 		int user_point = 0;
-		// 로그인이 되어 있을때
+		// 로그인이 되어 있을때 유저정보
 		if(memberVo != null) {
-			// 유저의 게시글 갯수 구하기
 			int user_no = memberVo.getUser_no();
 			userPostCount = postService.getUserPostCount(user_no);
-			//유저의 댓글 갯수 구하기
 			userCommentCount = commentService.getUserCommentCount(user_no);
-			// 유저 포인트 
 			user_point = memberVo.getUser_point();
 		}
 		List<SteamAppVo> bannerList = bannerService.getBannerList();
-		System.out.println(bannerList);
 		model.addAttribute("bannerList", bannerList);
-		System.out.println("메인페이지 시작");
 		model.addAttribute("commList", commList);
 		model.addAttribute("postList", postList);
 		model.addAttribute("userPostCount", userPostCount);
@@ -120,6 +117,8 @@ public class HomeController {
 		System.out.println("delete");
 		return "redirect:/";
 	}
+	
+	// 파일 드래그앤 드랍 했을때 
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
 	public String uploadFile(@RequestParam MultipartFile[] files,Model model) {
 		int seqPostNo = postService.selectCurrentSeq() + 1;
@@ -129,8 +128,10 @@ public class HomeController {
 			System.out.println(files[i].getOriginalFilename());
 			String type = files[i].getContentType();
 			System.out.println(type);
+			
 			String filetype = type.substring(0, type.indexOf("/"));
 			String file_ext = type.substring(type.indexOf("/"), type.length());
+			
 			if(file_ext.equals("/gif")) {
 				filetype = "video";
 			}
@@ -149,6 +150,7 @@ public class HomeController {
 		model.addAttribute("mediaType",mType);
 		return "include/media";
 	}
+	
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
 									@RequestParam int category_no, @RequestParam String post_title,

@@ -7,6 +7,12 @@
 <%
 PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 %>
+<style>
+.postContent img{
+	height:60px;
+	object-fit: cover;
+}
+</style>
 <!-- 포스트 DEFAULT 시작 -->
 <div id="<%=postVo.getPost_no()%>">
 	<input type="checkbox" id="post-toggleBtn" style="display: none">

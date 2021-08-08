@@ -44,13 +44,16 @@ public class MediaController {
 	@Inject
 	MemberService memberService;
 
+	// 게시글 내용 저장
 	@RequestMapping(value = "/upload_media", method = RequestMethod.POST)
 	public String upload_media(@RequestParam("file") MultipartFile file,
 			@RequestParam("community_id") String community_id, @RequestParam("category_no") int category_no,
 			@RequestParam("post_title") String post_title, HttpSession session, Model model) throws IOException {
 		int seqPostNo = pService.getNewPostSeq();
-
+		
+		// 게시글 내용 파일 저장
 		String fileName = ContentReadAndWrite.WriteContent(file, seqPostNo);
+		// 게시글 vo 객체 생성
 		MemberVo memberVo = (MemberVo) session.getAttribute("loginVo");
 		int user_no = memberVo.getUser_no();
 		PostsVo vo = new PostsVo();
@@ -61,6 +64,7 @@ public class MediaController {
 		vo.setUser_no(user_no);
 		vo.setPost_content_file(fileName);
 		vo.setCommunity_name(commService.getOneCommunity(community_id).getCommunity_name());
+		// 게시글vo DB insert
 		pService.posting(vo);
 		return "redirect:/include/modal?post_no=" + vo.getPost_no();
 	}
@@ -134,16 +138,16 @@ public class MediaController {
 	public void loadVideo(@RequestParam String path, HttpServletResponse response)
 			throws Exception {
 		int fileSize = (int) new File(path).length();
-		response.setContentLength(fileSize);
-		response.setContentType("video");
-		FileInputStream inputStream = new FileInputStream(path);
-		ServletOutputStream outputStream = response.getOutputStream();
-		int value = IOUtils.copy(inputStream, outputStream);
+		response.setContentLength(fileSize); // 응답 데이터 크기 설정
+		response.setContentType("video"); // 응답 데이터 타입 설정
+		FileInputStream inputStream = new FileInputStream(path); // 파일 읽기 스트림
+		ServletOutputStream outputStream = response.getOutputStream(); // 응답 스트림을 쓰기 스트림으로씀
+		int value = IOUtils.copy(inputStream, outputStream); // 읽기 스트림으로부터 읽은 데이터를 쓰기 스트림으로 복사함
 		System.out.println("File Size :: " + fileSize);
 		System.out.println("Copied Bytes :: " + value);
-		IOUtils.closeQuietly(inputStream);
-		IOUtils.closeQuietly(outputStream);
-		response.setStatus(HttpServletResponse.SC_OK);
+		IOUtils.closeQuietly(inputStream); // 스트림 닫기
+		IOUtils.closeQuietly(outputStream); // 스트림 닫기
+		response.setStatus(HttpServletResponse.SC_OK); // 파일 읽어오고 응답데이터에 담기 성공했으니 그대로 응답데이터 정상데이터로 보내기
 	}
 
 	// profile 이미지 파일 업로드
@@ -154,7 +158,7 @@ public class MediaController {
 		String user_id = getMemberVo.getUser_id();
 		String user_pw = getMemberVo.getUser_pw();
 		String strUser_no = String.valueOf(user_no);
-		String uploadPath = "C:/Users/beng0/kmerz/repository/profile/" + strUser_no;
+		String uploadPath = "D:/kmerz/repository/profile/" + strUser_no;
 		// System.out.println("uploadPath:" + uploadPath);
 		// System.out.println("file:" + file);
 		String originalFilename = file.getOriginalFilename();

@@ -23,7 +23,7 @@ import ws.schild.jave.encode.EncodingAttributes;
 import ws.schild.jave.encode.VideoAttributes;
 
 public class AttachmentProcessing {
-	public static String path = "C:/Users/beng0/kmerz/repository/media/";
+	public static String path = "D:/kmerz/repository/media/";
 	
 	public static String Upload_Attachment() {
 		//String path = "C:/Users/beng0/kmerz/repository/media/";
@@ -51,9 +51,8 @@ public class AttachmentProcessing {
 		}
 	}
 	public static String MediaFileNameProcessing(int seqPostNo) {
-		String path = "E:/kmerz/repository/media/";
-
-		//String path = "D:/kmerz/repository/media/";
+		//String path = "E:/kmerz/repository/media/";
+		String path = "D:/kmerz/repository/media/";
 
 		Path uploadDir = PathProcessing(path);
 		Path filePath = null;
@@ -81,37 +80,50 @@ public class AttachmentProcessing {
 		}
 		return filePath.toString();
 	}
+	// 이미지일때 호출됨
 	public static void TranscodingJpg(MultipartFile files, String output) {
+		
 		System.out.println("Transcoding jpg");
 		File source = multipartToFile(files);
 		File target = new File(output + ".jpg");
 		try {
 			BufferedImage output_img = ImageIO.read(source);
+			// 이미지를 트랜스 코딩해줌 -> 파일을 읽어서 jpg로 변환
 			ImageIO.write(output_img, "jpg", target);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public static void TranscodingMP4(MultipartFile files,String output) {
+	// 동영상일때 호출됨
+	public static void TranscodingMP4(MultipartFile files,String output) { // 파일(소스), 경로
 		System.out.println("encode MP4");
+		// 자바스크립트에서 넘겨주는 파일을 자바에서 쓸수있게 파일 객체로 변환해줌
 		File source = multipartToFile(files);
+		
 		File target = new File(output + ".mp4");
+		
 		AudioAttributes audio = new AudioAttributes();
 		VideoAttributes video = new VideoAttributes();
 		EncodingAttributes attrs = new EncodingAttributes();
+		
 		attrs.setAudioAttributes(audio);
 		attrs.setVideoAttributes(video);
-		audio.setCodec(AudioAttributes.DIRECT_STREAM_COPY);
-		audio.setBitRate(new Integer(64000));
+		audio.setCodec(AudioAttributes.DIRECT_STREAM_COPY); // 기존의 오디오 코덱을 카피해서 코덱으로 설정함
+
+		// 오디오 형식은 정해져있음
+		audio.setBitRate(new Integer(64000)); 
 		audio.setSamplingRate(new Integer(44100));
 		audio.setChannels(new Integer(2));
 		audio.setBitRate(new Integer(192000));
-		video.setCodec("libx264");
-		video.setBitRate(new Integer(500000));
-		video.setFrameRate(new Integer(60));
+		
+
+		video.setCodec("libx264"); // 라이브러리 264 코덱 => mp4
+		video.setBitRate(new Integer(500000)); // fullhd(60fps) 최적화된 5메가 비트레이트 (한프레임에 5메가) -> 화질 좋음
+		video.setFrameRate(new Integer(60)); 
+		
 		attrs.setOutputFormat("mp4");
-		Encoder instance = new Encoder();
+		Encoder instance = new Encoder(); // 인코딩 시켜줌
 		try {
 			instance.encode(new MultimediaObject(source), target, attrs, null);
 		} catch (IllegalArgumentException e) {
@@ -125,10 +137,13 @@ public class AttachmentProcessing {
 			e.printStackTrace();
 		}
 	}
+	
 	public static File multipartToFile(MultipartFile mfile) {
+		// 빈 파일 객체
 		File file = new File(mfile.getOriginalFilename());
 		try {
-			mfile.transferTo(file);
+			// 자바스크립트에서 넘겨주는 파일을 자바에서 쓸수있게 파일 객체로 변환해줌
+			mfile.transferTo(file); // 빈파일객체 데이터 넣어줌
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

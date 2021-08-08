@@ -14,6 +14,12 @@ System.out.println(postVo);
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/header.css?ver6">
+<style>
+#modal-post-content img {
+width:600px;
+object-fit: cover;
+}
+</style>
 <script
 	src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
 <div id="myModal" class="modal">
@@ -39,7 +45,9 @@ System.out.println(postVo);
 					<div class="modal-background border">
 						<div class="modal-body">
 							<div class="modal-postTitle"><%=postVo.getPost_title()%></div>
-							<p class="post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
+							<div id="modal-post-content">
+								<p class="post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
+							</div>
 						</div>
 					</div>
 				</div>
