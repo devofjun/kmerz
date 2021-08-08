@@ -1,94 +1,6 @@
-<%@page import="com.kmerz.app.vo.SteamAppVo"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<style>
-    *, *:before, *:after { box-sizing: inherit; }
-    .clearfix:after { content: ''; display: block; clear: both; float: none; }
-    .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
-    .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
-    .link:hover, .link:focus { color: #9fd6c2; }
-    /* container - body */
-    #container { width: 100%; margin: auto; }
-    .slide_wrap { position: relative; width: 90%; margin: auto; padding-bottom: 30px; }
-    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
-    .slide_content { display: table; float: left; width: 100%; height: 400px; }
-    .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
-    .slide_content.slide01 { background: #ddbdff; }
-    .slide_content.slide02 { background: #9fd6c2; }
-    .slide_content.slide03 { background: #abe2f7; }
-    .slide_content.slide04 { background: #f08c78; }
-    .slide_content.slide05 { background: #fbdb65; }
-    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
-    .slide_btn_box > .slide_btn_prev { left: -100px; }
-    .slide_btn_box > .slide_btn_next { right: -100px; }
-    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
-    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
-    .slide_pagination .dot.dot_active { background: #333; }
-    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
-  </style>
-<!-- <section class="banner"> -->
-<!-- 	<!-- <div class="tenor-gif-embed" data-postid="18605633" data-share-method="host" data-width="100%" data-aspect-ratio="1.810909090909091"><a href="https://tenor.com/view/%eb%ac%b8%ec%9e%ac%ec%9d%b8-%eb%aa%85%ec%99%95-moon-%ec%9e%ac%ec%9d%b8-%ec%a3%84%ec%9d%b8-gif-18605633">문재인 명왕 GIF</a> from <a href="https://tenor.com/search/%EB%AC%B8%EC%9E%AC%EC%9D%B8-gifs">문재인 GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script> -->
--->
-
-<!-- 	<div id="container"> -->
-<!-- 		<div class="slide_wrap"> -->
-<!-- 			<div class="slide_box"> -->
-<!-- 				<div class="slide_list clearfix"> -->
-<!-- 					<div class="slide_content"> -->
-<%-- 						 --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				// .slide_list -->
-<!-- 			</div> -->
-<!-- 			<!-- // .slide_box -->
--->
-<!-- 			<button type="button" class="slide_btn_prev">Prev</button> -->
-<!-- 			<button type="button" class="slide_btn_next">Next</button> -->
-<!-- 		</div> -->
-<!-- 		<!-- // .slide_btn_box -->
--->
-<!-- 		<ul class="slide_pagination"></ul> -->
-<!-- 		<!-- // .slide_pagination -->
--->
-<!-- 	</div> -->
-<!-- 	<!-- // .slide_wrap -->
--->
-<!-- </section> -->
-
-<div id="container">
-	<div class="slide_wrap">
-		<div class="slide_box">
-			<div class="slide_list clearfix">
-					<%@ include file="./bannerItem.jsp"%>
-<!-- 				<div class="slide_content slide02"> -->
-<!-- 					<p>2</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="slide_content slide03"> -->
-<!-- 					<p>3</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="slide_content slide04"> -->
-<!-- 					<p>4</p> -->
-<!-- 				</div> -->
-<!-- 				<div class="slide_content slide05"> -->
-<!-- 					<p>5</p> -->
-<!-- 				</div> -->
-			</div>
-			<!-- // .slide_list -->
-		</div>
-		<!-- // .slide_box -->
-		<div class="slide_btn_box">
-			<button type="button" class="slide_btn_prev">Prev</button>
-			<button type="button" class="slide_btn_next">Next</button>
-		</div>
-		<!-- // .slide_btn_box -->
-		<ul class="slide_pagination"></ul>
-		<!-- // .slide_pagination -->
-	</div>
-	<!-- // .slide_wrap -->
-</div>
-<!-- // .container -->
-<script>
+/**
+ * 
+ */
     (function () {
       const slideList = document.querySelector('.slide_list');  // Slide parent dom
       const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
@@ -101,7 +13,6 @@
       const startNum = 0; // initial slide index (0 ~ 4)
       
       slideList.style.width = slideWidth * (slideLen + 2) + "px";
-      slideList.style.display = "flex";
       
       // Copy first and last slide
       let firstChild = slideList.firstElementChild;
@@ -189,4 +100,3 @@
         });
       });
     })();
-  </script>

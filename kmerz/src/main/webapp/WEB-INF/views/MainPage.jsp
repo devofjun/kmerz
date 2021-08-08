@@ -23,11 +23,11 @@
 <link rel="stylesheet" href="/resources/css/slider.css?<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/icon.css?5">
 <link rel="stylesheet" href="/resources/css/transform.css?6">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>">
-
-</script>
+<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
+<script src="/resources/script/banner.js?ver<%=System.currentTimeMillis()%>"></script>
 </head>
 
 <body>
