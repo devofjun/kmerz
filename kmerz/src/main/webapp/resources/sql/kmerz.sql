@@ -54,6 +54,7 @@ create table tbl_community (
     community_topic varchar2(50) not null,
     community_description varchar2(300),
     community_status varchar2(15) not null,
+    community_createtime timestamp default sysdate,
     constraint uq_comm_name UNIQUE(community_name)
 );
 
@@ -207,20 +208,20 @@ create table tbl_adminmessage(
 --==================================================
 -- 유저 로그 테이블
 --==================================================
-/*drop table tbl_member_log CASCADE CONSTRAINTS;
+drop table tbl_member_log CASCADE CONSTRAINTS;
 create table tbl_member_log (
-    member_log_id number primary key,
-    member_log_code number not null,
+    member_logid number primary key,
+    member_logtype number not null,
     user_no number references tbl_member(user_no),
+    user_id varchar2(50),
+    user_name varchar2(50),
     request_ip varchar2(20),
-    request_content varchar2(200),
-    response_content varchar2(200),
     user_log_time timestamp default sysdate
 );
-drop sequence seq_memberlog_id;
-create sequence seq_memberlog_id
+drop sequence seq_member_logid;
+create sequence seq_member_logid
     start with 1;
-*/
+
 
 
 

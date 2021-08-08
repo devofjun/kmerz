@@ -13,4 +13,5 @@ public interface CommunityDao {
 	public CommunityVo getOneCommunity(String community_id);
 	public List<CommunityVo> selectUserNOCommunityList(int user_no);
 	public int selectCommunityCount(CommunityPagingDto communityPagingDto);
+	public List<CommunityVo> selectDailyComm();
 }

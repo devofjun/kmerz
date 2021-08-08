@@ -34,6 +34,7 @@ public class MyFileUploadUtil {
 		FileCopyUtils.copy(fileData, target);
 		boolean isImage = isImage(filePath);
 		if (isImage) {
+			makeBigThumbnail(filePath);
 			filePath = makeThumbnail(filePath);
 		}
 		return filePath;
@@ -115,6 +116,39 @@ public class MyFileUploadUtil {
 				}
 			}
 		}
+	}
+	
+	// 사이즈가 큰 썸네일 이미지 생성
+	public static String makeBigThumbnail(String filePath) {
+		// D:/kmerz/repository/profile/user_no/noname_uuid.png
+		// D:/kmerz/repository/profile/user_no/sm_noname_uuid.png
+		int slashIndex = filePath.lastIndexOf("/");
+		String front = filePath.substring(0, slashIndex + 1);
+		// -> D:/upload/2021/6/30/
+		String rear = filePath.substring(slashIndex + 1);
+		// -> uuid_noname.png
+		String thumbnailPath = front + "lm_" + rear;
+		// -> D:/upload/2021/6/30/sm_uuid_noname.png
+		
+		File orgFile = new File(filePath);
+		File thumbFile = new File(thumbnailPath);
+		
+		try {
+			// 이미 업로드 된 원본 파일을 메모리에 로딩
+			BufferedImage srcImage = ImageIO.read(orgFile);
+			BufferedImage destImage = Scalr.resize(
+					srcImage, // 원본 이미지 
+					// Scalr.Method.AUTOMATIC, // 비율 맞추기
+					Scalr.Mode.FIT_EXACT,
+					// Scalr.Mode.FIT_TO_HEIGHT, // 높이에 맞추기
+					320); // 해당 높이
+			ImageIO.write(destImage, getExtName(thumbnailPath), thumbFile);
+			// -> 썸네일 이미지를 해당파일의 확장자 형식을 썸네일 파일로 저장
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return thumbnailPath;
 	}
 	
 	// 첨부파일 삭제

@@ -28,6 +28,31 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
 <script src="/resources/script/banner.js?ver<%=System.currentTimeMillis()%>"></script>
+<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>">
+</script>
+
+<!-- JQeury CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		console.log("test1");
+		$(".modal-section").on("click","#postDeclared",function(e){
+			console.log("test2");
+			e.preventDefault();
+			url = "/postDeclaring";
+			sData = {
+				"target_id":$(".target_id").text(),
+				"target_type":$(".target_type").text(),
+				"user_no":$(".user_no").text(),
+				"target_user_no":$(".target_user_no").text()
+			};
+			console.log(sData);
+			$.post(url, sData, function(rData){
+				console.log(rData);
+			});
+		});
+	});
+</script>
 </head>
 
 <body>

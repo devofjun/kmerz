@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmerz.app.memberlog">
+	<!-- 회원 로그 입력 -->
+	<insert id="insertMemberLog">
+		insert into tbl_member_log values(
+			seq_member_logid.nextval,
+			#{member_logtype},
+			#{user_no},
+			#{user_id},
+			#{user_name},
+			#{request_ip},
+			sysdate
+		)
+	</insert>
+	
+	<!-- 일일 ... 리스트 -->
+	<select id="selectDailyList" resultType="MemberLogVo">
+		select * from tbl_member_log
+		where member_logtype = #{member_logtype}
+		and to_char(user_log_time, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+		order by user_log_time desc
+	</select>
+	
+	
+</mapper>

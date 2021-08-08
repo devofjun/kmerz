@@ -42,9 +42,7 @@ public class DeclaredDaoImpl implements DeclaredDao {
 		Map<String, Integer> map = new HashMap<>();
 		map.put("target_id", target_id);
 		map.put("target_type", target_type);
-		
-		List<DeclaredVo> declaredVo = session.selectList(NAMESPACE+"selectTargetIDCount", map);
-		return 0;
+		return session.selectOne(NAMESPACE+"selectTargetIDCount", map);
 	}
 
 	@Override
@@ -56,7 +54,8 @@ public class DeclaredDaoImpl implements DeclaredDao {
 	@Override
 	public List<DeclaredVo> selectTargetUser(int target_user_no) {
 		// 유저의 신고당한 건들
-		return session.selectList(NAMESPACE+"selectTargetUser", target_user_no);
+		List<DeclaredVo> list = session.selectList(NAMESPACE+"selectTargetUser", target_user_no);
+		return list;
 	}
 
 }
