@@ -74,6 +74,7 @@
 	pageEncoding="UTF-8"%>
 <%
 PostsVo postVo = (PostsVo) request.getAttribute("postVo");
+CategoryVo cateVo = (CategoryVo)request.getAttribute("cateVo");
 %>
 <!-- 포스트 DEFAULT 시작 -->
 <div id="<%=postVo.getPost_no()%>">
@@ -82,25 +83,25 @@ PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 		<div class="leftbar bar-color">
 		<div class="recommandation scale-8">
 			<div class="like">
-				<a href="#"><img class="icon-color rotate-180 " src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
+				<a href="#"><img class="icon-color rotate-180 " src="/resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
 			<span><%=postVo.getPost_recommand()%></span>
 			<div class="like">
-				<a href="#"><img class="icon-color" src="resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
+				<a href="#"><img class="icon-color" src="/resources/images/icons/arrow_drop_down_circle_black_36dp.svg"></a>
 			</div>
 		</div>
 			<div class="BottmNavBar scale-8">
 				<div class="toggleNav">
-					<a href="#"><img class="icon-color" src="resources/images/icons/chat_bubble_outline_black_36dp.svg"></a>
+					<a href="#"><img class="icon-color" src="/resources/images/icons/chat_bubble_outline_black_36dp.svg"></a>
 				</div>
 				<div class="toggleNav">
-					<a href="#"><img class="icon-color" src="resources/images/icons/bookmark_border_black_36dp.svg"></a>
+					<a href="#"><img class="icon-color" src="/resources/images/icons/bookmark_border_black_36dp.svg"></a>
 				</div>
 				<div class="toggleNav">
-					<a href="#"><img class="icon-color" src="resources/images/icons/ios_share_black_36dp.svg"></a>
+					<a href="#"><img class="icon-color" src="/resources/images/icons/ios_share_black_36dp.svg"></a>
 				</div>
 				<div>
-					<a href="#"><img class="icon-color" src="resources/images/icons/more_black_36dp.svg"></a>
+					<a href="#"><img class="icon-color" src="/resources/images/icons/more_black_36dp.svg"></a>
 				</div>
 			</div>
 		</div>
@@ -109,7 +110,7 @@ PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 				<div class="postTitle" onclick="openModal(<%=postVo.getPost_no()%>)"><h3 class="icon-color"><%=postVo.getPost_title()%></h3></div>
 				<div class="communityAdress">
 
-					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=postVo.getCategory_name()%></span></a><span> - </span><a href="#"><img
+					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=cateVo.getCategory_name()%></span></a><span> - </span><a href="#"><img
 						src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=postVo.getUser_name()%></span></a>
 				</div>
 			</div>

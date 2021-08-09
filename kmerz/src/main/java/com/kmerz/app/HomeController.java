@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,10 +21,13 @@ import com.kmerz.app.service.BannerService;
 import com.kmerz.app.service.CategoryService;
 import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
+import com.kmerz.app.service.DeclaredService;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.util.AttachmentProcessing;
+import com.kmerz.app.util.ContentReadAndWrite;
 import com.kmerz.app.vo.CommunityVo;
+import com.kmerz.app.vo.DeclaredVo;
 import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 import com.kmerz.app.vo.SteamAppVo;
@@ -50,7 +54,11 @@ public class HomeController {
 	CommentService commentService;
 	
 	@Inject
+
+	DeclaredService declaredService;
+	@Inject
 	BannerService bannerService;
+
 	
 	@RequestMapping
 	public String home(Model model, HttpSession session) {
@@ -97,6 +105,16 @@ public class HomeController {
 		model.addAttribute("commList", commList);
 		return "PostingPage";
 	}
+	
+	// 게시글 신고하기
+	@ResponseBody
+	@RequestMapping(value="postDeclaring")
+	public String postDeclaring(DeclaredVo declaredVo) {
+		System.out.println("게시글 신고하기: "+declaredVo);
+		declaredService.addPostDeclared(declaredVo);
+		return "success";
+	}
+	
 	@RequestMapping(value="/deletePost", method=RequestMethod.POST)
 	public String deletePost(@RequestParam int post_no) {
 		postService.updateStatus(post_no, -1);
@@ -135,19 +153,23 @@ public class HomeController {
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
 									@RequestParam int category_no, @RequestParam String post_title,
-									@RequestParam String post_content_file) {
+									@RequestParam MultipartFile file) {
+		String fileName = ContentReadAndWrite.WriteContent(file, post_no);
 		PostsVo postVo = new PostsVo();
 		postVo.setPost_no(post_no);
 		postVo.setCategory_no(category_no);
 		postVo.setCommunity_id(community_id);
 		postVo.setPost_title(post_title);
-		postVo.setPost_content_file(post_content_file);
+		postVo.setPost_content_file(fileName);
 		postService.updatePost(postVo);
 		return "";
 	}
+
+
 	@RequestMapping(value="/loadBanner")
 	public String loadBanner(Model model) {
 		
 		return "";
 	}
+
 }

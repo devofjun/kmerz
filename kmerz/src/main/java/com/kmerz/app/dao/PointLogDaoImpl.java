@@ -31,6 +31,7 @@ public class PointLogDaoImpl implements PointLogDao {
 				point_total = preLogVo.getPoint_total() + point_score;
 			} else {
 				point_now = preLogVo.getPoint_now() + point_score;
+				point_total = preLogVo.getPoint_total();
 			}
 		} else {
 			if(point_score > 0) {
@@ -38,6 +39,7 @@ public class PointLogDaoImpl implements PointLogDao {
 				point_total = point_score;
 			} else {
 				point_now = point_score;
+				point_total = point_score;
 			}
 		}
 		PointLogVo pointLogVo = new PointLogVo(user_no, point_content, point_now, point_score, point_total);

@@ -6,7 +6,7 @@ import com.kmerz.app.dto.PostPagingDto;
 import com.kmerz.app.vo.PostsVo;
 
 public interface PostDao {
-	public int countPosts(PostPagingDto postPagingDto);
+	public int countAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllPosts(PostPagingDto postPagingDto);
 	public List<PostsVo> selectAllowPosts(int status);
 	public PostsVo selectPostNo(int post_no);
@@ -18,9 +18,13 @@ public interface PostDao {
 	public int selectUserPostCount(int user_no);
 	public int selectSeqPostno();
 	public PostsVo selectLoadPost(int init_post);
+	public PostsVo selectLoadCommunityPost(int init_post, String community_id);
 	// 게시글 상태 변경
 	public void updateStatus(int target, int status);
+	public void updateListStatus(List<Integer> list, int status);
+	public List<PostsVo> selectListStatus(List<Integer> list);
 	public void updatePost(PostsVo vo);
 	public int countPosts();
 	public int selectCurrentSeq();
+	public List<PostsVo> selectDailyPost();
 }

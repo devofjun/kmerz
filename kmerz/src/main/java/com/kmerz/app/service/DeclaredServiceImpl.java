@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kmerz.app.dao.DeclaredDao;
 import com.kmerz.app.dao.PostDao;
 import com.kmerz.app.vo.DeclaredVo;
+import com.kmerz.app.vo.PostsVo;
 
 @Service
 public class DeclaredServiceImpl implements DeclaredService {
@@ -48,10 +49,24 @@ public class DeclaredServiceImpl implements DeclaredService {
 		return declaredDao.selectTargetIDCount(target_id, target_type);
 	}
 
+	@Transactional
 	@Override
 	public List<DeclaredVo> getTargetUserNOList(int target_user_no) {
 		// 유저의 신고당한 건들
-		return declaredDao.selectTargetUser(target_user_no);
+		List<DeclaredVo> list = declaredDao.selectTargetUser(target_user_no);
+		for(DeclaredVo vo : list) {
+			if(vo.getTarget_type() == TYPE_POST) {
+				vo.setStr_target_type("게시글");
+				
+				PostsVo post = postDao.selectPostNo(vo.getTarget_id());
+				String post_title = post.getPost_title();
+				vo.setPost_title(post_title);
+			} else if(vo.getTarget_type() == TYPE_COMMENT) {
+				vo.setStr_target_type("댓글");
+			}
+			
+		}
+		return list;
 	}
 
 	

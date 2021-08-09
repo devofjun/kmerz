@@ -23,8 +23,10 @@ import ws.schild.jave.encode.EncodingAttributes;
 import ws.schild.jave.encode.VideoAttributes;
 
 public class AttachmentProcessing {
+//	public static String path = "C:/Users/beng0/kmerz/repository/media/";
+	
 	public static String Upload_Attachment() {
-		String path = "D:/kmerz/repository/media/";
+		//String path = "C:/Users/beng0/kmerz/repository/media/";
 		
 		return "";
 	}
@@ -49,7 +51,10 @@ public class AttachmentProcessing {
 		}
 	}
 	public static String MediaFileNameProcessing(int seqPostNo) {
+//		String path = "E:/kmerz/repository/media/";
+
 		String path = "D:/kmerz/repository/media/";
+
 		Path uploadDir = PathProcessing(path);
 		Path filePath = null;
 		String logicalFileName = null;

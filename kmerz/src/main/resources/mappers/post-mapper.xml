@@ -10,9 +10,14 @@
 	select * from tbl_posts where user_no = #{user_no}
 </select>
 
-<!-- 게시글 수 -->
+<!-- 열람가능 게시글 수 -->
 <select id="countPosts" resultType="Integer">
 	select count(*) from tbl_posts where post_status>=0
+</select>
+
+<!-- 모든 게시글 수 -->
+<select id="countAllPosts" resultType="Integer">
+	select count(*) from tbl_posts
 	<include refid="search"></include>
 </select>
 
@@ -29,19 +34,21 @@
 <!-- 검색 -->
 <sql id="search">
 	<if test="searchType != null">
-		<choose>
-			<when test="searchType == 'post_title'">
-				where post_title like '%' || #{keyword} || '%'
-			</when>
-			<when test="searchType == 'user_name'">
-				where user_no in (select user_no from tbl_member
-					where user_name like '%' || #{keyword} || '%')
-			</when>
-			<when test="searchType == 'community_name'">
-				where community_id in (select community_id from tbl_community
-					where community_name like '%' || #{keyword} || '%')
-			</when>
-		</choose>
+		<if test="keyword != null || keyword != ''">
+			<choose>
+				<when test="searchType == 'post_title'">
+					where post_title like '%' || #{keyword} || '%'
+				</when>
+				<when test="searchType == 'user_name'">
+					where user_no in (select user_no from tbl_member
+						where user_name like '%' || #{keyword} || '%')
+				</when>
+				<when test="searchType == 'community_name'">
+					where community_id in (select community_id from tbl_community
+						where community_name like '%' || #{keyword} || '%')
+				</when>
+			</choose>
+		</if>
 	</if>
 </sql>
 
@@ -111,8 +118,8 @@ insert into tbl_posts values(
 	category_no = #{category_no},
 	post_title = #{post_title},
 	post_content_file = #{post_content_file},
-	last_update = sysdate,
-	post_status = 'update'
+	post_updatetime = sysdate,
+	post_status = #{post_status}
 	where post_no = #{post_no}
 </update>
 <update id="deletePost">
@@ -126,11 +133,38 @@ insert into tbl_posts values(
 </select>
 
 <select id="selectLoadPost" resultType="PostsVo">
+	select * from (select rownum as row_num, po.* from (select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status>=0 ) posts order by rownum desc)po )where row_num = #{init_post} </select>
+
+<select id="selectLoadCommunityPost" resultType="PostsVo">
 	select * from (select rownum as rownumber, p_index.* from tbl_posts p_index where post_status>=0) posts where posts.rownumber = #{init_post}
+	and community_id = #{community_id}
 </select>
 
 <!-- 게시글 상태 변경 -->
 <update id="updateStatus">
 	update tbl_posts set post_status=#{post_status} where post_no=#{post_no}
 </update>
+
+<!-- 여러개 게시글 상태 변경 -->
+<update id="updateListStatus">
+	update tbl_posts set post_status=#{post_status} where post_no IN
+	<foreach item="item" collection="list" open="(" close=")" separator=",">
+			${item}
+	</foreach>
+</update>
+
+<!-- 여러개 게시글 상태 조회 -->
+<select id="selectListStatus" resultType="PostsVo">
+	select post_no, post_status, post_updatetime from tbl_posts where post_no IN
+	<foreach item="item" collection="list" open="(" close=")" separator=",">
+			${item}
+	</foreach>
+</select>
+
+<!-- 오늘 올라온 게시글 조회 -->
+<select id="selectDailyPost" resultType="PostsVo">
+	select * from tbl_posts
+	where to_char(post_createtime, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+</select>
+
 </mapper>

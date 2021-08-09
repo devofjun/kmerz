@@ -4,43 +4,11 @@
  var init_post = 10; 
  var count;
  var end_check = true;
- function editSubmit(post_no){
-  	var content = document.getElementById("editable").innerHTML;
-	var community_id = document.getElementById("community-input").value;
-	console.log(community_id);
-	var categoryinput = document.getElementById("category-input-val");
-	console.log(categoryinput);
-	var category_no = categoryinput.value;
-	console.log(category_no);
-	var post_title = document.getElementById("post_title").value;
-	var textFile = null,
-	makeTextFile = function (content) {
-	    var data = new File([content], "1.txt",{type: "text/plain", lastModified: Date.now()});
-	return data;
-  };
-      edits(makeTextFile(content), community_id, category_no, post_title, post_no);
- }
- function edits(file, community_id, category_no, post_title, post_no){
- var data = new FormData();
-		data.append("file", file);
-		data.append("community_id", community_id);
-		data.append("category_no", category_no);
-		data.append("post_title", post_title);
-		data.append("post_no", post_no);
-		console.log(data);
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "editPost", false);
-		xhr.send(data);
-		var page = document.querySelector('.modal-section');
-		page.innerHTML = xhr.responseText;
- }
  function editPost(post_no){
  	console.log("글수정");
  	var modalBody = document.querySelector(".modal-body");
  	var postTitle = document.querySelector(".modal-postTitle");
- 	var editsubmit = document.querySelector(".edit-submit"); 	
  	modalBody.innerHTML = '';
- 	editsubmit.innerHTML = '<a href="#"><img class="icon-color" src="/resources/images/icons/edit_black_36dp.svg">Edit Submit</a>';
  	includeHTML(modalBody, '/include/editPost?post_no=' + post_no);
  }
  function deletePost(post_no){
@@ -66,9 +34,9 @@ window.addEventListener('load',function (){
 function init_posts(){
 	console.log("init");
 	init_post = 10; 
-	var post_container = document.getElementById("post_container");
-	if(post_container.hasChildNodes()){
-		post_container.innerHTML = '';
+	var communityPost_container = document.getElementById("communityPost_container");
+	if(communityPost_container.hasChildNodes()){
+		communityPost_container.innerHTML = '';
 	}
  	appendPosts();
 }
@@ -86,9 +54,23 @@ function countReturn(callback){
 countReturn(function(data){
 	count = data;
 });
+function getPosts() {
+	var init_post = 10;
+	var page = 3;
+	/*var community_id = community_id;*/
+	for(var i = init_post-9; i < init_post+1; i++){
+		var newDiv = document.createElement("div");
+		var communityPost_container = document.getElementById("communityPost_container");
+		includeHTML(newDiv, '/include/commPost?init_post=' + i + "&community_id=" + community_id);
+		communityPost_container.appendChild(newDiv);
+		console.log(newDiv);
+		}
+		init_post+=10;
+}
 function appendPosts(){
 	console.log("게시글 불러오기");
  	console.log("count = " + count);
+ 	/*var community_id = community_id;*/
  	var page = count/init_post;
  	var left = count%10;
  	console.log(page);
@@ -97,9 +79,9 @@ function appendPosts(){
  		console.log("1");
 		for(var i = init_post-9; i < init_post+1; i++){
 		var newDiv = document.createElement("div");
-		var post_container = document.getElementById("post_container");
-		includeHTML(newDiv, '/include/post?init_post=' + i);
-		post_container.appendChild(newDiv);
+		var communityPost_container = document.getElementById("communityPost_container");
+		includeHTML(newDiv, '/include/commPost?init_post=' + i + "&community_id=" + community_id);
+		communityPost_container.appendChild(newDiv);
 		console.log(newDiv);
 		}
 		init_post+=10;
@@ -108,9 +90,9 @@ function appendPosts(){
 	    console.log("2");
 		for(var i = init_post-9; i <= count; i++){
 		var newDiv = document.createElement("div");
-		var post_container = document.getElementById("post_container");
-		includeHTML(newDiv, '/include/post?init_post=' + i);
-		post_container.appendChild(newDiv);
+		var communityPost_container = document.getElementById("communityPost_container");
+		includeHTML(newDiv, '/include/commPost?init_post=' + i + "&community_id=" + community_id);
+		communityPost_container.appendChild(newDiv);
 		console.log(newDiv);
 		end_check=false;	
 		}

@@ -22,9 +22,9 @@ public class PostDaoImpl implements PostDao {
 	
 	
 	@Override
-	public int countPosts(PostPagingDto postPagingDto) {
+	public int countAllPosts(PostPagingDto postPagingDto) {
 		// 게시글 수
-		return session.selectOne(NAMESPACE+"countPosts", postPagingDto);
+		return session.selectOne(NAMESPACE+"countAllPosts", postPagingDto);
 	}
 
 	
@@ -107,6 +107,15 @@ public class PostDaoImpl implements PostDao {
 	}
 	
 	@Override
+	public PostsVo selectLoadCommunityPost(int init_post, String community_id) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("init_post", init_post);
+		map.put("community_id", community_id);
+		return session.selectOne(NAMESPACE + "selectLoadCommunityPost" , map);
+	}
+	
+	@Override
 	public void updatePost(PostsVo postsVo) {
 		// 글 수정
 		session.update(NAMESPACE+"updatePost", postsVo);
@@ -121,6 +130,20 @@ public class PostDaoImpl implements PostDao {
 
 
 	@Override
+	public void updateListStatus(List<Integer> list, int status) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("post_status", status);
+		session.update(NAMESPACE+"updateListStatus", map);
+	}
+
+
+	@Override
+	public List<PostsVo> selectListStatus(List<Integer> list) {
+		// 여러 게시글 상태 보기
+		return session.selectList(NAMESPACE+"selectListStatus", list);
+	}
+	
 	public int countPosts() {
 		return session.selectOne(NAMESPACE + "countPosts");
 	}
@@ -130,6 +153,16 @@ public class PostDaoImpl implements PostDao {
 	public int selectCurrentSeq() {
 		return session.selectOne(NAMESPACE + "selectCurrentSeq");
 	}
+
+
+	@Override
+	public List<PostsVo> selectDailyPost() {
+		// 오늘 만들어진 게시글 조회
+		return session.selectList(NAMESPACE+"selectDailyPost");
+	}
+
+
+	
 	
 
 	

@@ -11,7 +11,7 @@
 <%System.out.println(mType); %>
 	<%if(mType.get(i).equals("video")){ %>
 	<div><video width="320" height="240" controls>
-			<source src="http://localhost/media/loadVideo?path=<%=paths[i]%>.mp4" type=video/mp4>
+			<source src="http://localhost:8001/media/loadVideo?path=<%=paths[i]%>.mp4" type=video/mp4>
 		</video></div>
 	<%}%>
 	<%if(mType.get(i).equals("image")){ %>

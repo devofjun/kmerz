@@ -14,18 +14,45 @@
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
 <link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="/resources/css/PostingPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="/resources/css/banner.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/header.css?ver6">
 <link rel="stylesheet" href="/resources/css/font.css?4">
 <link rel="stylesheet" href="/resources/css/margin.css?4">
-<link rel="stylesheet" href="/resources/css/slider.css?4">
+<link rel="stylesheet" href="/resources/css/slider.css?<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/icon.css?5">
 <link rel="stylesheet" href="/resources/css/transform.css?6">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>">
+<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
+<script src="/resources/script/banner.js?ver<%=System.currentTimeMillis()%>"></script>
+<script src="/resources/script/PostingPage.js?ver<%=System.currentTimeMillis()%>">
+</script>
 
+<!-- JQeury CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		console.log("test1");
+		$(".modal-section").on("click","#postDeclared",function(e){
+			console.log("test2");
+			e.preventDefault();
+			url = "/postDeclaring";
+			sData = {
+				"target_id":$(".target_id").text(),
+				"target_type":$(".target_type").text(),
+				"user_no":$(".user_no").text(),
+				"target_user_no":$(".target_user_no").text()
+			};
+			console.log(sData);
+			$.post(url, sData, function(rData){
+				console.log(rData);
+			});
+		});
+	});
 </script>
 </head>
 

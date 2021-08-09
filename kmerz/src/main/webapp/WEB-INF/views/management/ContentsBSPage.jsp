@@ -213,7 +213,7 @@ $(document).ready(function() {
 		$("#btnSave").addClass("btn-outline-danger");
 	}
 	
-	// 적용하기도 구현해야함
+	// 적용하기
 	$("#btnSave").click(function() {
 		var appList = new Array();
 		var selectApps = $("#selectApps").find(".selectApp");

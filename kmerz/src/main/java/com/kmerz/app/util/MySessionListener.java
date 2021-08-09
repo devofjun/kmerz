@@ -6,13 +6,13 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 @WebListener
-public class CountManager implements HttpSessionListener {
+public class MySessionListener implements HttpSessionListener {
 	 public static int count;
 	 
 	    public static int getCount() {
 	        return count;
 	    }
-	 
+	    @Override
 	    public void sessionCreated(HttpSessionEvent event) {
 	        //세션이 만들어질 때 호출
 	        HttpSession session = event.getSession(); //request에서 얻는 session과 동일한 객체
@@ -22,7 +22,7 @@ public class CountManager implements HttpSessionListener {
 	         
 	        session.getServletContext().log(session.getId() + " 세션생성 " + ", 접속자수 : " + count);
 	    }
-	 
+	    @Override
 	    public void sessionDestroyed(HttpSessionEvent event) {
 	        //세션이 소멸될 때 호출
 	        count--;

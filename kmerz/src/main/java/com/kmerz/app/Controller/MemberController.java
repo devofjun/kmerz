@@ -1,18 +1,22 @@
 package com.kmerz.app.Controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kmerz.app.service.MemberLogService;
+import com.kmerz.app.service.MemberLogServiceImpl;
 import com.kmerz.app.service.MemberService;
 import com.kmerz.app.service.MemberServiceImpl;
+import com.kmerz.app.vo.MemberLogVo;
 import com.kmerz.app.vo.MemberVo;
 
 @Controller
@@ -20,6 +24,9 @@ import com.kmerz.app.vo.MemberVo;
 public class MemberController {
 	@Inject
 	private MemberService memberService;
+	
+	@Inject
+	private MemberLogService memberLogService;
 	
 	// 로그인 화면
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
@@ -83,6 +90,27 @@ public class MemberController {
 			resultLogin = "fail";
 			page = "redirect:/m/loginForm";
 		}
+		
+		
+		// 로그
+		// ip 가져오기
+		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		String ip = req.getHeader("X-FORWARDED-FOR");
+		if (ip == null)
+			ip = req.getRemoteAddr();
+		MemberLogVo mlogVo = new MemberLogVo();
+		if(session.getAttribute("loginVo") == null) {
+			mlogVo.setMember_logtype(MemberLogServiceImpl.TYPE_LOGIN_FAIL);
+		} else {
+			mlogVo.setMember_logtype(MemberLogServiceImpl.TYPE_LOGIN_SUCCESS);
+		}
+		mlogVo.setUser_no(memberVo.getUser_no());
+		mlogVo.setUser_id(memberVo.getUser_id());
+		mlogVo.setUser_name(memberVo.getUser_name());
+		mlogVo.setRequest_ip(ip);
+		memberLogService.insertMemberLog(mlogVo);
+		// 로그 끝
+		
 		rttr.addFlashAttribute("resultLogin", resultLogin);
 		return page;
 	}
@@ -90,6 +118,23 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping(value = "/logoutRun", method = RequestMethod.GET)
 	public String adminLogoutRun(HttpSession session) throws Exception {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		if(memberVo != null) {
+			// 로그
+			// ip 가져오기
+			HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+			String ip = req.getHeader("X-FORWARDED-FOR");
+			if (ip == null)
+				ip = req.getRemoteAddr();
+			MemberLogVo mlogVo = new MemberLogVo();
+			mlogVo.setMember_logtype(MemberLogServiceImpl.TYPE_LOGOUT);
+			mlogVo.setUser_no(memberVo.getUser_no());
+			mlogVo.setUser_id(memberVo.getUser_id());
+			mlogVo.setUser_name(memberVo.getUser_name());
+			mlogVo.setRequest_ip(ip);
+			memberLogService.insertMemberLog(mlogVo);
+			// 로그 끝
+		}
 		session.removeAttribute("loginVo");
 		return "redirect:/";
 	}
@@ -104,7 +149,23 @@ public class MemberController {
 	@RequestMapping(value = "/joinRun", method = RequestMethod.POST)
 	public String joinMember(MemberVo memberVo, RedirectAttributes rttr) {
 		memberService.joinMember(memberVo);
-		System.out.println("회원가입 성공");
+		
+		// 로그
+		// ip 가져오기
+		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		String ip = req.getHeader("X-FORWARDED-FOR");
+		if (ip == null)
+			ip = req.getRemoteAddr();
+		MemberLogVo mlogVo = new MemberLogVo();
+		mlogVo.setMember_logtype(MemberLogServiceImpl.TYPE_SIGNUP);
+		mlogVo.setUser_no(memberVo.getUser_no());
+		mlogVo.setUser_id(memberVo.getUser_id());
+		mlogVo.setUser_name(memberVo.getUser_name());
+		mlogVo.setRequest_ip(ip);
+		memberLogService.insertMemberLog(mlogVo);
+		// 로그 끝
+		
+		//System.out.println("회원가입 성공");
 		rttr.addFlashAttribute("resultJoin", "success");
 		return "redirect:/";
 	}
