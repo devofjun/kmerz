@@ -117,9 +117,9 @@ public class MediaController {
 
 	// post 업로드
 
-	// post 이미지 파일 업로드
+	// post 이미지 파일 로드
 	@RequestMapping(value = "/loadImage")
-	public void uploadPostImage(@RequestParam String path, HttpServletResponse response) throws IOException {
+	public void loadPostImage(@RequestParam String path, HttpServletResponse response) throws IOException {
 		int fileSize = (int) new File(path).length();
 		response.setContentLength(fileSize);
 		response.setContentType("image");
