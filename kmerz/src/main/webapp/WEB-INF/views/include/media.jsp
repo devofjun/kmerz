@@ -15,6 +15,6 @@
 		</video></div>
 	<%}%>
 	<%if(mType.get(i).equals("image")){ %>
-	<div><img src="http://localhost/media/loadImage?path=<%=paths[i]%>.jpg"></div>
+	<div><img draggable='false' src="http://localhost/media/loadImage?path=<%=paths[i]%>.jpg"></div>
 	<%}%>
 <%}%>

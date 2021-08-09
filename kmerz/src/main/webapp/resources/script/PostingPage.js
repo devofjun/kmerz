@@ -15,7 +15,7 @@ function dropHandler(ev) {
         if (this.readyState == 4) {
         console.log(xhr.responseText);
             if (this.status == 200) { videozone.innerHTML += xhr.responseText; }
-            if (this.status == 404) { videozone.innerHTML = "Page not found."; }
+            if (this.status == 404) { videozone.innerHTML = "용량초과 or 확장자 지원 안함"; }
         }
   }
 }
@@ -31,6 +31,7 @@ function getCategoryInput(){
 	includeHTML(categoryinput, 'include/setCategory?communityid=' + communityid);
 }
 
+// 글쓰기
 function posting(){
 	var content = document.getElementById("editable").innerHTML;
 	var community_id = document.getElementById("community-input").value;
@@ -41,6 +42,7 @@ function posting(){
 	console.log(category_no);
 	var post_title = document.getElementById("post_title").value;
 	var textFile = null,
+	// 글쓰기 내용을 파일로 변환
   makeTextFile = function (content) {
     var data = new File([content], "1.txt",{type: "text/plain", lastModified: Date.now()});
 	return data;
@@ -84,6 +86,8 @@ function insertLink(){
 	var content = document.getElementById("editable");
 	content.innerHTML += "<div><img draggable='false' src='" + url.value + "'><div>"
 }
+
+// 첨부파일을 넣고 '입력' 버튼을 눌렀을때
 function insertMedia(){
 	var source = document.getElementById("video_zone")
 	var media = source.querySelectorAll("div");

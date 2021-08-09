@@ -92,17 +92,17 @@ BEGIN
 FOR i IN 1..10 LOOP
     insert into tbl_posts values(
     seq_post_no.NEXTVAL, 1000+i, 'star', 100, '스타크래프트', 
-    'C:\Users\beng0\kmerz\repository\post\2021\8\7\130_c451ce79-8ebb-4841-8325-a1a716899e81.txt',
+    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
     0,0,sysdate,null,0
     );
     insert into tbl_posts values(
     seq_post_no.NEXTVAL, 1000+i, 'overwatch', 101, '오버워치', 
-    'C:\Users\beng0\kmerz\repository\post\2021\8\7\130_c451ce79-8ebb-4841-8325-a1a716899e81.txt',
+    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
     0,0,sysdate,null,0
     );
     insert into tbl_posts values(
     seq_post_no.NEXTVAL, 1000+i, 'lol', 102, '리그오브레전드', 
-    'C:\Users\beng0\kmerz\repository\post\2021\8\7\130_c451ce79-8ebb-4841-8325-a1a716899e81.txt',
+    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
     0,0,sysdate,null,0
     );
 END LOOP;

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<a href="#" class="logo">LOGO</a>
+		<a href="#" class="logo">Kmerz</a>
 		<div class="toggle"></div>
 		<ul>
 			<li><a href="/loginForm">Log in</a></li>
