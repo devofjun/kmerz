@@ -49,6 +49,7 @@
  	data.append("post_no", post_no);
  	xhr.open("POST", "/deletePost");
  	xhr.send(data);
+ 	document.body.style.removeProperty("overflow");
  	closeModal();
  	init_posts();
  }  
@@ -186,9 +187,9 @@ function openModal(i) {
   includeHTML(document.querySelector('.modal-section'), '/include/modal?post_no=' + i);
 }
 function closeModal() {
+document.body.style.removeProperty("overflow");
   var modal = document.getElementById("myModal");
   modal.remove();
-  document.body.style.removeProperty("overflow");
 }
 window.onclick = function(event) {
 	var modal = document.getElementById("myModal");
