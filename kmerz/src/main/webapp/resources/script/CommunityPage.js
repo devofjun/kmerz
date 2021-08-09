@@ -4,6 +4,36 @@
  var init_post = 10; 
  var count;
  var end_check = true;
+ function editSubmit(post_no){
+	  	var content = document.getElementById("editable").innerHTML;
+		var community_id = document.getElementById("community-input").value;
+		console.log(community_id);
+		var categoryinput = document.getElementById("category-input-val");
+		console.log(categoryinput);
+		var category_no = categoryinput.value;
+		console.log(category_no);
+		var post_title = document.getElementById("post_title").value;
+		var textFile = null,
+		makeTextFile = function (content) {
+		    var data = new File([content], "1.txt",{type: "text/plain", lastModified: Date.now()});
+		return data;
+	  };
+	      edits(makeTextFile(content), community_id, category_no, post_title, post_no);
+	 }
+	 function edits(file, community_id, category_no, post_title, post_no){
+	 var data = new FormData();
+			data.append("file", file);
+			data.append("community_id", community_id);
+			data.append("category_no", category_no);
+			data.append("post_title", post_title);
+			data.append("post_no", post_no);
+			console.log(data);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "editPost", false);
+			xhr.send(data);
+			var page = document.querySelector('.modal-section');
+			page.innerHTML = xhr.responseText;
+	 }
  function editPost(post_no){
  	console.log("글수정");
  	var modalBody = document.querySelector(".modal-body");
@@ -17,6 +47,7 @@
  	data.append("post_no", post_no);
  	xhr.open("POST", "/deletePost");
  	xhr.send(data);
+ 	  document.body.style.removeProperty("overflow");
  	closeModal();
  	init_posts();
  }  
@@ -129,6 +160,12 @@ function addComment(post_no,comment_retag){
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "comment/addComment");
 	xhr.send(data);
+	commentReload(post_no);
+}
+function commentReload(post_no){
+	var replyPanel = document.querySelector(".reply-panel");
+replyPanel.innerHTML = "";
+includeHTML(replyPanel, '/comment/commReload?post_no=' + post_no);
 }
  function replytoggle(i){
 	var commentNo = document.getElementById(i);
@@ -162,9 +199,9 @@ function openModal(i) {
   includeHTML(document.querySelector('.modal-section'), '/include/modal?post_no=' + i);
 }
 function closeModal() {
+	  document.body.style.removeProperty("overflow");
   var modal = document.getElementById("myModal");
   modal.remove();
-  document.body.style.removeProperty("overflow");
 }
 window.onclick = function(event) {
 	var modal = document.getElementById("myModal");
@@ -172,35 +209,5 @@ window.onclick = function(event) {
 	    modal.remove();
 	    document.body.style.removeProperty("overflow");
 	  }
-}
-					
-function posttoggle(i) {
-	var postNo = document.getElementById(i);
-	var PostToggleBtn = postNo.querySelector("#post-toggleBtn");
-	var post = postNo.querySelector(".post");
-	var toggleImg = post.querySelector(".rightbar > .postDown");
-	var toggleNavBar = post.querySelectorAll(".leftbar > .BottmNavBar > .toggleNav");
-	if(PostToggleBtn.checked){
-		post.style.height = "180px";
-		post.style.minHeight = "180px";
-		toggleImg.style.transform = "rotateX(0deg)";
-		for(var j = 0; j < toggleNavBar.length; j++){
-		toggleNavBar[j].style.visibility = "hidden";
-		toggleNavBar[j].style.opacity = "0%";
-		toggleNavBar[j].style.height = "0%";
-		toggleNavBar[j].style.transition = "all ease .2s";
-		}
-	}else{
-		post.style.minHeight = "300px";
-		post.style.height = "auto";
-		toggleImg.style.transform = "rotateX(180deg)";
-		for(var j = 0; j < toggleNavBar.length; j++){
-		toggleNavBar[j].style.visibility = "visible";
-		toggleNavBar[j].style.opacity = "100%";
-		toggleNavBar[j].style.height = "100%";
-		toggleNavBar[j].style.transition = "all ease 4s";
-		}	
-	}
-	PostToggleBtn.click();
 }
 	

@@ -110,20 +110,12 @@ CategoryVo cateVo = (CategoryVo)request.getAttribute("cateVo");
 				<div class="postTitle" onclick="openModal(<%=postVo.getPost_no()%>)"><h3 class="icon-color"><%=postVo.getPost_title()%></h3></div>
 				<div class="communityAdress">
 
-					<a href="#"><img src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=cateVo.getCategory_name()%></span></a><span> - </span><a href="#"><img
-						src="/resources/images/starcraft_small.jpg"><span class="font-14"><%=postVo.getUser_name()%></span></a>
+					<a href="#"><span class="font-14"><%=cateVo.getCategory_name()%></span></a><span> - </span><a href="#"><span class="font-14"><%=postVo.getUser_name()%></span></a>
 				</div>
 			</div>
 			<div class="postContent border" onclick="openModal(<%=postVo.getPost_no()%>)">
 				<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
 			</div>
-
-
-
-			<div class="postDown" onclick="posttoggle(<%=postVo.getPost_no()%>)">
-				<label for="toggleBtn" class="labelBtn" onclick=""> <img src="/resources/images/expand_more_black_24dp.svg"/></label>
-			</div>
-
 		</div>
 	</div>
 </div>

@@ -154,7 +154,7 @@ public class MediaController {
 		String user_id = getMemberVo.getUser_id();
 		String user_pw = getMemberVo.getUser_pw();
 		String strUser_no = String.valueOf(user_no);
-		String uploadPath = "C:/Users/beng0/kmerz/repository/profile/" + strUser_no;
+		String uploadPath = "C:/Users/kngoh/kmerz/repository/profile/" + strUser_no;
 		// System.out.println("uploadPath:" + uploadPath);
 		// System.out.println("file:" + file);
 		String originalFilename = file.getOriginalFilename();
