@@ -14,6 +14,7 @@
 <meta charset="UTF-8">
 <title>K-Merz The Best Game Community</title>
 <link rel="stylesheet" href="/resources/css/MainPage.css?ver<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="/resources/css/PostingPage.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/banner.css?ver<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/lSidebar.css?v13">
 <link rel="stylesheet" href="/resources/css/rSidebar.css?v13">
@@ -23,9 +24,12 @@
 <link rel="stylesheet" href="/resources/css/slider.css?<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/resources/css/icon.css?5">
 <link rel="stylesheet" href="/resources/css/transform.css?6">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>">
+<script src="/resources/script/MainPage.js?ver<%=System.currentTimeMillis()%>"></script>
+<script src="/resources/script/banner.js?ver<%=System.currentTimeMillis()%>"></script>
+<script src="/resources/script/PostingPage.js?ver<%=System.currentTimeMillis()%>">
 </script>
 
 <!-- JQeury CDN -->
@@ -47,7 +51,6 @@
 		});
 	});
 </script>
-
 </head>
 
 <body>

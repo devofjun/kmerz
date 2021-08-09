@@ -86,6 +86,8 @@ object-fit: cover;
 						<a href="#"><img class="icon-color"
 							src="/resources/images/icons/edit_black_36dp.svg">Edit</a>
 					</div>
+					<div class="edit-submit" onclick="editSubmit(<%=postVo.getPost_no()%>)">
+					</div>
 					<div class="button-nav-btn"
 						onclick="deletePost(<%=postVo.getPost_no()%>)">
 						<a href="#"><img class="icon-color"
@@ -101,7 +103,7 @@ object-fit: cover;
 						<span>Comment This Post</span>
 						<div class="reply-content">
 							<div class="reply-form-input">
-								<textarea id="comment_content_" cols="120" rows="10"></textarea>
+								<textarea class="border" style="overflow: hidden;" id="comment_content_" cols="120" rows="10"></textarea>
 							</div>
 							<div class="reply-submit">
 								<button class="btn">CON</button>

@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="reply-content">
-	<div class="reply-form-input">
-		<textarea id="comment_content_<%=request.getAttribute("comment_retag")%>" cols="120" rows="10"></textarea>
+	<div class="border"  class="reply-form-input">
+		<textarea class="border" style="overflow: hidden;" id="comment_content_<%=request.getAttribute("comment_retag")%>" cols="120" rows="10"></textarea>
 	</div>
 	<div class="reply-submit">
 		<button class="btn">CON</button>

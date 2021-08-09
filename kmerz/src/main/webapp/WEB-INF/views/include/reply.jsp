@@ -7,9 +7,6 @@
 	List<CommentVo> mentList = (List<CommentVo>) request.getAttribute("mentList");
 %>
 <%
-	List<MemberVo> memList = (List<MemberVo>) request.getAttribute("memList");
-%>
-<%
 	for (int i = 0; i < mentList.size(); i++) {
 %>
 <div>

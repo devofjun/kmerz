@@ -51,7 +51,8 @@ public class AttachmentProcessing {
 		}
 	}
 	public static String MediaFileNameProcessing(int seqPostNo) {
-		//String path = "E:/kmerz/repository/media/";
+//		String path = "E:/kmerz/repository/media/";
+
 		String path = "D:/kmerz/repository/media/";
 
 		Path uploadDir = PathProcessing(path);
