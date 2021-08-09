@@ -15,6 +15,11 @@
 	select count(*) from tbl_posts where post_status>=0
 </select>
 
+<select id="countCommPosts" resultType="Integer">
+	select count(*) from tbl_posts where post_status>=0 and community_id = #{community_id}
+</select>
+
+
 <!-- 모든 게시글 수 -->
 <select id="countAllPosts" resultType="Integer">
 	select count(*) from tbl_posts
@@ -138,7 +143,8 @@ insert into tbl_posts values(
 <select id="selectLoadCommunityPost" resultType="PostsVo">
 	select * from 
 		(select rownum as rownumber, p_index.* from tbl_posts p_index
-		where post_status>=0 and community_id = #{community_id}) posts 
+		where post_status>=0 and community_id = #{community_id}
+		order by post_createtime desc) posts 
 	where posts.rownumber = #{init_post}
 </select>
 

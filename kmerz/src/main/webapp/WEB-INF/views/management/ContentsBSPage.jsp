@@ -226,7 +226,6 @@ $(document).ready(function() {
 		}
 		var bannerList = JSON.stringify(appList);
 		var url = $(this).attr("data-url");
-		//console.log(jsonAppList);
 		$.ajax({
 			type : "POST",
 			url : url,

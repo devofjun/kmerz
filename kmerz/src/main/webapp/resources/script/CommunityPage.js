@@ -56,7 +56,7 @@ countReturn(function(data){
 });
 function getPosts() {
 	var init_post = 10;
-	var page = 3;
+	var page = 1;
 	/*var community_id = community_id;*/
 	for(var i = init_post-9; i < init_post+1; i++){
 		var newDiv = document.createElement("div");

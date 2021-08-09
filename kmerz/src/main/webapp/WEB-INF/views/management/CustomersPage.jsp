@@ -88,6 +88,11 @@ function showUserInfoCard(userno){
 			$("#btnUserStatusChange").text("로그인 정지");
 			$("#btnUserStatusChange").addClass("btn-danger");
 			$("#btnUserStatusChange").attr("data-status", "0");
+		} else if(user_status == "탈퇴") {
+			$("#btnUserStatusChange").text("탈퇴");
+			$("#btnUserStatusChange").addClass("btn-secondary");
+			$("#btnUserStatusChange").attr("data-status", "-1");
+		
 		} else {
 			$("#btnUserStatusChange").text("뭐지");
 		}

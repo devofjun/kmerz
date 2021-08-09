@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,6 +85,7 @@ public class CommunityController {
 	}
 	
 	// 커뮤니티 페이지 이동
+	@Transactional
 	@RequestMapping(value="/{community_id}", method=RequestMethod.GET)
 	public String testCommunityForm(@PathVariable("community_id") String community_id, String community_name,
 			Model model, HttpSession session) {

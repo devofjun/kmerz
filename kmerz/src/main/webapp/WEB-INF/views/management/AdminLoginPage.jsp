@@ -57,12 +57,12 @@
 							<!-- 로그인 폼 -->
 							<form id="frmLogin" action="/admin/loginRun" method="post">
 								<div class="form-floating mb-1">
-									<input value="admin" type="text" class="form-control" id="admin_id"
+									<input type="text" class="form-control" id="admin_id"
 										name="admin_id" placeholder="아이디를 입력하세요." required> <label
 										for="floatingInput">Admin ID</label>
 								</div>
 								<div class="form-floating">
-									<input value="1234" type="password" class="form-control" id="admin_pw"
+									<input type="password" class="form-control" id="admin_pw"
 										name="admin_pw" placeholder="비밀번호를 입력해주세요" required> <label
 										for="floatingInput">Password</label>
 								</div>

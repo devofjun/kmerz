@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService{
 	@Inject
 	DeclaredDao declaredDao;
 	
-	
+	@Transactional
 	@Override
 	public int getCountAllPosts(PostPagingDto postPagingDto) {
 		return postdao.countAllPosts(postPagingDto);
@@ -301,5 +301,11 @@ public class PostServiceImpl implements PostService{
 	public List<PostsVo> selectDailyPost() {
 		List<PostsVo> list = settingPostsVo(postdao.selectDailyPost());
 		return list;
+	}
+
+	@Override
+	public int countCommPosts(String community_id) {
+		
+		return postdao.countCommPosts(community_id);
 	}
 }

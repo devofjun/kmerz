@@ -105,8 +105,8 @@ public class HomeController {
 	
 	// 게시글 신고하기
 	@ResponseBody
-	@RequestMapping(value="postDeclaring")
-	public String postDeclaring(DeclaredVo declaredVo) {
+	@RequestMapping(value="postDeclaring", method=RequestMethod.POST)
+	public String postDeclaring(DeclaredVo declaredVo) throws Exception{
 		System.out.println("게시글 신고하기: "+declaredVo);
 		declaredService.addPostDeclared(declaredVo);
 		return "success";

@@ -164,6 +164,13 @@ public class PostDaoImpl implements PostDao {
 	}
 
 
+	@Override
+	public int countCommPosts(String community_id) {
+		
+		return session.selectOne(NAMESPACE+"countCommPosts", community_id);
+	}
+
+
 	
 	
 
