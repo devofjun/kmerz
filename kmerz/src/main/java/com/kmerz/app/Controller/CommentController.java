@@ -35,12 +35,12 @@ public class CommentController {
 		commentVo.setComment_retag(comment_retag);
 		System.out.println(commentVo);
 		commentService.insertComment(commentVo);
-		model.addAttribute("post_no", post_no);
 	}
 	@RequestMapping(value="/commReload")
 	public String commReload(@RequestParam int post_no, Model model) {
 		List<CommentVo> mentList = commentService.selectCommentOnPost(post_no);
 		model.addAttribute("mentList", mentList);
+		System.out.println("댓글 로딩");
 		return "/include/reply";
 	}
 }

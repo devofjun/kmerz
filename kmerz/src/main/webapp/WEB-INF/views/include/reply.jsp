@@ -7,7 +7,7 @@
 	List<CommentVo> mentList = (List<CommentVo>) request.getAttribute("mentList");
 %>
 <%
-	for (int i = 0; i < mentList.size(); i++) {
+	for (int i = mentList.size() - 1; i > 0; i--) {
 %>
 <div>
 	<div class="replyContent">

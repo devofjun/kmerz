@@ -147,7 +147,7 @@ function addComment(post_no,comment_retag){
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "comment/addComment");
 	xhr.send(data);
-	commentReload(post_no)
+	commentReload(post_no);
 }
 function commentReload(post_no){
 		var replyPanel = document.querySelector(".reply-panel");

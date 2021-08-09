@@ -395,6 +395,7 @@ labelBtn:hover {
     border: 1px solid #718093;
     width: 75%;
     min-height:100%;
+    height: auto;
 }
 
 .modal-topbar {
