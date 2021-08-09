@@ -8,6 +8,7 @@
 }
 
 #bannerItem_container {
+	color:#fff;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
