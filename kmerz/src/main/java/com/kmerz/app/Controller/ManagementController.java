@@ -260,7 +260,6 @@ public class ManagementController {
 	@ResponseBody
 	@RequestMapping(value = "/contents/setBanner",  method = RequestMethod.POST)
 	public String setBanner(@RequestBody List<BannerVo> bannerList) throws Exception {
-		//System.out.println("setBanner :" + bannerList);
 		bannerService.initBanner(bannerList);
 		return "success";
 	}

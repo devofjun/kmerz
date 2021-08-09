@@ -112,7 +112,9 @@ public class PostDaoImpl implements PostDao {
 		Map<String, Object> map = new HashMap<>();
 		map.put("init_post", init_post);
 		map.put("community_id", community_id);
-		return session.selectOne(NAMESPACE + "selectLoadCommunityPost" , map);
+		PostsVo postVo = session.selectOne(NAMESPACE + "selectLoadCommunityPost" , map);
+		System.out.println("DAO::"+postVo);
+		return postVo;
 	}
 	
 	@Override

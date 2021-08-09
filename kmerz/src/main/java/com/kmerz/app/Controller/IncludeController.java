@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,7 @@ public class IncludeController {
 	@Inject
 	CategoryService cateService;
 	
+	@Transactional
 	@RequestMapping(value="/modal", method = RequestMethod.GET)
 	public String openModal(Model model,@RequestParam(value="post_no") int post_no) {
 		System.out.println(post_no);
@@ -71,6 +73,7 @@ public class IncludeController {
 		model.addAttribute("cateList", cateList);
 		return "include/Cate_select";
 	}
+	@Transactional
 	@RequestMapping(value="/post")
 	public String post(Model model, @RequestParam int init_post) {
 		//System.out.println(init_post);
@@ -82,21 +85,26 @@ public class IncludeController {
 		model.addAttribute("postVo", postVo);
 		return "/include/post";
 	}
+	@Transactional
 	@RequestMapping(value="/commPost")
 	public String commPost(Model model, @RequestParam int init_post, @RequestParam String community_id) {
-		// System.out.println(init_post);
-		// System.out.println(community_id);
+		System.out.println(init_post);
+		System.out.println(community_id);
 		PostsVo postVo = pService.selectLoadCommunityPost(init_post, community_id);
 		CommunityVo commVo = cService.getOneCommunity(community_id);
 		// System.out.println(postVo + "postVo");
-		postVo.setCommunity_name(commVo.getCommunity_name());
-		postVo.setUser_name(memService.selectNO(postVo.getUser_no()).getUser_name());
-		CategoryVo cateVo = cateService.getCategoryName(postVo.getCategory_no());
-		model.addAttribute("postVo", postVo);
-		model.addAttribute("cateVo", cateVo);
-		return "/include/community_post";
+		if(postVo != null && commVo != null) {
+			postVo.setCommunity_name(commVo.getCommunity_name());
+			postVo.setUser_name(memService.selectNO(postVo.getUser_no()).getUser_name());
+			CategoryVo cateVo = cateService.getCategoryName(postVo.getCategory_no());
+			model.addAttribute("postVo", postVo);
+			model.addAttribute("cateVo", cateVo);
+			return "/include/community_post";
+		}
+		return null;
 	}
 	
+	@Transactional
 	@RequestMapping(value="/editPost")
 	public String editPost(Model model, @RequestParam int post_no) {
 		PostsVo postVo = pService.selectPost(post_no);

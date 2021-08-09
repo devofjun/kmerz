@@ -27,7 +27,7 @@ public class SteamUtil {
 		parameter.put("format", "json");
 		
 		System.out.println("요청시작");
-		String html = getRequest(url, HttpMethod.GET, null);
+		String html = getRequest(url, HttpMethod.GET, parameter);
 		
 		System.out.println("파싱시작");
 		JSONObject jsonObj = new JSONObject(html);
@@ -53,18 +53,6 @@ public class SteamUtil {
 		}
 		
 		System.out.println("검색끝 "+idList.size()+"개의 검색 결과");
-		/*s
-		File file = new File("D:/test/test.json");
-		
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			writer.write(html);
-			writer.close();
-			System.out.println("파일저장 성공");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
 		return idList;
 	}
 	
@@ -76,7 +64,6 @@ public class SteamUtil {
 		parameter.put("appids", appid);
 		// http 요청 시작
 		String html = getRequest(url, HttpMethod.GET, parameter);
-
 		JSONObject jsonObj = new JSONObject(html);
 
 		SteamAppVo appVo = null;
@@ -96,41 +83,28 @@ public class SteamUtil {
 				name = jsonObj.getJSONObject(appid).getJSONObject("data").getString("name");
 				try{
 					description = jsonObj.getJSONObject(appid).getJSONObject("data").getString("short_description");
-				} catch(Exception e) {
-					System.out.println("설명없음");
-				}
+				} catch(Exception e) { System.out.println("설명없음"); }
 				try{
 					imgPath = jsonObj.getJSONObject(appid).getJSONObject("data").getString("header_image");
-				} catch(Exception e) {
-					System.out.println("이미지 없음");
-				}
+				} catch(Exception e) { System.out.println("이미지 없음"); }
 				try {
 					appPrice = jsonObj.getJSONObject(appid).getJSONObject("data").getJSONObject("price_overview")
 							.getString("final_formatted");
-				} catch (Exception e) {
-					System.out.println("무료이거나 판매중이 아님");
-				}
+				} catch (Exception e) {	System.out.println("무료이거나 판매중이 아님");	}
 				try {
 					appMovie = jsonObj.getJSONObject(appid).getJSONObject("data").getJSONArray("movies")
 							.optJSONObject(1).getJSONObject("webm").getString("480");
-				} catch (Exception e) {
-					System.out.println("영상 없음");
-				}
+				} catch (Exception e) {	System.out.println("영상 없음");}
 				try {
 					background = jsonObj.getJSONObject(appid).getJSONObject("data").getString("background");
-				} catch (Exception e) {
-					System.out.println("배경이미지 없음");
-				}
+				} catch (Exception e) {	System.out.println("배경이미지 없음");}
 				appVo = new SteamAppVo(Integer.parseInt(appid), type, name, description, imgPath, appPrice, appMovie,
 						background);
 			} else {
 				appVo = new SteamAppVo(Integer.parseInt(appid), "empty", "empty", null, null, null, null, null);
 				System.out.println("스토어에 등록되지 않음");
 			}
-		} catch (Exception e) {
-			System.out.println("데이터 셋이 맞지 않음");
-		}
-		System.out.println(appVo);
+		} catch (Exception e) {	System.out.println("데이터 셋이 맞지 않음");}
 		return appVo;
 	}
 	

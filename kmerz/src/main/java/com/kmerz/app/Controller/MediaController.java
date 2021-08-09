@@ -75,19 +75,9 @@ public class MediaController {
 	@ResponseBody
 	@RequestMapping(value = "/steam/searchApp", method = RequestMethod.POST)
 	public List<SteamAppVo> searchApp(String searchType, String searchWord) {
-		// 앱 검색하기
-		// steam api로 요청하여 응답받은 JSON에서 앱 이름으로 검색하여 있다면 id를 저장한다.
-		// id로 App Detail 정보를 JSON으로 받아내서 파싱하여 DB에 저장한다.
-
 		List<String> appidList = new ArrayList<String>();
-		// test data 응답
-		/*
-		 * if(searchWord.equals("test")) { return testData(); } else
-		 * if(searchWord.equals("testinsert")) {
-		 * steamAppService.addSteamAppInfo(testData()); return null; }
-		 */
+		
 		if (searchType.equals("searchName")) {
-			// 검색 => id
 			appidList = SteamUtil.appSearch(searchWord);
 		} else if (searchType.equals("searchId")) {
 			try {
