@@ -2,7 +2,7 @@
 -- 테스트 데이터 삽입(유저 테이블)
 ----------------------------------------------------
 BEGIN
-FOR i IN 1..200 LOOP
+FOR i IN 1..10 LOOP
     insert into tbl_member values(
         seq_user_no.nextval,
         'test'||i||'@naver.com',
@@ -86,7 +86,7 @@ insert into tbl_category values(
 -- 테스트 데이터 삽입(게시글 테이블)
 ----------------------------------------------------
 BEGIN
-FOR i IN 1..200 LOOP
+FOR i IN 1..10 LOOP
     insert into tbl_posts values(
     seq_post_no.NEXTVAL, 1000+i, 'star', 100, 'test', 
     'D:\kmerz\repository\post\2021\7\29\101_d17f37d1-ff26-46b4-b7f4-c5294e6582cc.txt',
