@@ -49,6 +49,7 @@
  	data.append("post_no", post_no);
  	xhr.open("POST", "/deletePost");
  	xhr.send(data);
+ 	document.body.style.removeProperty("overflow");
  	closeModal();
  	init_posts();
  }  
@@ -147,7 +148,7 @@ function addComment(post_no,comment_retag){
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "comment/addComment");
 	xhr.send(data);
-	commentReload(post_no)
+	commentReload(post_no);
 }
 function commentReload(post_no){
 		var replyPanel = document.querySelector(".reply-panel");
@@ -186,9 +187,9 @@ function openModal(i) {
   includeHTML(document.querySelector('.modal-section'), '/include/modal?post_no=' + i);
 }
 function closeModal() {
+document.body.style.removeProperty("overflow");
   var modal = document.getElementById("myModal");
   modal.remove();
-  document.body.style.removeProperty("overflow");
 }
 window.onclick = function(event) {
 	var modal = document.getElementById("myModal");
@@ -198,33 +199,5 @@ window.onclick = function(event) {
 	  }
 }
 					
-function posttoggle(i) {
-	var postNo = document.getElementById(i);
-	var PostToggleBtn = postNo.querySelector("#post-toggleBtn");
-	var post = postNo.querySelector(".post");
-	var toggleImg = post.querySelector(".rightbar > .postDown");
-	var toggleNavBar = post.querySelectorAll(".leftbar > .BottmNavBar > .toggleNav");
-	if(PostToggleBtn.checked){
-		post.style.height = "180px";
-		post.style.minHeight = "180px";
-		toggleImg.style.transform = "rotateX(0deg)";
-		for(var j = 0; j < toggleNavBar.length; j++){
-		toggleNavBar[j].style.visibility = "hidden";
-		toggleNavBar[j].style.opacity = "0%";
-		toggleNavBar[j].style.height = "0%";
-		toggleNavBar[j].style.transition = "all ease .2s";
-		}
-	}else{
-		post.style.minHeight = "300px";
-		post.style.height = "auto";
-		toggleImg.style.transform = "rotateX(180deg)";
-		for(var j = 0; j < toggleNavBar.length; j++){
-		toggleNavBar[j].style.visibility = "visible";
-		toggleNavBar[j].style.opacity = "100%";
-		toggleNavBar[j].style.height = "100%";
-		toggleNavBar[j].style.transition = "all ease 4s";
-		}	
-	}
-	PostToggleBtn.click();
-}
+
 	

@@ -1,5 +1,6 @@
 package com.kmerz.app.util;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +88,9 @@ public class AttachmentProcessing {
 		File source = multipartToFile(files);
 		File target = new File(output + ".jpg");
 		try {
-			BufferedImage output_img = ImageIO.read(source);
+			BufferedImage input_img = ImageIO.read(source);
+			BufferedImage output_img = new BufferedImage(input_img.getWidth(), input_img.getHeight(), BufferedImage.TYPE_INT_RGB);
+			output_img.createGraphics().drawImage(input_img, 0, 0, Color.white, null);
 			ImageIO.write(output_img, "jpg", target);
 		} catch (IOException e) {
 			e.printStackTrace();

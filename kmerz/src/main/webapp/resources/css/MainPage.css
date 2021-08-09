@@ -187,7 +187,7 @@ p.icon-color {
 	height: 180px;
 	transition: all ease .3s;
 	/* overflow: hidden; */
-	/* height: 720px; */
+	height:auto;
 }
 
 .post:hover {
@@ -395,6 +395,7 @@ labelBtn:hover {
     border: 1px solid #718093;
     width: 75%;
     min-height:100%;
+    height: auto;
 }
 
 .modal-topbar {

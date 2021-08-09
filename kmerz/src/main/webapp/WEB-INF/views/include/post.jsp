@@ -56,9 +56,6 @@ PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 
 
 
-			<div class="postDown" onclick="posttoggle(<%=postVo.getPost_no()%>)">
-				<label for="toggleBtn" class="labelBtn" onclick=""> <img src="/resources/images/expand_more_black_24dp.svg"/></label>
-			</div>
 
 		</div>
 	</div>
