@@ -153,7 +153,8 @@ public class HomeController {
 	@RequestMapping(value="/editPost", method=RequestMethod.POST)
 	public String editPost(@RequestParam int post_no, @RequestParam String community_id,
 									@RequestParam int category_no, @RequestParam String post_title,
-									@RequestParam MultipartFile file) {
+									@RequestParam MultipartFile file,
+									Model model) {
 		String fileName = ContentReadAndWrite.WriteContent(file, post_no);
 		PostsVo postVo = new PostsVo();
 		postVo.setPost_no(post_no);
@@ -162,7 +163,8 @@ public class HomeController {
 		postVo.setPost_title(post_title);
 		postVo.setPost_content_file(fileName);
 		postService.updatePost(postVo);
-		return "";
+		model.addAttribute("post_no", post_no);
+		return "redirect:/include/modal";
 	}
 
 

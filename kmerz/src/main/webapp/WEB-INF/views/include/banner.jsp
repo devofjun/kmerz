@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<style>
-    *, *:before, *:after { box-sizing: inherit; }
     .clearfix:after { content: ''; display: block; clear: both; float: none; }
     .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
     .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
@@ -27,34 +26,6 @@
     .slide_pagination .dot.dot_active { background: #333; }
     .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
   </style>
-<!-- <section class="banner"> -->
-<!-- 	<!-- <div class="tenor-gif-embed" data-postid="18605633" data-share-method="host" data-width="100%" data-aspect-ratio="1.810909090909091"><a href="https://tenor.com/view/%eb%ac%b8%ec%9e%ac%ec%9d%b8-%eb%aa%85%ec%99%95-moon-%ec%9e%ac%ec%9d%b8-%ec%a3%84%ec%9d%b8-gif-18605633">문재인 명왕 GIF</a> from <a href="https://tenor.com/search/%EB%AC%B8%EC%9E%AC%EC%9D%B8-gifs">문재인 GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script> -->
--->
-
-<!-- 	<div id="container"> -->
-<!-- 		<div class="slide_wrap"> -->
-<!-- 			<div class="slide_box"> -->
-<!-- 				<div class="slide_list clearfix"> -->
-<!-- 					<div class="slide_content"> -->
-<%-- 						 --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				// .slide_list -->
-<!-- 			</div> -->
-<!-- 			<!-- // .slide_box -->
--->
-<!-- 			<button type="button" class="slide_btn_prev">Prev</button> -->
-<!-- 			<button type="button" class="slide_btn_next">Next</button> -->
-<!-- 		</div> -->
-<!-- 		<!-- // .slide_btn_box -->
--->
-<!-- 		<ul class="slide_pagination"></ul> -->
-<!-- 		<!-- // .slide_pagination -->
--->
-<!-- 	</div> -->
-<!-- 	<!-- // .slide_wrap -->
--->
-<!-- </section> -->
 
 <div id="container">
 	<div class="slide_wrap">

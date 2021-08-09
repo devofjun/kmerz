@@ -95,7 +95,7 @@ System.out.println(postVo);
 						<span>Comment This Post</span>
 						<div class="reply-content">
 							<div class="reply-form-input">
-								<textarea id="comment_content_" cols="120" rows="10"></textarea>
+								<textarea class="border" style="overflow: hidden;" id="comment_content_" cols="120" rows="10"></textarea>
 							</div>
 							<div class="reply-submit">
 								<button class="btn">CON</button>
