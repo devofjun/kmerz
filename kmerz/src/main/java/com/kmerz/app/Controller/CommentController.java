@@ -21,7 +21,7 @@ public class CommentController {
 	@Inject
 	CommentService commentService;
 	@RequestMapping(value="/addComment", method=RequestMethod.POST)
-	public void addComment(HttpSession session, 
+	public String addComment(HttpSession session, 
 										@RequestParam String commentContent,
 										@RequestParam int post_no,
 										@RequestParam(required = false, value = "comment_retag") Integer comment_retag,
@@ -29,18 +29,21 @@ public class CommentController {
 		CommentVo commentVo = new CommentVo();
 		MemberVo memVo = (MemberVo) session.getAttribute("loginVo");
 		System.out.println(comment_retag + "retag");
+		System.out.println("포스트"+post_no);
 		commentVo.setUser_no(memVo.getUser_no());
 		commentVo.setPost_no(post_no);
 		commentVo.setComment_content(commentContent);
 		commentVo.setComment_retag(comment_retag);
 		System.out.println(commentVo);
 		commentService.insertComment(commentVo);
+		model.addAttribute("post_no", post_no);
+		return null;
 	}
-	@RequestMapping(value="/commReload")
+	@RequestMapping(value="/commReload", method=RequestMethod.POST)
 	public String commReload(@RequestParam int post_no, Model model) {
+		System.out.println("로드 포스트"+post_no);
 		List<CommentVo> mentList = commentService.selectCommentOnPost(post_no);
 		model.addAttribute("mentList", mentList);
-		System.out.println("댓글 로딩");
 		return "/include/reply";
 	}
 }

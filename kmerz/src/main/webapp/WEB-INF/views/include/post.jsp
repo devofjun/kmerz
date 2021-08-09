@@ -48,9 +48,6 @@ PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 				<p class="icon-color post-content"><%=ContentReadAndWrite.ReadContent(postVo.getPost_content_file())%></p>
 			</div>
 
-
-
-
 		</div>
 	</div>
 </div>

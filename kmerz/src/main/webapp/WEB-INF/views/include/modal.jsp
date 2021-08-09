@@ -111,9 +111,7 @@ System.out.println(postVo);
 						</div>
 					</div>
 				</div>
-				<div class="reply-panel">
-					<%@ include file="reply.jsp"%>
-				</div>
+				<div id="reply-panel" class="reply-panel">	<%@ include file="reply.jsp"%></div>
 			</div>
 			<div>
 				<%@ include file="modal_right.jsp"%>

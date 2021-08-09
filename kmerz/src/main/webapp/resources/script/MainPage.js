@@ -130,8 +130,8 @@ function appendCommentInput(comment_no, comment_retag, post_no){
 }
 function addComment(post_no,comment_retag){
 	console.log("댓글쓰기");
-	console.log(post_no);
 	var commentContent;
+	var xhr = new XMLHttpRequest();
 	var data = new FormData();
 	if(comment_retag != null){
 		console.log("널아님");
@@ -141,19 +141,28 @@ function addComment(post_no,comment_retag){
 		console.log("널임");
 		commentContent = document.getElementById("comment_content_").value;
 	}
-	console.log(comment_retag);
-	console.log(commentContent);
+	console.log("태그"+comment_retag);
+	console.log("내용"+commentContent);
+	console.log("글번호"+post_no);
 	data.append("commentContent", commentContent);
 	data.append("post_no", post_no);
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "comment/addComment");
+	xhr.open("POST", "comment/addComment",false);
 	xhr.send(data);
-	commentReload(post_no);
+	loadComment(post_no)
 }
-function commentReload(post_no){
-		var replyPanel = document.querySelector(".reply-panel");
-	replyPanel.innerHTML = "";
-	includeHTML(replyPanel, '/comment/commReload?post_no=' + post_no);
+function loadComment(post_no){
+var replyPanel = document.getElementById("reply-panel");
+var data = new FormData();
+var xhr = new XMLHttpRequest();
+   xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            if (this.status == 200) { replyPanel.innerHTML = xhr.responseText;  }
+            if (this.status == 404) { return; }
+        }
+    }
+data.append("post_no",post_no);
+xhr.open("POST", "comment/commReload");
+xhr.send(data);
 }
  function replytoggle(i){
 	var commentNo = document.getElementById(i);

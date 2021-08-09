@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	List<CommentVo> mentList = (List<CommentVo>) request.getAttribute("mentList");
+	System.out.println("댓글리스트"+mentList);
 %>
 <%
 	for (int i = mentList.size() - 1; i > 0; i--) {

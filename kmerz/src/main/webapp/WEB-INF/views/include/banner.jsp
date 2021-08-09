@@ -8,7 +8,7 @@
     .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
     .link:hover, .link:focus { color: #9fd6c2; }
     /* container - body */
-    #container { width: 100%; margin: auto; }
+    #container { width: 100%; margin: auto; margin-top: 35px; }
     .slide_wrap { position: relative; width: 90%; margin: auto; padding-bottom: 30px; }
     .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
     .slide_content { display: table; float: left; width: 100%; height: 400px; }
