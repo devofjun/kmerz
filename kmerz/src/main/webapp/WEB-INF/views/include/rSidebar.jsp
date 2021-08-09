@@ -96,21 +96,4 @@ $(document).ready(function() {
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<div class="hotList border stickyUnderInfo">
-		<div class="relatedPost hr">
-			<span class="font-18">인기글</span>
-		</div>
-		<ol>
-			<li><a href="#">인기글1</a></li>
-			<li><a href="#">인기글2</a></li>
-			<li><a href="#">인기글3</a></li>
-			<li><a href="#">인기글4</a></li>
-			<li><a href="#">인기글5</a></li>
-			<li><a href="#">인기글6</a></li>
-			<li><a href="#">인기글7</a></li>
-			<li><a href="#">인기글8</a></li>
-			<li><a href="#">인기글9</a></li>
-			<li><a href="#">인기글10</a></li>
-		</ol>
-	</div>
 </div>
