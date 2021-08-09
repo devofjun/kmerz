@@ -15,7 +15,7 @@ function dropHandler(ev) {
         if (this.readyState == 4) {
         console.log(xhr.responseText);
             if (this.status == 200) { videozone.innerHTML += xhr.responseText; }
-            if (this.status == 404) { videozone.innerHTML = "Page not found."; }
+            if (this.status == 404) { videozone.innerHTML = "용량초과 or 확장자 지원 안함"; }
         }
   }
 }

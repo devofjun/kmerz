@@ -9,7 +9,7 @@ PostsVo postVo = (PostsVo) request.getAttribute("postVo");
 %>
 <style>
 .postContent img{
-	height:60px;
+	height:200px;
 	object-fit: cover;
 }
 </style>
