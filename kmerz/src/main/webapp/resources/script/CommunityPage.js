@@ -21,7 +21,8 @@
  	init_posts();
  }  
 window.addEventListener('scroll', () => {  
-  if (document.documentElement.offsetHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {  
+  if (document.documentElement.offsetHeight + document.documentElement.scrollTop 
+		  >= document.documentElement.scrollHeight) {  
     console.log('scrolled to bottom');
     if(end_check==true){
     	appendPosts();

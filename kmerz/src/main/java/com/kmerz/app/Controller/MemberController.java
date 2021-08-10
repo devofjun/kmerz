@@ -104,13 +104,14 @@ public class MemberController {
 		} else {
 			mlogVo.setMember_logtype(MemberLogServiceImpl.TYPE_LOGIN_SUCCESS);
 		}
-		mlogVo.setUser_no(memberVo.getUser_no());
-		mlogVo.setUser_id(memberVo.getUser_id());
-		mlogVo.setUser_name(memberVo.getUser_name());
-		mlogVo.setRequest_ip(ip);
-		memberLogService.insertMemberLog(mlogVo);
-		// 로그 끝
-		
+		if(memberVo != null) {
+			mlogVo.setUser_no(memberVo.getUser_no());
+			mlogVo.setUser_id(memberVo.getUser_id());
+			mlogVo.setUser_name(memberVo.getUser_name());
+			mlogVo.setRequest_ip(ip);
+			memberLogService.insertMemberLog(mlogVo);
+			// 로그 끝
+		}
 		rttr.addFlashAttribute("resultLogin", resultLogin);
 		return page;
 	}
