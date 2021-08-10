@@ -36,9 +36,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
-		console.log("test1");
 		$(".modal-section").on("click","#postDeclared",function(e){
-			console.log("test2");
 			e.preventDefault();
 			url = "/postDeclaring";
 			sData = {
@@ -47,7 +45,6 @@
 				"user_no":$(".user_no").text(),
 				"target_user_no":$(".target_user_no").text()
 			};
-			console.log(sData);
 			$.post(url, sData, function(rData){
 				console.log(rData);
 			});
