@@ -187,7 +187,10 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void posting(PostsVo vo) {
 		// 새로운 게시글 작성
-		postdao.posting(vo);
+		MemberVo memberVo = memberDao.selectNO(vo.getUser_no());
+		if(memberVo.getUser_status() != MemberServiceImpl.STATUS_WRITE_LOCK) {
+			postdao.posting(vo);
+		}
 	}
 
 	@Override

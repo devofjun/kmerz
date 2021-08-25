@@ -6,8 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -61,6 +66,9 @@ public class ManagementController {
 	CommunityService communityService;
 	@Inject
 	MemberLogService memberLogService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	// uri 간편화 admin 입력하면 로그인 페이지나 대시보드 페이지로 넘어감
 	@RequestMapping
@@ -246,6 +254,29 @@ public class ManagementController {
 		return "success";
 	}
 	
+	// 고객에게 메일 보내기
+	@ResponseBody
+	@RequestMapping(value = "/mail/mailSending")
+	public String mailSending(HttpServletRequest request) {
+		String setfrom = "mailtest0516@gmail.com";
+		String tomail = request.getParameter("tomail");
+		String title = "케이머즈 운영자입니다.";
+		String content = request.getParameter("content");
+		System.out.println("tomail: "+tomail + "/ content: "+content);
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			messageHelper.setFrom(setfrom);		// 보내는 사람
+			messageHelper.setTo(tomail);		// 받는 사람
+			messageHelper.setSubject(title);	// 메일제목은 생략이 가능하다.
+			messageHelper.setText(content);		// 메일 내용
+			mailSender.send(message);
+		} catch(Exception e) {
+			System.out.println(e);
+			return "fail";
+		}
+		return "success";
+	}
 	
 	// 배너/사이드바 관리 페이지
 	@RequestMapping(value = "/contents/bsSettingPage", method = RequestMethod.GET)

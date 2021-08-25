@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kmerz.app.dao.DeclaredDao;
+import com.kmerz.app.dao.MemberDao;
 import com.kmerz.app.dao.PostDao;
 import com.kmerz.app.vo.DeclaredVo;
+import com.kmerz.app.vo.MemberVo;
 import com.kmerz.app.vo.PostsVo;
 
 @Service
@@ -22,6 +24,8 @@ public class DeclaredServiceImpl implements DeclaredService {
 	DeclaredDao declaredDao;
 	@Inject
 	PostDao postDao;
+	@Inject
+	MemberDao memberDao;
 	
 	@Override
 	public void addPostDeclared(DeclaredVo declaredVo) {
@@ -61,6 +65,10 @@ public class DeclaredServiceImpl implements DeclaredService {
 				PostsVo post = postDao.selectPostNo(vo.getTarget_id());
 				String post_title = post.getPost_title();
 				vo.setPost_title(post_title);
+				
+				MemberVo memberVo = memberDao.selectNO(vo.getUser_no());
+				String user_name = memberVo.getUser_name();
+				vo.setUser_name(user_name);
 			} else if(vo.getTarget_type() == TYPE_COMMENT) {
 				vo.setStr_target_type("댓글");
 			}

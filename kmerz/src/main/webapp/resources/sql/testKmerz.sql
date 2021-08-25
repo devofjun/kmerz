@@ -137,8 +137,6 @@ where rnum between 1 and 10;
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
 
-
-
 ----------------------------------------------------
 -- 테스트 데이터 삽입(답글 테이블)
 ----------------------------------------------------
@@ -228,3 +226,7 @@ where member_logtype = 3 and to_char(user_log_time, 'YYYYMMDD') =
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
+
+select * from tbl_declared;
+delete from tbl_declared
+where declared_id = 4;
