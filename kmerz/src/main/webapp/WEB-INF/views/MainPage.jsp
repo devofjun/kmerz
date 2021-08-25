@@ -37,6 +37,7 @@
 <script>
 	$(document).ready(function(){
 		$(".modal-section").on("click","#postDeclared",function(e){
+			console.log("test");
 			e.preventDefault();
 			url = "/postDeclaring";
 			sData = {

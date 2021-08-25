@@ -23,6 +23,7 @@ import com.kmerz.app.service.CommentService;
 import com.kmerz.app.service.CommunityService;
 import com.kmerz.app.service.DeclaredService;
 import com.kmerz.app.service.MemberService;
+import com.kmerz.app.service.MemberServiceImpl;
 import com.kmerz.app.service.PostService;
 import com.kmerz.app.util.AttachmentProcessing;
 import com.kmerz.app.util.ContentReadAndWrite;
@@ -98,15 +99,22 @@ public class HomeController {
 	}
 	@RequestMapping(value="posting")
 	public String posting(Model model, HttpSession session) {
-		List<CommunityVo> commList = commService.getCommunityList();
-		model.addAttribute("commList", commList);
-		return "PostingPage";
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		System.out.println(memberVo);
+		if(memberVo.getUser_status() != MemberServiceImpl.STATUS_WRITE_LOCK) {
+			List<CommunityVo> commList = commService.getCommunityList();
+			model.addAttribute("commList", commList);
+			return "PostingPage";
+		} else {
+			return "redirect:/";
+		}
+		
 	}
 	
 	// 게시글 신고하기
 	@ResponseBody
-	@RequestMapping(value="postDeclaring")
-	public String postDeclaring(DeclaredVo declaredVo) {
+	@RequestMapping(value="postDeclaring", method=RequestMethod.POST)
+	public String postDeclaring(DeclaredVo declaredVo) throws Exception{
 		System.out.println("게시글 신고하기: "+declaredVo);
 		declaredService.addPostDeclared(declaredVo);
 		return "success";

@@ -8,7 +8,7 @@ FOR i IN 1..10 LOOP
         'test'||i||'@naver.com',
         '1234',
         '테스터'||i,
-        sysdate-2, 0, null, 100, 100
+        sysdate-i, 0, null, 100, 100
     );
     insert into tbl_point_log values(
         SEQ_POINTLOG_ID.nextval,
@@ -17,7 +17,7 @@ FOR i IN 1..10 LOOP
         100,
         100,
         100,
-        sysdate
+        sysdate-i
     );
 END LOOP;
 END;
@@ -47,27 +47,27 @@ insert into tbl_community values(
     1001,
     '스타크래프트',
     'starcraft',
-    '스타크래프트 임시 커뮤니티입니다.',
+    '스타크래프트 커뮤니티입니다.',
     'accept',
-    sysdate
+    sysdate-7
 );
 insert into tbl_community values(
     'lol',
     1002,
     '리그오브레전드',
     'League of Legends',
-    '롤 임시 커뮤니티입니다.',
+    '롤 커뮤니티입니다.',
     'accept',
-    sysdate
+    sysdate-6
 );
 insert into tbl_community values(
     'overwatch',
     1003,
     '오버워치',
     'overwatch',
-    '오버워치 임시 커뮤니티입니다.',
+    '오버워치 커뮤니티입니다.',
     'accept',
-    sysdate
+    sysdate-5
 );
 -- select * from tbl_community;
 
@@ -75,13 +75,13 @@ insert into tbl_community values(
 -- 테스트 데이터 삽입(카테고리 테이블)
 ----------------------------------------------------
 insert into tbl_category values(
-    seq_category_id.nextval, 'star', '공략', '스타공략임', 'accept'
+    seq_category_id.nextval, 'star', '공략', '스타공략임돠', 'accept'
 );
 insert into tbl_category values(
-    seq_category_id.nextval, 'lol', '공략', '롤공략임', 'accept'
+    seq_category_id.nextval, 'lol', '팬아트', '롤팬아트임돠', 'accept'
 );
 insert into tbl_category values(
-    seq_category_id.nextval, 'overwatch', '공략', '옵치공략임', 'accept'
+    seq_category_id.nextval, 'overwatch', '망겜', '망겜임', 'accept'
 );
 
 
@@ -91,19 +91,19 @@ insert into tbl_category values(
 BEGIN
 FOR i IN 1..10 LOOP
     insert into tbl_posts values(
-    seq_post_no.NEXTVAL, 1000+i, 'star', 100, '스타크래프트', 
-    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0,0,sysdate,null,0
+    seq_post_no.NEXTVAL, 1000+i, 'star', 100, '제목: 스타크래프트', 
+    'D:\kmerz\repository\post\2021\7\26\1_e3166fc9-3687-4e3c-9dc3-e4431239284a.txt',
+    0,0,sysdate-(31-i),null,0
     );
     insert into tbl_posts values(
-    seq_post_no.NEXTVAL, 1000+i, 'overwatch', 101, '오버워치', 
-    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0,0,sysdate,null,0
+    seq_post_no.NEXTVAL, 1000+i, 'lol', 101, '제목: 리그오브레전드', 
+    'D:\kmerz\repository\post\2021\7\26\1_e3166fc9-3687-4e3c-9dc3-e4431239284a.txt',
+    0,0,sysdate-(31-i),null,0
     );
     insert into tbl_posts values(
-    seq_post_no.NEXTVAL, 1000+i, 'lol', 102, '리그오브레전드', 
-    'D:\kmerz\repository\post\2021\7\26\100_3f8673d7-9693-4092-8844-1a4e222c414c.txt',
-    0,0,sysdate,null,0
+    seq_post_no.NEXTVAL, 1000+i, 'overwatch', 102, '제목: 오버워치', 
+    'D:\kmerz\repository\post\2021\7\26\1_e3166fc9-3687-4e3c-9dc3-e4431239284a.txt',
+    0,0,sysdate-(31-i),null,0
     );
 END LOOP;
 END;
@@ -137,12 +137,10 @@ where rnum between 1 and 10;
 -- 테스트 데이터 삽입(댓글 테이블)
 ----------------------------------------------------
 
-
-
 ----------------------------------------------------
 -- 테스트 데이터 삽입(답글 테이블)
 ----------------------------------------------------
-select * from tbl_member;
+--select * from tbl_member;
 --select user_point from tbl_member;
 --select * from tbl_point_log;
 
@@ -228,3 +226,7 @@ where member_logtype = 3 and to_char(user_log_time, 'YYYYMMDD') =
 -- 테스트 데이터 삽입 끝
 --------------------
 commit;
+
+select * from tbl_declared;
+delete from tbl_declared
+where declared_id = 4;

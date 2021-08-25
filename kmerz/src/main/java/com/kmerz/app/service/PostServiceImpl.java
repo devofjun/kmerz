@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService{
 	@Inject
 	DeclaredDao declaredDao;
 	
-	
+	@Transactional
 	@Override
 	public int getCountAllPosts(PostPagingDto postPagingDto) {
 		return postdao.countAllPosts(postPagingDto);
@@ -187,7 +187,10 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void posting(PostsVo vo) {
 		// 새로운 게시글 작성
-		postdao.posting(vo);
+		MemberVo memberVo = memberDao.selectNO(vo.getUser_no());
+		if(memberVo.getUser_status() != MemberServiceImpl.STATUS_WRITE_LOCK) {
+			postdao.posting(vo);
+		}
 	}
 
 	@Override
@@ -301,5 +304,11 @@ public class PostServiceImpl implements PostService{
 	public List<PostsVo> selectDailyPost() {
 		List<PostsVo> list = settingPostsVo(postdao.selectDailyPost());
 		return list;
+	}
+
+	@Override
+	public int countCommPosts(String community_id) {
+		
+		return postdao.countCommPosts(community_id);
 	}
 }

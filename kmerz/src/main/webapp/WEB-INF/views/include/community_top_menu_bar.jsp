@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 <header>
-	<a href="/" class="logo">LOGO</a>
+	<a href="/" class="logo">Kmerz</a>
 	<div class="toggle"></div>
 	<ul>
 		<li><a href="/c/createForm">Community</a></li>

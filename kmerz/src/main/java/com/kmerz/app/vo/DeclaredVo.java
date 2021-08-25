@@ -12,6 +12,7 @@ public class DeclaredVo {
 	
 	private String str_target_type;
 	private String post_title;
+	private String user_name;
 	
 	public DeclaredVo() {
 		super();
@@ -19,7 +20,7 @@ public class DeclaredVo {
 	}
 
 	public DeclaredVo(int declared_id, int target_id, int target_type, int user_no, int target_user_no,
-			Timestamp declared_datetime, String str_target_type, String post_title) {
+			Timestamp declared_datetime, String str_target_type, String post_title, String user_name) {
 		super();
 		this.declared_id = declared_id;
 		this.target_id = target_id;
@@ -29,6 +30,7 @@ public class DeclaredVo {
 		this.declared_datetime = declared_datetime;
 		this.str_target_type = str_target_type;
 		this.post_title = post_title;
+		this.user_name = user_name;
 	}
 
 	public int getDeclared_id() {
@@ -95,11 +97,20 @@ public class DeclaredVo {
 		this.post_title = post_title;
 	}
 
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
 	@Override
 	public String toString() {
 		return "DeclaredVo [declared_id=" + declared_id + ", target_id=" + target_id + ", target_type=" + target_type
 				+ ", user_no=" + user_no + ", target_user_no=" + target_user_no + ", declared_datetime="
-				+ declared_datetime + ", str_target_type=" + str_target_type + ", post_title=" + post_title + "]";
+				+ declared_datetime + ", str_target_type=" + str_target_type + ", post_title=" + post_title
+				+ ", user_name=" + user_name + "]";
 	}
 
 	

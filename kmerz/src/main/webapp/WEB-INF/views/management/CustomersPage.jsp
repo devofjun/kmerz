@@ -88,11 +88,19 @@ function showUserInfoCard(userno){
 			$("#btnUserStatusChange").text("로그인 정지");
 			$("#btnUserStatusChange").addClass("btn-danger");
 			$("#btnUserStatusChange").attr("data-status", "0");
+		} else if(user_status == "탈퇴") {
+			$("#btnUserStatusChange").text("탈퇴");
+			$("#btnUserStatusChange").addClass("btn-secondary");
+			$("#btnUserStatusChange").attr("data-status", "-1");
+		
 		} else {
 			$("#btnUserStatusChange").text("뭐지");
 		}
 		$("#cardUserInfo").show();
+		// 메일 작성 모달
+		$("#spSendMessage").attr("data-bs-whatever", info.user_id);
 		// 포인트 모달
+		$("#spUpdatePoint").attr("data-bs-whatever", info.user_id);
 		var pointList = rData.pointList;
 		$(".pointModalTr:gt(0)").remove();
 		$.each(pointList, function(){
@@ -350,6 +358,26 @@ $(document).ready(function() {
 		submitPaging();
 	});
 	
+	// 메일 보내기 버튼
+	$("#btnSendMail").click(function() {
+		var tomail = $("#toMail").val();
+		var content = $("#mailContent").val();
+		var url = "/admin/mail/mailSending";
+		var sData = {
+			"tomail" : tomail,
+			"content" : content
+		};
+		console.log(sData);
+		$.post(url, sData, function(rData){
+			if(rData=="success"){
+				alert("메일 전송 성공");
+				$("#btnCloseMail").trigger("click");
+				$("#mailContent").val("");
+			} else if(rData=="fail"){
+				alert("메일 전송 실패");
+			}
+		})
+	});
 	
 	// 포인트 변경 모달 닫기
 	$("#btnPointClose").click(function(){
@@ -683,24 +711,24 @@ $(document).ready(function() {
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title" id="exampleModalLabel">메일 보내기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">받는 사람:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="toMail" readonly>
           </div>
           <div class="mb-3">
             <label for="message-content" class="col-form-label">메시지 내용:</label>
-            <textarea class="form-control" id="message-content"></textarea>
+            <textarea class="form-control" id="mailContent"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">보내기</button>
+        <button id="btnCloseMail" type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button id="btnSendMail" type="button" class="btn btn-primary">보내기</button>
       </div>
     </div>
   </div>

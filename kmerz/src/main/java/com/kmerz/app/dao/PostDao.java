@@ -27,4 +27,5 @@ public interface PostDao {
 	public int countPosts();
 	public int selectCurrentSeq();
 	public List<PostsVo> selectDailyPost();
+	public int countCommPosts(String community_id);
 }
